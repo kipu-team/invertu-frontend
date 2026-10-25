@@ -1,0 +1,55 @@
+.construccion {
+  border: 2px dashed var(--borde);
+  border-radius: var(--radio);
+  background: var(--superficie);
+  padding: 24px;
+  max-width: 860px;
+}
+
+.construccion__encabezado {
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+}
+
+.construccion__encabezado mat-icon {
+  color: var(--dorado);
+  font-size: 32px;
+  width: 32px;
+  height: 32px;
+}
+
+.construccion__encabezado h1 {
+  margin: 0 0 4px;
+  font-size: 1.4rem;
+}
+
+.construccion__encabezado p {
+  margin: 0;
+  color: var(--texto-suave);
+}
+
+.construccion__datos {
+  display: grid;
+  grid-template-columns: max-content 1fr;
+  gap: 4px 16px;
+  margin: 20px 0 0;
+  font-size: 0.9rem;
+}
+
+.construccion__datos dt {
+  color: var(--texto-suave);
+}
+
+.construccion__datos dd {
+  margin: 0;
+  font-weight: 600;
+}
+
+.construccion__pendientes {
+  margin: 16px 0 0;
+  padding-left: 20px;
+  color: var(--texto-suave);
+  font-size: 0.9rem;
+  line-height: 1.6;
+}

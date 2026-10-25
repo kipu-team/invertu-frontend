@@ -1,0 +1,16 @@
+{
+  "autenticacion": {
+    "iniciarSesion": {
+      "titulo": "Inicia sesión"
+    },
+    "registro": {
+      "titulo": "Crea tu cuenta"
+    },
+    "recuperar": {
+      "titulo": "¿Olvidaste tu contraseña?"
+    },
+    "restablecer": {
+      "titulo": "Crea tu nueva contraseña"
+    }
+  }
+}

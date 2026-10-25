@@ -1,0 +1,9 @@
+p {
+  margin: 0;
+  color: var(--texto-suave);
+}
+
+.boton-peligro {
+  --mat-button-filled-container-color: var(--gasto);
+  --mat-button-filled-label-text-color: #fff;
+}

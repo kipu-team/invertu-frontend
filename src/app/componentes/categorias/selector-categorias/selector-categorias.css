@@ -1,0 +1,21 @@
+.selector {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.selector__opcion {
+  padding: 6px 12px;
+  border: 1px solid var(--borde);
+  border-radius: 999px;
+  background: var(--superficie);
+  font: inherit;
+  font-size: 0.85rem;
+  cursor: pointer;
+}
+
+.selector__opcion--activa {
+  border-color: var(--verde-esmeralda);
+  background: var(--verde-claro);
+  color: var(--verde-oscuro);
+}

@@ -1,0 +1,22 @@
+<nav class="menu">
+  <a class="menu__logo" routerLink="/inicio">
+    <span class="menu__logo-icono"><mat-icon>trending_up</mat-icon></span>
+    <span class="menu__logo-texto">InvertU</span>
+  </a>
+
+  <ul class="menu__lista">
+    @for (opcion of opciones; track opcion.ruta) {
+      <li>
+        <a class="menu__opcion" [routerLink]="opcion.ruta" routerLinkActive="menu__opcion--activa">
+          <mat-icon>{{ opcion.icono }}</mat-icon>
+          <span>{{ opcion.texto | translate }}</span>
+          @if (opcion.soloPremium && !sesion.esPremium()) {
+            <mat-icon class="menu__candado" [attr.aria-label]="'compartido.soloPremium' | translate"
+              >lock</mat-icon
+            >
+          }
+        </a>
+      </li>
+    }
+  </ul>
+</nav>

@@ -1,0 +1,19 @@
+@if (abierto()) {
+  <div class="chatbot__ventana">
+    <app-en-construccion
+      titulo="chatbot.titulo"
+      responsable="Luz"
+      figuras="23"
+      [pendientes]="pendientes"
+    />
+  </div>
+}
+
+<button
+  mat-fab
+  class="chatbot__boton"
+  (click)="abierto.set(!abierto())"
+  [attr.aria-label]="'chatbot.abrir' | translate"
+>
+  <mat-icon>{{ abierto() ? 'close' : 'smart_toy' }}</mat-icon>
+</button>

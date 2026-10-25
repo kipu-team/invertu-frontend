@@ -1,0 +1,12 @@
+{
+  "premium": {
+    "pasar": {
+      "titulo": "Pásate a Premium"
+    },
+    "aviso": {
+      "titulo": "Función exclusiva Premium",
+      "general": "Esta función está disponible solo para el plan Premium. Puedes probarlo gratis.",
+      "boton": "Pasar a Premium"
+    }
+  }
+}

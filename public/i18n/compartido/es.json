@@ -1,0 +1,44 @@
+{
+  "compartido": {
+    "menu": {
+      "inicio": "Inicio",
+      "movimientos": "Movimientos",
+      "metas": "Metas",
+      "suscripciones": "Suscripciones",
+      "calendario": "Calendario"
+    },
+    "soloPremium": "Solo Premium",
+    "datosPrueba": "Modo datos de prueba",
+    "cambiarIdioma": "Cambiar idioma",
+    "plan": {
+      "free": "Plan Free",
+      "premium": "Plan Premium"
+    },
+    "usuario": {
+      "perfil": "Perfil",
+      "configuracion": "Configuración",
+      "verComoFree": "Ver como Free (prueba)",
+      "verComoPremium": "Ver como Premium (prueba)",
+      "cerrarSesion": "Cerrar sesión"
+    },
+    "cerrarSesion": {
+      "titulo": "¿Cerrar sesión?",
+      "mensaje": "Tendrás que volver a ingresar tu correo y contraseña para entrar a InvertU.",
+      "confirmar": "Cerrar sesión"
+    },
+    "acciones": {
+      "cancelar": "Cancelar",
+      "confirmar": "Confirmar",
+      "guardar": "Guardar",
+      "editar": "Editar",
+      "eliminar": "Eliminar",
+      "volver": "Volver",
+      "ahoraNo": "Ahora no"
+    },
+    "construccion": {
+      "aviso": "Pantalla en construcción",
+      "responsable": "Responsable",
+      "figuras": "Figuras del informe"
+    }
+  }
+}

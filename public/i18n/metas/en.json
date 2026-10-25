@@ -1,0 +1,11 @@
+{
+  "metas": {
+    "titulo": "My savings goals",
+    "registrar": {
+      "titulo": "New savings goal"
+    },
+    "detalle": {
+      "titulo": "Goal details"
+    }
+  }
+}

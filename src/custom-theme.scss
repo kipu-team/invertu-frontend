@@ -1,0 +1,156 @@
+/*
+ * Tema de Angular Material con los colores de InvertU (verde esmeralda + dorado).
+ * Es el ÚNICO archivo .scss del proyecto: Angular Material solo se puede personalizar con SCSS
+ * (igual que custom-theme.scss en los ejemplos del curso). No es necesario editarlo.
+ * Los demás estilos van en archivos .css normales.
+ */
+@use 'sass:map';
+@use '@angular/material' as mat;
+
+// ---- Paleta generada con: ng g @angular/material:theme-color (primario #13985C, terciario #F5B800)
+// Note: Color palettes are generated from primary: #13985C, tertiary: #F5B800
+$_palettes: (
+  primary: (
+    0: #000000,
+    10: #002110,
+    20: #00391e,
+    25: #004526,
+    30: #00522e,
+    35: #005f37,
+    40: #006d3f,
+    50: #008951,
+    60: #29a467,
+    70: #4bc080,
+    80: #69dc99,
+    90: #86f9b3,
+    95: #c1ffd3,
+    98: #e9ffec,
+    99: #f5fff4,
+    100: #ffffff,
+  ),
+  secondary: (
+    0: #000000,
+    10: #002110,
+    20: #0d3821,
+    25: #1a432b,
+    30: #264f36,
+    35: #325b41,
+    40: #3e674d,
+    50: #578064,
+    60: #709a7d,
+    70: #8ab596,
+    80: #a4d1b1,
+    90: #c0edcc,
+    95: #cefcda,
+    98: #e9ffec,
+    99: #f5fff4,
+    100: #ffffff,
+  ),
+  tertiary: (
+    0: #000000,
+    10: #261a00,
+    20: #402d00,
+    25: #4d3800,
+    30: #5b4300,
+    35: #6a4e00,
+    40: #795900,
+    50: #987100,
+    60: #b88900,
+    70: #d9a300,
+    80: #fabd0d,
+    90: #ffdf9f,
+    95: #ffefd4,
+    98: #fff8f2,
+    99: #fffbff,
+    100: #ffffff,
+  ),
+  neutral: (
+    0: #000000,
+    10: #171d18,
+    20: #2c322d,
+    25: #373d38,
+    30: #424843,
+    35: #4e544e,
+    40: #59605a,
+    50: #727972,
+    60: #8c928c,
+    70: #a6ada6,
+    80: #c2c8c1,
+    90: #dee4dc,
+    95: #ecf2ea,
+    98: #f5fbf3,
+    99: #f8fef6,
+    100: #ffffff,
+    4: #0a100b,
+    6: #0f1510,
+    12: #1b211c,
+    17: #252b26,
+    22: #303631,
+    24: #343b35,
+    87: #d5dcd4,
+    92: #e4eae2,
+    94: #e9f0e8,
+    96: #eff5ed,
+  ),
+  neutral-variant: (
+    0: #000000,
+    10: #131e16,
+    20: #28332b,
+    25: #323e35,
+    30: #3e4a40,
+    35: #49554c,
+    40: #556157,
+    50: #6e7a70,
+    60: #879489,
+    70: #a2afa3,
+    80: #bdcabe,
+    90: #d9e6d9,
+    95: #e7f4e7,
+    98: #f0fdf0,
+    99: #f5fff4,
+    100: #ffffff,
+  ),
+  error: (
+    0: #000000,
+    10: #410002,
+    20: #690005,
+    25: #7e0007,
+    30: #93000a,
+    35: #a80710,
+    40: #ba1a1a,
+    50: #de3730,
+    60: #ff5449,
+    70: #ff897d,
+    80: #ffb4ab,
+    90: #ffdad6,
+    95: #ffedea,
+    98: #fff8f7,
+    99: #fffbff,
+    100: #ffffff,
+  ),
+);
+
+$_rest: (
+  secondary: map.get($_palettes, secondary),
+  neutral: map.get($_palettes, neutral),
+  neutral-variant: map.get($_palettes, neutral-variant),
+  error: map.get($_palettes, error),
+);
+
+$primary-palette: map.merge(map.get($_palettes, primary), $_rest);
+$tertiary-palette: map.merge(map.get($_palettes, tertiary), $_rest);
+
+// ---- Aplicar el tema a toda la app
+html {
+  color-scheme: light;
+  @include mat.theme(
+    (
+      color: (
+        primary: $primary-palette,
+        tertiary: $tertiary-palette,
+      ),
+      typography: 'Inter Variable',
+      density: 0,
+    )
+  );
+}

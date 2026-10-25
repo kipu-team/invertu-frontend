@@ -1,0 +1,14 @@
+.aviso__titulo {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.aviso__titulo mat-icon {
+  color: var(--dorado);
+}
+
+p {
+  margin: 0;
+  color: var(--texto-suave);
+}

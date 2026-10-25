@@ -1,0 +1,13 @@
+<!-- Versión mínima temporal: Matias la reemplaza por chips con el diseño final -->
+<div class="selector">
+  @for (c of categorias; track c.idCategoria) {
+    <button
+      type="button"
+      class="selector__opcion"
+      [class.selector__opcion--activa]="seleccionada() === c.idCategoria"
+      (click)="seleccionada.set(c.idCategoria)"
+    >
+      {{ c.nombre }}
+    </button>
+  }
+</div>

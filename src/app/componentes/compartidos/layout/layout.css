@@ -1,0 +1,22 @@
+.layout {
+  display: grid;
+  grid-template-columns: 232px 1fr;
+  min-height: 100vh;
+}
+
+.layout__menu {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+}
+
+.layout__principal {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.layout__contenido {
+  flex: 1;
+  padding: 24px 32px 40px;
+}

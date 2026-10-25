@@ -1,0 +1,13 @@
+<h2 mat-dialog-title class="aviso__titulo">
+  <mat-icon>workspace_premium</mat-icon>
+  {{ 'premium.aviso.titulo' | translate }}
+</h2>
+<mat-dialog-content>
+  <p>{{ datos?.mensaje ?? 'premium.aviso.general' | translate }}</p>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close>{{ 'compartido.acciones.ahoraNo' | translate }}</button>
+  <button mat-flat-button class="boton-dorado" (click)="irAPremium()">
+    {{ 'premium.aviso.boton' | translate }}
+  </button>
+</mat-dialog-actions>

@@ -1,0 +1,26 @@
+<section class="construccion">
+  <div class="construccion__encabezado">
+    <mat-icon>construction</mat-icon>
+    <div>
+      <h1>{{ titulo() | translate }}</h1>
+      <p>{{ 'compartido.construccion.aviso' | translate }}</p>
+    </div>
+  </div>
+
+  <dl class="construccion__datos">
+    <dt>{{ 'compartido.construccion.responsable' | translate }}</dt>
+    <dd>{{ responsable() }}</dd>
+    <dt>{{ 'compartido.construccion.figuras' | translate }}</dt>
+    <dd>{{ figuras() }}</dd>
+  </dl>
+
+  @if (pendientes().length) {
+    <ul class="construccion__pendientes">
+      @for (p of pendientes(); track p) {
+        <li>{{ p }}</li>
+      }
+    </ul>
+  }
+
+  <ng-content />
+</section>

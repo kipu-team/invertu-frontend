@@ -1,0 +1,18 @@
+.chatbot__boton {
+  position: fixed;
+  right: 32px;
+  bottom: 32px;
+  --mat-fab-container-color: var(--dorado);
+  --mat-fab-foreground-color: var(--verde-oscuro);
+}
+
+.chatbot__ventana {
+  position: fixed;
+  right: 32px;
+  bottom: 104px;
+  width: 380px;
+  max-height: 70vh;
+  overflow: auto;
+  border-radius: var(--radio);
+  box-shadow: 0 12px 32px rgba(16, 40, 28, 0.18);
+}

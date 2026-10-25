@@ -1,0 +1,44 @@
+{
+  "compartido": {
+    "menu": {
+      "inicio": "Home",
+      "movimientos": "Transactions",
+      "metas": "Goals",
+      "suscripciones": "Subscriptions",
+      "calendario": "Calendar"
+    },
+    "soloPremium": "Premium only",
+    "datosPrueba": "Test data mode",
+    "cambiarIdioma": "Change language",
+    "plan": {
+      "free": "Free plan",
+      "premium": "Premium plan"
+    },
+    "usuario": {
+      "perfil": "Profile",
+      "configuracion": "Settings",
+      "verComoFree": "View as Free (test)",
+      "verComoPremium": "View as Premium (test)",
+      "cerrarSesion": "Log out"
+    },
+    "cerrarSesion": {
+      "titulo": "Log out?",
+      "mensaje": "You will need to enter your email and password again to access InvertU.",
+      "confirmar": "Log out"
+    },
+    "acciones": {
+      "cancelar": "Cancel",
+      "confirmar": "Confirm",
+      "guardar": "Save",
+      "editar": "Edit",
+      "eliminar": "Delete",
+      "volver": "Back",
+      "ahoraNo": "Not now"
+    },
+    "construccion": {
+      "aviso": "Screen under construction",
+      "responsable": "Owner",
+      "figuras": "Report figures"
+    }
+  }
+}

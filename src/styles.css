@@ -1,0 +1,62 @@
+/*
+ * Estilos generales de InvertU (para toda la app).
+ * El tema de Angular Material está aparte en custom-theme.scss.
+ * Las fuentes (Inter y los íconos Material Symbols) se cargan en angular.json → "styles".
+ */
+
+/*
+ * Colores de InvertU. Úsalos siempre con var(--nombre) en vez de escribir el color:
+ *   color: var(--verde-esmeralda);
+ */
+:root {
+  --verde-esmeralda: #13985c;
+  --verde-oscuro: #0b4a32;
+  --verde-claro: #e7f6ee;
+  --dorado: #f5b800;
+  --dorado-claro: #fff6d9;
+  --ingreso: #13985c;
+  --gasto: #d93a3a;
+  --fondo: #f6f8f7;
+  --superficie: #ffffff;
+  --texto: #17241d;
+  --texto-suave: #5f6d66;
+  --borde: #e2e8e4;
+  --radio: 12px;
+  --sombra: 0 1px 3px rgba(16, 40, 28, 0.08);
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: 'Inter Variable', system-ui, sans-serif;
+  background: var(--fondo);
+  color: var(--texto);
+}
+
+/* Botón dorado (como "Nueva meta" en los mockups): <button mat-flat-button class="boton-dorado"> */
+.mat-mdc-unelevated-button.boton-dorado {
+  --mat-button-filled-container-color: var(--dorado);
+  --mat-button-filled-label-text-color: #2b2100;
+}
+
+/* Tarjeta blanca estándar: <div class="tarjeta"> */
+.tarjeta {
+  background: var(--superficie);
+  border: 1px solid var(--borde);
+  border-radius: var(--radio);
+  box-shadow: var(--sombra);
+  padding: 20px;
+}
+
+.monto-ingreso {
+  color: var(--ingreso);
+  font-weight: 600;
+}
+.monto-gasto {
+  color: var(--gasto);
+  font-weight: 600;
+}

@@ -1,0 +1,46 @@
+<header class="cabecera">
+  <span class="cabecera__prueba">{{ 'compartido.datosPrueba' | translate }}</span>
+
+  <button
+    mat-button
+    class="cabecera__idioma"
+    (click)="idioma.alternar()"
+    [attr.aria-label]="'compartido.cambiarIdioma' | translate"
+  >
+    <mat-icon>translate</mat-icon>
+    {{ idioma.actual() === 'es' ? 'ES' : 'EN' }}
+  </button>
+
+  <button class="cabecera__usuario" [matMenuTriggerFor]="menuUsuario">
+    <span class="cabecera__textos">
+      <strong>{{ sesion.estudiante().nombres }}</strong>
+      <span class="cabecera__plan" [class.cabecera__plan--premium]="sesion.esPremium()">
+        {{ (sesion.esPremium() ? 'compartido.plan.premium' : 'compartido.plan.free') | translate }}
+      </span>
+    </span>
+    <span class="cabecera__avatar">{{ sesion.estudiante().nombres.charAt(0) }}</span>
+    <mat-icon>expand_more</mat-icon>
+  </button>
+
+  <mat-menu #menuUsuario="matMenu" xPosition="before">
+    <a mat-menu-item routerLink="/perfil">
+      <mat-icon>person</mat-icon>{{ 'compartido.usuario.perfil' | translate }}
+    </a>
+    <a mat-menu-item routerLink="/perfil" [queryParams]="{ pestana: 'configuracion' }">
+      <mat-icon>settings</mat-icon>{{ 'compartido.usuario.configuracion' | translate }}
+    </a>
+    <button mat-menu-item (click)="sesion.alternarRol()">
+      <mat-icon>swap_horiz</mat-icon>
+      {{
+        (sesion.esPremium()
+          ? 'compartido.usuario.verComoFree'
+          : 'compartido.usuario.verComoPremium'
+        ) | translate
+      }}
+    </button>
+    <mat-divider />
+    <button mat-menu-item class="cabecera__salir" (click)="confirmarCierreSesion()">
+      <mat-icon>logout</mat-icon>{{ 'compartido.usuario.cerrarSesion' | translate }}
+    </button>
+  </mat-menu>
+</header>
