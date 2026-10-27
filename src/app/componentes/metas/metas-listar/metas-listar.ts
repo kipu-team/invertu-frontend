@@ -1,17 +1,28 @@
-import { Component, ChangeDetectionStrategy } from '@angular/core';
-import { EnConstruccion } from '../../compartidos/en-construccion/en-construccion';
-
+import { Component, ChangeDetectionStrategy, OnInit, inject } from '@angular/core';
+import { TranslatePipe } from '@ngx-translate/core';
+import { MatButton } from '@angular/material/button';
+import { MatIcon } from '@angular/material/icon';
+import { MetaService } from '../../../servicios/meta-service';
+import { MetaResumen } from '../../../modelo/meta';
 @Component({
   selector: 'app-metas-listar',
-  imports: [EnConstruccion],
+  imports: [TranslatePipe, MatButton, MatIcon],
   templateUrl: './metas-listar.html',
   changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './metas-listar.css',
 })
-export class MetasListar {
-  pendientes = [
-    'Pestañas Activas / Finalizadas (mat-tab-group) con tarjetas y barra de progreso',
-    '"Nueva meta": consultar estado-limite; si limiteAlcanzado → aviso del plan Free (67)',
-    'Estados vacíos (72–73)',
-  ];
+export class MetasListar implements OnInit {
+  private metaService = inject(MetaService);
+  activas: MetaResumen[] = [];
+  finalizadas: MetaResumen[] = [];
+  ngOnInit(): void {
+    this.metaService.listarActivas().subscribe((data) => {
+      this.activas = data;
+      console.log(data);
+    });
+
+    this.metaService.listarFinalizadas().subscribe((data) => {
+      this.finalizadas = data;
+    });
+  }
 }

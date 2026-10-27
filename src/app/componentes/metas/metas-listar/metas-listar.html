@@ -1,6 +1,31 @@
-<app-en-construccion
-  titulo="metas.titulo"
-  responsable="Bruno"
-  figuras="67, 70–73"
-  [pendientes]="pendientes"
-/>
+<section class="metas">
+  <header class="metas__encabezado">
+    <div>
+      <h1>{{ 'metas.titulo' | translate }}</h1>
+      <p>{{ 'metas.subtitulo' | translate }}</p>
+    </div>
+    <button mat-flat-button class="boton-dorado">
+      <mat-icon>add</mat-icon>
+      {{ 'metas.nueva' | translate }}
+    </button>
+  </header>
+
+  <div class="metas__activas">
+    @for (meta of activas; track meta.idMeta) {
+      <article class="tarjeta">
+        <h3>{{ meta.nombre }}</h3>
+        <p>{{ meta.porcentaje }}%</p>
+        <p>S/ {{ meta.montoAportado }} / S/ {{ meta.montoObjetivo }}</p>
+      </article>
+    }
+  </div>
+  <h2>{{ 'metas.finalizadas' | translate }}</h2>
+  <div class="metas__finalizadas">
+    @for (meta of finalizadas; track meta.idMeta) {
+      <article class="tarjeta">
+        <h3>{{ meta.nombre }}</h3>
+        <p>{{ 'metas.estado.' + meta.estado | translate }}</p>
+      </article>
+    }
+  </div>
+</section>

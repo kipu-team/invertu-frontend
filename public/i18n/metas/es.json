@@ -1,6 +1,13 @@
 {
   "metas": {
     "titulo": "Mis metas de ahorro",
+    "subtitulo": "Monitorea y alcanza tus objetivos financieros estudiantiles.",
+    "nueva": "Nueva meta",
+    "finalizadas": "Metas finalizadas",
+    "estado": {
+      "CUMPLIDA": "Cumplida",
+      "CANCELADA": "Cancelada"
+    },
     "registrar": {
       "titulo": "Nueva meta de ahorro"
     },

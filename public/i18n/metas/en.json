@@ -1,6 +1,13 @@
 {
   "metas": {
     "titulo": "My savings goals",
+    "subtitulo": "Track and reach your student financial goals.",
+    "nueva": "New goal",
+    "finalizadas": "Completed goals",
+    "estado": {
+      "CUMPLIDA": "Completed",
+      "CANCELADA": "Cancelled"
+    },
     "registrar": {
       "titulo": "New savings goal"
     },
