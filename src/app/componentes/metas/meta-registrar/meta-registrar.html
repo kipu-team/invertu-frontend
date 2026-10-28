@@ -1,6 +1,61 @@
-<app-en-construccion
-  titulo="metas.registrar.titulo"
-  responsable="Bruno"
-  figuras="66, 68–69, 80–81"
-  [pendientes]="pendientes"
-/>
+<header class="registrar__encabezado">
+  <h1>{{ 'metas.registrar.titulo' | translate }}</h1>
+  <p>{{ 'metas.registrar.subtitulo' | translate }}</p>
+</header>
+
+<form class="tarjeta" [formGroup]="formulario">
+  <div class="columna">
+    <label>
+      <span class="etiqueta">
+        {{ 'metas.registrar.nombre' | translate }}
+        <span class="obligatorio">{{ 'metas.registrar.obligatorio' | translate }}</span>
+      </span>
+      <input formControlName="nombre" [placeholder]="'metas.registrar.nombrePlaceholder' | translate" />
+    </label>
+
+    <label>
+      <span class="etiqueta">{{ 'metas.registrar.descripcion' | translate }}</span>
+      <textarea formControlName="descripcion" [placeholder]="'metas.registrar.descripcionPlaceholder' | translate"></textarea>
+    </label>
+  </div>
+
+  <div class="columna">
+    <label>
+      <span class="etiqueta">
+        {{ 'metas.registrar.monto' | translate }}
+        <span class="obligatorio">{{ 'metas.registrar.obligatorio' | translate }}</span>
+      </span>
+      <div class="campo-monto">
+        <span class="campo-monto__moneda">S/</span>
+        <input type="number" formControlName="montoObjetivo" placeholder="0.00" />
+      </div>
+    </label>
+
+    <label>
+      <span class="etiqueta">
+        {{ 'metas.registrar.fecha' | translate }}
+        <span class="obligatorio">{{ 'metas.registrar.obligatorio' | translate }}</span>
+      </span>
+      <input type="date" formControlName="fechaObjetivo" />
+    </label>
+
+    <label>
+      <span class="etiqueta">{{ 'metas.registrar.frecuencia' | translate }}</span>
+      <select formControlName="frecuenciaAporte">
+        <option value="DIARIA">{{ 'metas.registrar.frecuenciaOpcion.DIARIA' | translate }}</option>
+        <option value="SEMANAL">{{ 'metas.registrar.frecuenciaOpcion.SEMANAL' | translate }}</option>
+        <option value="MENSUAL">{{ 'metas.registrar.frecuenciaOpcion.MENSUAL' | translate }}</option>
+        <option value="SIN_FRECUENCIA">{{ 'metas.registrar.frecuenciaOpcion.SIN_FRECUENCIA' | translate }}</option>
+      </select>
+    </label>
+  </div>
+
+  <div class="acciones">
+    <button type="button" mat-stroked-button class="acciones__cancelar">
+      {{ 'metas.registrar.cancelar' | translate }}
+    </button>
+    <button type="submit" mat-flat-button class="boton-dorado acciones__registrar">
+      {{ 'metas.registrar.registrar' | translate }}
+    </button>
+  </div>
+</form>

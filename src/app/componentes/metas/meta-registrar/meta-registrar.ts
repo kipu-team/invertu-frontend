@@ -1,17 +1,23 @@
-import { Component, ChangeDetectionStrategy } from '@angular/core';
-import { EnConstruccion } from '../../compartidos/en-construccion/en-construccion';
+import { Component, ChangeDetectionStrategy, inject } from '@angular/core';
+import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
+import { MatButton } from '@angular/material/button';
+import { TranslatePipe } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-meta-registrar',
-  imports: [EnConstruccion],
+  imports: [ReactiveFormsModule, TranslatePipe, MatButton],
   templateUrl: './meta-registrar.html',
   changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './meta-registrar.css',
 })
 export class MetaRegistrar {
-  pendientes = [
-    'Formulario reactivo: nombre, monto objetivo, fecha límite, frecuencia de aporte, descripción',
-    'Con :id en la ruta → cargar la meta y editar (igual que registrar-pozo/:id del profe)',
-    'Validaciones (68) y confirmaciones (69, 81)',
-  ];
+  private fb = inject(FormBuilder);
+
+  formulario = this.fb.group({
+    nombre: ['', Validators.required],
+    montoObjetivo: [null as number | null, [Validators.required, Validators.min(1)]],
+    fechaObjetivo: ['', Validators.required],
+    frecuenciaAporte: ['SEMANAL', Validators.required],
+    descripcion: [''],
+  });
 }

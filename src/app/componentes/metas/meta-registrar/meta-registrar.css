@@ -1,0 +1,119 @@
+.registrar__encabezado {
+  margin-bottom: 22px;
+}
+
+.registrar__encabezado h1 {
+  margin: 0;
+  font-size: 1.35rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+.registrar__encabezado p {
+  margin: 4px 0 0;
+  font-size: 0.75rem;
+  color: var(--texto-suave);
+}
+
+form {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px 24px;
+  padding: 24px;
+}
+
+.columna {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+label {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.etiqueta {
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: var(--texto);
+}
+
+.obligatorio {
+  margin-left: 4px;
+  color: #dc2626;
+  font-weight: 600;
+}
+
+input,
+textarea,
+select {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 10px 12px;
+  border: 1px solid var(--borde);
+  border-radius: 8px;
+  background: var(--superficie);
+  color: var(--texto);
+  font: inherit;
+  font-size: 0.8125rem;
+}
+
+input::placeholder,
+textarea::placeholder {
+  color: var(--texto-suave);
+}
+
+input:focus,
+textarea:focus,
+select:focus {
+  outline: none;
+  border-color: var(--verde-esmeralda);
+}
+
+textarea {
+  min-height: 112px;
+  resize: vertical;
+}
+
+.campo-monto {
+  display: flex;
+  align-items: center;
+  border: 1px solid var(--borde);
+  border-radius: 8px;
+  background: var(--superficie);
+}
+
+.campo-monto:focus-within {
+  border-color: var(--verde-esmeralda);
+}
+
+.campo-monto__moneda {
+  padding-left: 12px;
+  font-size: 0.8125rem;
+  font-weight: 700;
+}
+
+.campo-monto input {
+  border: none;
+  background: transparent;
+}
+
+.acciones {
+  grid-column: 1 / -1;
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  border-top: 1px solid var(--borde);
+  padding-top: 20px;
+}
+
+.acciones__cancelar,
+.acciones__registrar {
+  height: 36px;
+  padding: 0 18px;
+  border-radius: 8px;
+  font-size: 0.8125rem;
+  font-weight: 700;
+}

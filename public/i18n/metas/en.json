@@ -35,7 +35,24 @@
       "12": "Dec"
     },
     "registrar": {
-      "titulo": "New savings goal"
+      "titulo": "Create new goal",
+      "subtitulo": "Set up a smart savings plan adapted to your student budget.",
+      "nombre": "Goal name",
+      "nombrePlaceholder": "E.g. Laptop for university, End-of-term trip...",
+      "obligatorio": "(Required field)",
+      "descripcion": "Description (Optional)",
+      "descripcionPlaceholder": "Briefly describe what this goal is for...",
+      "monto": "Target amount",
+      "fecha": "Target date",
+      "frecuencia": "Suggested frequency",
+      "frecuenciaOpcion": {
+        "DIARIA": "Daily",
+        "SEMANAL": "Weekly (Recommended for students)",
+        "MENSUAL": "Monthly",
+        "SIN_FRECUENCIA": "No frequency"
+      },
+      "cancelar": "Cancel",
+      "registrar": "Register goal"
     },
     "detalle": {
       "titulo": "Goal details"

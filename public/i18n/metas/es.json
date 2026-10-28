@@ -35,7 +35,24 @@
       "12": "Dic"
     },
     "registrar": {
-      "titulo": "Nueva meta de ahorro"
+      "titulo": "Crear nueva meta",
+      "subtitulo": "Configura un plan de ahorro inteligente adaptado a tu presupuesto estudiantil.",
+      "nombre": "Nombre de la meta",
+      "nombrePlaceholder": "Ej. Laptop para la universidad, Viaje de fin de ciclo...",
+      "obligatorio": "(Campo obligatorio)",
+      "descripcion": "Descripción (Opcional)",
+      "descripcionPlaceholder": "Describe brevemente para qué es esta meta...",
+      "monto": "Monto objetivo",
+      "fecha": "Fecha objetivo",
+      "frecuencia": "Frecuencia sugerida",
+      "frecuenciaOpcion": {
+        "DIARIA": "Diaria",
+        "SEMANAL": "Semanal (Recomendado para estudiantes)",
+        "MENSUAL": "Mensual",
+        "SIN_FRECUENCIA": "Sin frecuencia"
+      },
+      "cancelar": "Cancelar",
+      "registrar": "Registrar meta"
     },
     "detalle": {
       "titulo": "Detalle de la meta"
