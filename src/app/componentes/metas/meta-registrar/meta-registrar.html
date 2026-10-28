@@ -23,20 +23,34 @@
     <label>
       <span class="etiqueta">
         {{ 'metas.registrar.monto' | translate }}
-        <span class="obligatorio">{{ 'metas.registrar.obligatorio' | translate }}</span>
+        @if (monto.errors?.['min']) {
+          <mat-icon class="icono-error">warning</mat-icon>
+        } @else {
+          <span class="obligatorio">{{ 'metas.registrar.obligatorio' | translate }}</span>
+        }
       </span>
-      <div class="campo-monto">
+      <div class="campo-monto" [class.invalido]="monto.errors?.['min']">
         <span class="campo-monto__moneda">S/</span>
         <input type="number" formControlName="montoObjetivo" placeholder="0.00" />
       </div>
+      @if (monto.errors?.['min']) {
+        <small class="error">{{ 'metas.registrar.montoMinimo' | translate }}</small>
+      }
     </label>
 
     <label>
       <span class="etiqueta">
         {{ 'metas.registrar.fecha' | translate }}
-        <span class="obligatorio">{{ 'metas.registrar.obligatorio' | translate }}</span>
+        @if (fecha.errors?.['fechaPasada']) {
+          <mat-icon class="icono-error">warning</mat-icon>
+        } @else {
+          <span class="obligatorio">{{ 'metas.registrar.obligatorio' | translate }}</span>
+        }
       </span>
-      <input type="date" formControlName="fechaObjetivo" />
+      <input type="date" formControlName="fechaObjetivo" [class.invalido]="fecha.errors?.['fechaPasada']" />
+      @if (fecha.errors?.['fechaPasada']) {
+        <small class="error">{{ 'metas.registrar.fechaPasada' | translate }}</small>
+      }
     </label>
 
     <label>
@@ -54,7 +68,12 @@
     <button type="button" mat-stroked-button class="acciones__cancelar">
       {{ 'metas.registrar.cancelar' | translate }}
     </button>
-    <button type="submit" mat-flat-button class="boton-dorado acciones__registrar">
+    <button
+      type="submit"
+      mat-flat-button
+      class="boton-dorado acciones__registrar"
+      [disabled]="formulario.invalid && formulario.dirty"
+    >
       {{ 'metas.registrar.registrar' | translate }}
     </button>
   </div>
