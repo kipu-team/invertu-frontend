@@ -4,10 +4,10 @@
       <h1>{{ 'metas.titulo' | translate }}</h1>
       <p>{{ 'metas.subtitulo' | translate }}</p>
     </div>
-    <button mat-flat-button class="boton-dorado metas__boton-dorado">
+    <a mat-flat-button class="boton-dorado metas__boton-dorado" routerLink="/metas/registrar">
       <mat-icon>add</mat-icon>
       {{ 'metas.nueva' | translate }}
-    </button>
+    </a>
   </header>
 
   @if (destacada) {
@@ -57,10 +57,10 @@
       </span>
       <h3>{{ 'metas.vacio.titulo' | translate }}</h3>
       <p>{{ 'metas.vacio.descripcion' | translate }}</p>
-      <button mat-flat-button class="boton-dorado metas__boton-dorado">
+      <a mat-flat-button class="boton-dorado metas__boton-dorado" routerLink="/metas/registrar">
         <mat-icon>add</mat-icon>
         {{ 'metas.vacio.crear' | translate }}
-      </button>
+      </a>
     </section>
   }
 

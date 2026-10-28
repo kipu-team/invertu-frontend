@@ -6,10 +6,10 @@ import { MatIcon } from '@angular/material/icon';
 import { MatProgressSpinner } from '@angular/material/progress-spinner';
 import { MetaService } from '../../../servicios/meta-service';
 import { MetaResumen } from '../../../modelo/meta';
-
+import { RouterLink } from '@angular/router';
 @Component({
   selector: 'app-metas-listar',
-  imports: [TranslatePipe, DecimalPipe, MatButton, MatIcon, MatProgressSpinner],
+  imports: [TranslatePipe, DecimalPipe, MatButton, MatIcon, MatProgressSpinner, RouterLink],
   templateUrl: './metas-listar.html',
   changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './metas-listar.css',
