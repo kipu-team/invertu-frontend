@@ -1,6 +1,39 @@
 {
   "metas": {
-    "titulo": "My savings goals",
+    "titulo": "My Savings Goals",
+    "subtitulo": "Track and reach your student financial goals.",
+    "nueva": "New goal",
+    "verDetalle": "View details",
+    "limite": "Due",
+    "ahorradoDe": "saved of",
+    "de": "of",
+    "otrasActivas": "Other active goals",
+    "consejoPrueba": "This month you had less variable income, so we suggest setting aside S/40 this week instead of S/60. Keep your goal on track for February.",
+    "compartir": "Share",
+    "vacio": {
+      "titulo": "You don't have an active goal yet",
+      "descripcion": "Set something you want to achieve and we'll help you get there, adapting to your real income every week.",
+      "crear": "Create new goal"
+    },
+    "finalizadas": "Completed goals",
+    "estado": {
+      "CUMPLIDA": "Completed",
+      "CANCELADA": "Cancelled"
+    },
+    "mes": {
+      "01": "Jan",
+      "02": "Feb",
+      "03": "Mar",
+      "04": "Apr",
+      "05": "May",
+      "06": "Jun",
+      "07": "Jul",
+      "08": "Aug",
+      "09": "Sep",
+      "10": "Oct",
+      "11": "Nov",
+      "12": "Dec"
+    },
     "registrar": {
       "titulo": "New savings goal"
     },
