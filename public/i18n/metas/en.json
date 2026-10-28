@@ -54,7 +54,12 @@
         "SIN_FRECUENCIA": "No frequency"
       },
       "cancelar": "Cancel",
-      "registrar": "Register goal"
+      "registrar": "Register goal",
+      "exito": "Goal created successfully!",
+      "verMisMetas": "View my goals",
+      "limiteTitulo": "Free Plan Limit Reached",
+      "limiteMensaje": "You have reached the limit of your Free plan (maximum 2 active goals). Upgrade to Premium to create unlimited goals and organize your savings better.",
+      "pasarPremium": "Upgrade to Premium"
     },
     "detalle": {
       "titulo": "Goal details"

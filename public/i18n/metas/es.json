@@ -54,7 +54,12 @@
       },
       "cancelar": "Cancelar",
       "registrar": "Registrar meta",
-      "fechaPasada": "La fecha debe ser posterior a hoy"
+      "fechaPasada": "La fecha debe ser posterior a hoy",
+      "exito": "¡Meta creada con éxito!",
+      "verMisMetas": "Ver mis metas",
+      "limiteTitulo": "Límite del Plan Free Alcanzado",
+      "limiteMensaje": "Has alcanzado el límite de tu plan Free (máximo 2 metas activas). Pasa a Premium para crear metas ilimitadas y organizar mejor tus ahorros.",
+      "pasarPremium": "Pasar a Premium"
     },
     "detalle": {
       "titulo": "Detalle de la meta"

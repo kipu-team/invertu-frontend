@@ -3,7 +3,7 @@
   <p>{{ 'metas.registrar.subtitulo' | translate }}</p>
 </header>
 
-<form class="tarjeta" [formGroup]="formulario">
+<form class="tarjeta" [formGroup]="formulario" (ngSubmit)="registrar()">
   <div class="columna">
     <label>
       <span class="etiqueta">
@@ -65,16 +65,29 @@
   </div>
 
   <div class="acciones">
-    <button type="button" mat-stroked-button class="acciones__cancelar">
+    <button type="button" mat-stroked-button class="acciones__cancelar" (click)="cancelar()">
       {{ 'metas.registrar.cancelar' | translate }}
     </button>
     <button
       type="submit"
       mat-flat-button
       class="boton-dorado acciones__registrar"
-      [disabled]="formulario.invalid && formulario.dirty"
+      [disabled]="limiteAlcanzado || (formulario.invalid && formulario.dirty)"
     >
       {{ 'metas.registrar.registrar' | translate }}
     </button>
   </div>
 </form>
+
+@if (limiteAlcanzado) {
+  <aside class="aviso-limite">
+    <mat-icon class="aviso-limite__icono">warning_amber</mat-icon>
+    <div class="aviso-limite__texto">
+      <strong>{{ 'metas.registrar.limiteTitulo' | translate }}</strong>
+      <p>{{ 'metas.registrar.limiteMensaje' | translate }}</p>
+    </div>
+    <a mat-flat-button class="aviso-limite__boton" routerLink="/pasar-premium">
+      {{ 'metas.registrar.pasarPremium' | translate }}
+    </a>
+  </aside>
+}
