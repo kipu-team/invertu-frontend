@@ -1,12 +1,38 @@
 {
   "metas": {
-    "titulo": "Mis metas de ahorro",
+    "titulo": "Mis Metas de Ahorro",
     "subtitulo": "Monitorea y alcanza tus objetivos financieros estudiantiles.",
     "nueva": "Nueva meta",
+    "verDetalle": "Ver detalle",
+    "limite": "Límite",
+    "ahorradoDe": "ahorrado de",
+    "de": "de",
+    "otrasActivas": "Otras metas activas",
+    "consejoPrueba": "Este mes tuviste menos ingreso variable, te sugerimos destinar S/40 esta semana en vez de S/60. Mantienes la meta para febrero.",
+    "compartir": "Compartir",
+    "vacio": {
+      "titulo": "Aún no tienes una meta activa",
+      "descripcion": "Define algo que quieras lograr y te ayudamos a llegar ahí, ajustándonos a tu ingreso real cada semana.",
+      "crear": "Crear nueva meta"
+    },
     "finalizadas": "Metas finalizadas",
     "estado": {
       "CUMPLIDA": "Cumplida",
       "CANCELADA": "Cancelada"
+    },
+    "mes": {
+      "01": "Ene",
+      "02": "Feb",
+      "03": "Mar",
+      "04": "Abr",
+      "05": "May",
+      "06": "Jun",
+      "07": "Jul",
+      "08": "Ago",
+      "09": "Sep",
+      "10": "Oct",
+      "11": "Nov",
+      "12": "Dic"
     },
     "registrar": {
       "titulo": "Nueva meta de ahorro"
