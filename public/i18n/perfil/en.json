@@ -1,5 +1,89 @@
 {
+  "compartido": {
+    "menu": {
+      "inicio": "Home",
+      "movimientos": "Transactions",
+      "metas": "Goals",
+      "suscripciones": "Subscriptions",
+      "calendario": "Calendar"
+    },
+    "soloPremium": "Premium Only",
+    "datosPrueba": "Test data mode",
+    "cambiarIdioma": "Change language",
+    "plan": {
+      "free": "Free Plan",
+      "premium": "Premium Plan"
+    },
+    "usuario": {
+      "perfil": "Profile",
+      "ver-perfil": "My Profile",
+      "configuracion": "Settings",
+      "verComoFree": "View as Free (trial)",
+      "verComoPremium": "View as Premium (trial)",
+      "cerrarSesion": "Log out"
+    },
+    "cerrarSesion": {
+      "titulo": "Log out?",
+      "mensaje": "You will have to enter your email and password again to access InvertU.",
+      "confirmar": "Log out"
+    },
+    "acciones": {
+      "cancelar": "Cancel",
+      "confirmar": "Confirm",
+      "guardar": "Save",
+      "editar": "Edit",
+      "eliminar": "Delete",
+      "volver": "Back",
+      "ahoraNo": "Not now"
+    },
+    "construccion": {
+      "aviso": "Screen under construction",
+      "responsable": "Responsible",
+      "figuras": "Report figures"
+    }
+  },
   "perfil": {
-    "titulo": "My profile"
+    "titulo": "My Profile",
+    "subtitulo": "Manage your personal, academic information and preferences of your InvertU account.",
+    "planes": {
+      "free": "Free Plan",
+      "premium": "Premium Plan"
+    },
+    "desc_plan": {
+      "free": "Free Plan for University Students",
+      "premium": "Unlimited Premium Plan"
+    },
+    "secciones": {
+      "personal": "Personal Information",
+      "cuenta": "Account",
+      "academico": "Academic"
+    },
+    "campos": {
+      "nombres": "First Name",
+      "apellidos": "Last Name",
+      "correo": "Email Address",
+      "plan_actual": "Current Plan",
+      "universidad": "University",
+      "sin_universidad": "Not registered",
+      "estado_verificacion": "Verification Status",
+      "verificado": "Verified Student"
+    },
+    "botones": {
+      "editar": "Edit profile",
+      "mejorar_plan": "Upgrade to Premium"
+    },
+    "titulos": {
+      "beneficios": "Expected Premium Benefits"
+    },
+    "beneficios": {
+      "b1_title": "Advanced reports",
+      "b1_desc": "Deep and interactive analysis of your monthly savings and spending habits.",
+      "b2_title": "Ad-free",
+      "b2_desc": "Browse free of advertising in all your sections and daily workflows.",
+      "b3_title": "Financial advisory",
+      "b3_desc": "Personalized advice and scenario simulation through our AI assistant.",
+      "b4_title": "Export data",
+      "b4_desc": "Download your financial history in XLS, CSV or PDF formats with a single click."
+    }
   }
 }

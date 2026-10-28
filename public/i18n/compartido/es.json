@@ -16,6 +16,7 @@
     },
     "usuario": {
       "perfil": "Perfil",
+      "ver-perfil": "Mi Perfil",
       "configuracion": "Configuración",
       "verComoFree": "Ver como Free (prueba)",
       "verComoPremium": "Ver como Premium (prueba)",
@@ -39,6 +40,50 @@
       "aviso": "Pantalla en construcción",
       "responsable": "Responsable",
       "figuras": "Figuras del informe"
+    }
+  },
+  "perfil": {
+    "titulo": "Mi Perfil",
+    "subtitulo": "Administra tu información personal, académica y preferencias de tu cuenta InvertU.",
+    "planes": {
+      "free": "Plan Gratuito",
+      "premium": "Plan Premium"
+    },
+    "desc_plan": {
+      "free": "Plan Gratuito para Universitarios",
+      "premium": "Plan Premium Ilimitado"
+    },
+    "secciones": {
+      "personal": "Información Personal",
+      "cuenta": "Cuenta",
+      "academico": "Académico"
+    },
+    "campos": {
+      "nombres": "Nombres",
+      "apellidos": "Apellidos",
+      "correo": "Correo Electrónico",
+      "plan_actual": "Plan Actual",
+      "universidad": "Universidad",
+      "sin_universidad": "No registrada",
+      "estado_verificacion": "Estado de Verificación",
+      "verificado": "Estudiante Verificado"
+    },
+    "botones": {
+      "editar": "Editar perfil",
+      "mejorar_plan": "Pasar a Premium"
+    },
+    "titulos": {
+      "beneficios": "Beneficios Premium Esperados"
+    },
+    "beneficios": {
+      "b1_title": "Reportes avanzados",
+      "b1_desc": "Análisis profundo e interactivo de tus hábitos de ahorro y gasto mensual.",
+      "b2_title": "Sin anuncios",
+      "b2_desc": "Navega libre de publicidad en todas tus secciones y flujos diarios.",
+      "b3_title": "Asesoría financiera",
+      "b3_desc": "Consejos personalizados y simulación de escenarios mediante nuestro asistente de IA.",
+      "b4_title": "Exportar datos",
+      "b4_desc": "Descarga tu historial financiero en formatos XLS, CSV o PDF con un solo clic."
     }
   }
 }
