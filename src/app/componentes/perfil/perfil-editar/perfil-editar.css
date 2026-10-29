@@ -1,0 +1,62 @@
+.perfil-editar {
+  font-family: 'Inter Variable', system-ui, sans-serif;
+  color: var(--texto);
+}
+
+.campo input,
+.campo select,
+.campo button {
+  font-family: inherit;
+}
+
+.perfil-editar {
+  width: 100%;
+}
+
+.perfil-editar h2 {
+  margin: 0 0 24px;
+  font-size: 1.25rem;
+  font-weight: 600;
+}
+
+.campo {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 18px;
+}
+
+.campo label {
+  font-weight: 500;
+  font-size: 0.9rem;
+}
+
+.campo input,
+.campo select {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 12px;
+  border: 1px solid var(--borde);
+  border-radius: 8px;
+  background: var(--superficie);
+  color: var(--texto);
+  font: inherit;
+}
+
+.campo input:focus,
+.campo select:focus {
+  outline: 2px solid var(--verde-esmeralda);
+  outline-offset: 1px;
+}
+
+.acciones {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  margin-top: 24px;
+}
+
+.mensaje-error {
+  color: #b91c1c;
+  font-size: 0.9rem;
+}

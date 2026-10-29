@@ -1,8 +1,65 @@
 {
   "metas": {
-    "titulo": "My savings goals",
+    "titulo": "My Savings Goals",
+    "subtitulo": "Track and reach your student financial goals.",
+    "nueva": "New goal",
+    "verDetalle": "View details",
+    "limite": "Due",
+    "ahorradoDe": "saved of",
+    "de": "of",
+    "otrasActivas": "Other active goals",
+    "consejoPrueba": "This month you had less variable income, so we suggest setting aside S/40 this week instead of S/60. Keep your goal on track for February.",
+    "compartir": "Share",
+    "vacio": {
+      "titulo": "You don't have an active goal yet",
+      "descripcion": "Set something you want to achieve and we'll help you get there, adapting to your real income every week.",
+      "crear": "Create new goal"
+    },
+    "finalizadas": "Completed goals",
+    "estado": {
+      "CUMPLIDA": "Completed",
+      "CANCELADA": "Cancelled"
+    },
+    "mes": {
+      "01": "Jan",
+      "02": "Feb",
+      "03": "Mar",
+      "04": "Apr",
+      "05": "May",
+      "06": "Jun",
+      "07": "Jul",
+      "08": "Aug",
+      "09": "Sep",
+      "10": "Oct",
+      "11": "Nov",
+      "12": "Dec"
+    },
     "registrar": {
-      "titulo": "New savings goal"
+      "titulo": "Create new goal",
+      "subtitulo": "Set up a smart savings plan adapted to your student budget.",
+      "nombre": "Goal name",
+      "nombrePlaceholder": "E.g. Laptop for university, End-of-term trip...",
+      "obligatorio": "(Required field)",
+      "descripcion": "Description (Optional)",
+      "descripcionPlaceholder": "Briefly describe what this goal is for...",
+      "monto": "Target amount",
+      "montoMinimo": "The amount must be greater than 0",
+      "fecha": "Target date",
+      "fechaPasada": "The date must be after today",
+      "frecuencia": "Suggested frequency",
+      "frecuenciaOpcion": {
+        "DIARIA": "Daily",
+        "SEMANAL": "Weekly (Recommended for students)",
+        "MENSUAL": "Monthly",
+        "SIN_FRECUENCIA": "No frequency"
+      },
+      "cancelar": "Cancel",
+      "registrar": "Register goal",
+      "exito": "Goal created successfully!",
+      "verMisMetas": "View my goals",
+      "limiteTitulo": "Free Plan Limit Reached",
+      "limiteMensaje": "You have reached the limit of your Free plan (maximum 2 active goals). Upgrade to Premium to create unlimited goals and organize your savings better.",
+      "pasarPremium": "Upgrade to Premium"
     },
     "detalle": {
       "titulo": "Goal details"

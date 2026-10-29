@@ -1,0 +1,214 @@
+.perfil-contenedor {
+  padding: 32px;
+  background-color: #ffffff;
+  border-radius: 16px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  font-family: 'Inter Variable', sans-serif;
+}
+
+.perfil-titulo {
+  margin: 0 0 4px 0;
+  font-size: 26px;
+  font-weight: 700;
+  color: #171d18;
+}
+
+.perfil-subtitulo {
+  margin: 0 0 32px 0;
+  color: #59605a;
+  font-size: 14px;
+}
+
+.cabecera-usuario {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border: 1px solid #dee4dc;
+  padding: 24px;
+  border-radius: 12px;
+  margin-bottom: 32px;
+  background-color: #ffffff;
+}
+
+.usuario-info-bloque {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.avatar-foto {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  overflow: hidden;
+  background-color: #ecf2ea;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #dee4dc;
+}
+
+.avatar-iniciales {
+  font-size: 28px;
+  font-weight: 600;
+  color: #005f37;
+}
+
+.usuario-nombre {
+  margin: 0 0 6px 0;
+  font-size: 22px;
+  font-weight: 700;
+  color: #171d18;
+}
+
+.usuario-correo-sub {
+  font-size: 14px;
+  color: #8c928c;
+}
+
+.badge-plan-mockup {
+  padding: 6px 16px;
+  border-radius: 20px;
+  font-size: 13px;
+  font-weight: 600;
+  background-color: #ecf2ea;
+  color: #424843;
+  border: 1px solid #c2c8c1;
+}
+
+.columnas-info-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 32px;
+  border-bottom: 1px solid #dee4dc;
+  padding-bottom: 32px;
+  margin-bottom: 24px;
+}
+
+.columna-titulo {
+  font-size: 14px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin: 0 0 16px 0;
+  color: #424843;
+}
+
+.titulo-verde {
+  color: #006d3f;
+}
+
+.campo-grupo {
+  margin-bottom: 14px;
+}
+
+.campo-etiqueta {
+  display: block;
+  font-size: 12px;
+  color: #8c928c;
+  margin-bottom: 2px;
+}
+
+.icono-candado {
+  font-size: 14px;
+  width: 14px;
+  height: 14px;
+  vertical-align: middle;
+  margin-left: 2px;
+  color: #a6ada6;
+}
+
+.campo-valor {
+  font-size: 15px;
+  font-weight: 500;
+  color: #2c322d;
+}
+
+.valor-verificado {
+  color: #29a467;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.punto-verde {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: #29a467;
+  display: inline-block;
+}
+
+.perfil-acciones {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  margin-bottom: 40px;
+}
+
+.boton-guardar-verde {
+  background-color: #006d3f !important;
+  color: white !important;
+  padding: 0 20px;
+  border-radius: 6px;
+  font-weight: 500;
+}
+
+.beneficios-seccion-titulo {
+  font-size: 18px;
+  font-weight: 700;
+  color: #171d18;
+  margin: 0 0 20px 0;
+}
+
+.beneficios-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+/* Modificado a fondo blanco puro para calzar con el mockup original */
+.beneficio-tarjeta {
+  border: 1px solid #dee4dc;
+  background-color: #ffffff;
+  padding: 16px;
+  border-radius: 12px;
+  display: flex;
+  gap: 16px;
+  align-items: start;
+}
+
+/* Removido el fondo verde de la caja interna y el color se le asigna directamente al icono */
+.beneficio-icono-contenedor {
+  color: #29a467;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-top: 2px;
+}
+
+.beneficio-icono-contenedor mat-icon {
+  font-size: 24px;
+  width: 24px;
+  height: 24px;
+}
+
+.beneficio-titulo {
+  margin: 0 0 4px 0;
+  font-size: 15px;
+  font-weight: 600;
+  color: #171d18;
+}
+
+.beneficio-descripcion {
+  margin: 0;
+  font-size: 13px;
+  color: #59605a;
+  line-height: 1.4;
+}
+
+.perfil-cargando {
+  text-align: center;
+  padding: 40px;
+  color: #59605a;
+}

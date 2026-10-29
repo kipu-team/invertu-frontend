@@ -1,4 +1,4 @@
-import { Service, inject } from '@angular/core';
+import { inject, Service } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { Mensaje } from '../modelo/comun';
 import {
@@ -39,10 +39,6 @@ export class PerfilService {
     return of({ mensaje: 'Contraseña actualizada' });
   }
 
-  /**
-   * Prueba gratuita de Premium (Figura 98). Después de llamarlo:
-   *   sesion.cambiarRol(respuesta.rol)
-   */
   pasarPremium(): Observable<PasarPremiumResponse> {
     return of({ rol: 'ROLE_PREMIUM', token: 'token-de-prueba', mensaje: '¡Ahora eres Premium!' });
   }

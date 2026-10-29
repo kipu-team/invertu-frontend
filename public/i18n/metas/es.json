@@ -1,8 +1,65 @@
 {
   "metas": {
-    "titulo": "Mis metas de ahorro",
+    "titulo": "Mis Metas de Ahorro",
+    "subtitulo": "Monitorea y alcanza tus objetivos financieros estudiantiles.",
+    "nueva": "Nueva meta",
+    "verDetalle": "Ver detalle",
+    "limite": "Límite",
+    "ahorradoDe": "ahorrado de",
+    "de": "de",
+    "otrasActivas": "Otras metas activas",
+    "consejoPrueba": "Este mes tuviste menos ingreso variable, te sugerimos destinar S/40 esta semana en vez de S/60. Mantienes la meta para febrero.",
+    "compartir": "Compartir",
+    "vacio": {
+      "titulo": "Aún no tienes una meta activa",
+      "descripcion": "Define algo que quieras lograr y te ayudamos a llegar ahí, ajustándonos a tu ingreso real cada semana.",
+      "crear": "Crear nueva meta"
+    },
+    "finalizadas": "Metas finalizadas",
+    "estado": {
+      "CUMPLIDA": "Cumplida",
+      "CANCELADA": "Cancelada"
+    },
+    "mes": {
+      "01": "Ene",
+      "02": "Feb",
+      "03": "Mar",
+      "04": "Abr",
+      "05": "May",
+      "06": "Jun",
+      "07": "Jul",
+      "08": "Ago",
+      "09": "Sep",
+      "10": "Oct",
+      "11": "Nov",
+      "12": "Dic"
+    },
     "registrar": {
-      "titulo": "Nueva meta de ahorro"
+      "titulo": "Crear nueva meta",
+      "subtitulo": "Configura un plan de ahorro inteligente adaptado a tu presupuesto estudiantil.",
+      "nombre": "Nombre de la meta",
+      "nombrePlaceholder": "Ej. Laptop para la universidad, Viaje de fin de ciclo...",
+      "obligatorio": "(Campo obligatorio)",
+      "descripcion": "Descripción (Opcional)",
+      "descripcionPlaceholder": "Describe brevemente para qué es esta meta...",
+      "monto": "Monto objetivo",
+      "montoMinimo": "El monto debe ser mayor a 0",
+      "fecha": "Fecha objetivo",
+      "frecuencia": "Frecuencia sugerida",
+      "frecuenciaOpcion": {
+        "DIARIA": "Diaria",
+        "SEMANAL": "Semanal (Recomendado para estudiantes)",
+        "MENSUAL": "Mensual",
+        "SIN_FRECUENCIA": "Sin frecuencia"
+      },
+      "cancelar": "Cancelar",
+      "registrar": "Registrar meta",
+      "fechaPasada": "La fecha debe ser posterior a hoy",
+      "exito": "¡Meta creada con éxito!",
+      "verMisMetas": "Ver mis metas",
+      "limiteTitulo": "Límite del Plan Free Alcanzado",
+      "limiteMensaje": "Has alcanzado el límite de tu plan Free (máximo 2 metas activas). Pasa a Premium para crear metas ilimitadas y organizar mejor tus ahorros.",
+      "pasarPremium": "Pasar a Premium"
     },
     "detalle": {
       "titulo": "Detalle de la meta"

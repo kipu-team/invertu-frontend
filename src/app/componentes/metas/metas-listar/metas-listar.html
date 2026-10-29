@@ -1,6 +1,135 @@
-<app-en-construccion
-  titulo="metas.titulo"
-  responsable="Bruno"
-  figuras="67, 70–73"
-  [pendientes]="pendientes"
-/>
+<section class="metas">
+  <header class="metas__encabezado">
+    <div>
+      <h1>{{ 'metas.titulo' | translate }}</h1>
+      <p>{{ 'metas.subtitulo' | translate }}</p>
+    </div>
+    <a mat-flat-button class="boton-dorado metas__boton-dorado" routerLink="/metas/registrar">
+      <mat-icon>add</mat-icon>
+      {{ 'metas.nueva' | translate }}
+    </a>
+  </header>
+
+  @if (destacada) {
+    <article class="tarjeta meta-tarjeta">
+      <div class="meta-tarjeta__fila">
+        <div class="meta-tarjeta__principal">
+          <div class="meta-tarjeta__progreso">
+            <mat-progress-spinner
+              mode="determinate"
+              [value]="destacada.porcentaje"
+              [diameter]="72"
+              [strokeWidth]="7"
+            />
+            <span class="meta-tarjeta__porcentaje">{{ destacada.porcentaje }}%</span>
+          </div>
+          <div class="meta-tarjeta__info">
+            <h3>{{ destacada.nombre }}</h3>
+            <p>
+              <strong class="meta-tarjeta__aportado"
+                >S/{{ destacada.montoAportado | number: '1.0-2' }}</strong
+              >
+              {{ 'metas.ahorradoDe' | translate }} S/{{ destacada.montoObjetivo | number: '1.0-0' }}
+            </p>
+            <span class="meta-tarjeta__limite">
+              <mat-icon>schedule</mat-icon>
+              {{ 'metas.limite' | translate }}:
+              {{ 'metas.mes.' + mes(destacada.fechaObjetivo) | translate }}
+              {{ anio(destacada.fechaObjetivo) }}
+            </span>
+          </div>
+        </div>
+        <button mat-stroked-button class="meta-tarjeta__boton">
+          <mat-icon>edit</mat-icon>
+          {{ 'metas.verDetalle' | translate }}
+        </button>
+      </div>
+
+      <div class="meta-tarjeta__consejo">
+        <span class="meta-tarjeta__consejo-icono"><mat-icon>star</mat-icon></span>
+        <p>{{ 'metas.consejoPrueba' | translate }}</p>
+      </div>
+    </article>
+  } @else {
+    <section class="tarjeta metas__vacio">
+      <span class="metas__vacio-icono">
+        <mat-icon>savings</mat-icon>
+      </span>
+      <h3>{{ 'metas.vacio.titulo' | translate }}</h3>
+      <p>{{ 'metas.vacio.descripcion' | translate }}</p>
+      <a mat-flat-button class="boton-dorado metas__boton-dorado" routerLink="/metas/registrar">
+        <mat-icon>add</mat-icon>
+        {{ 'metas.vacio.crear' | translate }}
+      </a>
+    </section>
+  }
+
+  @if (otras.length > 0) {
+    <h2 class="metas__subtitulo">{{ 'metas.otrasActivas' | translate }}</h2>
+    <div class="metas__otras">
+      @for (meta of otras; track meta.idMeta) {
+        <article class="tarjeta meta-tarjeta meta-tarjeta--compacta">
+          <div class="meta-tarjeta__fila">
+            <div class="meta-tarjeta__principal">
+              <div class="meta-tarjeta__progreso">
+                <mat-progress-spinner
+                  mode="determinate"
+                  [value]="meta.porcentaje"
+                  [diameter]="46"
+                  [strokeWidth]="5"
+                />
+                <span class="meta-tarjeta__porcentaje">{{ meta.porcentaje }}%</span>
+              </div>
+              <div class="meta-tarjeta__info">
+                <h3>{{ meta.nombre }}</h3>
+                <p>
+                  <strong class="meta-tarjeta__aportado"
+                    >S/{{ meta.montoAportado | number: '1.0-2' }}</strong
+                  >
+                  {{ 'metas.de' | translate }} S/{{ meta.montoObjetivo | number: '1.0-0' }}
+                </p>
+                <span class="meta-tarjeta__limite">
+                  <mat-icon>schedule</mat-icon>
+                  {{ 'metas.limite' | translate }}:
+                  {{ 'metas.mes.' + mes(meta.fechaObjetivo) | translate }}
+                  {{ anio(meta.fechaObjetivo) }}
+                </span>
+              </div>
+            </div>
+            <button mat-stroked-button class="meta-tarjeta__boton">
+              {{ 'metas.verDetalle' | translate }}
+            </button>
+          </div>
+        </article>
+      }
+    </div>
+  }
+
+  @if (finalizadas.length > 0) {
+    <h2 class="metas__subtitulo">{{ 'metas.finalizadas' | translate }}</h2>
+    <div class="metas__finalizadas">
+      @for (meta of finalizadas; track meta.idMeta) {
+        @let fecha = meta.fechaCumplimiento ?? meta.fechaObjetivo;
+        <article class="tarjeta meta-final">
+          <span class="meta-final__icono">
+            <mat-icon>check_circle</mat-icon>
+          </span>
+          <div class="meta-final__info">
+            <h3>{{ meta.nombre }}</h3>
+            <span class="meta-final__estado">
+              {{ 'metas.estado.' + meta.estado | translate }}
+              {{ 'metas.mes.' + mes(fecha) | translate }} {{ anio(fecha) }}
+            </span>
+          </div>
+          <button
+            type="button"
+            class="meta-final__compartir"
+            [attr.aria-label]="'metas.compartir' | translate"
+          >
+            <mat-icon>share</mat-icon>
+          </button>
+        </article>
+      }
+    </div>
+  }
+</section>
