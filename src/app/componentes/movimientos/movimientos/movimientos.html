@@ -1,6 +1,74 @@
-<app-en-construccion
-  titulo="movimientos.titulo"
-  responsable="Meme"
-  figuras="24–46"
-  [pendientes]="pendientes"
-/>
+<section class="movimientos">
+  <header class="movimientos__encabezado">
+    <span class="movimientos__etiqueta">{{ 'movimientos.etiqueta' | translate }}</span>
+    <h1>{{ 'movimientos.titulo' | translate }}</h1>
+    <div class="movimientos__periodo">
+      <button mat-icon-button (click)="mesAnterior()" [attr.aria-label]="'movimientos.mesAnterior' | translate">
+        <mat-icon>chevron_left</mat-icon>
+      </button>
+      <span>
+        {{ 'movimientos.meses.' + mes | translate }} {{ anio }} ·
+        {{ 'movimientos.contador' | translate: { cantidad: dataSource.data.length } }}
+      </span>
+      <button mat-icon-button (click)="mesSiguiente()" [attr.aria-label]="'movimientos.mesSiguiente' | translate">
+        <mat-icon>chevron_right</mat-icon>
+      </button>
+    </div>
+  </header>
+
+  <div class="tarjeta movimientos__tabla">
+    @if (dataSource.data.length > 0) {
+      <table mat-table [dataSource]="dataSource">
+        <ng-container matColumnDef="fecha">
+          <th mat-header-cell *matHeaderCellDef>{{ 'movimientos.columnas.fecha' | translate }}</th>
+          <td mat-cell *matCellDef="let m">{{ m.fecha | date: 'dd/MM/yyyy' }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="descripcion">
+          <th mat-header-cell *matHeaderCellDef>{{ 'movimientos.columnas.descripcion' | translate }}</th>
+          <td mat-cell *matCellDef="let m">
+            {{ m.descripcion }}
+            @if (m.suscripcion) {
+              <small class="movimientos__sub">{{ 'movimientos.suscripcion' | translate }}</small>
+            }
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="categoria">
+          <th mat-header-cell *matHeaderCellDef>{{ 'movimientos.columnas.categoria' | translate }}</th>
+          <td mat-cell *matCellDef="let m">{{ m.categoria }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="clasificacion">
+          <th mat-header-cell *matHeaderCellDef>{{ 'movimientos.columnas.tipo' | translate }}</th>
+          <td mat-cell *matCellDef="let m">
+            <mat-chip class="chip" [class.chip--fijo]="m.clasificacion === 'FIJO'" [class.chip--variable]="m.clasificacion === 'VARIABLE'">
+              {{ 'movimientos.clasificacion.' + m.clasificacion | translate }}
+            </mat-chip>
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="monto">
+          <th mat-header-cell *matHeaderCellDef class="columna-monto">{{ 'movimientos.columnas.monto' | translate }}</th>
+          <td mat-cell *matCellDef="let m" class="columna-monto">
+            @if (m.tipo === 'INGRESO') {
+              <span class="monto-ingreso">+ S/ {{ m.monto | number: '1.2-2' }}</span>
+            } @else {
+              <span class="monto-gasto">- S/ {{ m.monto | number: '1.2-2' }}</span>
+            }
+          </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="columnas"></tr>
+        <tr mat-row *matRowDef="let row; columns: columnas"></tr>
+      </table>
+    } @else {
+      <div class="movimientos__vacio">
+        <span class="movimientos__vacio-icono"><mat-icon>receipt_long</mat-icon></span>
+        <h3>{{ 'movimientos.vacio.titulo' | translate }}</h3>
+        <p>{{ 'movimientos.vacio.descripcion' | translate }}</p>
+      </div>
+    }
+  </div>
+
+</section>

@@ -1,5 +1,39 @@
 {
   "movimientos": {
-    "titulo": "Mis movimientos"
+    "etiqueta": "Movimientos",
+    "titulo": "Mis movimientos",
+    "contador": "{{cantidad}} movimientos registrados",
+    "mesAnterior": "Mes anterior",
+    "mesSiguiente": "Mes siguiente",
+    "suscripcion": "Suscripción",
+    "meses": {
+      "1": "Enero",
+      "2": "Febrero",
+      "3": "Marzo",
+      "4": "Abril",
+      "5": "Mayo",
+      "6": "Junio",
+      "7": "Julio",
+      "8": "Agosto",
+      "9": "Septiembre",
+      "10": "Octubre",
+      "11": "Noviembre",
+      "12": "Diciembre"
+    },
+    "columnas": {
+      "fecha": "Fecha",
+      "descripcion": "Descripción",
+      "categoria": "Categoría",
+      "tipo": "Tipo",
+      "monto": "Monto"
+    },
+    "clasificacion": {
+      "FIJO": "Fijo",
+      "VARIABLE": "Variable"
+    },
+    "vacio": {
+      "titulo": "No hay movimientos registrados en este periodo",
+      "descripcion": "Registra tu primer movimiento desde el formulario lateral para comenzar a monitorear tus finanzas."
+    }
   }
 }
