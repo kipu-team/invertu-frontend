@@ -1,5 +1,39 @@
 {
   "movimientos": {
-    "titulo": "My transactions"
+    "etiqueta": "Transactions",
+    "titulo": "My transactions",
+    "contador": "{{cantidad}} transactions recorded",
+    "mesAnterior": "Previous month",
+    "mesSiguiente": "Next month",
+    "suscripcion": "Subscription",
+    "meses": {
+      "1": "January",
+      "2": "February",
+      "3": "March",
+      "4": "April",
+      "5": "May",
+      "6": "June",
+      "7": "July",
+      "8": "August",
+      "9": "September",
+      "10": "October",
+      "11": "November",
+      "12": "December"
+    },
+    "columnas": {
+      "fecha": "Date",
+      "descripcion": "Description",
+      "categoria": "Category",
+      "tipo": "Type",
+      "monto": "Amount"
+    },
+    "clasificacion": {
+      "FIJO": "Fixed",
+      "VARIABLE": "Variable"
+    },
+    "vacio": {
+      "titulo": "No transactions recorded in this period",
+      "descripcion": "Record your first transaction from the side form to start tracking your finances."
+    }
   }
 }
