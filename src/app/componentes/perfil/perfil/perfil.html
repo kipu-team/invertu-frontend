@@ -1,144 +1,155 @@
+
 <div class="tarjeta perfil-contenedor">
-  @if (perfil()) {
-    <!-- TÍTULO DE LA PANTALLA -->
-    <h1 class="perfil-titulo">{{ 'perfil.titulo' | translate }}</h1>
-    <p class="perfil-subtitulo">{{ 'perfil.subtitulo' | translate }}</p>
+  @if (perfil(); as datosPerfil) {
+    @if (editando()) {
 
-    <!-- BLOQUE 1: CABECERA DE USUARIO -->
-    <div class="cabecera-usuario">
-      <div class="usuario-info-bloque">
-        <!-- Avatar / Foto de Perfil -->
-        <div class="avatar-foto">
-          <span class="avatar-iniciales">{{ iniciales() }}</span>
-        </div>
-        <div>
-          <h2 class="usuario-nombre">{{ perfil()?.nombres }} {{ perfil()?.apellidos }}</h2>
-          <span class="usuario-correo-sub">{{ perfil()?.correo }}</span>
-        </div>
-      </div>
+      <app-perfil-editar
+        [perfil]="datosPerfil"
+        (cancelar)="cancelarEdicion()"
+        (guardado)="guardarEdicion($event)"
+      />
+    } @else{
+      <!-- TÍTULO DE LA PANTALLA -->
+      <h1 class="perfil-titulo">{{ 'perfil.titulo' | translate }}</h1>
+      <p class="perfil-subtitulo">{{ 'perfil.subtitulo' | translate }}</p>
 
-      <!-- Badge de Plan según Mockup -->
-      <span class="badge-plan-mockup">
+      <!-- BLOQUE 1: CABECERA DE USUARIO -->
+      <div class="cabecera-usuario">
+        <div class="usuario-info-bloque">
+          <!-- Avatar / Foto de Perfil -->
+          <div class="avatar-foto">
+            <span class="avatar-iniciales">{{ iniciales() }}</span>
+          </div>
+          <div>
+            <h2 class="usuario-nombre">{{ perfil()?.nombres }} {{ perfil()?.apellidos }}</h2>
+            <span class="usuario-correo-sub">{{ perfil()?.correo }}</span>
+          </div>
+        </div>
+
+        <!-- Badge de Plan según Mockup -->
+        <span class="badge-plan-mockup">
         {{ (sesion.esPremium() ? 'perfil.planes.premium' : 'perfil.planes.free') | translate }}
       </span>
-    </div>
-
-    <!-- BLOQUE 2: COLUMNAS DE INFORMACIÓN -->
-    <div class="columnas-info-grid">
-
-      <!-- Columna: Información Personal -->
-      <div class="columna-datos">
-        <h3 class="columna-titulo titulo-verde">{{ 'perfil.secciones.personal' | translate }}</h3>
-        <div class="campo-grupo">
-          <label class="campo-etiqueta">{{ 'perfil.campos.nombres' | translate }}</label>
-          <span class="campo-valor">{{ perfil()?.nombres }}</span>
-        </div>
-        <div class="campo-grupo">
-          <label class="campo-etiqueta">{{ 'perfil.campos.apellidos' | translate }}</label>
-          <span class="campo-valor">{{ perfil()?.apellidos }}</span>
-        </div>
       </div>
 
-      <!-- Columna: Cuenta -->
-      <div class="columna-datos">
-        <h3 class="columna-titulo">{{ 'perfil.secciones.cuenta' | translate }}</h3>
-        <div class="campo-grupo">
-          <label class="campo-etiqueta">
-            {{ 'perfil.campos.correo' | translate }}
-            <mat-icon class="icono-candado">lock</mat-icon>
-          </label>
-          <span class="campo-valor">{{ perfil()?.correo }}</span>
-        </div>
-        <div class="campo-grupo">
-          <label class="campo-etiqueta">{{ 'perfil.campos.plan_actual' | translate }}</label>
-          <!-- CORREGIDO: Se añadió la coherencia completa con los dos puntos ':' para evitar el error TS1005 -->
-          <span class="campo-valor">{{ (sesion.esPremium() ? 'perfil.desc_plan.premium' : 'perfil.desc_plan.free') | translate }}</span>
-        </div>
-      </div>
+      <!-- BLOQUE 2: COLUMNAS DE INFORMACIÓN -->
+      <div class="columnas-info-grid">
 
-      <!-- Columna: Académico -->
-      <div class="columna-datos">
-        <h3 class="columna-titulo">{{ 'perfil.secciones.academico' | translate }}</h3>
-        <div class="campo-grupo">
-          <label class="campo-etiqueta">{{ 'perfil.campos.universidad' | translate }}</label>
-          <span class="campo-valor">{{ perfil()?.universidad || ('perfil.campos.sin_universidad' | translate) }}</span>
+        <!-- Columna: Información Personal -->
+        <div class="columna-datos">
+          <h3 class="columna-titulo titulo-verde">{{ 'perfil.secciones.personal' | translate }}</h3>
+          <div class="campo-grupo">
+            <label class="campo-etiqueta">{{ 'perfil.campos.nombres' | translate }}</label>
+            <span class="campo-valor">{{ perfil()?.nombres }}</span>
+          </div>
+          <div class="campo-grupo">
+            <label class="campo-etiqueta">{{ 'perfil.campos.apellidos' | translate }}</label>
+            <span class="campo-valor">{{ perfil()?.apellidos }}</span>
+          </div>
         </div>
-        <div class="campo-grupo">
-          <label class="campo-etiqueta">{{ 'perfil.campos.estado_verificacion' | translate }}</label>
-          <span class="campo-valor valor-verificado">
+
+        <!-- Columna: Cuenta -->
+        <div class="columna-datos">
+          <h3 class="columna-titulo">{{ 'perfil.secciones.cuenta' | translate }}</h3>
+          <div class="campo-grupo">
+            <label class="campo-etiqueta">
+              {{ 'perfil.campos.correo' | translate }}
+              <mat-icon class="icono-candado">lock</mat-icon>
+            </label>
+            <span class="campo-valor">{{ perfil()?.correo }}</span>
+          </div>
+          <div class="campo-grupo">
+            <label class="campo-etiqueta">{{ 'perfil.campos.plan_actual' | translate }}</label>
+            <!-- CORREGIDO: Se añadió la coherencia completa con los dos puntos ':' para evitar el error TS1005 -->
+            <span class="campo-valor">{{ (sesion.esPremium() ? 'perfil.desc_plan.premium' : 'perfil.desc_plan.free') | translate }}</span>
+          </div>
+        </div>
+
+        <!-- Columna: Académico -->
+        <div class="columna-datos">
+          <h3 class="columna-titulo">{{ 'perfil.secciones.academico' | translate }}</h3>
+          <div class="campo-grupo">
+            <label class="campo-etiqueta">{{ 'perfil.campos.universidad' | translate }}</label>
+            <span class="campo-valor">{{ perfil()?.universidad || ('perfil.campos.sin_universidad' | translate) }}</span>
+          </div>
+          <div class="campo-grupo">
+            <label class="campo-etiqueta">{{ 'perfil.campos.estado_verificacion' | translate }}</label>
+            <span class="campo-valor valor-verificado">
             <span class="punto-verde"></span>
-            {{ 'perfil.campos.verificado' | translate }}
+              {{ 'perfil.campos.verificado' | translate }}
           </span>
+          </div>
         </div>
+
       </div>
 
-    </div>
-
-    <!-- ACCIONES / BOTONES -->
-    <div class="perfil-acciones">
-      <button mat-flat-button class="boton-guardar-verde">
-        <mat-icon>edit</mat-icon>
-        {{ 'perfil.botones.editar' | translate }}
-      </button>
-
-      @if (!sesion.esPremium()) {
-        <button mat-flat-button class="boton-dorado" routerLink="/pasar-premium">
-          {{ 'perfil.botones.mejorar_plan' | translate }}
+      <!-- ACCIONES / BOTONES -->
+      <div class="perfil-acciones">
+        <button mat-flat-button class="boton-guardar-verde" class="boton-guardar-verde"
+                (click)="abrirEdicion()">
+          <mat-icon>edit</mat-icon>
+          {{ 'perfil.botones.editar' | translate }}
         </button>
-      }
-    </div>
 
-    <!-- BLOQUE 3: BENEFICIOS PREMIUM -->
-    <div class="beneficios-contenedor">
-      <h3 class="beneficios-seccion-titulo">{{ 'perfil.titulos.beneficios' | translate }}</h3>
-      <div class="beneficios-grid">
-
-        <!-- Beneficio 1 -->
-        <div class="beneficio-tarjeta">
-          <div class="beneficio-icono-contenedor">
-            <mat-icon>pie_chart</mat-icon>
-          </div>
-          <div>
-            <h4 class="beneficio-titulo">{{ 'perfil.beneficios.b1_title' | translate }}</h4>
-            <p class="beneficio-descripcion">{{ 'perfil.beneficios.b1_desc' | translate }}</p>
-          </div>
-        </div>
-
-        <!-- Beneficio 2 -->
-        <div class="beneficio-tarjeta">
-          <div class="beneficio-icono-contenedor">
-            <mat-icon>shield_check</mat-icon>
-          </div>
-          <div>
-            <h4 class="beneficio-titulo">{{ 'perfil.beneficios.b2_title' | translate }}</h4>
-            <p class="beneficio-descripcion">{{ 'perfil.beneficios.b2_desc' | translate }}</p>
-          </div>
-        </div>
-
-        <!-- Beneficio 3 -->
-        <div class="beneficio-tarjeta">
-          <div class="beneficio-icono-contenedor">
-            <mat-icon>headset_mic</mat-icon>
-          </div>
-          <div>
-            <h4 class="beneficio-titulo">{{ 'perfil.beneficios.b3_title' | translate }}</h4>
-            <p class="beneficio-descripcion">{{ 'perfil.beneficios.b3_desc' | translate }}</p>
-          </div>
-        </div>
-
-        <!-- Beneficio 4 -->
-        <div class="beneficio-tarjeta">
-          <div class="beneficio-icono-contenedor">
-            <mat-icon>description</mat-icon>
-          </div>
-          <div>
-            <h4 class="beneficio-titulo">{{ 'perfil.beneficios.b4_title' | translate }}</h4>
-            <p class="beneficio-descripcion">{{ 'perfil.beneficios.b4_desc' | translate }}</p>
-          </div>
-        </div>
-
+        @if (!sesion.esPremium()) {
+          <button mat-flat-button class="boton-dorado" routerLink="/pasar-premium">
+            {{ 'perfil.botones.mejorar_plan' | translate }}
+          </button>
+        }
       </div>
-    </div>
+
+      <!-- BLOQUE 3: BENEFICIOS PREMIUM -->
+      <div class="beneficios-contenedor">
+        <h3 class="beneficios-seccion-titulo">{{ 'perfil.titulos.beneficios' | translate }}</h3>
+        <div class="beneficios-grid">
+
+          <!-- Beneficio 1 -->
+          <div class="beneficio-tarjeta">
+            <div class="beneficio-icono-contenedor">
+              <mat-icon>pie_chart</mat-icon>
+            </div>
+            <div>
+              <h4 class="beneficio-titulo">{{ 'perfil.beneficios.b1_title' | translate }}</h4>
+              <p class="beneficio-descripcion">{{ 'perfil.beneficios.b1_desc' | translate }}</p>
+            </div>
+          </div>
+
+          <!-- Beneficio 2 -->
+          <div class="beneficio-tarjeta">
+            <div class="beneficio-icono-contenedor">
+              <mat-icon>shield_check</mat-icon>
+            </div>
+            <div>
+              <h4 class="beneficio-titulo">{{ 'perfil.beneficios.b2_title' | translate }}</h4>
+              <p class="beneficio-descripcion">{{ 'perfil.beneficios.b2_desc' | translate }}</p>
+            </div>
+          </div>
+
+          <!-- Beneficio 3 -->
+          <div class="beneficio-tarjeta">
+            <div class="beneficio-icono-contenedor">
+              <mat-icon>headset_mic</mat-icon>
+            </div>
+            <div>
+              <h4 class="beneficio-titulo">{{ 'perfil.beneficios.b3_title' | translate }}</h4>
+              <p class="beneficio-descripcion">{{ 'perfil.beneficios.b3_desc' | translate }}</p>
+            </div>
+          </div>
+
+          <!-- Beneficio 4 -->
+          <div class="beneficio-tarjeta">
+            <div class="beneficio-icono-contenedor">
+              <mat-icon>description</mat-icon>
+            </div>
+            <div>
+              <h4 class="beneficio-titulo">{{ 'perfil.beneficios.b4_title' | translate }}</h4>
+              <p class="beneficio-descripcion">{{ 'perfil.beneficios.b4_desc' | translate }}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    }
+
   } @else {
     <div class="perfil-cargando">
       <p>Cargando información del perfil...</p>

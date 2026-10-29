@@ -47,6 +47,10 @@
       "b3_desc": "Consejos personalizados y simulación de escenarios mediante nuestro asistente de IA.",
       "b4_title": "Exportar datos",
       "b4_desc": "Descarga tu historial financiero en formatos XLS, CSV o PDF con un solo clic."
+    },
+    "editar": {
+      "titulo": "Editar perfil",
+      "guardando": "Guardando..."
     }
   }
 }

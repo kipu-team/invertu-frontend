@@ -84,6 +84,10 @@
       "b3_desc": "Personalized advice and scenario simulation through our AI assistant.",
       "b4_title": "Export data",
       "b4_desc": "Download your financial history in XLS, CSV or PDF formats with a single click."
+    },
+    "editar": {
+      "titulo": "Edit profile",
+      "guardando": "Saving..."
     }
   }
 }
