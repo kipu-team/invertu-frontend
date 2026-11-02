@@ -3,9 +3,12 @@
     "etiqueta": "Movimientos",
     "titulo": "Mis movimientos",
     "contador": "{{cantidad}} movimientos registrados",
+    "contadorUno": "{{cantidad}} movimiento registrado",
     "mesAnterior": "Mes anterior",
     "mesSiguiente": "Mes siguiente",
     "suscripcion": "Suscripción",
+    "buscar": "Buscar movimiento...",
+    "filtrar": "Filtrar",
     "meses": {
       "1": "Enero",
       "2": "Febrero",
@@ -31,9 +34,39 @@
       "FIJO": "Fijo",
       "VARIABLE": "Variable"
     },
+    "tipo": {
+      "INGRESO": "Ingreso",
+      "GASTO": "Gasto"
+    },
+    "medios": {
+      "EFECTIVO": "Efectivo",
+      "TRANSFERENCIA": "Transferencia",
+      "TARJETA_DEBITO": "Tarjeta de débito",
+      "TARJETA_CREDITO": "Tarjeta de crédito",
+      "BILLETERA_DIGITAL": "Billetera digital",
+      "OTRO": "Otro"
+    },
+    "filtros": {
+      "titulo": "Filtrar movimientos",
+      "criterios": "{{cantidad}} criterios",
+      "criteriosUno": "{{cantidad}} criterio",
+      "tipo": "Tipo",
+      "clasificacion": "Clasificación",
+      "categoria": "Categoría",
+      "medioPago": "Medio de pago",
+      "todos": "Todos",
+      "todas": "Todas",
+      "limpiar": "Limpiar filtros",
+      "aplicar": "Aplicar filtros"
+    },
     "vacio": {
       "titulo": "No hay movimientos registrados en este periodo",
       "descripcion": "Registra tu primer movimiento desde el formulario lateral para comenzar a monitorear tus finanzas."
+    },
+    "sinResultados": {
+      "titulo": "No se encontraron movimientos",
+      "descripcion": "No se encontraron movimientos que coincidan con tu búsqueda. Revisa la ortografía o intenta buscar otro término.",
+      "limpiar": "Limpiar búsqueda"
     }
   }
 }
