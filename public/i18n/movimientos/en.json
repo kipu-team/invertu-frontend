@@ -3,9 +3,12 @@
     "etiqueta": "Transactions",
     "titulo": "My transactions",
     "contador": "{{cantidad}} transactions recorded",
+    "contadorUno": "{{cantidad}} transaction recorded",
     "mesAnterior": "Previous month",
     "mesSiguiente": "Next month",
     "suscripcion": "Subscription",
+    "buscar": "Search transaction...",
+    "filtrar": "Filter",
     "meses": {
       "1": "January",
       "2": "February",
@@ -31,9 +34,39 @@
       "FIJO": "Fixed",
       "VARIABLE": "Variable"
     },
+    "tipo": {
+      "INGRESO": "Income",
+      "GASTO": "Expense"
+    },
+    "medios": {
+      "EFECTIVO": "Cash",
+      "TRANSFERENCIA": "Bank transfer",
+      "TARJETA_DEBITO": "Debit card",
+      "TARJETA_CREDITO": "Credit card",
+      "BILLETERA_DIGITAL": "Digital wallet",
+      "OTRO": "Other"
+    },
+    "filtros": {
+      "titulo": "Filter transactions",
+      "criterios": "{{cantidad}} criteria",
+      "criteriosUno": "{{cantidad}} criterion",
+      "tipo": "Type",
+      "clasificacion": "Classification",
+      "categoria": "Category",
+      "medioPago": "Payment method",
+      "todos": "All",
+      "todas": "All",
+      "limpiar": "Clear filters",
+      "aplicar": "Apply filters"
+    },
     "vacio": {
       "titulo": "No transactions recorded in this period",
       "descripcion": "Record your first transaction from the side form to start tracking your finances."
+    },
+    "sinResultados": {
+      "titulo": "No transactions found",
+      "descripcion": "No transactions match your search. Check the spelling or try another term.",
+      "limpiar": "Clear search"
     }
   }
 }

@@ -8,14 +8,99 @@
       </button>
       <span>
         {{ 'movimientos.meses.' + mes | translate }} {{ anio }} ·
-        {{ 'movimientos.contador' | translate: { cantidad: dataSource.data.length } }}
-      </span>
+        {{ (dataSource.data.length === 1 ? 'movimientos.contadorUno' : 'movimientos.contador') | translate: { cantidad: dataSource.data.length } }}      </span>
       <button mat-icon-button (click)="mesSiguiente()" [attr.aria-label]="'movimientos.mesSiguiente' | translate">
         <mat-icon>chevron_right</mat-icon>
       </button>
     </div>
   </header>
 
+  <!-- Barra de busqueda y botón de filtros de US-14 -->
+  <div class="movimientos__barra">
+    <mat-form-field class="movimientos__buscador" appearance="outline" subscriptSizing="dynamic">
+      <mat-icon matPrefix>search</mat-icon>
+      <input matInput [formControl]="busqueda" [placeholder]="'movimientos.buscar' | translate" />
+    </mat-form-field>
+
+    <button mat-stroked-button type="button" (click)="panelAbierto = !panelAbierto">
+      <mat-icon>filter_list</mat-icon>
+      {{ 'movimientos.filtrar' | translate }}
+    </button>
+
+    <!-- Panel flotante de filtros -->
+    @if (panelAbierto) {
+      <div class="movimientos__fondo" (click)="cerrarPanel()"></div>
+      <form
+        class="tarjeta movimientos__panel"
+        [formGroup]="filtrosForm"
+        (ngSubmit)="aplicarFiltros()"
+        (keydown.escape)="cerrarPanel()"
+      >
+        <div class="movimientos__panel-titulo">
+          <h3>{{ 'movimientos.filtros.titulo' | translate }}</h3>
+          @if (criteriosActivos > 0) {
+            <span class="movimientos__criterios">
+              {{ (criteriosActivos === 1 ? 'movimientos.filtros.criteriosUno' : 'movimientos.filtros.criterios') | translate: { cantidad: criteriosActivos } }}
+            </span>
+          }
+        </div>
+
+        <!-- Cada mat-select está conectado a un campo de filtrosForm con formControlName -->
+        <div class="movimientos__panel-campos">
+          <mat-form-field appearance="outline">
+            <mat-label>{{ 'movimientos.filtros.tipo' | translate }}</mat-label>
+            <mat-select formControlName="tipo">
+              <mat-option [value]="null">{{ 'movimientos.filtros.todos' | translate }}</mat-option>
+              @for (t of tipos; track t) {
+                <mat-option [value]="t">{{ 'movimientos.tipo.' + t | translate }}</mat-option>
+              }
+            </mat-select>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline">
+            <mat-label>{{ 'movimientos.filtros.clasificacion' | translate }}</mat-label>
+            <mat-select formControlName="clasificacion">
+              <mat-option [value]="null">{{ 'movimientos.filtros.todas' | translate }}</mat-option>
+              @for (c of clasificaciones; track c) {
+                <mat-option [value]="c">{{ 'movimientos.clasificacion.' + c | translate }}</mat-option>
+              }
+            </mat-select>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline">
+            <mat-label>{{ 'movimientos.filtros.categoria' | translate }}</mat-label>
+            <mat-select formControlName="idCategoria">
+              <mat-option [value]="null">{{ 'movimientos.filtros.todas' | translate }}</mat-option>
+              @for (cat of categorias; track cat.idCategoria) {
+                <mat-option [value]="cat.idCategoria">{{ cat.nombre }}</mat-option>
+              }
+            </mat-select>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline">
+            <mat-label>{{ 'movimientos.filtros.medioPago' | translate }}</mat-label>
+            <mat-select formControlName="medioPago">
+              <mat-option [value]="null">{{ 'movimientos.filtros.todos' | translate }}</mat-option>
+              @for (medio of mediosPago; track medio) {
+                <mat-option [value]="medio">{{ 'movimientos.medios.' + medio | translate }}</mat-option>
+              }
+            </mat-select>
+          </mat-form-field>
+        </div>
+
+        <div class="movimientos__panel-acciones">
+          <button mat-button type="button" (click)="limpiarFiltros()">
+            {{ 'movimientos.filtros.limpiar' | translate }}
+          </button>
+          <button mat-flat-button type="submit">
+            {{ 'movimientos.filtros.aplicar' | translate }}
+          </button>
+        </div>
+      </form>
+    }
+  </div>
+
+  <!-- Tabla del historial de US-10 -->
   <div class="tarjeta movimientos__tabla">
     @if (dataSource.data.length > 0) {
       <table mat-table [dataSource]="dataSource">
@@ -62,6 +147,16 @@
         <tr mat-header-row *matHeaderRowDef="columnas"></tr>
         <tr mat-row *matRowDef="let row; columns: columnas"></tr>
       </table>
+    } @else if (hayBusqueda) {
+      <div class="movimientos__vacio">
+        <span class="movimientos__vacio-icono"><mat-icon>search_off</mat-icon></span>
+        <h3>{{ 'movimientos.sinResultados.titulo' | translate }}</h3>
+        <p>{{ 'movimientos.sinResultados.descripcion' | translate }}</p>
+        <button mat-stroked-button type="button" (click)="limpiarTodo()">
+          <mat-icon>refresh</mat-icon>
+          {{ 'movimientos.sinResultados.limpiar' | translate }}
+        </button>
+      </div>
     } @else {
       <div class="movimientos__vacio">
         <span class="movimientos__vacio-icono"><mat-icon>receipt_long</mat-icon></span>
@@ -71,4 +166,5 @@
     }
   </div>
 
+  <!-- poner panel lateral de registro de US-16 y US-11 -->
 </section>
