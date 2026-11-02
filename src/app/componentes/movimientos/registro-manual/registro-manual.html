@@ -1,0 +1,157 @@
+@if (resumen) {
+  <!-- Confirmacion -->
+  <div class="manual__exito">
+    <span class="manual__exito-icono"><mat-icon>check</mat-icon></span>
+    <h2>
+      {{ (resumen.tipo === 'INGRESO' ? 'movimientos.manual.exitoIngreso' : 'movimientos.manual.exitoGasto') | translate }}
+    </h2>
+    <p>
+      {{ (resumen.tipo === 'INGRESO' ? 'movimientos.manual.exitoIngresoDetalle' : 'movimientos.manual.exitoGastoDetalle')
+      | translate: { monto: (resumen.monto | number: '1.2-2') } }}
+    </p>
+  </div>
+
+  <dl class="manual__resumen">
+    <dt>{{ 'movimientos.manual.descripcion' | translate }}</dt>
+    <dd>{{ resumen.descripcion }}</dd>
+
+    <dt>{{ 'movimientos.manual.fecha' | translate }}</dt>
+    <dd>{{ resumen.fecha | date: 'dd/MM/yyyy' }}</dd>
+
+    <dt>{{ 'movimientos.manual.categoria' | translate }}</dt>
+    <dd>{{ resumen.categoria }}</dd>
+
+    <dt>{{ 'movimientos.manual.clasificacion' | translate }}</dt>
+    <dd>{{ 'movimientos.clasificacion.' + resumen.clasificacion | translate }}</dd>
+
+    <dt>{{ 'movimientos.manual.medio' | translate }}</dt>
+    <dd>
+      @if (resumen.medioPago) {
+        {{ 'movimientos.medios.' + resumen.medioPago | translate }}
+      } @else {
+        {{ 'movimientos.manual.ninguno' | translate }}
+      }
+    </dd>
+
+    @if (resumen.tipo === 'GASTO') {
+      <dt>{{ 'movimientos.manual.suscripcionResumen' | translate }}</dt>
+      <dd>{{ resumen.suscripcion ?? ('movimientos.manual.ninguna' | translate) }}</dd>
+    }
+  </dl>
+
+  <div class="manual__acciones">
+    <button mat-flat-button type="button" (click)="nuevoRegistro()">
+      {{ 'movimientos.manual.registrarOtro' | translate }}
+    </button>
+    <button mat-stroked-button type="button" (click)="volver.emit()">
+      {{ 'movimientos.manual.verMovimientos' | translate }}
+    </button>
+  </div>
+} @else {
+  <!-- Formulario de registro -->
+  <div class="manual__cabecera">
+    <button mat-icon-button type="button" (click)="volver.emit()" [attr.aria-label]="'movimientos.registro.volver' | translate">
+      <mat-icon>chevron_left</mat-icon>
+    </button>
+    <h2>{{ 'movimientos.registro.tituloManual' | translate }}</h2>
+  </div>
+
+  <form class="manual" [formGroup]="formulario" (ngSubmit)="registrar()">
+    <mat-button-toggle-group class="manual__toggle" formControlName="tipo">
+      @for (t of tipos; track t) {
+        <mat-button-toggle [value]="t">{{ 'movimientos.tipo.' + t | translate }}</mat-button-toggle>
+      }
+    </mat-button-toggle-group>
+
+    <mat-button-toggle-group class="manual__toggle" formControlName="clasificacion">
+      @for (c of clasificaciones; track c) {
+        <mat-button-toggle [value]="c">{{ 'movimientos.clasificacion.' + c | translate }}</mat-button-toggle>
+      }
+    </mat-button-toggle-group>
+
+    <mat-form-field appearance="outline" subscriptSizing="dynamic">
+      <mat-label>{{ 'movimientos.manual.descripcion' | translate }}</mat-label>
+      <input matInput formControlName="descripcion" maxlength="250"
+             [placeholder]="'movimientos.manual.descripcionPlaceholder' | translate" />
+      @if (descripcion.hasError('required')) {
+        <mat-error>{{ 'movimientos.manual.errores.descripcion' | translate }}</mat-error>
+      }
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" subscriptSizing="dynamic">
+      <mat-label>{{ 'movimientos.manual.fecha' | translate }}</mat-label>
+      <mat-datepicker-toggle matIconPrefix [for]="selectorFecha" />
+      <input matInput [matDatepicker]="selectorFecha" formControlName="fecha" [max]="hoy" placeholder="DD/MM/AAAA" />
+      <mat-datepicker #selectorFecha />
+      @if (fecha.hasError('matDatepickerParse')) {
+        <mat-error>{{ 'movimientos.manual.errores.fechaInvalida' | translate }}</mat-error>
+      } @else if (fecha.hasError('required')) {
+        <mat-error>{{ 'movimientos.manual.errores.fecha' | translate }}</mat-error>
+      } @else if (fecha.hasError('fechaFutura') || fecha.hasError('matDatepickerMax')) {
+        <mat-error>{{ 'movimientos.manual.errores.fechaFutura' | translate }}</mat-error>
+      }
+    </mat-form-field>
+
+    <div class="manual__monto" [class.manual__monto--error]="monto.invalid && monto.touched">
+      <span class="manual__monto-etiqueta">{{ 'movimientos.manual.monto' | translate }}</span>
+      <div class="manual__monto-valor">
+        <span>S/</span>
+        <input type="number" formControlName="monto" placeholder="0.00" step="0.01" min="0" />
+      </div>
+    </div>
+    @if (monto.touched && monto.invalid) {
+      <small class="manual__error">
+        <mat-icon>error</mat-icon>
+        @if (monto.hasError('required')) {
+          {{ 'movimientos.manual.errores.monto' | translate }}
+        } @else if (monto.hasError('min')) {
+          {{ 'movimientos.manual.errores.montoMinimo' | translate }}
+        } @else {
+          {{ 'movimientos.manual.errores.montoDecimales' | translate }}
+        }
+      </small>
+    }
+
+    <div>
+      <span class="manual__etiqueta">{{ 'movimientos.manual.categoria' | translate }}</span>
+      <app-selector-categorias
+        [seleccionada]="idCategoria.value"
+        (seleccionadaChange)="idCategoria.setValue($event)"
+      />
+      @if (idCategoria.touched && idCategoria.hasError('required')) {
+        <small class="manual__error">
+          <mat-icon>error</mat-icon>
+          {{ 'movimientos.manual.errores.categoria' | translate }}
+        </small>
+      }
+    </div>
+
+    <mat-form-field appearance="outline" subscriptSizing="dynamic">
+      <mat-label>
+        {{ (esGasto ? 'movimientos.manual.medioPago' : 'movimientos.manual.medioIngreso') | translate }}
+      </mat-label>
+      <mat-select formControlName="medioPago">
+        <mat-option [value]="null">{{ 'movimientos.manual.ninguno' | translate }}</mat-option>
+        @for (medio of mediosPago; track medio) {
+          <mat-option [value]="medio">{{ 'movimientos.medios.' + medio | translate }}</mat-option>
+        }
+      </mat-select>
+    </mat-form-field>
+
+    @if (esGasto) {
+      <mat-form-field appearance="outline" subscriptSizing="dynamic">
+        <mat-label>{{ 'movimientos.manual.suscripcion' | translate }}</mat-label>
+        <mat-select formControlName="idSuscripcion">
+          <mat-option [value]="null">{{ 'movimientos.manual.ninguna' | translate }}</mat-option>
+          @for (s of suscripciones; track s.idSuscripcion) {
+            <mat-option [value]="s.idSuscripcion">{{ s.nombreServicio }}</mat-option>
+          }
+        </mat-select>
+      </mat-form-field>
+    }
+
+    <button mat-flat-button type="submit" class="manual__registrar">
+      {{ 'movimientos.manual.registrar' | translate }}
+    </button>
+  </form>
+}

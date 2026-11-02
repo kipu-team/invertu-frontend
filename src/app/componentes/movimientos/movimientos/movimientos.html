@@ -205,13 +205,7 @@
 
         <p class="registro__ayuda">{{ 'movimientos.registro.ayuda' | translate }}</p>
       } @else if (vistaRegistro === 'manual') {
-        <div class="registro__cabecera">
-          <button mat-icon-button type="button" (click)="vistaRegistro = 'metodo'" [attr.aria-label]="'movimientos.registro.volver' | translate">
-            <mat-icon>chevron_left</mat-icon>
-          </button>
-          <h2>{{ 'movimientos.registro.tituloManual' | translate }}</h2>
-        </div>
-        <!-- falta el formulario de registro manual de US-11 -->
+        <app-registro-manual (volver)="vistaRegistro = 'metodo'" (registrado)="cargar()" />
       } @else {
         <div class="registro__cabecera">
           <button mat-icon-button type="button" (click)="vistaRegistro = 'metodo'" [attr.aria-label]="'movimientos.registro.volver' | translate">

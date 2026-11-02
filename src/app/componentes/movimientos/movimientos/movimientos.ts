@@ -16,6 +16,7 @@ import { Categoria } from '../../../modelo/categoria';
 import { Clasificacion, MedioPago, TipoMovimiento } from '../../../modelo/comun';
 import { RouterLink } from '@angular/router';
 import { SesionService } from '../../../servicios/sesion-service';
+import { RegistroManual } from '../registro-manual/registro-manual';
 
 @Component({
   selector: 'app-movimientos',
@@ -33,6 +34,7 @@ import { SesionService } from '../../../servicios/sesion-service';
     MatIconButton,
     MatIcon,
     RouterLink,
+    RegistroManual,
   ],
   templateUrl: './movimientos.html',
   changeDetection: ChangeDetectionStrategy.Eager,
