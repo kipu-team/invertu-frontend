@@ -81,6 +81,38 @@
       "volver": "Volver",
       "tituloManual": "Registrar movimiento manual",
       "tituloIa": "Registro con comprobante"
+    },
+    "manual": {
+      "descripcion": "Descripción",
+      "descripcionPlaceholder": "Ingrese una descripción corta",
+      "fecha": "Fecha",
+      "monto": "Monto",
+      "categoria": "Categoría",
+      "clasificacion": "Clasificación",
+      "medio": "Medio de pago",
+      "medioPago": "Medio de pago (opcional)",
+      "medioIngreso": "Medio de ingreso (opcional)",
+      "suscripcion": "Suscripción asociada (opcional)",
+      "suscripcionResumen": "Suscripción asociada",
+      "ninguno": "Ninguno",
+      "ninguna": "Ninguna",
+      "registrar": "Registrar",
+      "exitoIngreso": "¡Ingreso registrado correctamente!",
+      "exitoGasto": "¡Gasto registrado correctamente!",
+      "exitoIngresoDetalle": "Tu ingreso de S/ {{monto}} ha sido registrado.",
+      "exitoGastoDetalle": "Tu gasto de S/ {{monto}} ha sido registrado.",
+      "registrarOtro": "Registrar otro",
+      "verMovimientos": "Ver movimientos",
+      "errores": {
+        "descripcion": "Ingresa una descripción",
+        "fecha": "Ingresa una fecha",
+        "fechaInvalida": "Ingresa una fecha válida (DD/MM/AAAA)",
+        "fechaFutura": "La fecha no puede ser futura",
+        "monto": "Ingresa un monto",
+        "montoMinimo": "El monto debe ser mayor a S/ 0.00",
+        "montoDecimales": "El monto admite como máximo dos decimales",
+        "categoria": "Selecciona una categoría"
+      }
     }
   }
 }
