@@ -1,21 +1,43 @@
 .selector {
   display: flex;
   flex-wrap: wrap;
+  align-items: center;
   gap: 8px;
 }
 
-.selector__opcion {
-  padding: 6px 12px;
-  border: 1px solid var(--borde);
-  border-radius: 999px;
-  background: var(--superficie);
+.selector__chip {
+  --mat-chip-elevated-container-color: var(--superficie);
+  --mat-chip-outline-color: var(--borde);
+  --mat-chip-label-text-color: var(--texto);
+  --mat-chip-elevated-selected-container-color: var(--verde-claro);
+  --mat-chip-selected-label-text-color: var(--verde-oscuro);
+  --mat-chip-selected-trailing-icon-color: var(--verde-oscuro);
+  --mat-chip-container-height: 30px;
+  --mat-chip-label-text-size: 0.75rem;
+}
+
+.selector__crear {
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+  height: 30px;
+  padding: 0 12px;
+  border: 1px dashed var(--borde);
+  border-radius: 8px;
+  background: transparent;
+  color: var(--texto-suave);
   font: inherit;
-  font-size: 0.85rem;
+  font-size: 0.75rem;
   cursor: pointer;
 }
 
-.selector__opcion--activa {
+.selector__crear:hover {
   border-color: var(--verde-esmeralda);
-  background: var(--verde-claro);
-  color: var(--verde-oscuro);
+  color: var(--verde-esmeralda);
+}
+
+.selector__crear mat-icon {
+  width: 16px;
+  height: 16px;
+  font-size: 16px;
 }

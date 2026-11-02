@@ -102,7 +102,7 @@
       "exitoIngresoDetalle": "Tu ingreso de S/ {{monto}} ha sido registrado.",
       "exitoGastoDetalle": "Tu gasto de S/ {{monto}} ha sido registrado.",
       "registrarOtro": "Registrar otro",
-      "verMovimientos": "Ver movimientos",
+      "verMovimientos": "Listo",
       "errores": {
         "descripcion": "Ingresa una descripción",
         "fecha": "Ingresa una fecha",
