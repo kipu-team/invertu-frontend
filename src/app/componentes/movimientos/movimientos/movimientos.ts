@@ -43,7 +43,7 @@ export class Movimientos implements OnInit {
       this.dataSource.data = data.movimientos.filter((m) => m.fecha.startsWith(prefijo));
     });
   }
- 
+
   mesAnterior(): void {
     if (this.mes === 1) {
       this.mes = 12;
