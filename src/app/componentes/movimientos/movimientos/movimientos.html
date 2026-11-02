@@ -15,6 +15,8 @@
     </div>
   </header>
 
+  <div class="movimientos__contenido">
+    <div class="movimientos__principal">
   <!-- Barra de busqueda y botón de filtros de US-14 -->
   <div class="movimientos__barra">
     <mat-form-field class="movimientos__buscador" appearance="outline" subscriptSizing="dynamic">
@@ -164,7 +166,61 @@
         <p>{{ 'movimientos.vacio.descripcion' | translate }}</p>
       </div>
     }
-  </div>
 
-  <!-- poner panel lateral de registro de US-16 y US-11 -->
+  </div>
+    </div>
+
+    <!-- Panel de registro segun US-16 -->
+    <aside class="tarjeta registro">
+      @if (vistaRegistro === 'metodo') {
+        <h2 class="registro__titulo">{{ 'movimientos.registro.titulo' | translate }}</h2>
+
+        <button mat-stroked-button type="button" class="registro__manual" (click)="vistaRegistro = 'manual'">
+          <mat-icon>edit</mat-icon>
+          {{ 'movimientos.registro.manual' | translate }}
+        </button>
+
+        <div class="registro__auto">
+          <div class="registro__auto-titulo">
+            <h3>{{ 'movimientos.registro.automatico' | translate }}</h3>
+            <span class="registro__premium">
+              <mat-icon>bolt</mat-icon>
+              {{ 'movimientos.registro.premium' | translate }}
+            </span>
+          </div>
+
+          @if (sesion.esPremium()) {
+            <p>{{ 'movimientos.registro.autoDescripcion' | translate }}</p>
+            <button mat-flat-button type="button" (click)="vistaRegistro = 'ia'">
+              <mat-icon>photo_camera</mat-icon>
+              {{ 'movimientos.registro.subirComprobante' | translate }}
+            </button>
+          } @else {
+            <p>{{ 'movimientos.registro.autoDescripcionFree' | translate }}</p>
+            <a mat-stroked-button routerLink="/pasar-premium">
+              {{ 'movimientos.registro.pasarPremium' | translate }}
+            </a>
+          }
+        </div>
+
+        <p class="registro__ayuda">{{ 'movimientos.registro.ayuda' | translate }}</p>
+      } @else if (vistaRegistro === 'manual') {
+        <div class="registro__cabecera">
+          <button mat-icon-button type="button" (click)="vistaRegistro = 'metodo'" [attr.aria-label]="'movimientos.registro.volver' | translate">
+            <mat-icon>chevron_left</mat-icon>
+          </button>
+          <h2>{{ 'movimientos.registro.tituloManual' | translate }}</h2>
+        </div>
+        <!-- falta el formulario de registro manual de US-11 -->
+      } @else {
+        <div class="registro__cabecera">
+          <button mat-icon-button type="button" (click)="vistaRegistro = 'metodo'" [attr.aria-label]="'movimientos.registro.volver' | translate">
+            <mat-icon>chevron_left</mat-icon>
+          </button>
+          <h2>{{ 'movimientos.registro.tituloIa' | translate }}</h2>
+        </div>
+        <!-- falta el registro con comprobante de US-17 -->
+      }
+    </aside>
+  </div>
 </section>

@@ -67,6 +67,20 @@
       "titulo": "No transactions found",
       "descripcion": "No transactions match your search. Check the spelling or try another term.",
       "limpiar": "Clear search"
+    },
+    "registro": {
+      "titulo": "Record transaction",
+      "manual": "Record manually",
+      "automatico": "Automatic recording",
+      "premium": "Premium",
+      "autoDescripcion": "Record your transactions automatically with a photo of your receipt.",
+      "autoDescripcionFree": "Record your transactions automatically with a photo of your receipt. Available in Premium.",
+      "subirComprobante": "Upload receipt",
+      "pasarPremium": "Go Premium",
+      "ayuda": "Enter your transaction details manually",
+      "volver": "Back",
+      "tituloManual": "Record manual transaction",
+      "tituloIa": "Record with receipt"
     }
   }
 }

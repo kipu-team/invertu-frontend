@@ -14,6 +14,8 @@ import { CategoriaService } from '../../../servicios/categoria-service';
 import { MovimientoItem } from '../../../modelo/movimiento';
 import { Categoria } from '../../../modelo/categoria';
 import { Clasificacion, MedioPago, TipoMovimiento } from '../../../modelo/comun';
+import { RouterLink } from '@angular/router';
+import { SesionService } from '../../../servicios/sesion-service';
 
 @Component({
   selector: 'app-movimientos',
@@ -30,6 +32,7 @@ import { Clasificacion, MedioPago, TipoMovimiento } from '../../../modelo/comun'
     MatButton,
     MatIconButton,
     MatIcon,
+    RouterLink,
   ],
   templateUrl: './movimientos.html',
   changeDetection: ChangeDetectionStrategy.Eager,
@@ -39,8 +42,12 @@ export class Movimientos implements OnInit {
   private movimientoService = inject(MovimientoService);
   private categoriaService = inject(CategoriaService);
   private fb = inject(FormBuilder);
+  sesion = inject(SesionService);
 
-  // Tabla de US-10
+  // Panel lateral de registro de US-16
+  vistaRegistro: 'metodo' | 'manual' | 'ia' = 'metodo';
+
+  // Panel de lista de movimientos
   columnas: string[] = ['fecha', 'descripcion', 'categoria', 'clasificacion', 'monto'];
   dataSource: MatTableDataSource<MovimientoItem> = new MatTableDataSource<MovimientoItem>();
   anio: number = new Date().getFullYear();

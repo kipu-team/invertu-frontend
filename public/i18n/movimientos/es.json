@@ -67,6 +67,20 @@
       "titulo": "No se encontraron movimientos",
       "descripcion": "No se encontraron movimientos que coincidan con tu búsqueda. Revisa la ortografía o intenta buscar otro término.",
       "limpiar": "Limpiar búsqueda"
+    },
+    "registro": {
+      "titulo": "Registrar movimiento",
+      "manual": "Registrar manualmente",
+      "automatico": "Registro automático",
+      "premium": "Premium",
+      "autoDescripcion": "Registra tus movimientos automáticamente con una foto de tu boleta o comprobante.",
+      "autoDescripcionFree": "Registra tus movimientos automáticamente con una foto de tu boleta o comprobante. Disponible en Premium.",
+      "subirComprobante": "Subir comprobante",
+      "pasarPremium": "Pasar a Premium",
+      "ayuda": "Ingresa los datos de tu movimiento manualmente",
+      "volver": "Volver",
+      "tituloManual": "Registrar movimiento manual",
+      "tituloIa": "Registro con comprobante"
     }
   }
 }
