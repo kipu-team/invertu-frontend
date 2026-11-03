@@ -1,0 +1,60 @@
+@if (estado === 'formulario' && analisis) {
+  <app-registro-manual
+    [analisis]="analisis"
+    [nombreArchivo]="archivo?.name ?? null"
+    (volver)="alVolver()"
+    (otro)="reiniciar()"
+    (registrado)="alRegistrar()"
+  />
+} @else {
+  <div class="ia__cabecera">
+    <button mat-icon-button type="button" (click)="volver.emit()" [attr.aria-label]="'movimientos.registro.volver' | translate">
+      <mat-icon>chevron_left</mat-icon>
+    </button>
+    <h2>{{ 'movimientos.registro.tituloIa' | translate }}</h2>
+    <span class="ia__badge"><mat-icon>auto_awesome</mat-icon>{{ 'movimientos.ia.activa' | translate }}</span>
+  </div>
+
+  @if (estado === 'analizando') {
+    <div class="ia__analizando">
+      <mat-progress-spinner mode="indeterminate" [diameter]="40" />
+      <p>{{ 'movimientos.ia.analizando' | translate }}</p>
+    </div>
+  } @else {
+    <!-- Zona de carga (y errores de la Fig. 46) -->
+    <div class="ia__zona" [class.ia__zona--error]="error">
+      @if (error) {
+        <span class="ia__icono ia__icono--error"><mat-icon>close</mat-icon></span>
+        @if (error === 'archivo') {
+          <p class="ia__zona-titulo">{{ 'movimientos.ia.errorArchivo' | translate }}</p>
+        } @else {
+          <p class="ia__zona-titulo">{{ 'movimientos.ia.errorIlegible' | translate }}</p>
+          <p class="ia__zona-texto">{{ 'movimientos.ia.errorIlegibleDetalle' | translate }}</p>
+        }
+        <button mat-stroked-button type="button" (click)="selector.click()">
+          <mat-icon>upload</mat-icon>
+          {{ 'movimientos.ia.otroArchivo' | translate }}
+        </button>
+      } @else {
+        <span class="ia__icono"><mat-icon>upload_file</mat-icon></span>
+        <p class="ia__zona-titulo">{{ 'movimientos.ia.subirTitulo' | translate }}</p>
+        <p class="ia__zona-texto">{{ 'movimientos.ia.formatos' | translate }}</p>
+        <button mat-flat-button type="button" (click)="selector.click()">
+          {{ 'movimientos.ia.seleccionar' | translate }}
+        </button>
+      }
+      <input #selector type="file" accept=".jpg,.jpeg,.png,.pdf" hidden (change)="elegirArchivo($event)" />
+    </div>
+
+    <button mat-stroked-button type="button" class="ia__manual" (click)="irManual.emit()">
+      {{ 'movimientos.ia.manual' | translate }}
+      <mat-icon iconPositionEnd>arrow_forward</mat-icon>
+    </button>
+    <p class="ia__manual-texto">{{ 'movimientos.ia.manualDetalle' | translate }}</p>
+
+    <div class="ia__consejo">
+      <mat-icon>lightbulb</mat-icon>
+      <p><strong>{{ 'movimientos.ia.consejoTitulo' | translate }}</strong> {{ 'movimientos.ia.consejo' | translate }}</p>
+    </div>
+  }
+}
