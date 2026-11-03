@@ -133,6 +133,23 @@
       "detectado": "Details detected automatically by AI",
       "confirmar": "Confirm",
       "cancelar": "Cancel"
+    },
+    "detalle": {
+      "titulo": "Transaction details",
+      "montoDebitado": "Amount debited",
+      "montoRecibido": "Amount received",
+      "suscripcion": "Subscription",
+      "fecha": "Date",
+      "categoria": "Category",
+      "tipo": "Type",
+      "clasificacion": "Classification",
+      "medio": "Payment method",
+      "verComprobante": "View receipt",
+      "editar": "Edit"
+    },
+    "editar": {
+      "titulo": "Edit transaction",
+      "guardar": "Save changes"
     }
   }
 }

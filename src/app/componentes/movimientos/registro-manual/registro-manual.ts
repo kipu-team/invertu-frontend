@@ -3,11 +3,15 @@ import {
   ChangeDetectionStrategy,
   EventEmitter,
   Injectable,
+  Input,
+  OnChanges,
   OnInit,
   Output,
+  SimpleChanges,
   inject,
-  Input,
 } from '@angular/core';
+import { forkJoin } from 'rxjs';
+import { CategoriaService } from '../../../servicios/categoria-service';
 import { DatePipe, DecimalPipe } from '@angular/common';
 import {
   AbstractControl,
@@ -104,7 +108,7 @@ interface ResumenRegistro {
     { provide: MAT_DATE_LOCALE, useValue: 'es-PE' },
   ],
 })
-export class RegistroManual implements OnInit {
+export class RegistroManual implements OnInit, OnChanges {
   // Avisos hacia la página de movimientos
   @Output() volver = new EventEmitter<void>();
   @Output() registrado = new EventEmitter<void>();
@@ -113,9 +117,12 @@ export class RegistroManual implements OnInit {
   // para registro con IA
   @Input() analisis: AnalisisComprobante | null = null;
   @Input() nombreArchivo: string | null = null;
+  // Solo en edición para US-12: id del movimiento a editar
+  @Input() idMovimiento: number | null = null;
   private fb = inject(FormBuilder);
   private movimientoService = inject(MovimientoService);
   private suscripcionService = inject(SuscripcionService);
+  private categoriaService = inject(CategoriaService);
 
   tipos: TipoMovimiento[] = ['GASTO', 'INGRESO'];
   clasificaciones: Clasificacion[] = ['FIJO', 'VARIABLE'];
@@ -162,6 +169,48 @@ export class RegistroManual implements OnInit {
     return this.formulario.controls.tipo.value === 'GASTO';
   }
 
+  get titulo(): string {
+    if (this.analisis) return 'movimientos.registro.tituloIa';
+    if (this.idMovimiento) return 'movimientos.editar.titulo';
+    return 'movimientos.registro.tituloManual';
+  }
+  get textoBoton(): string {
+    if (this.analisis) return 'movimientos.ia.confirmar';
+    if (this.idMovimiento) return 'movimientos.editar.guardar';
+    return 'movimientos.manual.registrar';
+  }
+
+  // si llega un id, carga ese movimiento para editarlo
+  ngOnChanges(cambios: SimpleChanges): void {
+    if (cambios['idMovimiento'] && this.idMovimiento) {
+      this.cargarParaEditar(this.idMovimiento);
+    }
+  }
+
+  private cargarParaEditar(id: number): void {
+    // forkJoin espera a que lleguen las tres respuestas y las entrega juntas
+    forkJoin({
+      detalle: this.movimientoService.obtenerDetalle(id),
+      categorias: this.categoriaService.listar(),
+      suscripciones: this.suscripcionService.listar('ACTIVA'),
+    }).subscribe(({ detalle, categorias, suscripciones }) => {
+      const [anio, mes, dia] = detalle.fecha.split('-').map(Number);
+      this.formulario.reset({
+        tipo: detalle.tipo,
+        clasificacion: detalle.clasificacion,
+        descripcion: detalle.descripcion,
+        fecha: new Date(anio, mes - 1, dia),
+        monto: detalle.monto,
+        // El detalle trae nombres, así que se buscan sus id
+        idCategoria: categorias.find((c) => c.nombre === detalle.categoria)?.idCategoria ?? null,
+        medioPago: detalle.medioPago,
+        idSuscripcion:
+          suscripciones.find((s) => s.nombreServicio === detalle.suscripcion)?.idSuscripcion ??
+          null,
+      });
+    });
+  }
+
   ngOnInit(): void {
     this.suscripcionService.listar('ACTIVA').subscribe((data) => (this.suscripciones = data));
 
@@ -202,6 +251,11 @@ export class RegistroManual implements OnInit {
       idSuscripcion: v.tipo === 'GASTO' ? v.idSuscripcion : null,
       comprobanteRef: this.analisis?.comprobanteRef ?? null,
     };
+    // para editar, guarda los cambios y avisa a la página
+    if (this.idMovimiento) {
+      this.movimientoService.actualizar(this.idMovimiento, datos).subscribe(() => this.registrado.emit());
+      return;
+    }
 
     this.movimientoService.registrar(datos).subscribe((mov) => {
       this.resumen = {

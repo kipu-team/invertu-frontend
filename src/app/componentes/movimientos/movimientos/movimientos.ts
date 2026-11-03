@@ -18,6 +18,7 @@ import { RouterLink } from '@angular/router';
 import { SesionService } from '../../../servicios/sesion-service';
 import { RegistroManual } from '../registro-manual/registro-manual';
 import { RegistroIa } from '../registro-ia/registro-ia';
+import { DetalleMovimiento } from '../detalle-movimiento/detalle-movimiento';
 
 @Component({
   selector: 'app-movimientos',
@@ -37,6 +38,7 @@ import { RegistroIa } from '../registro-ia/registro-ia';
     RouterLink,
     RegistroManual,
     RegistroIa,
+    DetalleMovimiento,
   ],
   templateUrl: './movimientos.html',
   changeDetection: ChangeDetectionStrategy.Eager,
@@ -49,7 +51,9 @@ export class Movimientos implements OnInit {
   sesion = inject(SesionService);
 
   // Panel lateral de registro de US-16
-  vistaRegistro: 'metodo' | 'manual' | 'ia' = 'metodo';
+  vistaRegistro: 'metodo' | 'manual' | 'ia' | 'detalle' | 'editar' = 'metodo';
+  // id de movimiento al editar o ver detalle de US-12
+  idSeleccionado: number | null = null;
 
   // Panel de lista de movimientos
   columnas: string[] = ['fecha', 'descripcion', 'categoria', 'clasificacion', 'monto'];
@@ -140,6 +144,27 @@ export class Movimientos implements OnInit {
     this.panelAbierto = false;
   }
 
+  verDetalle(id: number): void {
+    this.idSeleccionado = id;
+    this.vistaRegistro = 'detalle';
+  }
+
+  editarMovimiento(id: number): void {
+    this.idSeleccionado = id;
+    this.vistaRegistro = 'editar';
+  }
+
+  alGuardarEdicion(): void {
+    this.cargar();
+    this.vistaRegistro = 'detalle';
+  }
+
+  esFilaActiva(id: number): boolean {
+    return (
+      id === this.idSeleccionado &&
+      (this.vistaRegistro === 'detalle' || this.vistaRegistro === 'editar')
+    );
+  }
   mesAnterior(): void {
     if (this.mes === 1) {
       this.mes = 12;
