@@ -129,6 +129,9 @@
               {{ 'metas.mes.' + mes(fecha) | translate }} {{ anio(fecha) }}
             </span>
           </div>
+          <a mat-stroked-button class="meta-final__boton" [routerLink]="['/metas', meta.idMeta]">
+            {{ 'metas.verDetalle' | translate }}
+          </a>
           <button
             type="button"
             class="meta-final__compartir"
