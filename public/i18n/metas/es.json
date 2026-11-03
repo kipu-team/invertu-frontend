@@ -62,6 +62,7 @@
       "pasarPremium": "Pasar a Premium"
     },
     "detalle": {
+      "volver": "Volver a mis metas",
       "titulo": "Detalle de meta",
       "editar": "Editar meta",
       "aportar": "Aportar",
@@ -105,6 +106,7 @@
       "registrar": "Registrar aporte",
       "montoMinimo": "El monto debe ser mayor a 0",
       "montoMaximo": "El monto no puede ser mayor a lo que falta para la meta",
+      "fechaFutura": "La fecha del aporte no puede ser mayor a hoy",
       "excedeTitulo": "Aporte mayor a tu disponible",
       "excede": "Estás aportando más de tu dinero disponible este mes. ¿Deseas continuar?",
       "continuar": "Continuar",

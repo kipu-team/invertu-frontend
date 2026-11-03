@@ -4,7 +4,7 @@ import { MetaService } from '../../../servicios/meta-service';
 import { MetaDetalle as MetaDetalleDatos, Proyeccion } from '../../../modelo/meta';
 import { SesionService } from '../../../servicios/sesion-service';
 import { TranslatePipe } from '@ngx-translate/core';
-import { MatButton } from '@angular/material/button';
+import { MatButton, MatIconButton } from '@angular/material/button';
 import { MatIcon } from '@angular/material/icon';
 import { DatePipe, DecimalPipe } from '@angular/common';
 import { MatProgressSpinner } from '@angular/material/progress-spinner';
@@ -20,6 +20,7 @@ import { MetaCumplidaDialogo } from '../meta-cumplida-dialogo/meta-cumplida-dial
     DatePipe,
     DecimalPipe,
     MatButton,
+    MatIconButton,
     MatIcon,
     MatProgressSpinner,
     RouterLink,

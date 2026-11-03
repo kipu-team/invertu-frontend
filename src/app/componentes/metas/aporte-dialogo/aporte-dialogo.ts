@@ -1,6 +1,6 @@
 import { Component, ChangeDetectionStrategy, inject } from '@angular/core';
 import { DecimalPipe } from '@angular/common';
-import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
+import { AbstractControl, FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import {
   MAT_DIALOG_DATA,
   MatDialog,
@@ -38,12 +38,20 @@ export class AporteDialogo {
   private inicioService = inject(InicioService);
   meta = inject<MetaDetalle>(MAT_DIALOG_DATA);
 
+  hoy = new Date().toLocaleDateString('en-CA');
+
   formulario = this.fb.group({
     monto: [
       null as number | null,
       [Validators.required, Validators.min(0.01), Validators.max(this.restante)],
     ],
-    fecha: [new Date().toLocaleDateString('en-CA'), Validators.required],
+    fecha: [
+      this.hoy,
+      [
+        Validators.required,
+        (control: AbstractControl) => (control.value > this.hoy ? { fechaFutura: true } : null),
+      ],
+    ],
     descripcion: [''],
   });
 
@@ -51,7 +59,10 @@ export class AporteDialogo {
     return this.formulario.controls.monto;
   }
 
-  /** Lo que falta para llegar al monto objetivo de la meta */
+  get fecha() {
+    return this.formulario.controls.fecha;
+  }
+
   get restante(): number {
     return Math.max(this.meta.montoObjetivo - this.meta.montoAportado, 0);
   }
@@ -74,7 +85,6 @@ export class AporteDialogo {
     });
   }
 
-  /** Fig. 78: el aporte es mayor al dinero disponible del mes */
   private confirmarExceso(): void {
     this.dialog
       .open(ConfirmarDialogo, {

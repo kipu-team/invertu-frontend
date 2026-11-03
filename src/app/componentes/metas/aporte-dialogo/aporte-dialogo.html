@@ -21,7 +21,10 @@
 
     <label>
       <span class="etiqueta">{{ 'metas.aporte.fecha' | translate }}</span>
-      <input type="date" formControlName="fecha" />
+      <input type="date" formControlName="fecha" [max]="hoy" />
+      @if (fecha.touched && fecha.errors) {
+        <small class="error">{{ 'metas.aporte.fechaFutura' | translate }}</small>
+      }
     </label>
 
     <label>

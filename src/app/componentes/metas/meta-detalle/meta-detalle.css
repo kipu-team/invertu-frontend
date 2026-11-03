@@ -19,6 +19,16 @@
   color: var(--texto-suave);
 }
 
+.detalle__titulo {
+  display: flex;
+  align-items: flex-start;
+  gap: 4px;
+}
+
+.detalle__titulo button {
+  margin: -4px 0 0 -8px;
+}
+
 .detalle__acciones {
   display: flex;
   flex-wrap: wrap;
