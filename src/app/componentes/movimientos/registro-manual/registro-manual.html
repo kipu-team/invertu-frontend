@@ -53,9 +53,21 @@
     <button mat-icon-button type="button" (click)="volver.emit()" [attr.aria-label]="'movimientos.registro.volver' | translate">
       <mat-icon>chevron_left</mat-icon>
     </button>
-    <h2>{{ 'movimientos.registro.tituloManual' | translate }}</h2>
+    <h2>{{ (analisis ? 'movimientos.registro.tituloIa' : 'movimientos.registro.tituloManual') | translate }}</h2>
+    @if (analisis) {
+      <span class="manual__ia"><mat-icon>auto_awesome</mat-icon>{{ 'movimientos.ia.activa' | translate }}</span>
+    }
   </div>
 
+  @if (nombreArchivo) {
+    <div class="manual__archivo">
+      <mat-icon>description</mat-icon>
+      <div>
+        <strong>{{ nombreArchivo }}</strong>
+        <small>{{ 'movimientos.ia.procesado' | translate }}</small>
+      </div>
+    </div>
+  }
   <form class="manual" [formGroup]="formulario" (ngSubmit)="registrar()">
     <mat-button-toggle-group class="manual__toggle" formControlName="tipo">
       @for (t of tipos; track t) {
@@ -93,7 +105,9 @@
     </mat-form-field>
 
     <div class="manual__monto" [class.manual__monto--error]="monto.invalid && monto.touched">
-      <span class="manual__monto-etiqueta">{{ 'movimientos.manual.monto' | translate }}</span>
+      <span class="manual__monto-etiqueta">
+        {{ (analisis ? 'movimientos.ia.montoDetectado' : 'movimientos.manual.monto') | translate }}
+      </span>
       <div class="manual__monto-valor">
         <span>S/</span>
         <input type="number" formControlName="monto" placeholder="0.00" step="0.01" min="0" />
@@ -150,8 +164,14 @@
       </mat-form-field>
     }
 
+    @if (analisis) {
+      <small class="manual__ia-nota"><mat-icon>auto_awesome</mat-icon>{{ 'movimientos.ia.detectado' | translate }}</small>
+    }
     <button mat-flat-button type="submit" class="manual__registrar">
-      {{ 'movimientos.manual.registrar' | translate }}
+      {{ (analisis ? 'movimientos.ia.confirmar' : 'movimientos.manual.registrar') | translate }}
     </button>
+    @if (analisis) {
+      <button mat-button type="button" (click)="volver.emit()">{{ 'movimientos.ia.cancelar' | translate }}</button>
+    }
   </form>
 }

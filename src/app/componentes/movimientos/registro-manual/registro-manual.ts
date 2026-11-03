@@ -6,6 +6,7 @@ import {
   OnInit,
   Output,
   inject,
+  Input,
 } from '@angular/core';
 import { DatePipe, DecimalPipe } from '@angular/common';
 import {
@@ -24,7 +25,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatIcon } from '@angular/material/icon';
 import { MovimientoService } from '../../../servicios/movimiento-service';
 import { SuscripcionService } from '../../../servicios/suscripcion-service';
-import { MovimientoRequest } from '../../../modelo/movimiento';
+import { AnalisisComprobante, MovimientoRequest } from '../../../modelo/movimiento';
 import { SuscripcionResumen } from '../../../modelo/suscripcion';
 import { Clasificacion, MedioPago, TipoMovimiento } from '../../../modelo/comun';
 import { SelectorCategorias } from '../../categorias/selector-categorias/selector-categorias';
@@ -107,6 +108,11 @@ export class RegistroManual implements OnInit {
   // Avisos hacia la página de movimientos
   @Output() volver = new EventEmitter<void>();
   @Output() registrado = new EventEmitter<void>();
+  @Output() otro = new EventEmitter<void>();
+
+  // para registro con IA
+  @Input() analisis: AnalisisComprobante | null = null;
+  @Input() nombreArchivo: string | null = null;
   private fb = inject(FormBuilder);
   private movimientoService = inject(MovimientoService);
   private suscripcionService = inject(SuscripcionService);
@@ -165,6 +171,18 @@ export class RegistroManual implements OnInit {
         this.formulario.controls.idSuscripcion.setValue(null);
       }
     });
+
+    // para registro con IA pre carga lo que leyó del comprobante
+    if (this.analisis) {
+      const d = this.analisis.datos;
+      const [anio, mes, dia] = d.fecha.split('-').map(Number);
+      this.formulario.patchValue({
+        tipo: d.tipoSugerido,
+        descripcion: d.descripcion,
+        monto: d.monto,
+        fecha: new Date(anio, mes - 1, dia),
+      });
+    }
   }
 
   registrar(): void {
@@ -182,6 +200,7 @@ export class RegistroManual implements OnInit {
       idCategoria: v.idCategoria ?? 0,
       medioPago: v.medioPago,
       idSuscripcion: v.tipo === 'GASTO' ? v.idSuscripcion : null,
+      comprobanteRef: this.analisis?.comprobanteRef ?? null,
     };
 
     this.movimientoService.registrar(datos).subscribe((mov) => {
@@ -201,8 +220,13 @@ export class RegistroManual implements OnInit {
     });
   }
 
-  // Botón "Registrar otro": vuelve al formulario vacío
+  // de Registrar otro para volver al formulario vacío
   nuevoRegistro(): void {
+    // En registro con IA, "Registrar otro" vuelve a la zona de carga
+    if (this.analisis) {
+      this.otro.emit();
+      return;
+    }
     this.resumen = null;
     this.formulario.reset({
       tipo: 'INGRESO',
