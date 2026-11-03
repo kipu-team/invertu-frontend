@@ -62,7 +62,37 @@
       "pasarPremium": "Pasar a Premium"
     },
     "detalle": {
-      "titulo": "Detalle de la meta"
+      "titulo": "Detalle de meta",
+      "editar": "Editar meta",
+      "aportar": "Aportar",
+      "cancelar": "Cancelar meta",
+      "estado": {
+        "ACTIVA": "Activa",
+        "CUMPLIDA": "Completada",
+        "CANCELADA": "Cancelada"
+      },
+      "campo": {
+        "estado": "Estado",
+        "montoAcumulado": "Monto acumulado",
+        "montoObjetivo": "Monto objetivo",
+        "fechaObjetivo": "Fecha objetivo",
+        "frecuencia": "Frecuencia",
+        "descripcion": "Descripción"
+      },
+      "frecuenciaValor": {
+        "DIARIA": "Diaria",
+        "SEMANAL": "Semanal",
+        "MENSUAL": "Mensual",
+        "SIN_FRECUENCIA": "Sin frecuencia"
+      },
+      "historial": "Historial de aportes",
+      "eliminarAporte": "Eliminar aporte",
+      "proyeccion": {
+        "titulo": "Proyección",
+        "fechaEstimada": "Fecha estimada de cumplimiento",
+        "soloPremium": "La proyección está disponible en Premium",
+        "pasarPremium": "Pasar a Premium"
+      }
     }
   }
 }

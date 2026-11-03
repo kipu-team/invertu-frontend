@@ -1,0 +1,55 @@
+.detalle__encabezado {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 16px;
+  margin-bottom: 22px;
+}
+
+.detalle__encabezado h1 {
+  margin: 0;
+  font-size: 1.35rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+.detalle__encabezado p {
+  margin: 4px 0 0;
+  font-size: 0.75rem;
+  color: var(--texto-suave);
+}
+
+.detalle__acciones {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+.detalle__boton {
+  height: 34px;
+  padding: 0 14px;
+  border: 1px solid var(--verde-oscuro);
+  border-radius: 8px;
+  color: var(--verde-oscuro);
+  font-size: 0.78rem;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.detalle__boton mat-icon {
+  width: 14px;
+  height: 14px;
+  margin: 0 4px 0 0;
+  font-size: 14px;
+}
+
+.detalle__boton--aportar {
+  --mat-button-filled-container-color: var(--verde-esmeralda);
+  --mat-button-filled-label-text-color: #fff;
+  border-color: var(--verde-esmeralda);
+  color: #fff;
+}
+
+.detalle__boton--cancelar {
+  border-color: var(--gasto);
+  color: var(--gasto);
+}
