@@ -28,7 +28,7 @@
 
 .movimientos__contenido {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) 320px;
+  grid-template-columns: minmax(0, 1fr) clamp(340px, 28vw, 420px);
   gap: 20px;
   align-items: start;
 }
@@ -270,4 +270,45 @@ td.mat-mdc-cell {
   margin: 14px 0 0;
   font-size: 0.6875rem;
   color: var(--texto-suave);
+}
+
+.fila {
+  cursor: pointer;
+}
+
+.fila:hover td.mat-mdc-cell {
+  background: var(--fondo);
+}
+
+.fila--activa td.mat-mdc-cell {
+  background: var(--verde-claro);
+}
+
+/* iconos de la fila de la tabla de movimientos, solo se ve al pasar el mouse */
+.fila__acciones {
+  display: inline-flex;
+  vertical-align: middle;
+  margin-right: 4px;
+  visibility: hidden;
+}
+
+.fila:hover .fila__acciones,
+.fila:focus-within .fila__acciones {
+  visibility: visible;
+}
+
+.fila__boton {
+  --mat-icon-button-state-layer-size: 30px;
+  width: 30px;
+  height: 30px;
+  padding: 3px;
+}
+
+.fila__boton mat-icon {
+  font-size: 18px;
+  width: 18px;
+  height: 18px;
+}
+.fila__boton--peligro {
+  color: var(--gasto);
 }

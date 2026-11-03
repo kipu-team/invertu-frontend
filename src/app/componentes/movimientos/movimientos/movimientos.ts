@@ -18,6 +18,9 @@ import { RouterLink } from '@angular/router';
 import { SesionService } from '../../../servicios/sesion-service';
 import { RegistroManual } from '../registro-manual/registro-manual';
 import { RegistroIa } from '../registro-ia/registro-ia';
+import { DetalleMovimiento } from '../detalle-movimiento/detalle-movimiento';
+import { MatDialog } from '@angular/material/dialog';
+import { ConfirmarDialogo } from '../../compartidos/confirmar-dialogo/confirmar-dialogo';
 
 @Component({
   selector: 'app-movimientos',
@@ -37,6 +40,7 @@ import { RegistroIa } from '../registro-ia/registro-ia';
     RouterLink,
     RegistroManual,
     RegistroIa,
+    DetalleMovimiento,
   ],
   templateUrl: './movimientos.html',
   changeDetection: ChangeDetectionStrategy.Eager,
@@ -46,10 +50,13 @@ export class Movimientos implements OnInit {
   private movimientoService = inject(MovimientoService);
   private categoriaService = inject(CategoriaService);
   private fb = inject(FormBuilder);
+  private dialog = inject(MatDialog);
   sesion = inject(SesionService);
 
   // Panel lateral de registro de US-16
-  vistaRegistro: 'metodo' | 'manual' | 'ia' = 'metodo';
+  vistaRegistro: 'metodo' | 'manual' | 'ia' | 'detalle' | 'editar' = 'metodo';
+  // id de movimiento al editar o ver detalle de US-12
+  idSeleccionado: number | null = null;
 
   // Panel de lista de movimientos
   columnas: string[] = ['fecha', 'descripcion', 'categoria', 'clasificacion', 'monto'];
@@ -140,6 +147,51 @@ export class Movimientos implements OnInit {
     this.panelAbierto = false;
   }
 
+  verDetalle(id: number): void {
+    this.idSeleccionado = id;
+    this.vistaRegistro = 'detalle';
+  }
+
+  editarMovimiento(id: number): void {
+    this.idSeleccionado = id;
+    this.vistaRegistro = 'editar';
+  }
+
+  // de la US13 para confirmar y eliminar
+  eliminarMovimiento(id: number): void {
+    this.dialog
+      .open(ConfirmarDialogo, {
+        data: {
+          titulo: 'movimientos.eliminar.titulo',
+          mensaje: 'movimientos.eliminar.mensaje',
+          textoConfirmar: 'movimientos.eliminar.confirmar',
+          peligro: true,
+        },
+      })
+      .afterClosed()
+      .subscribe((confirmo) => {
+        if (confirmo) {
+          this.movimientoService.eliminar(id).subscribe(() => {
+            if (this.idSeleccionado === id) {
+              this.idSeleccionado = null;
+              this.vistaRegistro = 'metodo';
+            }
+            this.cargar();
+          });
+        }
+      });
+  }
+  alGuardarEdicion(): void {
+    this.cargar();
+    this.vistaRegistro = 'detalle';
+  }
+
+  esFilaActiva(id: number): boolean {
+    return (
+      id === this.idSeleccionado &&
+      (this.vistaRegistro === 'detalle' || this.vistaRegistro === 'editar')
+    );
+  }
   mesAnterior(): void {
     if (this.mes === 1) {
       this.mes = 12;

@@ -53,7 +53,7 @@
     <button mat-icon-button type="button" (click)="volver.emit()" [attr.aria-label]="'movimientos.registro.volver' | translate">
       <mat-icon>chevron_left</mat-icon>
     </button>
-    <h2>{{ (analisis ? 'movimientos.registro.tituloIa' : 'movimientos.registro.tituloManual') | translate }}</h2>
+    <h2>{{ titulo | translate }}</h2>
     @if (analisis) {
       <span class="manual__ia"><mat-icon>auto_awesome</mat-icon>{{ 'movimientos.ia.activa' | translate }}</span>
     }
@@ -168,9 +168,9 @@
       <small class="manual__ia-nota"><mat-icon>auto_awesome</mat-icon>{{ 'movimientos.ia.detectado' | translate }}</small>
     }
     <button mat-flat-button type="submit" class="manual__registrar">
-      {{ (analisis ? 'movimientos.ia.confirmar' : 'movimientos.manual.registrar') | translate }}
+      {{ textoBoton | translate }}
     </button>
-    @if (analisis) {
+    @if (analisis || idMovimiento) {
       <button mat-button type="button" (click)="volver.emit()">{{ 'movimientos.ia.cancelar' | translate }}</button>
     }
   </form>

@@ -1,0 +1,63 @@
+<div class="detalle__cabecera">
+  <button mat-icon-button type="button" (click)="volver.emit()" [attr.aria-label]="'movimientos.registro.volver' | translate">
+    <mat-icon>chevron_left</mat-icon>
+  </button>
+  <h2>{{ 'movimientos.detalle.titulo' | translate }}</h2>
+</div>
+
+@if (detalle) {
+  <div class="detalle__monto">
+    <span class="detalle__monto-etiqueta">
+      {{ (detalle.tipo === 'INGRESO' ? 'movimientos.detalle.montoRecibido' : 'movimientos.detalle.montoDebitado') | translate }}
+    </span>
+    @if (detalle.tipo === 'INGRESO') {
+      <strong class="monto-ingreso">+ S/ {{ detalle.monto | number: '1.2-2' }}</strong>
+    } @else {
+      <strong class="monto-gasto">- S/ {{ detalle.monto | number: '1.2-2' }}</strong>
+    }
+    <p>{{ detalle.descripcion }}</p>
+    @if (detalle.suscripcion) {
+      <small>{{ 'movimientos.detalle.suscripcion' | translate }}: {{ detalle.suscripcion }}</small>
+    }
+  </div>
+
+  <dl class="detalle__datos">
+    <dt>{{ 'movimientos.detalle.fecha' | translate }}</dt>
+    <dd>{{ detalle.fecha | date: 'dd/MM/yyyy' }}</dd>
+
+    <dt>{{ 'movimientos.detalle.categoria' | translate }}</dt>
+    <dd>{{ detalle.categoria }}</dd>
+
+    <dt>{{ 'movimientos.detalle.tipo' | translate }}</dt>
+    <dd>{{ 'movimientos.tipo.' + detalle.tipo | translate }}</dd>
+
+    <dt>{{ 'movimientos.detalle.clasificacion' | translate }}</dt>
+    <dd>{{ 'movimientos.clasificacion.' + detalle.clasificacion | translate }}</dd>
+
+    <dt>{{ 'movimientos.detalle.medio' | translate }}</dt>
+    <dd>
+      @if (detalle.medioPago) {
+        {{ 'movimientos.medios.' + detalle.medioPago | translate }}
+      } @else {
+        {{ 'movimientos.manual.ninguno' | translate }}
+      }
+    </dd>
+  </dl>
+
+  <div class="detalle__acciones">
+    @if (detalle.urlComprobante) {
+      <a mat-flat-button [href]="detalle.urlComprobante" target="_blank" rel="noopener">
+        <mat-icon>receipt</mat-icon>
+        {{ 'movimientos.detalle.verComprobante' | translate }}
+      </a>
+    }
+    <button mat-stroked-button type="button" (click)="editar.emit()">
+      <mat-icon>edit</mat-icon>
+      {{ 'movimientos.detalle.editar' | translate }}
+    </button>
+    <button mat-stroked-button type="button" class="detalle__eliminar" (click)="eliminar.emit(detalle.idMovimiento)">
+      <mat-icon>delete</mat-icon>
+      {{ 'movimientos.eliminar.confirmar' | translate }}
+    </button>
+  </div>
+}

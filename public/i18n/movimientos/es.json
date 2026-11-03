@@ -133,6 +133,28 @@
       "detectado": "Datos detectados automáticamente por IA",
       "confirmar": "Confirmar registro",
       "cancelar": "Cancelar"
+    },
+    "detalle": {
+      "titulo": "Detalle del movimiento",
+      "montoDebitado": "Monto debitado",
+      "montoRecibido": "Monto recibido",
+      "suscripcion": "Suscripción",
+      "fecha": "Fecha",
+      "categoria": "Categoría",
+      "tipo": "Tipo",
+      "clasificacion": "Clasificación",
+      "medio": "Medio de pago",
+      "verComprobante": "Ver comprobante",
+      "editar": "Editar"
+    },
+    "editar": {
+      "titulo": "Editar movimiento",
+      "guardar": "Guardar cambios"
+    },
+    "eliminar": {
+      "titulo": "¿Eliminar este movimiento?",
+      "mensaje": "Esta acción no se puede deshacer y el monto se descontará de tus totales.",
+      "confirmar": "Eliminar"
     }
   }
 }
