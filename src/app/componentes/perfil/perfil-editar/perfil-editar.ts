@@ -7,17 +7,14 @@ import { TranslatePipe } from '@ngx-translate/core';
 import { Perfil, PerfilRequest } from '../../../modelo/perfil';
 import { PerfilService } from '../../../servicios/perfil-service';
 import { UNIVERSIDADES } from '../../../servicios/datos-prueba/datos-prueba';
+import { MatIcon } from '@angular/material/icon';
 
 @Component({
   selector: 'app-perfil-editar',
   standalone: true,
-  imports: [
-    FormsModule,
-    MatButtonModule,
-    TranslatePipe
-  ],
+  imports: [FormsModule, MatButtonModule, TranslatePipe, MatIcon],
   templateUrl: './perfil-editar.html',
-  styleUrl: './perfil-editar.css'
+  styleUrl: './perfil-editar.css',
 })
 export class PerfilEditar {
   universidades = UNIVERSIDADES;
@@ -56,7 +53,7 @@ export class PerfilEditar {
     const datos: PerfilRequest = {
       nombres,
       apellidos,
-      universidad
+      universidad,
     };
 
     this.guardando = true;
@@ -69,7 +66,7 @@ export class PerfilEditar {
       error: () => {
         this.mensajeError = 'No se pudo actualizar el perfil.';
         this.guardando = false;
-      }
+      },
     });
   }
 }

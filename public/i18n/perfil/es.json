@@ -50,7 +50,29 @@
     },
     "editar": {
       "titulo": "Editar perfil",
-      "guardando": "Guardando..."
+      "guardando": "Guardando...",
+      "correo_bloqueado": "El correo electrónico institucional no puede ser modificado por seguridad académica."
+    },
+
+    "preferencias": {
+      "titulo": "Configuración",
+      "subtitulo": "Personaliza tu experiencia en InvertU.",
+      "apariencia": "Apariencia",
+      "claro": "Claro",
+      "oscuro": "Oscuro",
+      "sistema": "Sistema",
+      "restaurar": "Restaurar configuración predeterminada",
+      "idioma": "Idioma",
+      "escoger_idioma": "Escoge un idioma",
+      "descripcion_idioma": "La app se configurará al idioma de tu elección.",
+      "restaurar_tema": "Restaurar tema predeterminado",
+      "notificaciones": "Notificaciones",
+      "alertas_gastos": "Alertas de gastos",
+      "desc_alertas": "Recibe recordatorios cuando tus gastos diarios se acerquen al límite planeado.",
+      "recordatorios_metas": "Recordatorios de metas",
+      "desc_recordatorios": "Avisos para aportar a tus objetivos de ahorro activos.",
+      "actualizaciones": "Actualizaciones del sistema",
+      "desc_actualizaciones": "Información sobre nuevas funcionalidades y mejoras en InvertU."
     }
   }
 }
