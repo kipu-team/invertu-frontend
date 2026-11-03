@@ -1,0 +1,35 @@
+.exito {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  padding-top: 24px;
+  text-align: center;
+}
+
+.exito__icono {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: var(--verde-esmeralda);
+  color: #fff;
+}
+
+.exito h2 {
+  margin: 0;
+  font-size: 1.05rem;
+  font-weight: 600;
+}
+
+.exito__boton {
+  --mat-button-filled-container-color: var(--verde-esmeralda);
+  --mat-button-filled-label-text-color: #fff;
+  height: 32px;
+  padding: 0 16px;
+  border-radius: 6px;
+  font-size: 0.75rem;
+  font-weight: 700;
+}

@@ -4,12 +4,15 @@ import { MetaService } from '../../../servicios/meta-service';
 import { MetaDetalle as MetaDetalleDatos, Proyeccion } from '../../../modelo/meta';
 import { SesionService } from '../../../servicios/sesion-service';
 import { TranslatePipe } from '@ngx-translate/core';
-import { MatButton } from '@angular/material/button';
+import { MatButton, MatIconButton } from '@angular/material/button';
 import { MatIcon } from '@angular/material/icon';
 import { DatePipe, DecimalPipe } from '@angular/common';
 import { MatProgressSpinner } from '@angular/material/progress-spinner';
 import { AporteService } from '../../../servicios/aporte-service';
 import { Aporte } from '../../../modelo/aporte';
+import { MatDialog } from '@angular/material/dialog';
+import { AporteDialogo } from '../aporte-dialogo/aporte-dialogo';
+import { MetaCumplidaDialogo } from '../meta-cumplida-dialogo/meta-cumplida-dialogo';
 @Component({
   selector: 'app-meta-detalle',
   imports: [
@@ -17,6 +20,7 @@ import { Aporte } from '../../../modelo/aporte';
     DatePipe,
     DecimalPipe,
     MatButton,
+    MatIconButton,
     MatIcon,
     MatProgressSpinner,
     RouterLink,
@@ -30,6 +34,7 @@ export class MetaDetalle implements OnInit {
   private metaService = inject(MetaService);
   private aporteService = inject(AporteService);
   sesion = inject(SesionService);
+  private dialog = inject(MatDialog);
   id = 0;
   meta: MetaDetalleDatos | null = null;
   aportes: Aporte[] = [];
@@ -72,5 +77,20 @@ export class MetaDetalle implements OnInit {
         this.proyeccion = data;
       },
     });
+  }
+  aportar() {
+    if (!this.meta) return;
+    this.dialog
+      .open<AporteDialogo, MetaDetalleDatos, Aporte>(AporteDialogo, { data: this.meta })
+      .afterClosed()
+      .subscribe((aporte) => {
+        if (!aporte) return;
+        this.cargarMeta();
+        this.cargarAportes();
+        this.cargarProyeccion();
+        if (aporte.estadoMeta === 'CUMPLIDA') {
+          this.dialog.open(MetaCumplidaDialogo);
+        }
+      });
   }
 }

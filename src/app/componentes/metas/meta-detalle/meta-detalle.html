@@ -1,9 +1,19 @@
 @if (meta) {
   <section class="detalle">
     <header class="detalle__encabezado">
-      <div>
-        <h1>{{ 'metas.detalle.titulo' | translate }}</h1>
-        <p>{{ meta.nombre }}</p>
+      <div class="detalle__titulo">
+        <button
+          mat-icon-button
+          type="button"
+          routerLink="/metas"
+          [attr.aria-label]="'metas.detalle.volver' | translate"
+        >
+          <mat-icon>chevron_left</mat-icon>
+        </button>
+        <div>
+          <h1>{{ 'metas.detalle.titulo' | translate }}</h1>
+          <p>{{ meta.nombre }}</p>
+        </div>
       </div>
       @if (meta.estado === 'ACTIVA') {
         <div class="detalle__acciones">
@@ -11,7 +21,11 @@
             <mat-icon>edit</mat-icon>
             {{ 'metas.detalle.editar' | translate }}
           </button>
-          <button mat-flat-button class="detalle__boton detalle__boton--aportar">
+          <button
+            mat-flat-button
+            class="detalle__boton detalle__boton--aportar"
+            (click)="aportar()"
+          >
             {{ 'metas.detalle.aportar' | translate }}
           </button>
           <button mat-stroked-button class="detalle__boton detalle__boton--cancelar">
