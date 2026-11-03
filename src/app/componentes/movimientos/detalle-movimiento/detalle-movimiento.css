@@ -1,0 +1,72 @@
+.detalle__cabecera {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  margin: 0 0 12px -8px;
+}
+
+.detalle__cabecera h2 {
+  margin: 0;
+  font-size: 0.95rem;
+  font-weight: 600;
+}
+
+.detalle__monto {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  padding: 18px 12px;
+  border-radius: var(--radio);
+  background: var(--fondo);
+  text-align: center;
+}
+
+.detalle__monto-etiqueta {
+  font-size: 0.625rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--texto-suave);
+}
+
+.detalle__monto strong {
+  font-size: 1.6rem;
+}
+
+.detalle__monto p {
+  margin: 4px 0 0;
+  font-size: 0.8125rem;
+  font-weight: 600;
+}
+
+.detalle__monto small {
+  font-size: 0.6875rem;
+  color: var(--texto-suave);
+}
+
+.detalle__datos {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 12px;
+  margin: 16px 0;
+  font-size: 0.75rem;
+}
+
+.detalle__datos dt {
+  color: var(--texto-suave);
+}
+
+.detalle__datos dd {
+  margin: 0;
+  text-align: right;
+  font-weight: 600;
+}
+
+.detalle__acciones {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding-top: 14px;
+  border-top: 1px solid var(--borde);
+}
