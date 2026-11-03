@@ -93,6 +93,23 @@
         "soloPremium": "La proyección está disponible en Premium",
         "pasarPremium": "Pasar a Premium"
       }
+    },
+    "aporte": {
+      "titulo": "Aportar a {{nombre}}",
+      "subtitulo": "Completa los datos del aporte para registrar el movimiento.",
+      "monto": "Monto",
+      "fecha": "Fecha",
+      "descripcion": "Descripción (opcional)",
+      "descripcionPlaceholder": "Aporte semanal",
+      "restante": "Monto restante de la meta",
+      "registrar": "Registrar aporte",
+      "montoMinimo": "El monto debe ser mayor a 0",
+      "montoMaximo": "El monto no puede ser mayor a lo que falta para la meta",
+      "excedeTitulo": "Aporte mayor a tu disponible",
+      "excede": "Estás aportando más de tu dinero disponible este mes. ¿Deseas continuar?",
+      "continuar": "Continuar",
+      "cumplida": "¡Felicidades! Cumpliste tu meta",
+      "aceptar": "Aceptar"
     }
   }
 }

@@ -93,6 +93,23 @@
         "soloPremium": "Projection is available on Premium",
         "pasarPremium": "Upgrade to Premium"
       }
+    },
+    "aporte": {
+      "titulo": "Contribute to {{nombre}}",
+      "subtitulo": "Fill in the contribution details to record the transaction.",
+      "monto": "Amount",
+      "fecha": "Date",
+      "descripcion": "Description (optional)",
+      "descripcionPlaceholder": "Weekly contribution",
+      "restante": "Remaining amount of the goal",
+      "registrar": "Register contribution",
+      "montoMinimo": "The amount must be greater than 0",
+      "montoMaximo": "The amount cannot exceed what is left for the goal",
+      "excedeTitulo": "Contribution above your available money",
+      "excede": "You are contributing more than your available money this month. Do you want to continue?",
+      "continuar": "Continue",
+      "cumplida": "Congratulations! You reached your goal",
+      "aceptar": "Got it"
     }
   }
 }

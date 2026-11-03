@@ -11,7 +11,11 @@
             <mat-icon>edit</mat-icon>
             {{ 'metas.detalle.editar' | translate }}
           </button>
-          <button mat-flat-button class="detalle__boton detalle__boton--aportar">
+          <button
+            mat-flat-button
+            class="detalle__boton detalle__boton--aportar"
+            (click)="aportar()"
+          >
             {{ 'metas.detalle.aportar' | translate }}
           </button>
           <button mat-stroked-button class="detalle__boton detalle__boton--cancelar">

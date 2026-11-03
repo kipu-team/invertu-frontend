@@ -1,0 +1,44 @@
+<h2 mat-dialog-title>{{ 'metas.aporte.titulo' | translate: { nombre: meta.nombre } }}</h2>
+<p class="aporte__subtitulo">{{ 'metas.aporte.subtitulo' | translate }}</p>
+
+<mat-dialog-content>
+  <form class="aporte" [formGroup]="formulario" (ngSubmit)="registrar()">
+    <label>
+      <span class="etiqueta">{{ 'metas.aporte.monto' | translate }}</span>
+      <div class="campo-monto" [class.invalido]="monto.touched && monto.invalid">
+        <span class="campo-monto__moneda">S/</span>
+        <input type="number" formControlName="monto" placeholder="0.00" />
+      </div>
+      @if (monto.touched && monto.errors) {
+        <small class="error">
+          {{
+            (monto.errors['max'] ? 'metas.aporte.montoMaximo' : 'metas.aporte.montoMinimo')
+              | translate
+          }}
+        </small>
+      }
+    </label>
+
+    <label>
+      <span class="etiqueta">{{ 'metas.aporte.fecha' | translate }}</span>
+      <input type="date" formControlName="fecha" />
+    </label>
+
+    <label>
+      <span class="etiqueta">{{ 'metas.aporte.descripcion' | translate }}</span>
+      <textarea
+        formControlName="descripcion"
+        [placeholder]="'metas.aporte.descripcionPlaceholder' | translate"
+      ></textarea>
+    </label>
+
+    <div class="aporte__restante">
+      <span>{{ 'metas.aporte.restante' | translate }}</span>
+      <strong>S/{{ restante | number: '1.0-2' }}</strong>
+    </div>
+
+    <button mat-flat-button class="aporte__registrar" type="submit">
+      {{ 'metas.aporte.registrar' | translate }}
+    </button>
+  </form>
+</mat-dialog-content>
