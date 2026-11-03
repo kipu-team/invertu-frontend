@@ -28,7 +28,7 @@
 
 .movimientos__contenido {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) 320px;
+  grid-template-columns: minmax(0, 1fr) clamp(340px, 28vw, 420px);
   gap: 20px;
   align-items: start;
 }
@@ -308,4 +308,7 @@ td.mat-mdc-cell {
   font-size: 18px;
   width: 18px;
   height: 18px;
+}
+.fila__boton--peligro {
+  color: var(--gasto);
 }

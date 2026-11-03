@@ -148,8 +148,15 @@
               >
                 <mat-icon>edit</mat-icon>
               </button>
-              <!-- ícono de eliminar de US-13 -->
-            </span>
+              <button
+                mat-icon-button
+                type="button"
+                class="fila__boton fila__boton--peligro"
+                (click)="eliminarMovimiento(m.idMovimiento); $event.stopPropagation()"
+                [attr.aria-label]="'movimientos.eliminar.confirmar' | translate"
+              >
+                <mat-icon>delete</mat-icon>
+              </button>            </span>
             @if (m.tipo === 'INGRESO') {
               <span class="monto-ingreso">+ S/ {{ m.monto | number: '1.2-2' }}</span>
             } @else {
@@ -235,6 +242,7 @@
           [idMovimiento]="idSeleccionado"
           (volver)="vistaRegistro = 'metodo'"
           (editar)="vistaRegistro = 'editar'"
+          (eliminar)="eliminarMovimiento($event)"
         />
       } @else {
         <app-registro-manual

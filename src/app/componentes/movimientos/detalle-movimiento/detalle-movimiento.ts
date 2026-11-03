@@ -26,7 +26,7 @@ export class DetalleMovimiento implements OnChanges {
   @Input() idMovimiento: number | null = null;
   @Output() volver = new EventEmitter<void>();
   @Output() editar = new EventEmitter<void>();
-
+  @Output() eliminar = new EventEmitter<number>();
   private movimientoService = inject(MovimientoService);
 
   detalle: MovimientoDetalle | null = null;
