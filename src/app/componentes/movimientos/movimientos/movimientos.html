@@ -207,13 +207,11 @@
       } @else if (vistaRegistro === 'manual') {
         <app-registro-manual (volver)="vistaRegistro = 'metodo'" (registrado)="cargar()" />
       } @else {
-        <div class="registro__cabecera">
-          <button mat-icon-button type="button" (click)="vistaRegistro = 'metodo'" [attr.aria-label]="'movimientos.registro.volver' | translate">
-            <mat-icon>chevron_left</mat-icon>
-          </button>
-          <h2>{{ 'movimientos.registro.tituloIa' | translate }}</h2>
-        </div>
-        <!-- falta el registro con comprobante de US-17 -->
+        <app-registro-ia
+          (volver)="vistaRegistro = 'metodo'"
+          (irManual)="vistaRegistro = 'manual'"
+          (registrado)="cargar()"
+        />
       }
     </aside>
   </div>

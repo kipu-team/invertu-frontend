@@ -17,6 +17,7 @@ import { Clasificacion, MedioPago, TipoMovimiento } from '../../../modelo/comun'
 import { RouterLink } from '@angular/router';
 import { SesionService } from '../../../servicios/sesion-service';
 import { RegistroManual } from '../registro-manual/registro-manual';
+import { RegistroIa } from '../registro-ia/registro-ia';
 
 @Component({
   selector: 'app-movimientos',
@@ -35,6 +36,7 @@ import { RegistroManual } from '../registro-manual/registro-manual';
     MatIcon,
     RouterLink,
     RegistroManual,
+    RegistroIa,
   ],
   templateUrl: './movimientos.html',
   changeDetection: ChangeDetectionStrategy.Eager,

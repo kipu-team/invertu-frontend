@@ -113,6 +113,26 @@
         "montoDecimales": "El monto admite como máximo dos decimales",
         "categoria": "Selecciona una categoría"
       }
+    },
+    "ia": {
+      "activa": "IA activa",
+      "subirTitulo": "Sube una foto o PDF de tu boleta",
+      "formatos": "JPG, PNG o PDF de hasta 5 MB",
+      "seleccionar": "Seleccionar archivo",
+      "analizando": "Analizando tu comprobante...",
+      "errorArchivo": "Solo se aceptan archivos JPG, PNG o PDF de hasta 5 MB",
+      "errorIlegible": "No pudimos leer tu comprobante",
+      "errorIlegibleDetalle": "Completa los datos manualmente o intenta con una foto más clara.",
+      "otroArchivo": "Intentar subir otro archivo",
+      "manual": "Registrar manualmente",
+      "manualDetalle": "O completa los campos en el formulario estándar",
+      "consejoTitulo": "Consejo:",
+      "consejo": "Asegúrate de que la foto esté bien iluminada y el texto sea completamente legible.",
+      "procesado": "Procesado con éxito",
+      "montoDetectado": "Monto detectado",
+      "detectado": "Datos detectados automáticamente por IA",
+      "confirmar": "Confirmar registro",
+      "cancelar": "Cancelar"
     }
   }
 }

@@ -113,6 +113,26 @@
         "montoDecimales": "The amount allows at most two decimals",
         "categoria": "Select a category"
       }
+    },
+    "ia": {
+      "activa": "AI active",
+      "subirTitulo": "Upload a photo or PDF of your receipt",
+      "formatos": "JPG, PNG or PDF up to 5 MB",
+      "seleccionar": "Select file",
+      "analizando": "Analyzing your receipt...",
+      "errorArchivo": "Only JPG, PNG or PDF files up to 5 MB are accepted",
+      "errorIlegible": "We couldn't read your receipt",
+      "errorIlegibleDetalle": "Fill in the details manually or try a clearer photo.",
+      "otroArchivo": "Try another file",
+      "manual": "Record manually",
+      "manualDetalle": "Or fill in the standard form",
+      "consejoTitulo": "Tip:",
+      "consejo": "Make sure the photo is well lit and the text is fully legible.",
+      "procesado": "Processed successfully",
+      "montoDetectado": "Detected amount",
+      "detectado": "Details detected automatically by AI",
+      "confirmar": "Confirm",
+      "cancelar": "Cancel"
     }
   }
 }
