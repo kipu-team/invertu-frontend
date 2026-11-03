@@ -1,6 +1,140 @@
-<app-en-construccion
-  titulo="metas.detalle.titulo"
-  responsable="Bruno"
-  figuras="74–79, 82–87"
-  [pendientes]="pendientes"
-/>
+@if (meta) {
+  <section class="detalle">
+    <header class="detalle__encabezado">
+      <div>
+        <h1>{{ 'metas.detalle.titulo' | translate }}</h1>
+        <p>{{ meta.nombre }}</p>
+      </div>
+      @if (meta.estado === 'ACTIVA') {
+        <div class="detalle__acciones">
+          <button mat-stroked-button class="detalle__boton">
+            <mat-icon>edit</mat-icon>
+            {{ 'metas.detalle.editar' | translate }}
+          </button>
+          <button mat-flat-button class="detalle__boton detalle__boton--aportar">
+            {{ 'metas.detalle.aportar' | translate }}
+          </button>
+          <button mat-stroked-button class="detalle__boton detalle__boton--cancelar">
+            {{ 'metas.detalle.cancelar' | translate }}
+          </button>
+        </div>
+      }
+    </header>
+
+    <article class="tarjeta detalle__progreso">
+      <div class="detalle__fila">
+        <div class="detalle__circulo">
+          <mat-progress-spinner
+            mode="determinate"
+            [value]="meta.porcentaje"
+            [diameter]="72"
+            [strokeWidth]="7"
+          />
+          <span class="detalle__porcentaje">{{ meta.porcentaje }}%</span>
+        </div>
+
+        <div class="detalle__info">
+          <h3>{{ meta.nombre }}</h3>
+          <p>
+            <strong class="detalle__aportado">S/{{ meta.montoAportado | number: '1.0-2' }}</strong>
+            {{ 'metas.ahorradoDe' | translate }} S/{{ meta.montoObjetivo | number: '1.0-0' }}
+          </p>
+          <span class="detalle__limite">
+            <mat-icon>schedule</mat-icon>
+            {{ 'metas.limite' | translate }}:
+            {{ 'metas.mes.' + mes(meta.fechaObjetivo) | translate }}
+            {{ anio(meta.fechaObjetivo) }}
+          </span>
+        </div>
+
+        <span class="detalle__estado">
+          {{ 'metas.detalle.estado.' + meta.estado | translate }}
+        </span>
+      </div>
+
+      @if (meta.estado === 'ACTIVA') {
+        <div class="detalle__consejo">
+          <span class="detalle__consejo-icono"><mat-icon>star</mat-icon></span>
+          <p>{{ 'metas.consejoPrueba' | translate }}</p>
+        </div>
+      }
+    </article>
+    <div class="detalle__datos">
+      <div class="tarjeta detalle__dato">
+        <span>{{ 'metas.detalle.campo.estado' | translate }}</span>
+        <strong class="detalle__dato-estado">
+          {{ 'metas.detalle.estado.' + meta.estado | translate }}
+        </strong>
+      </div>
+
+      <div class="tarjeta detalle__dato">
+        <span>{{ 'metas.detalle.campo.montoAcumulado' | translate }}</span>
+        <strong>S/{{ meta.montoAportado | number: '1.0-2' }}</strong>
+      </div>
+
+      <div class="tarjeta detalle__dato">
+        <span>{{ 'metas.detalle.campo.montoObjetivo' | translate }}</span>
+        <strong>S/{{ meta.montoObjetivo | number: '1.0-2' }}</strong>
+      </div>
+
+      <div class="tarjeta detalle__dato">
+        <span>{{ 'metas.detalle.campo.fechaObjetivo' | translate }}</span>
+        <strong>{{ meta.fechaObjetivo | date: 'dd/MM/yyyy' }}</strong>
+      </div>
+    </div>
+
+    <div class="detalle__datos detalle__datos--dos">
+      <div class="tarjeta detalle__dato">
+        <span>{{ 'metas.detalle.campo.frecuencia' | translate }}</span>
+        <strong>{{ 'metas.detalle.frecuenciaValor.' + meta.frecuenciaAporte | translate }}</strong>
+      </div>
+
+      <div class="tarjeta detalle__dato">
+        <span>{{ 'metas.detalle.campo.descripcion' | translate }}</span>
+        <strong>{{ meta.descripcion ?? '—' }}</strong>
+      </div>
+    </div>
+    <h2 class="detalle__subtitulo">{{ 'metas.detalle.historial' | translate }}</h2>
+
+    <div class="tarjeta detalle__aportes">
+      @for (aporte of aportes; track aporte.idAporte) {
+        <div class="detalle__aporte">
+          <span>{{ aporte.fecha | date: 'dd/MM/yyyy' }}</span>
+
+          <div class="detalle__aporte-fin">
+            <strong class="detalle__monto">+S/{{ aporte.monto | number: '1.0-2' }}</strong>
+
+            @if (meta.estado === 'ACTIVA') {
+              <button
+                type="button"
+                class="detalle__eliminar"
+                [attr.aria-label]="'metas.detalle.eliminarAporte' | translate"
+              >
+                <mat-icon>delete</mat-icon>
+              </button>
+            }
+          </div>
+        </div>
+      }
+    </div>
+    <h2 class="detalle__subtitulo">{{ 'metas.detalle.proyeccion.titulo' | translate }}</h2>
+
+    <div class="tarjeta detalle__proyeccion">
+      @if (sesion.esPremium()) {
+        @if (proyeccion?.fechaEstimada; as fecha) {
+          <strong>{{ 'metas.detalle.proyeccion.fechaEstimada' | translate }}</strong>
+          <span>{{ fecha | date: 'dd/MM/yyyy' }}</span>
+        }
+      } @else {
+        <strong>{{ 'metas.detalle.proyeccion.soloPremium' | translate }}</strong>
+        <a
+          mat-flat-button
+          class="detalle__boton detalle__boton--aportar"
+          routerLink="/pasar-premium"
+        >
+          {{ 'metas.detalle.proyeccion.pasarPremium' | translate }}
+        </a>
+      }
+    </div>
+  </section>
+}

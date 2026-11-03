@@ -39,10 +39,14 @@
             </span>
           </div>
         </div>
-        <button mat-stroked-button class="meta-tarjeta__boton">
+        <a
+          mat-stroked-button
+          class="meta-tarjeta__boton"
+          [routerLink]="['/metas', destacada.idMeta]"
+        >
           <mat-icon>edit</mat-icon>
           {{ 'metas.verDetalle' | translate }}
-        </button>
+        </a>
       </div>
 
       <div class="meta-tarjeta__consejo">
@@ -96,9 +100,13 @@
                 </span>
               </div>
             </div>
-            <button mat-stroked-button class="meta-tarjeta__boton">
+            <a
+              mat-stroked-button
+              class="meta-tarjeta__boton"
+              [routerLink]="['/metas', meta.idMeta]"
+            >
               {{ 'metas.verDetalle' | translate }}
-            </button>
+            </a>
           </div>
         </article>
       }
@@ -121,6 +129,9 @@
               {{ 'metas.mes.' + mes(fecha) | translate }} {{ anio(fecha) }}
             </span>
           </div>
+          <a mat-stroked-button class="meta-final__boton" [routerLink]="['/metas', meta.idMeta]">
+            {{ 'metas.verDetalle' | translate }}
+          </a>
           <button
             type="button"
             class="meta-final__compartir"

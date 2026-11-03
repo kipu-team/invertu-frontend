@@ -62,7 +62,37 @@
       "pasarPremium": "Upgrade to Premium"
     },
     "detalle": {
-      "titulo": "Goal details"
+      "titulo": "Goal details",
+      "editar": "Edit goal",
+      "aportar": "Contribute",
+      "cancelar": "Cancel goal",
+      "estado": {
+        "ACTIVA": "Active",
+        "CUMPLIDA": "Completed",
+        "CANCELADA": "Cancelled"
+      },
+      "campo": {
+        "estado": "Status",
+        "montoAcumulado": "Amount saved",
+        "montoObjetivo": "Target amount",
+        "fechaObjetivo": "Target date",
+        "frecuencia": "Frequency",
+        "descripcion": "Description"
+      },
+      "frecuenciaValor": {
+        "DIARIA": "Daily",
+        "SEMANAL": "Weekly",
+        "MENSUAL": "Monthly",
+        "SIN_FRECUENCIA": "No frequency"
+      },
+      "historial": "Contribution history",
+      "eliminarAporte": "Delete contribution",
+      "proyeccion": {
+        "titulo": "Projection",
+        "fechaEstimada": "Estimated completion date",
+        "soloPremium": "Projection is available on Premium",
+        "pasarPremium": "Upgrade to Premium"
+      }
     }
   }
 }

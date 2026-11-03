@@ -1,17 +1,76 @@
-import { Component, ChangeDetectionStrategy } from '@angular/core';
-import { EnConstruccion } from '../../compartidos/en-construccion/en-construccion';
-
+import { Component, ChangeDetectionStrategy, OnInit, inject } from '@angular/core';
+import { ActivatedRoute, RouterLink } from '@angular/router';
+import { MetaService } from '../../../servicios/meta-service';
+import { MetaDetalle as MetaDetalleDatos, Proyeccion } from '../../../modelo/meta';
+import { SesionService } from '../../../servicios/sesion-service';
+import { TranslatePipe } from '@ngx-translate/core';
+import { MatButton } from '@angular/material/button';
+import { MatIcon } from '@angular/material/icon';
+import { DatePipe, DecimalPipe } from '@angular/common';
+import { MatProgressSpinner } from '@angular/material/progress-spinner';
+import { AporteService } from '../../../servicios/aporte-service';
+import { Aporte } from '../../../modelo/aporte';
 @Component({
   selector: 'app-meta-detalle',
-  imports: [EnConstruccion],
+  imports: [
+    TranslatePipe,
+    DatePipe,
+    DecimalPipe,
+    MatButton,
+    MatIcon,
+    MatProgressSpinner,
+    RouterLink,
+  ],
   templateUrl: './meta-detalle.html',
   changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './meta-detalle.css',
 })
-export class MetaDetalle {
-  pendientes = [
-    'Detalle con progreso, historial de aportes y proyección (Premium; Free → bloqueada, 75)',
-    'Registrar aporte (77–79)',
-    'Meta vencida: extender fecha (82–84) o cancelar (85–86); eliminar (87)',
-  ];
+export class MetaDetalle implements OnInit {
+  private route = inject(ActivatedRoute);
+  private metaService = inject(MetaService);
+  private aporteService = inject(AporteService);
+  sesion = inject(SesionService);
+  id = 0;
+  meta: MetaDetalleDatos | null = null;
+  aportes: Aporte[] = [];
+  proyeccion: Proyeccion | null = null;
+  ngOnInit() {
+    this.route.params.subscribe((data) => {
+      this.id = +data['id'];
+      this.cargarMeta();
+      this.cargarAportes();
+      this.cargarProyeccion();
+    });
+  }
+
+  private cargarMeta() {
+    this.metaService.obtenerDetalle(this.id).subscribe({
+      next: (data) => {
+        this.meta = data;
+      },
+    });
+  }
+  mes(fecha: string): string {
+    return fecha.slice(5, 7);
+  }
+
+  anio(fecha: string): string {
+    return fecha.slice(0, 4);
+  }
+
+  private cargarAportes() {
+    this.aporteService.listar(this.id).subscribe({
+      next: (data) => {
+        this.aportes = data;
+      },
+    });
+  }
+
+  private cargarProyeccion() {
+    this.metaService.obtenerProyeccion(this.id).subscribe({
+      next: (data) => {
+        this.proyeccion = data;
+      },
+    });
+  }
 }
