@@ -19,6 +19,8 @@ import { SesionService } from '../../../servicios/sesion-service';
 import { RegistroManual } from '../registro-manual/registro-manual';
 import { RegistroIa } from '../registro-ia/registro-ia';
 import { DetalleMovimiento } from '../detalle-movimiento/detalle-movimiento';
+import { MatDialog } from '@angular/material/dialog';
+import { ConfirmarDialogo } from '../../compartidos/confirmar-dialogo/confirmar-dialogo';
 
 @Component({
   selector: 'app-movimientos',
@@ -48,6 +50,7 @@ export class Movimientos implements OnInit {
   private movimientoService = inject(MovimientoService);
   private categoriaService = inject(CategoriaService);
   private fb = inject(FormBuilder);
+  private dialog = inject(MatDialog);
   sesion = inject(SesionService);
 
   // Panel lateral de registro de US-16
@@ -154,6 +157,30 @@ export class Movimientos implements OnInit {
     this.vistaRegistro = 'editar';
   }
 
+  // de la US13 para confirmar y eliminar
+  eliminarMovimiento(id: number): void {
+    this.dialog
+      .open(ConfirmarDialogo, {
+        data: {
+          titulo: 'movimientos.eliminar.titulo',
+          mensaje: 'movimientos.eliminar.mensaje',
+          textoConfirmar: 'movimientos.eliminar.confirmar',
+          peligro: true,
+        },
+      })
+      .afterClosed()
+      .subscribe((confirmo) => {
+        if (confirmo) {
+          this.movimientoService.eliminar(id).subscribe(() => {
+            if (this.idSeleccionado === id) {
+              this.idSeleccionado = null;
+              this.vistaRegistro = 'metodo';
+            }
+            this.cargar();
+          });
+        }
+      });
+  }
   alGuardarEdicion(): void {
     this.cargar();
     this.vistaRegistro = 'detalle';

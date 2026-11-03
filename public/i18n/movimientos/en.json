@@ -150,6 +150,11 @@
     "editar": {
       "titulo": "Edit transaction",
       "guardar": "Save changes"
+    },
+    "eliminar": {
+      "titulo": "Delete this transaction?",
+      "mensaje": "This action can't be undone and the amount will be removed from your totals.",
+      "confirmar": "Delete"
     }
   }
 }

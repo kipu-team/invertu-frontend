@@ -150,6 +150,11 @@
     "editar": {
       "titulo": "Editar movimiento",
       "guardar": "Guardar cambios"
+    },
+    "eliminar": {
+      "titulo": "¿Eliminar este movimiento?",
+      "mensaje": "Esta acción no se puede deshacer y el monto se descontará de tus totales.",
+      "confirmar": "Eliminar"
     }
   }
 }

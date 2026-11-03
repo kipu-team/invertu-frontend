@@ -55,6 +55,9 @@
       <mat-icon>edit</mat-icon>
       {{ 'movimientos.detalle.editar' | translate }}
     </button>
-    <!-- Aquí irá el botón Eliminar (US-13) -->
+    <button mat-stroked-button type="button" class="detalle__eliminar" (click)="eliminar.emit(detalle.idMovimiento)">
+      <mat-icon>delete</mat-icon>
+      {{ 'movimientos.eliminar.confirmar' | translate }}
+    </button>
   </div>
 }
