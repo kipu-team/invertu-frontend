@@ -87,7 +87,29 @@
     },
     "editar": {
       "titulo": "Edit profile",
-      "guardando": "Saving..."
+      "guardando": "Saving...",
+      "correo_bloqueado": "The institutional email address cannot be changed for academic security reasons."
+    },
+
+    "preferencias": {
+      "titulo": "Settings",
+      "subtitulo": "Customize your experience in InvertU.",
+      "apariencia": "Appearance",
+      "claro": "Light",
+      "oscuro": "Dark",
+      "sistema": "System",
+      "restaurar": "Restore default settings",
+      "idioma": "Language",
+      "escoger_idioma": "Choose a language",
+      "descripcion_idioma": "The app will be set to your chosen language.",
+      "restaurar_tema": "Restore default theme",
+      "notificaciones": "Notifications",
+      "alertas_gastos": "Spending alerts",
+      "desc_alertas": "Receive reminders when your daily expenses approach the planned limit.",
+      "recordatorios_metas": "Goal reminders",
+      "desc_recordatorios": "Notifications to contribute to your active savings goals.",
+      "actualizaciones": "System updates",
+      "desc_actualizaciones": "Information about new features and improvements in InvertU."
     }
   }
 }

@@ -1,0 +1,257 @@
+
+:host {
+  display: block;
+  width: 100%;
+  font-family: 'Inter Variable', system-ui, sans-serif;
+}
+
+.preferencias {
+  width: 100%;
+  color: #17241d;
+}
+
+.preferencias-titulo {
+  margin: 0 0 4px;
+  font-size: 26px;
+  font-weight: 700;
+  color: #17241d;
+}
+
+.preferencias-subtitulo {
+  margin: 0 0 18px;
+  font-size: 14px;
+  color: #5f6d66;
+}
+
+/* CARDS */
+
+.tarjeta-configuracion {
+  background: #ffffff;
+  color: #17241d;
+  border: 1px solid #e2e8e4;
+  border-radius: 12px;
+  padding: 18px 17px;
+  margin-bottom: 18px;
+  box-shadow: 0 1px 3px rgba(16, 40, 28, 0.08);
+}
+
+.seccion-titulo {
+  margin: 0 0 14px;
+  color: #13985c;
+  font-size: 14px;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+/* OPCIONES DE APARIENCIA */
+
+.opciones-tema {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 9px;
+  margin-bottom: 10px;
+}
+
+.opcion-tema {
+  height: 54px;
+  border: 1px solid #e2e8e4;
+  border-radius: 9px;
+  background: #edf3ef;
+  color: #5f6d66;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 3px;
+  cursor: pointer;
+  transition: border-color 0.2s, background-color 0.2s;
+}
+
+.opcion-tema mat-icon {
+  font-size: 17px;
+  width: 17px;
+  height: 17px;
+}
+
+.opcion-tema span {
+  font-size: 11px;
+  color: #17241d;
+}
+
+.opcion-tema:hover {
+  border-color: #13985c;
+}
+
+.opcion-tema.seleccionado {
+  border: 1.5px solid #13985c;
+  color: #13985c;
+  background: #e7f6ee;
+}
+
+.opcion-tema.seleccionado span {
+  color: #13985c;
+  font-weight: 600;
+}
+
+/* BOTONES PARA RESTAURAR */
+
+.boton-restaurar {
+  display: block;
+  padding: 3px 0;
+  border: none;
+  background: transparent;
+  color: #13985c;
+  font-size: 11px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.boton-restaurar:hover {
+  text-decoration: underline;
+}
+
+/* IDIOMA */
+
+.titulo-idioma {
+  margin-top: 14px;
+}
+
+.idioma-contenedor {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 15px;
+  margin: 18px 0 8px;
+}
+
+.idioma-informacion strong {
+  display: block;
+  font-size: 13px;
+  color: #17241d;
+}
+
+.idioma-informacion p {
+  margin: 3px 0 0;
+  font-size: 11px;
+  color: #5f6d66;
+}
+
+.selector-idioma {
+  min-width: 115px;
+  padding: 7px 12px;
+  border: none;
+  border-radius: 20px;
+  outline: none;
+  background: #13985c;
+  color: #ffffff;
+  font-size: 11px;
+  cursor: pointer;
+}
+
+/* NOTIFICACIONES */
+
+.tarjeta-notificaciones {
+  padding-top: 17px;
+  padding-bottom: 5px;
+}
+
+.notificacion {
+  min-height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 15px;
+  border-bottom: 1px solid #e2e8e4;
+  padding: 7px 0;
+}
+
+.notificacion:last-child {
+  border-bottom: none;
+}
+
+.notificacion-texto strong {
+  font-size: 12px;
+  font-weight: 600;
+  color: #17241d;
+}
+
+.notificacion-texto p {
+  margin: 3px 0 0;
+  font-size: 11px;
+  color: #5f6d66;
+}
+
+/* SWITCHES */
+
+.interruptor {
+  position: relative;
+  display: inline-block;
+  width: 38px;
+  height: 20px;
+  flex-shrink: 0;
+}
+
+.interruptor input {
+  width: 0;
+  height: 0;
+  opacity: 0;
+}
+
+.interruptor-deslizador {
+  position: absolute;
+  inset: 0;
+  background: #64748b;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.interruptor-deslizador::before {
+  content: '';
+  position: absolute;
+  width: 16px;
+  height: 16px;
+  left: 2px;
+  top: 2px;
+  background: #ffffff;
+  border-radius: 50%;
+  transition: 0.2s;
+}
+
+.interruptor input:checked + .interruptor-deslizador {
+  background: #13985c;
+}
+
+.interruptor input:checked + .interruptor-deslizador::before {
+  transform: translateX(18px);
+}
+
+.interruptor input:focus-visible + .interruptor-deslizador {
+  outline: 2px solid #13985c;
+  outline-offset: 3px;
+}
+
+/* RESPONSIVE */
+
+@media (max-width: 650px) {
+  .preferencias-titulo {
+    font-size: 22px;
+  }
+
+  .opciones-tema {
+    gap: 6px;
+  }
+
+  .opcion-tema {
+    height: 58px;
+  }
+
+  .idioma-contenedor {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .selector-idioma {
+    width: 100%;
+  }
+}

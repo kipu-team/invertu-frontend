@@ -50,6 +50,32 @@
       </select>
     </div>
 
+
+    <!-- CORREO ELECTRÓNICO -->
+    <div class="campo">
+      <label for="correo">
+        {{ 'perfil.campos.correo' | translate }}
+      </label>
+
+      <div class="correo-contenedor">
+        <input
+          id="correo"
+          name="correo"
+          type="email"
+          [value]="perfil.correo"
+          disabled
+        />
+
+        <mat-icon class="correo-candado">
+          lock
+        </mat-icon>
+      </div>
+
+      <small class="correo-ayuda">
+        {{ 'perfil.editar.correo_bloqueado' | translate }}
+      </small>
+    </div>
+
     @if (mensajeError) {
       <p class="mensaje-error">{{ mensajeError }}</p>
     }
