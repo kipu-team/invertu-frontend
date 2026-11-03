@@ -1,0 +1,15 @@
+.nueva__titulo {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.nueva__titulo mat-icon {
+  color: var(--verde-esmeralda);
+}
+
+.nueva__campo {
+  width: 100%;
+  min-width: 320px;
+  margin-top: 4px;
+}

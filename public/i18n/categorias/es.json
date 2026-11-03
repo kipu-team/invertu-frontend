@@ -1,5 +1,28 @@
 {
   "categorias": {
-    "titulo": "Categorías"
+    "titulo": "Categorías",
+    "etiqueta": "Categorías",
+    "crear": "Crear categoría",
+    "quitar": "Eliminar {{nombre}}",
+    "aviso": {
+      "crear": "Crear categorías personalizadas es una función Premium.",
+      "eliminar": "Eliminar categorías personalizadas es una función Premium."
+    },
+    "eliminar": {
+      "titulo": "¿Eliminar esta categoría?",
+      "mensaje": "Ya no aparecerá para nuevos movimientos. Los movimientos que ya la usan no cambian.",
+      "confirmar": "Eliminar"
+    },
+    "nueva": {
+      "titulo": "Nueva categoría",
+      "nombre": "Nombre de la categoría",
+      "ayuda": "Asigna un nombre claro y representativo para agrupar tus gastos.",
+      "cancelar": "Cancelar",
+      "crear": "Crear",
+      "errores": {
+        "nombre": "Ingresa un nombre",
+        "duplicada": "Ya tienes una categoría con ese nombre"
+      }
+    }
   }
 }

@@ -102,7 +102,7 @@
       "exitoIngresoDetalle": "Your income of S/ {{monto}} has been recorded.",
       "exitoGastoDetalle": "Your expense of S/ {{monto}} has been recorded.",
       "registrarOtro": "Record another",
-      "verMovimientos": "View transactions",
+      "verMovimientos": "Done",
       "errores": {
         "descripcion": "Enter a description",
         "fecha": "Enter a date",
