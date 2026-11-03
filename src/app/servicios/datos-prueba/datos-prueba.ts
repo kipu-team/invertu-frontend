@@ -43,6 +43,13 @@ export const PERFIL: Perfil = {
   plan: { precioMensual: 0, maxMetasActivas: 2, maxRecordatorios: 2 },
 };
 
+export const UNIVERSIDADES: string[] = [
+  'Universidad Nacional Mayor de San Marcos',
+  'Universidad Nacional de Ingeniería',
+  'Pontificia Universidad Católica del Perú',
+  'Universidad Peruana de Ciencias Aplicadas',
+];
+
 export const PLAN_PREMIUM = { precioMensual: 9.9, maxMetasActivas: null, maxRecordatorios: null };
 export const PLAN_FREE = { precioMensual: 0, maxMetasActivas: 2, maxRecordatorios: 2 };
 

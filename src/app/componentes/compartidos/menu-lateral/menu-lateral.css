@@ -1,9 +1,11 @@
 :host {
   display: block;
+  height: 100%;
 }
 
 .menu {
   height: 100%;
+  min-height: 100vh;
   box-sizing: border-box;
   padding: 24px 16px;
   background: linear-gradient(180deg, #16a063 0%, var(--verde-oscuro) 100%);
