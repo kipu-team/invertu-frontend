@@ -41,6 +41,18 @@
       "exito": "Meta actualizada correctamente",
       "verDetalle": "Ver detalle"
     },
+    "vencida": {
+      "etiqueta": "Vencida",
+      "aviso": "Tu meta ha vencido. Puedes extender la fecha límite para seguir ahorrando.",
+      "extender": "Extender fecha",
+      "actualizada": "Fecha actualizada. ¡Sigue ahorrando!"
+    },
+    "extender": {
+      "titulo": "Extender fecha límite",
+      "subtitulo": "Elige una nueva fecha para alcanzar tu meta.",
+      "fecha": "Nueva fecha límite",
+      "confirmar": "Confirmar"
+    },
     "registrar": {
       "titulo": "Crear nueva meta",
       "subtitulo": "Configura un plan de ahorro inteligente adaptado a tu presupuesto estudiantil.",

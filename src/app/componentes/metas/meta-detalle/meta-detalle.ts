@@ -13,6 +13,7 @@ import { Aporte } from '../../../modelo/aporte';
 import { MatDialog } from '@angular/material/dialog';
 import { AporteDialogo } from '../aporte-dialogo/aporte-dialogo';
 import { MetaCumplidaDialogo } from '../meta-cumplida-dialogo/meta-cumplida-dialogo';
+import { ExtenderFechaDialogo } from '../extender-fecha-dialogo/extender-fecha-dialogo';
 @Component({
   selector: 'app-meta-detalle',
   imports: [
@@ -91,6 +92,20 @@ export class MetaDetalle implements OnInit {
         if (aporte.estadoMeta === 'CUMPLIDA') {
           this.dialog.open(MetaCumplidaDialogo);
         }
+      });
+  }
+
+  extender() {
+    if (!this.meta) return;
+    this.dialog
+      .open<ExtenderFechaDialogo, void, string>(ExtenderFechaDialogo)
+      .afterClosed()
+      .subscribe((fecha) => {
+        if (!fecha) return;
+        this.metaService.extenderFecha(this.id, { nuevaFechaObjetivo: fecha }).subscribe(() => {
+          this.cargarMeta();
+          this.cargarProyeccion();
+        });
       });
   }
 }
