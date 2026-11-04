@@ -15,33 +15,49 @@
           <p>{{ meta.nombre }}</p>
         </div>
       </div>
-      @if (meta.estado === 'ACTIVA') {
+      @if (meta.estado === 'ACTIVA' || meta.estado === 'CANCELADA') {
         <div class="detalle__acciones">
-          @if (meta.vencida) {
-            <button mat-stroked-button class="detalle__boton" type="button" (click)="extender()">
-              <mat-icon>event</mat-icon>
-              {{ 'metas.vencida.extender' | translate }}
+          @if (meta.estado === 'ACTIVA') {
+            @if (meta.vencida) {
+              <button mat-stroked-button class="detalle__boton" type="button" (click)="extender()">
+                <mat-icon>event</mat-icon>
+                {{ 'metas.vencida.extender' | translate }}
+              </button>
+            } @else {
+              <button
+                mat-stroked-button
+                class="detalle__boton"
+                [routerLink]="['/metas/registrar', meta.idMeta]"
+              >
+                <mat-icon>edit</mat-icon>
+                {{ 'metas.detalle.editar' | translate }}
+              </button>
+            }
+            <button
+              mat-flat-button
+              class="detalle__boton detalle__boton--aportar"
+              (click)="aportar()"
+            >
+              {{ 'metas.detalle.aportar' | translate }}
+            </button>
+            <button
+              mat-stroked-button
+              class="detalle__boton detalle__boton--cancelar"
+              type="button"
+              (click)="cancelar()"
+            >
+              {{ 'metas.detalle.cancelar' | translate }}
             </button>
           } @else {
             <button
               mat-stroked-button
-              class="detalle__boton"
-              [routerLink]="['/metas/registrar', meta.idMeta]"
+              class="detalle__boton detalle__boton--reactivar"
+              type="button"
+              (click)="reactivar()"
             >
-              <mat-icon>edit</mat-icon>
-              {{ 'metas.detalle.editar' | translate }}
+              {{ 'metas.detalle.reactivar' | translate }}
             </button>
           }
-          <button
-            mat-flat-button
-            class="detalle__boton detalle__boton--aportar"
-            (click)="aportar()"
-          >
-            {{ 'metas.detalle.aportar' | translate }}
-          </button>
-          <button mat-stroked-button class="detalle__boton detalle__boton--cancelar">
-            {{ 'metas.detalle.cancelar' | translate }}
-          </button>
         </div>
       }
     </header>
@@ -72,7 +88,10 @@
           </span>
         </div>
 
-        <span class="detalle__estado">
+        <span
+          class="detalle__estado"
+          [class.detalle__estado--cancelada]="meta.estado === 'CANCELADA'"
+        >
           {{ 'metas.detalle.estado.' + meta.estado | translate }}
         </span>
       </div>
@@ -87,7 +106,10 @@
     <div class="detalle__datos">
       <div class="tarjeta detalle__dato">
         <span>{{ 'metas.detalle.campo.estado' | translate }}</span>
-        <strong class="detalle__dato-estado">
+        <strong
+          class="detalle__dato-estado"
+          [class.detalle__dato-estado--cancelada]="meta.estado === 'CANCELADA'"
+        >
           {{ 'metas.detalle.estado.' + meta.estado | translate }}
         </strong>
       </div>

@@ -151,9 +151,12 @@
     <div class="metas__finalizadas">
       @for (meta of finalizadas; track meta.idMeta) {
         @let fecha = meta.fechaCumplimiento ?? meta.fechaObjetivo;
-        <article class="tarjeta meta-final">
+        <article
+          class="tarjeta meta-final"
+          [class.meta-final--cancelada]="meta.estado === 'CANCELADA'"
+        >
           <span class="meta-final__icono">
-            <mat-icon>check_circle</mat-icon>
+            <mat-icon>{{ meta.estado === 'CANCELADA' ? 'cancel' : 'check_circle' }}</mat-icon>
           </span>
           <div class="meta-final__info">
             <h3>{{ meta.nombre }}</h3>

@@ -3,7 +3,7 @@ import { ActivatedRoute, RouterLink } from '@angular/router';
 import { MetaService } from '../../../servicios/meta-service';
 import { MetaDetalle as MetaDetalleDatos, Proyeccion } from '../../../modelo/meta';
 import { SesionService } from '../../../servicios/sesion-service';
-import { TranslatePipe } from '@ngx-translate/core';
+import { TranslatePipe, TranslateService } from '@ngx-translate/core';
 import { MatButton, MatIconButton } from '@angular/material/button';
 import { MatIcon } from '@angular/material/icon';
 import { DatePipe, DecimalPipe } from '@angular/common';
@@ -14,6 +14,10 @@ import { MatDialog } from '@angular/material/dialog';
 import { AporteDialogo } from '../aporte-dialogo/aporte-dialogo';
 import { MetaCumplidaDialogo } from '../meta-cumplida-dialogo/meta-cumplida-dialogo';
 import { ExtenderFechaDialogo } from '../extender-fecha-dialogo/extender-fecha-dialogo';
+import {
+  ConfirmarDialogo,
+  DatosConfirmacion,
+} from '../../compartidos/confirmar-dialogo/confirmar-dialogo';
 @Component({
   selector: 'app-meta-detalle',
   imports: [
@@ -36,6 +40,7 @@ export class MetaDetalle implements OnInit {
   private aporteService = inject(AporteService);
   sesion = inject(SesionService);
   private dialog = inject(MatDialog);
+  private traductor = inject(TranslateService);
   id = 0;
   meta: MetaDetalleDatos | null = null;
   aportes: Aporte[] = [];
@@ -107,5 +112,28 @@ export class MetaDetalle implements OnInit {
           this.cargarProyeccion();
         });
       });
+  }
+
+  cancelar() {
+    if (!this.meta) return;
+    this.dialog
+      .open<ConfirmarDialogo, DatosConfirmacion, boolean>(ConfirmarDialogo, {
+        data: {
+          titulo: this.traductor.instant('metas.cancelar.titulo', { nombre: this.meta.nombre }),
+          mensaje: 'metas.cancelar.mensaje',
+          textoCancelar: 'metas.cancelar.volver',
+          textoConfirmar: 'metas.detalle.cancelar',
+          peligro: true,
+        },
+      })
+      .afterClosed()
+      .subscribe((confirmo) => {
+        if (!confirmo) return;
+        this.metaService.cancelar(this.id).subscribe(() => this.cargarMeta());
+      });
+  }
+
+  reactivar() {
+    this.metaService.reactivar(this.id).subscribe(() => this.cargarMeta());
   }
 }

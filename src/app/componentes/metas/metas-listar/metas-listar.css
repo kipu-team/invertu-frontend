@@ -347,6 +347,12 @@
   font-weight: 600;
 }
 
+.meta-final--cancelada .meta-final__icono,
+.meta-final--cancelada .meta-final__estado {
+  background: color-mix(in srgb, var(--gasto) 12%, var(--superficie));
+  color: var(--gasto);
+}
+
 .meta-final__compartir {
   display: grid;
   place-items: center;

@@ -64,6 +64,11 @@
   color: var(--gasto);
 }
 
+.detalle__boton--reactivar {
+  border-color: var(--verde-esmeralda);
+  color: var(--verde-esmeralda);
+}
+
 .detalle__progreso {
   margin-bottom: 16px;
   padding: 20px 22px;
@@ -215,6 +220,15 @@
 .detalle__dato strong {
   font-size: 0.8125rem;
   font-weight: 600;
+}
+
+.detalle__estado--cancelada {
+  background: color-mix(in srgb, var(--gasto) 12%, var(--superficie));
+  color: var(--gasto);
+}
+
+.detalle__dato-estado--cancelada {
+  color: var(--gasto);
 }
 
 .detalle__dato-estado {
