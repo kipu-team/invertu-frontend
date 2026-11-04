@@ -49,14 +49,27 @@
             </span>
           </div>
         </div>
-        <a
-          mat-stroked-button
-          class="meta-tarjeta__boton"
-          [routerLink]="['/metas', destacada.idMeta]"
-        >
-          <mat-icon>edit</mat-icon>
-          {{ 'metas.verDetalle' | translate }}
-        </a>
+        <div class="meta-tarjeta__acciones">
+          <a
+            mat-stroked-button
+            class="meta-tarjeta__boton"
+            [routerLink]="['/metas', destacada.idMeta]"
+          >
+            <mat-icon>edit</mat-icon>
+            {{ 'metas.verDetalle' | translate }}
+          </a>
+          @if (destacada.montoAportado === 0) {
+            <button
+              type="button"
+              mat-stroked-button
+              class="meta-tarjeta__boton meta-tarjeta__boton--eliminar"
+              (click)="eliminar(destacada)"
+            >
+              <mat-icon>delete</mat-icon>
+              {{ 'metas.eliminar.confirmar' | translate }}
+            </button>
+          }
+        </div>
       </div>
 
       @if (destacada.vencida || actualizadaId === destacada.idMeta) {

@@ -58,6 +58,12 @@
       "mensaje": "You won't be able to record contributions while it is cancelled.",
       "volver": "Go back"
     },
+    "eliminar": {
+      "titulo": "Delete the goal {{nombre}}?",
+      "mensaje": "This action cannot be undone.",
+      "confirmar": "Delete",
+      "boton": "Delete goal"
+    },
     "registrar": {
       "titulo": "Create new goal",
       "subtitulo": "Set up a smart savings plan adapted to your student budget.",

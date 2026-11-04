@@ -1,6 +1,6 @@
 import { Component, ChangeDetectionStrategy, OnInit, inject } from '@angular/core';
 import { DecimalPipe, NgTemplateOutlet } from '@angular/common';
-import { TranslatePipe } from '@ngx-translate/core';
+import { TranslatePipe, TranslateService } from '@ngx-translate/core';
 import { MatButton } from '@angular/material/button';
 import { MatIcon } from '@angular/material/icon';
 import { MatProgressSpinner } from '@angular/material/progress-spinner';
@@ -9,6 +9,10 @@ import { MetaResumen } from '../../../modelo/meta';
 import { RouterLink } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
 import { ExtenderFechaDialogo } from '../extender-fecha-dialogo/extender-fecha-dialogo';
+import {
+  ConfirmarDialogo,
+  DatosConfirmacion,
+} from '../../compartidos/confirmar-dialogo/confirmar-dialogo';
 
 @Component({
   selector: 'app-metas-listar',
@@ -28,6 +32,7 @@ import { ExtenderFechaDialogo } from '../extender-fecha-dialogo/extender-fecha-d
 export class MetasListar implements OnInit {
   private metaService = inject(MetaService);
   private dialog = inject(MatDialog);
+  private traductor = inject(TranslateService);
 
   destacada: MetaResumen | null = null;
   otras: MetaResumen[] = [];
@@ -60,6 +65,23 @@ export class MetasListar implements OnInit {
           this.actualizadaId = meta.idMeta;
           this.cargar();
         });
+      });
+  }
+
+  eliminar(meta: MetaResumen): void {
+    this.dialog
+      .open<ConfirmarDialogo, DatosConfirmacion, boolean>(ConfirmarDialogo, {
+        data: {
+          titulo: this.traductor.instant('metas.eliminar.titulo', { nombre: meta.nombre }),
+          mensaje: 'metas.eliminar.mensaje',
+          textoConfirmar: 'metas.eliminar.confirmar',
+          peligro: true,
+        },
+      })
+      .afterClosed()
+      .subscribe((confirmo) => {
+        if (!confirmo) return;
+        this.metaService.eliminar(meta.idMeta).subscribe(() => this.cargar());
       });
   }
 
