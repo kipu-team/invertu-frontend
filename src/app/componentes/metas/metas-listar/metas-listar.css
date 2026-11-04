@@ -177,6 +177,17 @@
   font-size: 14px;
 }
 
+.meta-tarjeta__acciones {
+  display: flex;
+  flex: none;
+  gap: 10px;
+}
+
+.meta-tarjeta__boton--eliminar {
+  border-color: var(--gasto);
+  color: var(--gasto);
+}
+
 .meta-tarjeta__consejo {
   display: flex;
   align-items: center;

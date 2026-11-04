@@ -58,6 +58,17 @@
               {{ 'metas.detalle.reactivar' | translate }}
             </button>
           }
+          @if (aportes.length === 0) {
+            <button
+              mat-stroked-button
+              class="detalle__boton detalle__boton--cancelar"
+              type="button"
+              (click)="eliminar()"
+            >
+              <mat-icon>delete</mat-icon>
+              {{ 'metas.eliminar.boton' | translate }}
+            </button>
+          }
         </div>
       }
     </header>

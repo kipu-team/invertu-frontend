@@ -58,6 +58,12 @@
       "mensaje": "Ya no podrás registrar aportes mientras esté cancelada.",
       "volver": "Volver"
     },
+    "eliminar": {
+      "titulo": "¿Eliminar la meta {{nombre}}?",
+      "mensaje": "Esta acción no se puede deshacer.",
+      "confirmar": "Eliminar",
+      "boton": "Eliminar meta"
+    },
     "registrar": {
       "titulo": "Crear nueva meta",
       "subtitulo": "Configura un plan de ahorro inteligente adaptado a tu presupuesto estudiantil.",

@@ -1,5 +1,5 @@
 import { Component, ChangeDetectionStrategy, OnInit, inject } from '@angular/core';
-import { ActivatedRoute, RouterLink } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { MetaService } from '../../../servicios/meta-service';
 import { MetaDetalle as MetaDetalleDatos, Proyeccion } from '../../../modelo/meta';
 import { SesionService } from '../../../servicios/sesion-service';
@@ -36,6 +36,7 @@ import {
 })
 export class MetaDetalle implements OnInit {
   private route = inject(ActivatedRoute);
+  private router = inject(Router);
   private metaService = inject(MetaService);
   private aporteService = inject(AporteService);
   sesion = inject(SesionService);
@@ -135,5 +136,23 @@ export class MetaDetalle implements OnInit {
 
   reactivar() {
     this.metaService.reactivar(this.id).subscribe(() => this.cargarMeta());
+  }
+
+  eliminar() {
+    if (!this.meta) return;
+    this.dialog
+      .open<ConfirmarDialogo, DatosConfirmacion, boolean>(ConfirmarDialogo, {
+        data: {
+          titulo: this.traductor.instant('metas.eliminar.titulo', { nombre: this.meta.nombre }),
+          mensaje: 'metas.eliminar.mensaje',
+          textoConfirmar: 'metas.eliminar.confirmar',
+          peligro: true,
+        },
+      })
+      .afterClosed()
+      .subscribe((confirmo) => {
+        if (!confirmo) return;
+        this.metaService.eliminar(this.id).subscribe(() => this.router.navigate(['/metas']));
+      });
   }
 }
