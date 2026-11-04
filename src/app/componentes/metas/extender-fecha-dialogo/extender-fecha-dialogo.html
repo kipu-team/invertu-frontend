@@ -1,0 +1,28 @@
+<h2 mat-dialog-title>{{ 'metas.extender.titulo' | translate }}</h2>
+<p class="extender__subtitulo">{{ 'metas.extender.subtitulo' | translate }}</p>
+
+<mat-dialog-content>
+  <form class="extender" [formGroup]="formulario" (ngSubmit)="confirmar()">
+    <label>
+      <span class="etiqueta">{{ 'metas.extender.fecha' | translate }}</span>
+      <input
+        type="date"
+        formControlName="fecha"
+        [min]="manana"
+        [class.invalido]="fecha.touched && fecha.invalid"
+      />
+      @if (fecha.touched && fecha.invalid) {
+        <small class="error">{{ 'metas.registrar.fechaPasada' | translate }}</small>
+      }
+    </label>
+
+    <div class="extender__acciones">
+      <button type="button" mat-stroked-button class="extender__cancelar" mat-dialog-close>
+        {{ 'metas.registrar.cancelar' | translate }}
+      </button>
+      <button type="submit" mat-flat-button class="extender__confirmar">
+        {{ 'metas.extender.confirmar' | translate }}
+      </button>
+    </div>
+  </form>
+</mat-dialog-content>

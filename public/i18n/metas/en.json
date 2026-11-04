@@ -41,6 +41,18 @@
       "exito": "Goal updated successfully",
       "verDetalle": "View details"
     },
+    "vencida": {
+      "etiqueta": "Overdue",
+      "aviso": "Your goal is overdue. You can extend the deadline to keep saving.",
+      "extender": "Extend date",
+      "actualizada": "Date updated. Keep saving!"
+    },
+    "extender": {
+      "titulo": "Extend deadline",
+      "subtitulo": "Choose a new date to reach your goal.",
+      "fecha": "New deadline",
+      "confirmar": "Confirm"
+    },
     "registrar": {
       "titulo": "Create new goal",
       "subtitulo": "Set up a smart savings plan adapted to your student budget.",

@@ -24,14 +24,24 @@
             <span class="meta-tarjeta__porcentaje">{{ destacada.porcentaje }}%</span>
           </div>
           <div class="meta-tarjeta__info">
-            <h3>{{ destacada.nombre }}</h3>
+            <h3>
+              {{ destacada.nombre }}
+              @if (destacada.vencida) {
+                <span class="meta-tarjeta__vencida">{{
+                  'metas.vencida.etiqueta' | translate
+                }}</span>
+              }
+            </h3>
             <p>
               <strong class="meta-tarjeta__aportado"
                 >S/{{ destacada.montoAportado | number: '1.0-2' }}</strong
               >
               {{ 'metas.ahorradoDe' | translate }} S/{{ destacada.montoObjetivo | number: '1.0-0' }}
             </p>
-            <span class="meta-tarjeta__limite">
+            <span
+              class="meta-tarjeta__limite"
+              [class.meta-tarjeta__limite--vencida]="destacada.vencida"
+            >
               <mat-icon>schedule</mat-icon>
               {{ 'metas.limite' | translate }}:
               {{ 'metas.mes.' + mes(destacada.fechaObjetivo) | translate }}
@@ -49,10 +59,17 @@
         </a>
       </div>
 
-      <div class="meta-tarjeta__consejo">
-        <span class="meta-tarjeta__consejo-icono"><mat-icon>star</mat-icon></span>
-        <p>{{ 'metas.consejoPrueba' | translate }}</p>
-      </div>
+      @if (destacada.vencida || actualizadaId === destacada.idMeta) {
+        <ng-container
+          [ngTemplateOutlet]="aviso"
+          [ngTemplateOutletContext]="{ $implicit: destacada }"
+        />
+      } @else {
+        <div class="meta-tarjeta__consejo">
+          <span class="meta-tarjeta__consejo-icono"><mat-icon>star</mat-icon></span>
+          <p>{{ 'metas.consejoPrueba' | translate }}</p>
+        </div>
+      }
     </article>
   } @else {
     <section class="tarjeta metas__vacio">
@@ -85,14 +102,24 @@
                 <span class="meta-tarjeta__porcentaje">{{ meta.porcentaje }}%</span>
               </div>
               <div class="meta-tarjeta__info">
-                <h3>{{ meta.nombre }}</h3>
+                <h3>
+                  {{ meta.nombre }}
+                  @if (meta.vencida) {
+                    <span class="meta-tarjeta__vencida">{{
+                      'metas.vencida.etiqueta' | translate
+                    }}</span>
+                  }
+                </h3>
                 <p>
                   <strong class="meta-tarjeta__aportado"
                     >S/{{ meta.montoAportado | number: '1.0-2' }}</strong
                   >
                   {{ 'metas.de' | translate }} S/{{ meta.montoObjetivo | number: '1.0-0' }}
                 </p>
-                <span class="meta-tarjeta__limite">
+                <span
+                  class="meta-tarjeta__limite"
+                  [class.meta-tarjeta__limite--vencida]="meta.vencida"
+                >
                   <mat-icon>schedule</mat-icon>
                   {{ 'metas.limite' | translate }}:
                   {{ 'metas.mes.' + mes(meta.fechaObjetivo) | translate }}
@@ -108,6 +135,12 @@
               {{ 'metas.verDetalle' | translate }}
             </a>
           </div>
+          @if (meta.vencida || actualizadaId === meta.idMeta) {
+            <ng-container
+              [ngTemplateOutlet]="aviso"
+              [ngTemplateOutletContext]="{ $implicit: meta }"
+            />
+          }
         </article>
       }
     </div>
@@ -144,3 +177,20 @@
     </div>
   }
 </section>
+
+<ng-template #aviso let-meta>
+  @if (meta.vencida) {
+    <div class="meta-aviso meta-aviso--vencida">
+      <mat-icon>warning_amber</mat-icon>
+      <p>{{ 'metas.vencida.aviso' | translate }}</p>
+      <button type="button" mat-stroked-button class="meta-aviso__boton" (click)="extender(meta)">
+        {{ 'metas.vencida.extender' | translate }}
+      </button>
+    </div>
+  } @else {
+    <div class="meta-aviso meta-aviso--exito">
+      <mat-icon>check_circle</mat-icon>
+      <p>{{ 'metas.vencida.actualizada' | translate }}</p>
+    </div>
+  }
+</ng-template>

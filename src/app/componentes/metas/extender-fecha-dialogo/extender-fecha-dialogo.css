@@ -1,0 +1,84 @@
+h2 {
+  margin: 0;
+  padding: 20px 24px 4px;
+  font-size: 1.05rem;
+  font-weight: 600;
+}
+
+.extender__subtitulo {
+  margin: 0;
+  padding: 0 24px 16px;
+  border-bottom: 1px solid var(--borde);
+  font-size: 0.75rem;
+  color: var(--texto-suave);
+}
+
+.extender {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  padding-top: 16px;
+}
+
+label {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.etiqueta {
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: var(--texto);
+}
+
+input {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 10px 12px;
+  border: 1px solid var(--borde);
+  border-radius: 8px;
+  background: var(--superficie);
+  color: var(--texto);
+  font: inherit;
+  font-size: 0.8125rem;
+}
+
+input:focus {
+  outline: none;
+  border-color: var(--verde-esmeralda);
+}
+
+input.invalido {
+  border-color: #dc2626;
+}
+
+.error {
+  color: #dc2626;
+  font-size: 0.72rem;
+  font-weight: 600;
+}
+
+.extender__acciones {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+}
+
+.extender__cancelar {
+  height: 36px;
+  border: 1px solid var(--verde-oscuro);
+  border-radius: 8px;
+  color: var(--verde-oscuro);
+  font-size: 0.78rem;
+  font-weight: 600;
+}
+
+.extender__confirmar {
+  --mat-button-filled-container-color: var(--verde-esmeralda);
+  --mat-button-filled-label-text-color: #fff;
+  height: 36px;
+  border-radius: 8px;
+  font-size: 0.78rem;
+  font-weight: 700;
+}

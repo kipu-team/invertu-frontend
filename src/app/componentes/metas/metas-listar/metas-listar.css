@@ -211,6 +211,78 @@
   font-size: 16px;
 }
 
+.meta-tarjeta__vencida {
+  display: inline-block;
+  margin-left: 8px;
+  padding: 2px 8px;
+  border-radius: 6px;
+  background: var(--dorado-claro);
+  color: #8a6100;
+  font-size: 0.656rem;
+  font-weight: 600;
+  vertical-align: middle;
+}
+
+.meta-tarjeta__limite--vencida {
+  background: var(--dorado-claro);
+  color: #8a6100;
+}
+
+.meta-aviso {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px;
+  margin-top: 16px;
+  padding: 12px 14px;
+  border-radius: 8px;
+}
+
+.meta-aviso p {
+  flex: 1;
+  min-width: 200px;
+  margin: 0;
+  font-size: 0.75rem;
+  color: var(--texto);
+}
+
+.meta-aviso mat-icon {
+  flex: none;
+  width: 20px;
+  height: 20px;
+  font-size: 20px;
+}
+
+.meta-aviso--vencida {
+  border: 1px solid color-mix(in srgb, var(--dorado) 35%, var(--dorado-claro));
+  background: var(--dorado-claro);
+}
+
+.meta-aviso--vencida mat-icon {
+  color: #8a6100;
+}
+
+.meta-aviso--exito {
+  border: 1px solid color-mix(in srgb, var(--verde-esmeralda) 18%, var(--verde-claro));
+  background: var(--verde-claro);
+}
+
+.meta-aviso--exito mat-icon {
+  color: var(--verde-esmeralda);
+}
+
+.meta-aviso__boton {
+  flex: none;
+  white-space: nowrap;
+  height: 28px;
+  padding: 0 12px;
+  border: 1px solid var(--dorado);
+  border-radius: 8px;
+  color: #8a6100;
+  font-size: 0.72rem;
+  font-weight: 600;
+}
+
 .metas__otras {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
