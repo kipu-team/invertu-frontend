@@ -34,6 +34,13 @@
       "11": "Nov",
       "12": "Dec"
     },
+    "editar": {
+      "titulo": "Edit goal",
+      "subtitulo": "Set up a smart savings plan adapted to your student budget.",
+      "guardar": "Save changes",
+      "exito": "Goal updated successfully",
+      "verDetalle": "View details"
+    },
     "registrar": {
       "titulo": "Create new goal",
       "subtitulo": "Set up a smart savings plan adapted to your student budget.",

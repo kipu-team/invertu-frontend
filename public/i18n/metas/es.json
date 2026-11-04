@@ -34,6 +34,13 @@
       "11": "Nov",
       "12": "Dic"
     },
+    "editar": {
+      "titulo": "Editar meta",
+      "subtitulo": "Configura un plan de ahorro inteligente adaptado a tu presupuesto estudiantil.",
+      "guardar": "Guardar cambios",
+      "exito": "Meta actualizada correctamente",
+      "verDetalle": "Ver detalle"
+    },
     "registrar": {
       "titulo": "Crear nueva meta",
       "subtitulo": "Configura un plan de ahorro inteligente adaptado a tu presupuesto estudiantil.",
