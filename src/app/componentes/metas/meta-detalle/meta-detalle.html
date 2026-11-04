@@ -17,7 +17,11 @@
       </div>
       @if (meta.estado === 'ACTIVA') {
         <div class="detalle__acciones">
-          <button mat-stroked-button class="detalle__boton">
+          <button
+            mat-stroked-button
+            class="detalle__boton"
+            [routerLink]="['/metas/registrar', meta.idMeta]"
+          >
             <mat-icon>edit</mat-icon>
             {{ 'metas.detalle.editar' | translate }}
           </button>
