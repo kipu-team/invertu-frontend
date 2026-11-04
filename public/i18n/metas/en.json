@@ -53,6 +53,11 @@
       "fecha": "New deadline",
       "confirmar": "Confirm"
     },
+    "cancelar": {
+      "titulo": "Cancel the goal {{nombre}}?",
+      "mensaje": "You won't be able to record contributions while it is cancelled.",
+      "volver": "Go back"
+    },
     "registrar": {
       "titulo": "Create new goal",
       "subtitulo": "Set up a smart savings plan adapted to your student budget.",
@@ -81,6 +86,7 @@
       "pasarPremium": "Upgrade to Premium"
     },
     "detalle": {
+      "reactivar": "Reactivate goal",
       "volver": "Back to my goals",
       "titulo": "Goal details",
       "editar": "Edit goal",

@@ -53,6 +53,11 @@
       "fecha": "Nueva fecha límite",
       "confirmar": "Confirmar"
     },
+    "cancelar": {
+      "titulo": "¿Cancelar la meta {{nombre}}?",
+      "mensaje": "Ya no podrás registrar aportes mientras esté cancelada.",
+      "volver": "Volver"
+    },
     "registrar": {
       "titulo": "Crear nueva meta",
       "subtitulo": "Configura un plan de ahorro inteligente adaptado a tu presupuesto estudiantil.",
@@ -81,6 +86,7 @@
       "pasarPremium": "Pasar a Premium"
     },
     "detalle": {
+      "reactivar": "Reactivar meta",
       "volver": "Volver a mis metas",
       "titulo": "Detalle de meta",
       "editar": "Editar meta",
