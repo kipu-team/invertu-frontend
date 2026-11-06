@@ -291,6 +291,16 @@ export const SUSCRIPCIONES: SuscripcionDetalle[] = [
   },
 ];
 
+export const EVENTOS_PRUEBA = [
+  { id: '1', titulo: 'Aporte Laptop', tipo: 'META', fecha: '2026-11-06' },
+  { id: '2', titulo: 'Internet', tipo: 'SUSCRIPCION', monto: 120.00, estado: 'Próx. Renovación: 25 dic', fecha: '2026-11-06' },
+  { id: '3', titulo: 'Netflix', tipo: 'SUSCRIPCION', fecha: '2026-11-08' },
+  { id: '4', titulo: 'Laptop', tipo: 'META', fecha: '2026-11-16' },
+  { id: '5', titulo: 'Deuda Universitaria', tipo: 'DEUDA', monto: 450.00, estado: 'Pendiente', fecha: '2026-11-26' },
+  { id: '6', titulo: 'Amazon', tipo: 'SUSCRIPCION', fecha: '2026-11-27' },
+  { id: '7', titulo: 'Laptop', tipo: 'META', fecha: '2026-11-30' }
+];
+
 export const RESPUESTAS_CHATBOT: string[] = [
   'Este mes llevas gastado S/ 147.40. Tu categoría con más gasto es Universidad (S/ 65.00).',
   'Si mantienes tus aportes mensuales, cumplirías tu meta "Fondo de emergencia" en unos 4 meses.',
