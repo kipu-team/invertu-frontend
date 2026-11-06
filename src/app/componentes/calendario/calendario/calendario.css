@@ -1,10 +1,11 @@
 .calendario-contenedor {
-  display: block;
+  display: flex;
+  gap: 24px;
   padding: 20px;
 }
 
 .calendario-principal {
-  width: 100%;
+  flex: 1;
 }
 
 .calendario-titulo-texto {
@@ -12,6 +13,121 @@
   font-weight: 700;
   margin-bottom: 4px;
   color: var(--texto);
+}
+
+.calendario-footer-acciones {
+  margin-top: 20px;
+  display: flex;
+  justify-content: flex-start;
+}
+
+.boton-sincronizar-google {
+  border: 1px solid var(--borde) !important;
+  color: var(--texto) !important;
+  font-weight: 500 !important;
+}
+
+.panel-lateral {
+  width: 320px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 24px;
+  background: var(--superficie) !important;
+  border: 1px solid var(--borde);
+  border-radius: var(--radio);
+}
+
+.panel-lateral-cabecera {
+  display: block;
+}
+
+.panel-lateral-titulo {
+  font-size: 16px;
+  font-weight: 600;
+  margin: 0;
+  color: var(--texto);
+}
+
+.panel-lateral-contador {
+  font-size: 13px;
+  color: var(--texto-suave);
+  margin: 2px 0 0;
+}
+
+.lista-detalles {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.tarjeta-evento {
+  padding: 16px;
+  border-radius: 8px;
+  border: 1px solid var(--borde);
+  border-left: 4px solid;
+  background: var(--superficie);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.tarjeta-evento-cabecera {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.tarjeta-evento-info {
+  display: block;
+}
+
+.tarjeta-evento-titulo-texto {
+  font-size: 14px;
+  font-weight: 600;
+  margin: 0 0 2px 0;
+  color: var(--texto);
+}
+
+.tarjeta-evento-sub {
+  font-size: 11px;
+  color: var(--texto-suave);
+  display: block;
+}
+
+.tarjeta-evento-monto {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--texto);
+}
+
+.boton-tarjeta-evento-detalle {
+  width: 100%;
+  height: 32px;
+  font-size: 12px;
+  padding: 0;
+  border-color: var(--borde) !important;
+  color: var(--texto) !important;
+}
+
+.estado-vacio-panel {
+  text-align: center;
+  padding: 32px 12px;
+}
+
+.vacio-titulo-central {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--texto);
+  line-height: 1.4;
+  margin-bottom: 8px;
+}
+
+.vacio-descripcion-sub {
+  font-size: 13px;
+  color: var(--texto-suave);
+  line-height: 1.5;
+  margin: 0;
 }
 
 .filtros-chips, .calendario-leyenda {
@@ -175,9 +291,24 @@
 .badge-mini.suscripcion { background-color: var(--dorado-claro); color: var(--texto); }
 .badge-mini.deuda { background-color: #ffeee0; color: var(--gasto); }
 
-.calendario-bloqueado .calendario-grilla {
+.tarjeta-evento.meta { border-left-color: var(--ingreso) !important; }
+.tarjeta-evento.suscripcion { border-left-color: var(--dorado) !important; }
+.tarjeta-evento.deuda { border-left-color: var(--gasto) !important; }
+
+.calendario-bloqueado .calendario-grilla,
+.calendario-bloqueado .filtros-chips,
+.calendario-bloqueado .mes-navegacion {
   filter: blur(5px);
   pointer-events: none;
+}
+
+@media (max-width: 950px) {
+  .calendario-contenedor {
+    flex-direction: column;
+  }
+  .panel-lateral {
+    width: 100%;
+  }
 }
 
 @media (max-width: 600px) {
@@ -230,3 +361,7 @@
   background-color: #232a24 !important;
   color: #ffffff !important;
 }
+
+:host-context(.oscuro-theme) .tarjeta-evento.meta { border-left-color: var(--ingreso) !important; background: var(--superficie); }
+:host-context(.oscuro-theme) .tarjeta-evento.suscripcion { border-left-color: var(--dorado) !important; background: var(--superficie); }
+:host-context(.oscuro-theme) .tarjeta-evento.deuda { border-left-color: var(--gasto) !important; background: var(--superficie); }
