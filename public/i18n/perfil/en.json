@@ -66,7 +66,8 @@
       "universidad": "University",
       "sin_universidad": "Not registered",
       "estado_verificacion": "Verification Status",
-      "verificado": "Verified Student"
+      "verificado": "Verified Student",
+      "selecciona_universidad": "Select a university"
     },
     "botones": {
       "editar": "Edit profile",
