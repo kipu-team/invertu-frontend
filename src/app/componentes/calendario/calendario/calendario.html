@@ -1,6 +1,95 @@
-<app-en-construccion
-  titulo="calendario.titulo"
-  responsable="Mafer"
-  figuras="88–92"
-  [pendientes]="pendientes"
-/>
+<div class="calendario-contenedor" [class.calendario-bloqueado]="!sesion.esPremium()">
+
+  <div class="calendario-principal">
+    <h1 class="calendario-titulo-texto">Calendario Financiero</h1>
+
+    <div class="filtros-chips">
+      <span class="filtros-label">Filtrar por:</span>
+      <mat-chip-listbox multiple class="lista-chips-contenedor">
+        <mat-chip-option [selected]="filtroDeudas()" (selectionChange)="filtroDeudas.set($event.selected)">Deudas</mat-chip-option>
+        <mat-chip-option [selected]="filtroSuscripciones()" (selectionChange)="filtroSuscripciones.set($event.selected)">Suscripciones</mat-chip-option>
+        <mat-chip-option [selected]="filtroMetas()" (selectionChange)="filtroMetas.set($event.selected)">Metas</mat-chip-option>
+      </mat-chip-listbox>
+    </div>
+
+    <div class="calendario-leyenda">
+      <div class="leyenda-item">
+        <mat-icon class="leyenda-icono deuda">receipt_long</mat-icon>
+        <span>Deudas</span>
+      </div>
+      <div class="leyenda-item">
+        <mat-icon class="leyenda-icono suscripcion">sync</mat-icon>
+        <span>Suscripciones</span>
+      </div>
+      <div class="leyenda-item">
+        <mat-icon class="leyenda-icono meta">savings</mat-icon>
+        <span>Metas / Aportes</span>
+      </div>
+    </div>
+
+    <mat-card class="calendario-tarjeta-base">
+      <div class="mes-navegacion">
+        <button mat-icon-button (click)="mesAnterior()"><mat-icon>chevron_left</mat-icon></button>
+
+        <div class="contenedor-titulo-clickable">
+          <button mat-button class="boton-mes-clickable" (click)="mostrarSelectorModal.set(!mostrarSelectorModal())" [disabled]="!sesion.esPremium()">
+            {{ mesesNombres[mesActual()] }} {{ anioActual() }}
+            <mat-icon matSuffix>arrow_drop_down</mat-icon>
+          </button>
+
+          @if (mostrarSelectorModal() && sesion.esPremium()) {
+            <mat-card class="selector-mes-cuadrcula-pop">
+              <div class="selector-anio-header">
+                <button mat-icon-button (click)="cambiarAnioSelector(-1)"><mat-icon>chevron_left</mat-icon></button>
+                <span class="anio-header-texto">{{ anioActual() }}</span>
+                <button mat-icon-button (click)="cambiarAnioSelector(1)"><mat-icon>chevron_right</mat-icon></button>
+              </div>
+              <div class="grilla-meses-doce">
+                @for (mesAb of mesesAbreviados; track mesAb; let idx = $index) {
+                  <button
+                    mat-button
+                    class="celda-mes-btn"
+                    [class.celda-mes-activa]="mesActual() === idx"
+                    (click)="seleccionarMesRapido(idx)"
+                  >
+                    {{ mesAb }}
+                  </button>
+                }
+              </div>
+            </mat-card>
+          }
+        </div>
+
+        <button mat-icon-button (click)="mesSiguiente()"><mat-icon>chevron_right</mat-icon></button>
+      </div>
+
+      <div class="calendario-grilla">
+        <div class="dia-etiqueta">LUN</div>
+        <div class="dia-etiqueta">MAR</div>
+        <div class="dia-etiqueta">MIÉ</div>
+        <div class="dia-etiqueta">JUE</div>
+        <div class="dia-etiqueta">VIE</div>
+        <div class="dia-etiqueta">SÁB</div>
+        <div class="dia-etiqueta">DOM</div>
+
+        @for (vacio of diasPreviosVacios(); track $index) {
+          <div class="celda-dia celda-vacia"></div>
+        }
+
+        @for (dia of diasMes(); track dia) {
+          <div class="celda-dia" [class.seleccionada]="esDiaSeleccionado(dia)">
+            <span class="numero-dia-texto">{{ dia }}</span>
+            <div class="eventos-celda">
+              @for (ev of obtenerEventosDia(dia); track ev.id) {
+                <div class="badge-mini" [class]="ev.tipo.toLowerCase()">
+                  {{ ev.titulo }}
+                </div>
+              }
+            </div>
+          </div>
+        }
+      </div>
+    </mat-card>
+  </div>
+
+</div>

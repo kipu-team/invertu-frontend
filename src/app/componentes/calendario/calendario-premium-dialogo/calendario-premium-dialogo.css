@@ -1,0 +1,164 @@
+.modal-premium-layout {
+  padding: 16px;
+  position: relative;
+}
+
+.modal-premium-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.estrella-circulo {
+  background-color: #fff8e1;
+  color: #ffb300;
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.boton-cerrar-x {
+  color: var(--texto-suave) !important;
+}
+
+.modal-premium-titulo-central {
+  font-size: 20px;
+  font-weight: 700;
+  color: #17241d;
+  text-align: center;
+  margin: 16px 0 6px;
+}
+
+.modal-premium-sub {
+  font-size: 13px;
+  color: #5f6d66;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.modal-premium-beneficios {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 24px;
+}
+
+.beneficio-linea {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  color: #17241d;
+}
+
+.beneficio-linea mat-icon {
+  color: #13985c;
+  font-size: 18px;
+  width: 18px;
+  height: 18px;
+}
+
+/* Pasarela de Facturación simulada */
+.seccion-pasarela-pago {
+  border: 1px solid var(--borde);
+  border-radius: 12px;
+  padding: 16px;
+  background-color: #fafbfc;
+}
+
+.pasarela-cabecera {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 14px;
+}
+
+.pasarela-label {
+  font-size: 11px;
+  font-weight: 700;
+  color: #5f6d66;
+}
+
+.pasarela-tarjetas-iconos {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+}
+
+.badge-tarjeta {
+  font-size: 10px;
+  font-weight: 700;
+  padding: 2px 6px;
+  background: #e2e8e4;
+  border-radius: 4px;
+}
+
+.badge-seguridad {
+  font-size: 10px;
+  color: #13985c;
+  display: flex;
+  align-items: center;
+  gap: 2px;
+}
+
+.badge-seguridad mat-icon {
+  font-size: 12px;
+  width: 12px;
+  height: 12px;
+}
+
+.input-pasarela-ancho {
+  width: 100%;
+}
+
+.pasarela-fila-doble {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.texto-encriptacion {
+  font-size: 10px;
+  color: #5f6d66;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  margin-top: 4px;
+}
+
+.texto-encriptacion mat-icon {
+  font-size: 12px;
+  width: 12px;
+  height: 12px;
+}
+
+.modal-premium-footer {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 20px;
+}
+
+.boton-suscribir-institucional {
+  background-color: #13985c !important;
+  color: #ffffff !important;
+  width: 100%;
+  height: 46px;
+  border-radius: 8px;
+  font-weight: 600;
+}
+
+.boton-volver-link {
+  color: #5f6d66 !important;
+}
+
+/* Soporte para el Tema Oscuro */
+:host-context(.oscuro-theme) .seccion-pasarela-pago {
+  background-color: #111612;
+}
+:host-context(.oscuro-theme) .modal-premium-titulo-central { color: #ffffff; }
+:host-context(.oscuro-theme) .modal-premium-sub { color: var(--texto-suave); }
+:host-context(.oscuro-theme) .beneficio-linea { color: #ffffff; }

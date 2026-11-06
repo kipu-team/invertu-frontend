@@ -1,0 +1,62 @@
+<div class="modal-premium-layout">
+
+  <header class="modal-premium-header">
+    <div class="estrella-circulo"><mat-icon>star</mat-icon></div>
+    <button mat-icon-button class="boton-cerrar-x" (click)="salirABase()"><mat-icon>close</mat-icon></button>
+  </header>
+
+  <mat-dialog-content class="modal-premium-body">
+    <h2 class="modal-premium-titulo-central">Pásate a Premium para activar el Calendario Financiero</h2>
+    <p class="modal-premium-sub">Consulta todos los eventos programados como metas, aportes, suscripciones, desde un solo lugar.</p>
+
+    <div class="modal-premium-beneficios">
+      <div class="beneficio-linea"><mat-icon>check_circle</mat-icon><span>Sube imágenes o PDFs de tus boletas</span></div>
+      <div class="beneficio-linea"><mat-icon>check_circle</mat-icon><span>Lectura automática de montos y fechas</span></div>
+      <div class="beneficio-linea"><mat-icon>check_circle</mat-icon><span>Categorización inteligente</span></div>
+    </div>
+
+    <!-- PASARELA DE PAGO COMPLETAMENTE INTERACTIVA -->
+    <div class="seccion-pasarela-pago">
+      <div class="pasarela-cabecera">
+        <span class="pasarela-label">DATOS DE PAGO</span>
+        <div class="pasarela-tarjetas-iconos">
+          <span class="badge-tarjeta">VISA</span>
+          <span class="badge-tarjeta mc">mastercard</span>
+          <span class="badge-seguridad"><mat-icon>lock</mat-icon> SSL 256</span>
+        </div>
+      </div>
+
+      <mat-form-field appearance="outline" class="input-pasarela-ancho">
+        <mat-label>Número de tarjeta</mat-label>
+        <input matInput placeholder="4557 2891 0042 4242" maxlength="19" />
+        <mat-icon matSuffix>credit_card</mat-icon>
+      </mat-form-field>
+
+      <div class="pasarela-fila-doble">
+        <mat-form-field appearance="outline">
+          <mat-label>Vencimiento (MM/AA)</mat-label>
+          <input matInput placeholder="08/28" maxlength="5" />
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+          <mat-label>CVV</mat-label>
+          <input matInput placeholder="789" type="password" maxlength="3" />
+        </mat-form-field>
+      </div>
+
+      <mat-form-field appearance="outline" class="input-pasarela-ancho">
+        <mat-label>Nombre en la tarjeta</mat-label>
+        <input matInput placeholder="ANA MARTÍNEZ R." maxlength="100" />
+      </mat-form-field>
+
+      <p class="texto-encriptacion"><mat-icon>shield</mat-icon> Pago seguro encriptado de 256 bits. Cancela cuando quieras.</p>
+    </div>
+  </mat-dialog-content>
+
+  <mat-dialog-actions align="center" class="modal-premium-footer">
+    <button mat-flat-button class="boton-suscribir-institucional" (click)="irAPagar()">
+      Suscribirse ahora - S/ 7.90/mes &rarr;
+    </button>
+    <button mat-button class="boton-volver-link" (click)="salirABase()">Volver</button>
+  </mat-dialog-actions>
+
+</div>

@@ -89,23 +89,6 @@ body {
   transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-:root {
-  --verde-esmeralda: #13985c;
-  --verde-oscuro: #0b4a32;
-  --verde-claro: #e7f6ee;
-  --dorado: #f5b800;
-  --dorado-claro: #fff6d9;
-  --ingreso: #13985c;
-  --gasto: #d93a3a;
-  --fondo: #f6f8f7;
-  --superficie: #ffffff;
-  --texto: #17241d;
-  --texto-suave: #5f6d66;
-  --borde: #e2e8e4;
-  --radio: 12px;
-  --sombra: 0 1px 3px rgba(16, 40, 28, 0.08);
-}
-
 html,
 body {
   height: 100%;
@@ -382,3 +365,5 @@ select,
 .oscuro-theme .menu__opcion--activa span {
   color: #ffffff !important;
 }
+
+
