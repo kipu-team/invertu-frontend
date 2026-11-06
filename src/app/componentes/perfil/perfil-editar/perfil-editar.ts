@@ -1,5 +1,4 @@
-
-import { Component, EventEmitter, Input, Output, inject } from '@angular/core';
+import { Component, EventEmitter, Input, Output, inject, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { TranslatePipe } from '@ngx-translate/core';
@@ -7,22 +6,32 @@ import { TranslatePipe } from '@ngx-translate/core';
 import { Perfil, PerfilRequest } from '../../../modelo/perfil';
 import { PerfilService } from '../../../servicios/perfil-service';
 import { UNIVERSIDADES } from '../../../servicios/datos-prueba/datos-prueba';
-import { MatIcon } from '@angular/material/icon';
+import { MatIconModule } from '@angular/material/icon';
+
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatSelectModule } from '@angular/material/select';
 
 @Component({
   selector: 'app-perfil-editar',
   standalone: true,
-  imports: [FormsModule, MatButtonModule, TranslatePipe, MatIcon],
+  imports: [
+    FormsModule,
+    MatButtonModule,
+    TranslatePipe,
+    MatIconModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatSelectModule
+  ],
   templateUrl: './perfil-editar.html',
   styleUrl: './perfil-editar.css',
 })
-export class PerfilEditar {
+export class PerfilEditar implements OnInit {
   universidades = UNIVERSIDADES;
-
   private perfilService = inject(PerfilService);
 
   @Input({ required: true }) perfil!: Perfil;
-
   @Output() cancelar = new EventEmitter<void>();
   @Output() guardado = new EventEmitter<Perfil>();
 
@@ -40,7 +49,6 @@ export class PerfilEditar {
 
   guardar(): void {
     this.mensajeError = '';
-
     const nombres = this.nombres.trim();
     const apellidos = this.apellidos.trim();
     const universidad = this.universidad.trim();
@@ -50,12 +58,7 @@ export class PerfilEditar {
       return;
     }
 
-    const datos: PerfilRequest = {
-      nombres,
-      apellidos,
-      universidad,
-    };
-
+    const datos: PerfilRequest = { nombres, apellidos, universidad };
     this.guardando = true;
 
     this.perfilService.actualizar(datos).subscribe({

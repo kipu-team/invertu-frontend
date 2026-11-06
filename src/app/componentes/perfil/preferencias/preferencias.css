@@ -54,42 +54,39 @@
 
 .opcion-tema {
   height: 54px;
-  border: 1px solid #e2e8e4;
+  border: 1px solid var(--borde);
   border-radius: 9px;
-  background: #edf3ef;
-  color: #5f6d66;
+  background: var(--fondo);
+  color: var(--texto-suave);
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 3px;
+  gap: 4px;
   cursor: pointer;
-  transition: border-color 0.2s, background-color 0.2s;
+  padding: 0;
 }
 
 .opcion-tema mat-icon {
-  font-size: 17px;
-  width: 17px;
-  height: 17px;
+  font-size: 18px;
+  width: 18px;
+  height: 18px;
 }
 
 .opcion-tema span {
   font-size: 11px;
-  color: #17241d;
-}
-
-.opcion-tema:hover {
-  border-color: #13985c;
+  color: var(--texto);
 }
 
 .opcion-tema.seleccionado {
-  border: 1.5px solid #13985c;
-  color: #13985c;
-  background: #e7f6ee;
+  border: 1.5px solid var(--verde-esmeralda) !important;
+  background-color: var(--verde-claro) !important;
+  color: var(--verde-esmeralda) !important;
 }
 
-.opcion-tema.seleccionado span {
-  color: #13985c;
+.opcion-tema.seleccionado span,
+.opcion-tema.seleccionado mat-icon {
+  color: var(--verde-esmeralda) !important;
   font-weight: 600;
 }
 

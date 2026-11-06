@@ -44,10 +44,14 @@ export const PERFIL: Perfil = {
 };
 
 export const UNIVERSIDADES: string[] = [
+  'Universidad Peruana de Ciencias Aplicadas',
+  'Pontificia Universidad Católica del Perú',
+  'Universidad de Lima',
+  'Universidad del Pacífico',
   'Universidad Nacional Mayor de San Marcos',
   'Universidad Nacional de Ingeniería',
-  'Pontificia Universidad Católica del Perú',
-  'Universidad Peruana de Ciencias Aplicadas',
+  'Universidad San Ignacio de Loyola',
+  'Universidad Tecnológica del Perú',
 ];
 
 export const PLAN_PREMIUM = { precioMensual: 9.9, maxMetasActivas: null, maxRecordatorios: null };
