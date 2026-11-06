@@ -2,6 +2,9 @@
 <div class="tarjeta perfil-contenedor">
   @if (pestana() === 'configuracion') {
     <app-preferencias />
+
+  } @else if (pestana() === 'contrasena') {
+      <app-cambiar-contrasena /> <!--vista de la pantalla-->
   } @else {
     @if (perfil(); as datosPerfil) {
       @if (editando()) {
