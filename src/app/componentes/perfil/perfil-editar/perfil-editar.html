@@ -16,7 +16,7 @@
 
     <!-- Campo Universidad -->
     <mat-form-field appearance="outline" class="campo-formulario-mdc" style="width: 100%; display: block; margin-bottom: 16px;">
-      <mat-label>{{ 'perfil.campos.universidad' | translate }} *</mat-label>
+      <mat-label>{{ 'perfil.campos.universidad' | translate }}</mat-label>
       <mat-select id="universidad" name="universidad" [(ngModel)]="universidad" required>
         <mat-option value="" disabled>{{ 'perfil.campos.selecciona_universidad' | translate }}</mat-option>
         @for (opcion of universidades; track opcion) {

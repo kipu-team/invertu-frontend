@@ -6,19 +6,18 @@
   </header>
 
   <mat-dialog-content class="modal-premium-body">
-    <h2 class="modal-premium-titulo-central">Pásate a Premium para activar el Calendario Financiero</h2>
-    <p class="modal-premium-sub">Consulta todos los eventos programados como metas, aportes, suscripciones, desde un solo lugar.</p>
+    <h2 class="modal-premium-titulo-central">{{ 'calendario.premium_modal.titulo' | translate }}</h2>
+    <p class="modal-premium-sub">{{ 'calendario.premium_modal.descripcion' | translate }}</p>
 
     <div class="modal-premium-beneficios">
-      <div class="beneficio-linea"><mat-icon>check_circle</mat-icon><span>Sube imágenes o PDFs de tus boletas</span></div>
-      <div class="beneficio-linea"><mat-icon>check_circle</mat-icon><span>Lectura automática de montos y fechas</span></div>
-      <div class="beneficio-linea"><mat-icon>check_circle</mat-icon><span>Categorización inteligente</span></div>
+      <div class="beneficio-linea"><mat-icon>check_circle</mat-icon><span>{{ 'calendario.premium_modal.b1' | translate }}</span></div>
+      <div class="beneficio-linea"><mat-icon>check_circle</mat-icon><span>{{ 'calendario.premium_modal.b2' | translate }}</span></div>
+      <div class="beneficio-linea"><mat-icon>check_circle</mat-icon><span>{{ 'calendario.premium_modal.b3' | translate }}</span></div>
     </div>
 
-    <!-- PASARELA DE PAGO COMPLETAMENTE INTERACTIVA -->
     <div class="seccion-pasarela-pago">
       <div class="pasarela-cabecera">
-        <span class="pasarela-label">DATOS DE PAGO</span>
+        <span class="pasarela-label">{{ 'calendario.premium_modal.datos_pago' | translate }}</span>
         <div class="pasarela-tarjetas-iconos">
           <span class="badge-tarjeta">VISA</span>
           <span class="badge-tarjeta mc">mastercard</span>
@@ -27,36 +26,38 @@
       </div>
 
       <mat-form-field appearance="outline" class="input-pasarela-ancho">
-        <mat-label>Número de tarjeta</mat-label>
+        <mat-label>{{ 'calendario.premium_modal.tarjeta' | translate }}</mat-label>
         <input matInput placeholder="4557 2891 0042 4242" maxlength="19" />
         <mat-icon matSuffix>credit_card</mat-icon>
       </mat-form-field>
 
       <div class="pasarela-fila-doble">
         <mat-form-field appearance="outline">
-          <mat-label>Vencimiento (MM/AA)</mat-label>
+          <mat-label>{{ 'calendario.premium_modal.vencimiento' | translate }}</mat-label>
           <input matInput placeholder="08/28" maxlength="5" />
         </mat-form-field>
         <mat-form-field appearance="outline">
-          <mat-label>CVV</mat-label>
+          <mat-label>{{ 'calendario.premium_modal.cvv' | translate }}</mat-label>
           <input matInput placeholder="789" type="password" maxlength="3" />
         </mat-form-field>
       </div>
 
       <mat-form-field appearance="outline" class="input-pasarela-ancho">
-        <mat-label>Nombre en la tarjeta</mat-label>
+        <mat-label>{{ 'calendario.premium_modal.nombre' | translate }}</mat-label>
         <input matInput placeholder="ANA MARTÍNEZ R." maxlength="100" />
       </mat-form-field>
 
-      <p class="texto-encriptacion"><mat-icon>shield</mat-icon> Pago seguro encriptado de 256 bits. Cancela cuando quieras.</p>
+      <p class="texto-encriptacion"><mat-icon>shield</mat-icon> {{ 'calendario.premium_modal.encriptacion' | translate }}</p>
     </div>
   </mat-dialog-content>
 
   <mat-dialog-actions align="center" class="modal-premium-footer">
     <button mat-flat-button class="boton-suscribir-institucional" (click)="irAPagar()">
-      Suscribirse ahora - S/ 7.90/mes &rarr;
+      {{ 'calendario.premium_modal.suscribirse' | translate }}
     </button>
-    <button mat-button class="boton-volver-link" (click)="salirABase()">Volver</button>
+    <button mat-button class="boton-volver-link" (click)="salirABase()">
+      {{ 'calendario.premium_modal.volver' | translate }}
+    </button>
   </mat-dialog-actions>
 
 </div>

@@ -1,21 +1,36 @@
 <div class="calendario-contenedor" [class.calendario-bloqueado]="!sesion.esPremium()">
 
   <div class="calendario-principal">
-    <h1 class="calendario-titulo-texto">Calendario Financiero</h1>
+    <h1 class="calendario-titulo-texto">{{ 'calendario.titulo' | translate }}</h1>
 
     <div class="filtros-chips">
-      <span class="filtros-label">Filtrar por:</span>
+      <span class="filtros-label">{{ 'calendario.filtrar_por' | translate }}</span>
       <mat-chip-listbox multiple class="lista-chips-contenedor" [disabled]="!sesion.esPremium()">
-        <mat-chip-option [selected]="filtroDeudas()" (selectionChange)="filtroDeudas.set($event.selected)">Deudas</mat-chip-option>
-        <mat-chip-option [selected]="filtroSuscripciones()" (selectionChange)="filtroSuscripciones.set($event.selected)">Suscripciones</mat-chip-option>
-        <mat-chip-option [selected]="filtroMetas()" (selectionChange)="filtroMetas.set($event.selected)">Metas</mat-chip-option>
+        <mat-chip-option [selected]="filtroDeudas()" (selectionChange)="filtroDeudas.set($event.selected)">
+          {{ 'calendario.deudas' | translate }}
+        </mat-chip-option>
+        <mat-chip-option [selected]="filtroSuscripciones()" (selectionChange)="filtroSuscripciones.set($event.selected)">
+          {{ 'calendario.suscripciones' | translate }}
+        </mat-chip-option>
+        <mat-chip-option [selected]="filtroMetas()" (selectionChange)="filtroMetas.set($event.selected)">
+          {{ 'calendario.metas' | translate }}
+        </mat-chip-option>
       </mat-chip-listbox>
     </div>
 
     <div class="calendario-leyenda">
-      <div class="leyenda-item"><mat-icon class="leyenda-icono deuda">receipt_long</mat-icon><span>Deudas</span></div>
-      <div class="leyenda-item"><mat-icon class="leyenda-icono suscripcion">sync</mat-icon><span>Suscripciones</span></div>
-      <div class="leyenda-item"><mat-icon class="leyenda-icono meta">savings</mat-icon><span>Metas / Aportes</span></div>
+      <div class="leyenda-item">
+        <mat-icon class="leyenda-icono deuda">receipt_long</mat-icon>
+        <span>{{ 'calendario.deudas' | translate }}</span>
+      </div>
+      <div class="leyenda-item">
+        <mat-icon class="leyenda-icono suscripcion">sync</mat-icon>
+        <span>{{ 'calendario.suscripciones' | translate }}</span>
+      </div>
+      <div class="leyenda-item">
+        <mat-icon class="leyenda-icono meta">savings</mat-icon>
+        <span>{{ 'calendario.metas_aportes' | translate }}</span>
+      </div>
     </div>
 
     <mat-card class="calendario-tarjeta-base">
@@ -24,7 +39,7 @@
 
         <div class="contenedor-titulo-clickable">
           <button mat-button class="boton-mes-clickable" (click)="sesion.esPremium() && mostrarSelectorModal.set(!mostrarSelectorModal())" [disabled]="!sesion.esPremium()">
-            {{ mesesNombres[mesActual()] }} {{ anioActual() }}
+            {{ 'calendario.meses.' + mesActual() | translate }} {{ anioActual() }}
             <mat-icon matSuffix>arrow_drop_down</mat-icon>
           </button>
 
@@ -84,7 +99,7 @@
       <div class="calendario-footer-acciones">
         <button mat-stroked-button class="boton-sincronizar-google" (click)="sincronizarGoogle()" [disabled]="!sesion.esPremium() || eventosDiaSeleccionado().length === 0">
           <mat-icon>sync</mat-icon>
-          Sincronizar con Google Calendar
+          {{ 'calendario.sincronizar' | translate }}
         </button>
       </div>
     </mat-card>
@@ -92,8 +107,19 @@
 
   <mat-card class="panel-lateral">
     <div class="panel-lateral-cabecera">
-      <h3 class="panel-lateral-titulo">{{ diaSeleccionadoNumero() }} de {{ mesesNombres[mesActual()] }}, {{ anioActual() }}</h3>
-      <p class="panel-lateral-contador">{{ sesion.esPremium() ? eventosDiaSeleccionado().length : 0 }} eventos programados</p>
+      <h3 class="panel-lateral-titulo">
+        {{ diaSeleccionadoNumero() }} {{ 'calendario.de' | translate }} {{ 'calendario.meses.' + mesActual() | translate }}, {{ anioActual() }}
+      </h3>      <p class="panel-lateral-contador">
+        @if (sesion.esPremium()) {
+          @if (eventosDiaSeleccionado().length === 1) {
+            {{ 'calendario.programados_uno' | translate }}
+          } @else {
+            {{ 'calendario.programados_varios' | translate: { cantidad: eventosDiaSeleccionado().length } }}
+          }
+        } @else {
+          0
+        }
+      </p>
     </div>
 
     <div class="lista-detalles">
@@ -110,19 +136,19 @@
               }
             </div>
             <button mat-stroked-button class="boton-tarjeta-evento-detalle" (click)="irAlDetalle(ev)">
-              Ver detalle en {{ ev.tipo | titlecase }}
+              {{ 'calendario.ver_detalle' | translate: { tipo: (ev.tipo | titlecase) } }}
             </button>
           </div>
         } @empty {
           <div class="estado-vacio-panel">
             <mat-icon class="estado-vacio-icono">calendar_today</mat-icon>
-            <p class="estado-vacio-texto">No hay eventos financieros.</p>
+            <p class="estado-vacio-texto">{{ 'calendario.sin_eventos_titulo' | translate }}</p>
           </div>
         }
       } @else {
         <div class="estado-vacio-panel">
           <mat-icon class="estado-vacio-icono">lock</mat-icon>
-          <p class="estado-vacio-texto">Contenido protegido para cuentas Premium.</p>
+          <p class="estado-vacio-texto">{{ 'calendario.protegido' | translate }}</p>
         </div>
       }
     </div>

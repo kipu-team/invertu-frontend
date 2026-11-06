@@ -1,5 +1,18 @@
 {
   "calendario": {
-    "titulo": "Financial calendar"
+    "titulo": "Financial Calendar",
+    "de": "of",
+    "filtrar_por": "Filter by:",
+    "deudas": "Debts",
+    "suscripciones": "Subscriptions",
+    "metas": "Goals",
+    "metas_aportes": "Goals / Contributions",
+    "eventos_dia": "Day events",
+    "programados_uno": "1 event scheduled",
+    "programados_varios": "{{ cantidad }} events scheduled",
+    "ver_detalle": "View details in {{ tipo }}",
+    "sin_eventos_titulo": "You don't have any financial events registered yet.",
+    "sin_eventos_desc": "Register a goal, debt, or subscription to start viewing events in your financial calendar.",
+    "sincronizar": "Sync with Google Calendar"
   }
 }

@@ -5,13 +5,21 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { Router } from '@angular/router';
+import { TranslatePipe } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-calendario-premium-dialogo',
   standalone: true,
-  imports: [MatDialogModule, MatButtonModule, MatIconModule, MatInputModule, MatFormFieldModule],
+  imports: [
+    MatDialogModule,
+    MatButtonModule,
+    MatIconModule,
+    MatInputModule,
+    MatFormFieldModule,
+    TranslatePipe,
+  ],
   templateUrl: './calendario-premium-dialogo.html',
-  styleUrl: './calendario-premium-dialogo.css'
+  styleUrl: './calendario-premium-dialogo.css',
 })
 export class CalendarioPremiumDialogo {
   private ref = inject(MatDialogRef<CalendarioPremiumDialogo>);
