@@ -154,3 +154,20 @@ html {
     )
   );
 }
+
+/* Selector dinámico para cambiar a Tema Oscuro de forma coherente */
+html.oscuro-theme, body.oscuro-theme {
+  color-scheme: dark !important;
+  @include mat.theme(
+      (
+        color: (
+          theme-type: dark,
+          primary: $primary-palette,
+          tertiary: $tertiary-palette,
+        ),
+        typography: 'Inter Variable',
+        density: 0,
+      )
+  );
+  --mat-app-background-color: var(--fondo);
+}

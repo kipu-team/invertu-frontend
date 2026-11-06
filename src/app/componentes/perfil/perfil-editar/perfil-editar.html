@@ -1,103 +1,41 @@
-
 <div class="perfil-editar">
   <h2>{{ 'perfil.editar.titulo' | translate }}</h2>
 
   <form #formulario="ngForm" (ngSubmit)="guardar()">
-    <div class="campo">
-      <label for="nombres">
-        {{ 'perfil.campos.nombres' | translate }}
-      </label>
-      <input
-        id="nombres"
-        name="nombres"
-        type="text"
-        [(ngModel)]="nombres"
-        required
-        maxlength="100"
-      />
-    </div>
+    <!-- Campo Nombres -->
+    <mat-form-field appearance="outline" class="campo-formulario-mdc" style="width: 100%; display: block; margin-bottom: 16px;">
+      <mat-label>{{ 'perfil.campos.nombres' | translate }}</mat-label>
+      <input matInput id="nombres" name="nombres" type="text" [(ngModel)]="nombres" required maxlength="100" />
+    </mat-form-field>
 
-    <div class="campo">
-      <label for="apellidos">
-        {{ 'perfil.campos.apellidos' | translate }}
-      </label>
-      <input
-        id="apellidos"
-        name="apellidos"
-        type="text"
-        [(ngModel)]="apellidos"
-        required
-        maxlength="100"
-      />
-    </div>
+    <!-- Campo Apellidos -->
+    <mat-form-field appearance="outline" class="campo-formulario-mdc" style="width: 100%; display: block; margin-bottom: 16px;">
+      <mat-label>{{ 'perfil.campos.apellidos' | translate }}</mat-label>
+      <input matInput id="apellidos" name="apellidos" type="text" [(ngModel)]="apellidos" required maxlength="100" />
+    </mat-form-field>
 
-    <div class="campo">
-      <label for="universidad">
-        {{ 'perfil.campos.universidad' | translate }} *
-      </label>
-
-      <select
-        id="universidad"
-        name="universidad"
-        [(ngModel)]="universidad"
-        required
-      >
-        <option value="" disabled>Selecciona una universidad</option>
-
+    <!-- Campo Universidad -->
+    <mat-form-field appearance="outline" class="campo-formulario-mdc" style="width: 100%; display: block; margin-bottom: 16px;">
+      <mat-label>{{ 'perfil.campos.universidad' | translate }}</mat-label>
+      <mat-select id="universidad" name="universidad" [(ngModel)]="universidad" required>
+        <mat-option value="" disabled>Selecciona una universidad</mat-option>
         @for (opcion of universidades; track opcion) {
-          <option [value]="opcion">{{ opcion }}</option>
+          <mat-option [value]="opcion">{{ opcion }}</mat-option>
         }
-      </select>
-    </div>
-
-
-    <!-- CORREO ELECTRÓNICO -->
-    <div class="campo">
-      <label for="correo">
-        {{ 'perfil.campos.correo' | translate }}
-      </label>
-
-      <div class="correo-contenedor">
-        <input
-          id="correo"
-          name="correo"
-          type="email"
-          [value]="perfil.correo"
-          disabled
-        />
-
-        <mat-icon class="correo-candado">
-          lock
-        </mat-icon>
-      </div>
-
-      <small class="correo-ayuda">
-        {{ 'perfil.editar.correo_bloqueado' | translate }}
-      </small>
-    </div>
+      </mat-select>
+    </mat-form-field>
 
     @if (mensajeError) {
       <p class="mensaje-error">{{ mensajeError }}</p>
     }
 
-    <div class="acciones">
-      <button
-        mat-button
-        type="button"
-        (click)="cancelar.emit()"
-        [disabled]="guardando"
-      >
+    <div class="acciones" style="display: flex; justify-content: flex-end; gap: 12px; margin-top: 24px;">
+      <button mat-button type="button" (click)="cancelar.emit()" [disabled]="guardando">
         {{ 'compartido.acciones.cancelar' | translate }}
       </button>
-
-      <button
-        mat-flat-button
-        type="submit"
-        [disabled]="guardando || formulario.invalid"
-      >
+      <button mat-flat-button type="submit" [disabled]="guardando || formulario.invalid">
         {{ (guardando ? 'perfil.editar.guardando' : 'compartido.acciones.guardar') | translate }}
       </button>
     </div>
   </form>
 </div>
-

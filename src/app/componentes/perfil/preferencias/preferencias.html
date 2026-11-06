@@ -1,192 +1,79 @@
-
 <div class="preferencias">
+  <h1 class="preferencias-titulo">{{ 'perfil.preferencias.titulo' | translate }}</h1>
+  <p class="preferencias-subtitulo">{{ 'perfil.preferencias.subtitulo' | translate }}</p>
 
-  <!--navbar-->
-  <h1 class="preferencias-titulo">
-    {{ 'perfil.preferencias.titulo' | translate }}
-  </h1>
-
-  <p class="preferencias-subtitulo">
-    {{ 'perfil.preferencias.subtitulo' | translate }}
-  </p>
-
-  <!--card de configuración -->
   <section class="tarjeta-configuracion">
-
-    <!--apariencia-->
-    <h3 class="seccion-titulo">
-      {{ 'perfil.preferencias.apariencia' | translate }}
-    </h3>
+    <h3 class="seccion-titulo">{{ 'perfil.preferencias.apariencia' | translate }}</h3>
 
     <div class="opciones-tema">
-
-      <button
-        type="button"
-        class="opcion-tema"
-        [class.seleccionado]="tema() === 'CLARO'"
-        (click)="cambiarTema('CLARO')">
-
+      <!-- Botón Claro -->
+      <button type="button" class="opcion-tema" [class.seleccionado]="tema() === 'CLARO'" (click)="cambiarTema('CLARO')">
         <mat-icon>light_mode</mat-icon>
         <span>{{ 'perfil.preferencias.claro' | translate }}</span>
       </button>
 
-      <button
-        type="button"
-        class="opcion-tema"
-        [class.seleccionado]="tema() === 'OSCURO'"
-        (click)="cambiarTema('OSCURO')">
-
+      <!-- Botón Oscuro -->
+      <button type="button" class="opcion-tema" [class.seleccionado]="tema() === 'OSCURO'" (click)="cambiarTema('OSCURO')">
         <mat-icon>dark_mode</mat-icon>
         <span>{{ 'perfil.preferencias.oscuro' | translate }}</span>
       </button>
 
-      <button
-        type="button"
-        class="opcion-tema"
-        [class.seleccionado]="tema() === 'SISTEMA'"
-        (click)="cambiarTema('SISTEMA')">
-
+      <!-- Botón Sistema -->
+      <button type="button" class="opcion-tema" [class.seleccionado]="tema() === 'SISTEMA'" (click)="cambiarTema('SISTEMA')">
         <mat-icon>desktop_windows</mat-icon>
         <span>{{ 'perfil.preferencias.sistema' | translate }}</span>
       </button>
-
     </div>
 
-    <button
-      type="button"
-      class="boton-restaurar"
-      (click)="restaurarConfiguracion()">
-
+    <button mat-button type="button" class="boton-restaurar" (click)="restaurarConfiguracion()" style="padding: 0; margin-top: 12px; margin-bottom: 24px; display: block;">
       {{ 'perfil.preferencias.restaurar' | translate }}
     </button>
 
-    <!--idioma-->
-    <h3 class="seccion-titulo titulo-idioma">
-      {{ 'perfil.preferencias.idioma' | translate }}
-    </h3>
-
-    <div class="idioma-contenedor">
-
+    <h3 class="seccion-titulo titulo-idioma">{{ 'perfil.preferencias.idioma' | translate }}</h3>
+    <div class="idioma-contenedor" style="display: flex; justify-content: space-between; align-items: center; margin: 18px 0 8px;">
       <div class="idioma-informacion">
-        <strong>
-          {{ 'perfil.preferencias.escoger_idioma' | translate }}
-        </strong>
-
-        <p>
-          {{ 'perfil.preferencias.descripcion_idioma' | translate }}
-        </p>
+        <strong>{{ 'perfil.preferencias.escoger_idioma' | translate }}</strong>
+        <p style="margin-top: 3px;">{{ 'perfil.preferencias.descripcion_idioma' | translate }}</p>
       </div>
 
-      <select
-        class="selector-idioma"
-        [value]="idioma()"
-        (change)="cambiarIdioma($any($event.target).value)">
-
-        <option value="es_419">ES (Español)</option>
-        <option value="en_US">EN (English)</option>
-
-      </select>
-
+      <mat-form-field appearance="outline" subscriptSizing="dynamic" style="min-width: 140px;">
+        <mat-select [value]="idioma()" (selectionChange)="cambiarIdioma($event.value)">
+          <mat-option value="es_419">ES (Español)</mat-option>
+          <mat-option value="en_US">EN (English)</mat-option>
+        </mat-select>
+      </mat-form-field>
     </div>
 
-    <button
-      type="button"
-      class="boton-restaurar"
-      (click)="restaurarTema()">
-
+    <button mat-button type="button" class="boton-restaurar" (click)="restaurarTema()" style="padding: 0; margin-top: 12px;">
       {{ 'perfil.preferencias.restaurar_tema' | translate }}
     </button>
-
   </section>
 
-  <!--card de notificaciones-->
   <section class="tarjeta-configuracion tarjeta-notificaciones">
+    <h3 class="seccion-titulo">{{ 'perfil.preferencias.notificaciones' | translate }}</h3>
 
-    <h3 class="seccion-titulo">
-      {{ 'perfil.preferencias.notificaciones' | translate }}
-    </h3>
-
-    <!--alerta de gastos-->
-    <div class="notificacion">
-
+    <div class="notificacion" style="display: flex; justify-content: space-between; align-items: center; padding: 7px 0; border-bottom: 1px solid var(--borde);">
       <div class="notificacion-texto">
-        <strong>
-          {{ 'perfil.preferencias.alertas_gastos' | translate }}
-        </strong>
-
-        <p>
-          {{ 'perfil.preferencias.desc_alertas' | translate }}
-        </p>
+        <strong>{{ 'perfil.preferencias.alertas_gastos' | translate }}</strong>
+        <p style="margin-top: 3px;">{{ 'perfil.preferencias.desc_alertas' | translate }}</p>
       </div>
-
-      <label class="interruptor">
-        <input
-          type="checkbox"
-          [checked]="notificaciones().alertasGastos"
-          (change)="cambiarNotificacion(
-            'alertasGastos',
-            $any($event.target).checked
-          )">
-
-        <span class="interruptor-deslizador"></span>
-      </label>
-
+      <mat-slide-toggle [checked]="notificaciones().alertasGastos" (change)="cambiarNotificacion('alertasGastos', $event.checked)"></mat-slide-toggle>
     </div>
 
-    <!--recordatorios de metas-->
-    <div class="notificacion">
-
+    <div class="notificacion" style="display: flex; justify-content: space-between; align-items: center; padding: 7px 0; border-bottom: 1px solid var(--borde);">
       <div class="notificacion-texto">
-        <strong>
-          {{ 'perfil.preferencias.recordatorios_metas' | translate }}
-        </strong>
-
-        <p>
-          {{ 'perfil.preferencias.desc_recordatorios' | translate }}
-        </p>
+        <strong>{{ 'perfil.preferencias.recordatorios_metas' | translate }}</strong>
+        <p style="margin-top: 3px;">{{ 'perfil.preferencias.desc_recordatorios' | translate }}</p>
       </div>
-
-      <label class="interruptor">
-        <input
-          type="checkbox"
-          [checked]="notificaciones().recordatoriosMetas"
-          (change)="cambiarNotificacion(
-            'recordatoriosMetas',
-            $any($event.target).checked
-          )">
-
-        <span class="interruptor-deslizador"></span>
-      </label>
-
+      <mat-slide-toggle [checked]="notificaciones().recordatoriosMetas" (change)="cambiarNotificacion('recordatoriosMetas', $event.checked)"></mat-slide-toggle>
     </div>
 
-    <!--actualizaciones del sistema-->
-    <div class="notificacion">
-
+    <div class="notificacion" style="display: flex; justify-content: space-between; align-items: center; padding: 7px 0;">
       <div class="notificacion-texto">
-        <strong>
-          {{ 'perfil.preferencias.actualizaciones' | translate }}
-        </strong>
-
-        <p>
-          {{ 'perfil.preferencias.desc_actualizaciones' | translate }}
-        </p>
+        <strong>{{ 'perfil.preferencias.actualizaciones' | translate }}</strong>
+        <p style="margin-top: 3px;">{{ 'perfil.preferencias.desc_actualizaciones' | translate }}</p>
       </div>
-
-      <label class="interruptor">
-        <input
-          type="checkbox"
-          [checked]="notificaciones().actualizacionesSistema"
-          (change)="cambiarNotificacion(
-            'actualizacionesSistema',
-            $any($event.target).checked
-          )">
-
-        <span class="interruptor-deslizador"></span>
-      </label>
-
+      <mat-slide-toggle [checked]="notificaciones().actualizacionesSistema" (change)="cambiarNotificacion('actualizacionesSistema', $event.checked)"></mat-slide-toggle>
     </div>
-
   </section>
-
 </div>
