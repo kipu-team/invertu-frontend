@@ -29,7 +29,8 @@
       "universidad": "Universidad",
       "sin_universidad": "No registrada",
       "estado_verificacion": "Estado de Verificación",
-      "verificado": "Estudiante Verificado"
+      "verificado": "Estudiante Verificado",
+      "selecciona_universidad": "Selecciona una universidad"
     },
     "botones": {
       "editar": "Editar perfil",
