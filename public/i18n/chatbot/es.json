@@ -1,6 +1,18 @@
 {
   "chatbot": {
     "titulo": "Asistente InvertU",
-    "abrir": "Abrir asistente"
+    "abrir": "Abrir asistente",
+    "abrir": "Abrir asistente",
+    "cerrar": "Cerrar asistente",
+    "subtitulo": "Pregúntame sobre tus finanzas",
+    "bienvenida": "¡Hola! Soy tu asistente financiero. Pregúntame sobre tus gastos, metas o suscripciones.",
+    "placeholder": "Escribe tu pregunta...",
+    "enviar": "Enviar",
+    "escribiendo": "Escribiendo...",
+    "free": {
+      "titulo": "Función exclusiva Premium",
+      "texto": "El asistente financiero está disponible solo para el plan Premium. Puedes probarlo gratis.",
+      "boton": "Pasar a Premium"
+    }
   }
 }
