@@ -1,19 +1,65 @@
 @if (abierto()) {
-  <div class="chatbot__ventana">
-    <app-en-construccion
-      titulo="chatbot.titulo"
-      responsable="Luz"
-      figuras="23"
-      [pendientes]="pendientes"
-    />
-  </div>
+  <section class="chatbot__ventana" role="dialog" [attr.aria-label]="'chatbot.titulo' | translate">
+    <header class="chatbot__cabecera">
+      <mat-icon class="chatbot__avatar">smart_toy</mat-icon>
+      <div class="chatbot__titulos">
+        <strong>{{ 'chatbot.titulo' | translate }}</strong>
+        <small>{{ 'chatbot.subtitulo' | translate }}</small>
+      </div>
+      <button mat-icon-button (click)="cerrar()" [attr.aria-label]="'chatbot.cerrar' | translate">
+        <mat-icon>close</mat-icon>
+      </button>
+    </header>
+
+    @if (sesion.esPremium()) {
+      <div class="chatbot__mensajes" #lista aria-live="polite">
+        <p class="burbuja burbuja--asistente">{{ 'chatbot.bienvenida' | translate }}</p>
+
+        @for (mensaje of mensajes(); track $index) {
+          <p class="burbuja" [class.burbuja--estudiante]="mensaje.autor === 'estudiante'"
+             [class.burbuja--asistente]="mensaje.autor === 'asistente'">
+            {{ mensaje.texto }}
+          </p>
+        }
+
+        @if (esperando()) {
+          <p class="burbuja burbuja--asistente burbuja--escribiendo">{{ 'chatbot.escribiendo' | translate }}</p>
+        }
+      </div>
+
+      <form class="chatbot__formulario" (submit)="$event.preventDefault(); enviar()">
+        <input
+          class="chatbot__campo"
+          [value]="pregunta()"
+          (input)="pregunta.set($any($event.target).value)"
+          [placeholder]="'chatbot.placeholder' | translate"
+          [attr.aria-label]="'chatbot.placeholder' | translate"
+          maxlength="500"
+        />
+        <button mat-icon-button type="submit" class="chatbot__enviar"
+                [disabled]="!pregunta().trim() || esperando()"
+                [attr.aria-label]="'chatbot.enviar' | translate">
+          <mat-icon>send</mat-icon>
+        </button>
+      </form>
+    } @else {
+      <div class="chatbot__bloqueado">
+        <mat-icon class="chatbot__candado">lock</mat-icon>
+        <strong>{{ 'chatbot.free.titulo' | translate }}</strong>
+        <p>{{ 'chatbot.free.texto' | translate }}</p>
+        <button mat-flat-button class="boton-dorado" (click)="irAPremium()">
+          {{ 'chatbot.free.boton' | translate }}
+        </button>
+      </div>
+    }
+  </section>
 }
 
 <button
   mat-fab
   class="chatbot__boton"
-  (click)="abierto.set(!abierto())"
-  [attr.aria-label]="'chatbot.abrir' | translate"
+  (click)="alternar()"
+  [attr.aria-label]="(abierto() ? 'chatbot.cerrar' : 'chatbot.abrir') | translate"
 >
   <mat-icon>{{ abierto() ? 'close' : 'smart_toy' }}</mat-icon>
 </button>
