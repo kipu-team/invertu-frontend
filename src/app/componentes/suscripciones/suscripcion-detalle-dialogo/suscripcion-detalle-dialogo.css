@@ -115,6 +115,52 @@ h3 {
   font-size: 1rem;
 }
 
+/* US-31: recordatorio por correo */
+.recordatorio {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 12px 14px;
+  border-radius: var(--radio);
+  background: var(--fondo);
+}
+
+.recordatorio__fila {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.recordatorio__fila small {
+  display: block;
+  margin-top: 2px;
+  color: var(--texto-suave);
+}
+
+.recordatorio__dias {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  font-size: 0.9rem;
+}
+
+.recordatorio__dias select {
+  padding: 8px 10px;
+  border: 1px solid var(--borde);
+  border-radius: 8px;
+  background: var(--superficie);
+  color: var(--texto);
+  font: inherit;
+}
+
+.recordatorio__free {
+  margin: 0;
+  color: var(--texto-suave);
+  font-size: 0.8rem;
+}
+
 /* Historial de pagos */
 .pagos {
   width: 100%;
@@ -213,5 +259,10 @@ h3 {
 
   .enlace-rojo {
     padding: 8px 0;
+  }
+
+  .recordatorio__dias {
+    flex-direction: column;
+    align-items: stretch;
   }
 }
