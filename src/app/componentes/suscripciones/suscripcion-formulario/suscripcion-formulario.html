@@ -1,7 +1,7 @@
 <form class="panel" [formGroup]="formulario" (ngSubmit)="guardar()" novalidate>
   <header>
-    <h2>{{ 'suscripciones.formulario.titulo' | translate }}</h2>
-    <p>{{ 'suscripciones.formulario.subtitulo' | translate }}</p>
+    <h2>{{ (editando() ? 'suscripciones.formulario.tituloEditar' : 'suscripciones.formulario.titulo') | translate }}</h2>
+    <p>{{ (editando() ? 'suscripciones.formulario.subtituloEditar' : 'suscripciones.formulario.subtitulo') | translate }}</p>
   </header>
 
   <!-- Nombre del servicio -->
@@ -68,9 +68,9 @@
   </label>
 
   <button mat-flat-button type="submit" class="boton-verde" [disabled]="guardando()">
-    {{ 'suscripciones.formulario.guardar' | translate }}
+    {{ (editando() ? 'suscripciones.formulario.guardarCambios' : 'suscripciones.formulario.guardar') | translate }}
   </button>
-  <button type="button" class="enlace" (click)="limpiar()">
+  <button type="button" class="enlace" (click)="cancelar()">
     {{ 'suscripciones.formulario.cancelar' | translate }}
   </button>
 </form>
