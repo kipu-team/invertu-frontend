@@ -1,5 +1,39 @@
 {
   "suscripciones": {
-    "titulo": "My subscriptions"
+    "titulo": "Subscriptions",
+    "nueva": "New subscription",
+    "resumen": {
+      "activas": "Active",
+      "canceladas": "Cancelled",
+      "proximas": "Upcoming renewals"
+    },
+    "filtros": {
+      "TODAS": "All",
+      "ACTIVA": "Active",
+      "CANCELADA": "Cancelled"
+    },
+    "estados": {
+      "ACTIVA": "Active",
+      "CANCELADA": "Cancelled"
+    },
+    "frecuencias": {
+      "SEMANAL": "Weekly",
+      "MENSUAL": "Monthly",
+      "TRIMESTRAL": "Quarterly",
+      "SEMESTRAL": "Semiannual",
+      "ANUAL": "Yearly"
+    },
+    "proximoCobro": "Next charge",
+    "acciones": {
+      "verDetalles": "View details",
+      "registrarPago": "Record payment",
+      "reactivar": "Reactivate",
+      "cancelar": "Cancel"
+    },
+    "vacio": {
+      "titulo": "You don't have any subscriptions yet.",
+      "texto": "Add a new subscription to see your subscription list.",
+      "filtro": "You don't have subscriptions in this category."
+    }
   }
 }
