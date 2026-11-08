@@ -1,0 +1,265 @@
+/* Panel verde de la derecha (58%). Medidas y colores del Figma "mockups desktop". */
+:host {
+  flex: 0 0 58%;
+  display: flex;
+}
+
+.panel {
+  position: relative;
+  overflow: hidden;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding: 64px 80px 32px;
+  box-sizing: border-box;
+  background: linear-gradient(90deg, var(--verde-esmeralda) 0%, var(--verde-oscuro) 100%);
+  color: #ffffff;
+}
+
+/* Círculo de luz difuso de la esquina superior derecha */
+.brillo {
+  position: absolute;
+  width: 500px;
+  height: 500px;
+  top: -200px;
+  right: -200px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.05);
+  filter: blur(40px);
+  pointer-events: none;
+}
+
+.lema {
+  margin: 0;
+  max-width: 675px;
+  font-size: 48px;
+  line-height: 56px;
+  font-weight: 800;
+}
+
+.subrayado {
+  display: block;
+  width: 129px;
+  height: 8px;
+  margin: 16px 0 24px;
+  border-radius: 50px;
+  background: var(--dorado);
+}
+
+.descripcion {
+  margin: 0 0 36px;
+  max-width: 675px;
+  font-size: 18px;
+  line-height: 26px;
+  color: #e2f5ec;
+}
+
+/* ---------- Mini-dashboard ---------- */
+.mini-dashboard {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  max-width: 708px;
+  padding: 24px;
+  box-sizing: border-box;
+  border: 1.5px solid rgba(255, 255, 255, 0.2);
+  border-radius: 24px;
+  background: rgba(255, 255, 255, 0.18);
+  backdrop-filter: blur(8px);
+}
+
+.md-cabecera {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.md-balance {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.md-etiqueta {
+  font-size: 12px;
+  line-height: 16px;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.md-monto {
+  font-size: 22px;
+  line-height: 30px;
+  font-weight: 800;
+}
+
+.md-chip {
+  padding: 4px 10px;
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.13);
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.md-cuerpo {
+  display: flex;
+  align-items: center;
+  gap: 48px;
+}
+
+.md-dona-bloque {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+/* Dona: 35% blanco (fijo) y 65% dorado (variable) */
+.md-dona {
+  display: grid;
+  place-items: center;
+  width: 110px;
+  height: 110px;
+  border-radius: 50%;
+  background: conic-gradient(#ffffff 0 35%, var(--dorado) 35% 100%);
+}
+
+.md-dona-centro {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 78px;
+  height: 78px;
+  border-radius: 50%;
+  background: var(--verde-esmeralda);
+}
+
+.md-dona-centro strong {
+  font-size: 15px;
+  font-weight: 800;
+}
+
+.md-dona-centro span {
+  font-size: 10px;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.md-titulo-dona {
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.md-barras {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.md-fila {
+  display: flex;
+  justify-content: space-between;
+  font-size: 11px;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.md-fila strong {
+  font-weight: 700;
+  color: #ffffff;
+}
+
+.md-barra {
+  height: 8px;
+  border-radius: 4px;
+  overflow: hidden;
+  background: rgba(255, 255, 255, 0.13);
+}
+
+.md-relleno {
+  height: 100%;
+}
+
+.md-relleno-blanco {
+  width: 35%;
+  background: #ffffff;
+}
+
+.md-relleno-dorado {
+  width: 65%;
+  background: var(--dorado);
+}
+
+.md-nota {
+  margin-bottom: 8px;
+  font-size: 11px;
+  color: #d2fbeb;
+}
+
+.md-consejo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.07);
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.md-consejo mat-icon {
+  font-size: 16px;
+  width: 16px;
+  height: 16px;
+  color: var(--dorado);
+}
+
+/* ---------- Beneficios y pie ---------- */
+.beneficios {
+  display: flex;
+  justify-content: center;
+  gap: 56px;
+  margin: auto 0 0;
+  padding: 32px 0 0;
+  list-style: none;
+}
+
+.beneficios li {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  font-size: 18px;
+  line-height: 26px;
+  font-weight: 700;
+  text-align: center;
+  color: #e2f5ec;
+}
+
+.beneficio-icono {
+  display: grid;
+  place-items: center;
+  width: 78px;
+  height: 60px;
+  border: 1.5px solid rgba(255, 255, 255, 0.2);
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.18);
+  backdrop-filter: blur(8px);
+}
+
+.beneficio-icono mat-icon {
+  font-size: 36px;
+  width: 36px;
+  height: 36px;
+  color: #1e1e1e;
+}
+
+.derechos {
+  margin: 24px 0 0;
+  text-align: center;
+  font-size: 14px;
+  color: #a2d9be;
+}

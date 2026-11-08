@@ -1,7 +1,24 @@
 {
   "autenticacion": {
     "iniciarSesion": {
-      "titulo": "Log in"
+      "titulo": "Welcome back!",
+      "volverInicio": "Back to home",
+      "subtitulo": "Enter your credentials to access your student account.",
+      "correo": "Email",
+      "correoPlaceholder": "email@example.com",
+      "contrasena": "Password",
+      "recuerdame": "Remember me",
+      "olvidaste": "Forgot your password?",
+      "ingresar": "Log in",
+      "sinCuenta": "Don't have an account?",
+      "registrate": "Sign up",
+      "errores": {
+        "correoRequerido": "Enter your email",
+        "correoInvalido": "Enter a valid email",
+        "contrasenaRequerida": "Enter your password",
+        "credenciales": "Incorrect email or password",
+        "servidor": "Could not connect to the server. Try again."
+      }
     },
     "registro": {
       "titulo": "Create your account"
@@ -11,6 +28,25 @@
     },
     "restablecer": {
       "titulo": "Create your new password"
+    },
+    "panel": {
+      "titulo": "Decide today, live your best financial self",
+      "descripcion": "The personal finance platform for university students that helps you budget, save and invest better.",
+      "balanceTotal": "Total balance",
+      "esteMes": "This month",
+      "gastado": "Spent",
+      "gastosMes": "Monthly expenses",
+      "fijo": "Fixed (rent, university)",
+      "variable": "Variable (outings)",
+      "notaFijo": "35% • Rent, photocopies",
+      "notaVariable": "65% • Outings, food, leisure",
+      "consejo": "Great job! You saved 12% more than last month.",
+      "beneficios": {
+        "gastos": "Control your expenses",
+        "metas": "Reach your goals",
+        "libertad": "Build your freedom"
+      },
+      "derechos": "© 2026 InvertU. All rights reserved."
     }
   }
 }

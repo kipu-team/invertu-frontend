@@ -1,7 +1,24 @@
 {
   "autenticacion": {
     "iniciarSesion": {
-      "titulo": "Inicia sesión"
+      "titulo": "¡Hola de nuevo!",
+      "volverInicio": "Volver al inicio",
+      "subtitulo": "Ingresa tus credenciales para acceder a tu cuenta de estudiante.",
+      "correo": "Correo electrónico",
+      "correoPlaceholder": "correo@ejemplo.com",
+      "contrasena": "Contraseña",
+      "recuerdame": "Recuérdame",
+      "olvidaste": "¿Olvidaste tu contraseña?",
+      "ingresar": "Iniciar sesión",
+      "sinCuenta": "¿No tienes cuenta?",
+      "registrate": "Regístrate",
+      "errores": {
+        "correoRequerido": "Ingresa tu correo",
+        "correoInvalido": "Ingresa un correo válido",
+        "contrasenaRequerida": "Ingresa tu contraseña",
+        "credenciales": "Correo o contraseña incorrectos",
+        "servidor": "No se pudo conectar con el servidor. Intenta de nuevo."
+      }
     },
     "registro": {
       "titulo": "Crea tu cuenta"
@@ -11,6 +28,25 @@
     },
     "restablecer": {
       "titulo": "Crea tu nueva contraseña"
+    },
+    "panel": {
+      "titulo": "Decide hoy, vive tu mejor versión financiera",
+      "descripcion": "La plataforma de finanzas personales para universitarios que te ayuda a presupuestar, ahorrar e invertir mejor.",
+      "balanceTotal": "Balance total",
+      "esteMes": "Este mes",
+      "gastado": "Gastado",
+      "gastosMes": "Gastos del mes",
+      "fijo": "Fijo (renta, universidad)",
+      "variable": "Variable (salidas)",
+      "notaFijo": "35% • Alquiler, fotocopias",
+      "notaVariable": "65% • Salidas, comida, ocio",
+      "consejo": "¡Buen trabajo! Has ahorrado un 12% más que el mes pasado.",
+      "beneficios": {
+        "gastos": "Controla tus gastos",
+        "metas": "Alcanza tus metas",
+        "libertad": "Construye tu libertad"
+      },
+      "derechos": "© 2026 InvertU. Todos los derechos reservados."
     }
   }
 }

@@ -6,12 +6,13 @@ import {
   inject,
 } from '@angular/core';
 import { provideRouter } from '@angular/router';
-import { provideHttpClient } from '@angular/common/http';
+import { provideHttpClient, withInterceptors } from '@angular/common/http';
 import { provideTranslateService } from '@ngx-translate/core';
 import { provideTranslateMultiHttpLoader } from '@ngx-translate/http-loader';
 
 import { routes } from './app.routes';
 import { IdiomaService } from './servicios/idioma-service';
+import { autenticacionInterceptor } from './servicios/autenticacion-interceptor';
 
 /*
  * Textos ES/EN: un par de archivos por sección en public/i18n/<seccion>/es.json y en.json.
@@ -38,8 +39,8 @@ export const appConfig: ApplicationConfig = {
     // zone.js: la pantalla se actualiza sola al llegar datos con .subscribe() (como en los ejemplos del profe)
     provideZoneChangeDetection({ eventCoalescing: true }),
     provideRouter(routes),
-    // Por ahora solo se usa para cargar los textos ES/EN. Más adelante también para la API.
-    provideHttpClient(),
+    // Textos ES/EN y la API. El interceptor agrega el token a cada petición a la API.
+    provideHttpClient(withInterceptors([autenticacionInterceptor])),
     provideTranslateService({
       fallbackLang: 'es',
       loader: provideTranslateMultiHttpLoader({
