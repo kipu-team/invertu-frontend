@@ -1,0 +1,98 @@
+.panel {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding: 20px;
+  border: 1px solid var(--borde);
+  border-radius: var(--radio);
+  background: var(--superficie);
+}
+
+.panel h2 {
+  margin: 0;
+  font-size: 1.15rem;
+}
+
+.panel header p {
+  margin: 2px 0 0;
+  color: var(--texto-suave);
+  font-size: 0.8rem;
+}
+
+/* Cada campo: etiqueta arriba y caja con ícono */
+.campo {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+.campo__caja {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 0 12px;
+  border: 1px solid var(--borde);
+  border-radius: 8px;
+  background: var(--superficie);
+}
+
+.campo__caja:focus-within {
+  border-color: var(--verde-esmeralda);
+}
+
+.campo__caja--error {
+  border-color: var(--gasto);
+}
+
+.campo__caja mat-icon {
+  width: 18px;
+  height: 18px;
+  font-size: 18px;
+  color: var(--texto-suave);
+}
+
+.campo__caja input,
+.campo__caja select {
+  flex: 1;
+  min-width: 0;
+  padding: 10px 0;
+  border: none;
+  outline: none;
+  background: transparent;
+  color: var(--texto);
+  font: inherit;
+  font-weight: 400;
+}
+
+/* Mensaje de error debajo del campo (Figura 57) */
+.error {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  color: var(--gasto);
+  font-weight: 500;
+}
+
+.error mat-icon {
+  width: 16px;
+  height: 16px;
+  font-size: 16px;
+}
+
+.boton-verde {
+  height: 44px;
+  margin-top: 6px;
+  --mat-button-filled-container-color: var(--verde-esmeralda);
+  --mat-button-filled-label-text-color: #ffffff;
+}
+
+.enlace {
+  border: none;
+  background: none;
+  color: var(--texto-suave);
+  font: inherit;
+  font-weight: 600;
+  cursor: pointer;
+}
