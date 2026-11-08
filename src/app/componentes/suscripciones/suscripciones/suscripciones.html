@@ -1,79 +1,85 @@
-<div class="suscripciones">
-  <header class="suscripciones__cabecera">
-    <h1>{{ 'suscripciones.titulo' | translate }}</h1>
-    <button mat-flat-button class="boton-verde">
-      <mat-icon>add</mat-icon>
-      {{ 'suscripciones.nueva' | translate }}
-    </button>
-  </header>
-
-  <!-- Resumen: activas, canceladas y próximas renovaciones -->
-  <section class="resumen">
-    <div class="tarjeta resumen__item">
-      <span>{{ 'suscripciones.resumen.activas' | translate }}</span>
-      <strong class="contador contador--activa">{{ totalActivas() }}</strong>
-    </div>
-    <div class="tarjeta resumen__item">
-      <span>{{ 'suscripciones.resumen.canceladas' | translate }}</span>
-      <strong class="contador contador--cancelada">{{ totalCanceladas() }}</strong>
-    </div>
-    <div class="tarjeta resumen__item">
-      <span>{{ 'suscripciones.resumen.proximas' | translate }}</span>
-      <strong class="contador contador--proxima">{{ totalProximas() }}</strong>
-    </div>
-  </section>
-
-  <!-- Filtros -->
-  <div class="filtros" role="group">
-    @for (opcion of filtros; track opcion) {
-      <button type="button" class="filtro" [class.filtro--activo]="filtro() === opcion"
-              [attr.aria-pressed]="filtro() === opcion" (click)="filtro.set(opcion)">
-        {{ 'suscripciones.filtros.' + opcion | translate }}
+<div class="pagina">
+  <div class="suscripciones">
+    <header class="suscripciones__cabecera">
+      <h1>{{ 'suscripciones.titulo' | translate }}</h1>
+      <button mat-flat-button class="boton-verde" (click)="formulario.enfocar()">
+        <mat-icon>add</mat-icon>
+        {{ 'suscripciones.nueva' | translate }}
       </button>
+    </header>
+
+    <!-- Resumen: activas, canceladas y próximas renovaciones -->
+    <section class="resumen">
+      <div class="tarjeta resumen__item">
+        <span>{{ 'suscripciones.resumen.activas' | translate }}</span>
+        <strong class="contador contador--activa">{{ totalActivas() }}</strong>
+      </div>
+      <div class="tarjeta resumen__item">
+        <span>{{ 'suscripciones.resumen.canceladas' | translate }}</span>
+        <strong class="contador contador--cancelada">{{ totalCanceladas() }}</strong>
+      </div>
+      <div class="tarjeta resumen__item">
+        <span>{{ 'suscripciones.resumen.proximas' | translate }}</span>
+        <strong class="contador contador--proxima">{{ totalProximas() }}</strong>
+      </div>
+    </section>
+
+    <!-- Filtros -->
+    <div class="filtros" role="group">
+      @for (opcion of filtros; track opcion) {
+        <button type="button" class="filtro" [class.filtro--activo]="filtro() === opcion"
+                [attr.aria-pressed]="filtro() === opcion" (click)="filtro.set(opcion)">
+          {{ 'suscripciones.filtros.' + opcion | translate }}
+        </button>
+      }
+    </div>
+
+    <!-- Lista de suscripciones -->
+    @for (s of suscripcionesFiltradas(); track s.idSuscripcion) {
+      <article class="suscripcion" [class.suscripcion--cancelada]="s.estado === 'CANCELADA'">
+        <div class="suscripcion__fila">
+          <span class="suscripcion__logo">{{ s.nombreServicio.charAt(0) }}</span>
+          <div class="suscripcion__datos">
+            <strong>{{ s.nombreServicio }}</strong>
+            <small>
+              {{ 'suscripciones.frecuencias.' + s.frecuencia | translate }} •
+              <b>S/ {{ s.monto | number: '1.2-2' }}</b>
+            </small>
+          </div>
+          <span class="etiqueta" [class.etiqueta--cancelada]="s.estado === 'CANCELADA'">
+            {{ 'suscripciones.estados.' + s.estado | translate }}
+          </span>
+        </div>
+
+        <div class="suscripcion__fila suscripcion__pie">
+          <span class="suscripcion__cobro">
+            <mat-icon>schedule</mat-icon>
+            {{ 'suscripciones.proximoCobro' | translate }}: {{ s.proximaFechaCobro | date: 'dd/MM/yyyy' }}
+          </span>
+          <div class="suscripcion__acciones">
+            <button type="button" class="accion" (click)="verDetalle(s.idSuscripcion)">{{ 'suscripciones.acciones.verDetalles' | translate }}</button>
+            @if (s.estado === 'ACTIVA') {
+              <button type="button" class="accion accion--verde">{{ 'suscripciones.acciones.registrarPago' | translate }}</button>
+              <button type="button" class="accion accion--suave">{{ 'suscripciones.acciones.cancelar' | translate }}</button>
+            } @else {
+              <button type="button" class="accion accion--verde">{{ 'suscripciones.acciones.reactivar' | translate }}</button>
+            }
+          </div>
+        </div>
+      </article>
+    } @empty {
+      <div class="vacio">
+        @if (suscripciones().length === 0) {
+          <strong>{{ 'suscripciones.vacio.titulo' | translate }}</strong>
+          <p>{{ 'suscripciones.vacio.texto' | translate }}</p>
+        } @else {
+          <p>{{ 'suscripciones.vacio.filtro' | translate }}</p>
+        }
+      </div>
     }
   </div>
 
-  <!-- Lista de suscripciones -->
-  @for (s of suscripcionesFiltradas(); track s.idSuscripcion) {
-    <article class="suscripcion" [class.suscripcion--cancelada]="s.estado === 'CANCELADA'">
-      <div class="suscripcion__fila">
-        <span class="suscripcion__logo">{{ s.nombreServicio.charAt(0) }}</span>
-        <div class="suscripcion__datos">
-          <strong>{{ s.nombreServicio }}</strong>
-          <small>
-            {{ 'suscripciones.frecuencias.' + s.frecuencia | translate }} •
-            <b>S/ {{ s.monto | number: '1.2-2' }}</b>
-          </small>
-        </div>
-        <span class="etiqueta" [class.etiqueta--cancelada]="s.estado === 'CANCELADA'">
-          {{ 'suscripciones.estados.' + s.estado | translate }}
-        </span>
-      </div>
-
-      <div class="suscripcion__fila suscripcion__pie">
-        <span class="suscripcion__cobro">
-          <mat-icon>schedule</mat-icon>
-          {{ 'suscripciones.proximoCobro' | translate }}: {{ s.proximaFechaCobro | date: 'dd/MM/yyyy' }}
-        </span>
-        <div class="suscripcion__acciones">
-          <button type="button" class="accion" (click)="verDetalle(s.idSuscripcion)">{{ 'suscripciones.acciones.verDetalles' | translate }}</button>
-          @if (s.estado === 'ACTIVA') {
-            <button type="button" class="accion accion--verde">{{ 'suscripciones.acciones.registrarPago' | translate }}</button>
-            <button type="button" class="accion accion--suave">{{ 'suscripciones.acciones.cancelar' | translate }}</button>
-          } @else {
-            <button type="button" class="accion accion--verde">{{ 'suscripciones.acciones.reactivar' | translate }}</button>
-          }
-        </div>
-      </div>
-    </article>
-  } @empty {
-    <div class="vacio">
-      @if (suscripciones().length === 0) {
-        <strong>{{ 'suscripciones.vacio.titulo' | translate }}</strong>
-        <p>{{ 'suscripciones.vacio.texto' | translate }}</p>
-      } @else {
-        <p>{{ 'suscripciones.vacio.filtro' | translate }}</p>
-      }
-    </div>
-  }
+  <aside class="pagina__panel">
+    <app-suscripcion-formulario #formulario (guardada)="cargar()" />
+  </aside>
 </div>
