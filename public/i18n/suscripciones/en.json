@@ -67,6 +67,9 @@
       "descripcionPlaceholder": "Add notes about the renewal...",
       "guardar": "Save subscription",
       "cancelar": "Cancel",
+      "tituloEditar": "Edit subscription",
+      "subtituloEditar": "Update your subscription details",
+      "guardarCambios": "Save changes",
       "errores": {
         "nombre": "Enter the service name",
         "monto": "The amount must be greater than S/ 0.00",
@@ -80,7 +83,15 @@
       "registradaTexto": "Your subscription was added to the active list.",
       "continuar": "Continue",
       "errorTitulo": "Error",
-      "reintentar": "Try again"
+      "reintentar": "Try again",
+      "editadaTitulo": "Changes saved!",
+      "editadaTexto": "Your subscription details were updated."
+    },
+    "confirmarCambios": {
+      "titulo": "¿Guardar cambios?",
+      "mensaje": "Tienes cambios sin guardar en tu suscripción. ¿Qué deseas hacer?",
+      "descartar": "Descartar",
+      "guardar": "Guardar"
     }
   }
 }

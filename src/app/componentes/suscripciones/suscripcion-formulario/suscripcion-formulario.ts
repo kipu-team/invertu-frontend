@@ -7,6 +7,7 @@ import {
   signal,
   viewChild,
   ChangeDetectionStrategy,
+  computed,
 } from '@angular/core';
 import { AbstractControl, FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
@@ -17,7 +18,9 @@ import { SuscripcionService } from '../../../servicios/suscripcion-service';
 import { FrecuenciaSuscripcion } from '../../../modelo/comun';
 import { SuscripcionRequest } from '../../../modelo/suscripcion';
 import { SuscripcionMensajeDialogo } from '../suscripcion-mensaje-dialogo/suscripcion-mensaje-dialogo';
+import { ConfirmarDialogo } from '../../compartidos/confirmar-dialogo/confirmar-dialogo';
 
+/* US-29: el mismo panel sirve para editar (Figuras 49 y 51).*/
 @Component({
   selector: 'app-suscripcion-formulario',
   imports: [ReactiveFormsModule, MatButton, MatIcon, TranslatePipe],
@@ -35,6 +38,10 @@ export class SuscripcionFormulario implements OnInit {
   hoy = new Date().toLocaleDateString('en-CA'); // fecha de hoy en formato AAAA-MM-DD
   frecuencias = signal<FrecuenciaSuscripcion[]>([]);
   guardando = signal(false);
+
+  // US-29: id de la suscripción que se está editando (null = registrando una nueva)
+  idEditando = signal<number | null>(null);
+  editando = computed(() => this.idEditando() !== null);
 
   private primerCampo = viewChild<ElementRef<HTMLInputElement>>('primerCampo');
 
@@ -64,7 +71,8 @@ export class SuscripcionFormulario implements OnInit {
     return control.invalid && control.touched;
   }
 
-  guardar(): void {
+  // despues: lo que se hace luego de guardar bien (por ejemplo, abrir otra suscripción para editar)
+  guardar(despues?: () => void): void {
     if (this.formulario.invalid) {
       this.formulario.markAllAsTouched(); // pinta en rojo los campos que faltan (Figura 57)
       if (this.formulario.controls.proximaFechaCobro.hasError('fechaPasada')) {
@@ -88,20 +96,55 @@ export class SuscripcionFormulario implements OnInit {
     };
 
     this.guardando.set(true);
-    this.suscripcionService.registrar(datos).subscribe(() => {
+    const id = this.idEditando();
+    const peticion =
+      id === null
+        ? this.suscripcionService.registrar(datos)
+        : this.suscripcionService.editar(id, datos);
+
+    peticion.subscribe(() => {
       this.guardando.set(false);
       this.limpiar();
       this.guardada.emit();
-      this.mostrarMensaje(
-        'exito',
-        'suscripciones.mensajes.registradaTitulo',
-        'suscripciones.mensajes.registradaTexto',
-        'suscripciones.mensajes.continuar',
-      );
+      if (id === null) {
+        this.mostrarMensaje(
+          'exito',
+          'suscripciones.mensajes.registradaTitulo',
+          'suscripciones.mensajes.registradaTexto',
+          'suscripciones.mensajes.continuar',
+        );
+      } else {
+        this.mostrarMensaje(
+          'exito',
+          'suscripciones.mensajes.editadaTitulo',
+          'suscripciones.mensajes.editadaTexto',
+          'suscripciones.mensajes.continuar',
+        );
+      }
+      despues?.();
     });
   }
 
+  // US-29: carga los datos de una suscripción en el formulario. Si había cambios sin guardar, pregunta primero
+  editar(id: number): void {
+    if (this.formulario.dirty) {
+      this.confirmarCambios(() => this.cargarParaEditar(id));
+    } else {
+      this.cargarParaEditar(id);
+    }
+  }
+
+  // Botón "Cancelar": si hay cambios sin guardar, pregunta "¿Guardar cambios?" (Figura 51)
+  cancelar(): void {
+    if (this.formulario.dirty) {
+      this.confirmarCambios(() => this.limpiar());
+    } else {
+      this.limpiar();
+    }
+  }
+
   limpiar(): void {
+    this.idEditando.set(null);
     this.formulario.reset({ frecuencia: 'MENSUAL' });
   }
 
@@ -110,6 +153,44 @@ export class SuscripcionFormulario implements OnInit {
     const campo = this.primerCampo()?.nativeElement;
     campo?.scrollIntoView({ behavior: 'smooth', block: 'center' });
     campo?.focus();
+  }
+
+  private cargarParaEditar(id: number): void {
+    this.suscripcionService.obtenerDetalle(id).subscribe((s) => {
+      this.idEditando.set(id);
+      // reset deja el formulario "sin cambios", así solo pregunta si el usuario modifica algo
+      this.formulario.reset({
+        nombreServicio: s.nombreServicio,
+        monto: s.monto,
+        frecuencia: s.frecuencia,
+        proximaFechaCobro: s.proximaFechaCobro,
+        descripcion: s.descripcion ?? '',
+      });
+      this.enfocar();
+    });
+  }
+
+  // Guardar = guarda y luego sigue; Descartar = olvida los cambios y sigue; cerrar la ventana = no hace nada
+  private confirmarCambios(despues: () => void): void {
+    this.dialog
+      .open(ConfirmarDialogo, {
+        data: {
+          titulo: 'suscripciones.confirmarCambios.titulo',
+          mensaje: 'suscripciones.confirmarCambios.mensaje',
+          textoCancelar: 'suscripciones.confirmarCambios.descartar',
+          textoConfirmar: 'suscripciones.confirmarCambios.guardar',
+        },
+        maxWidth: '95vw',
+      })
+      .afterClosed()
+      .subscribe((guardar) => {
+        if (guardar === true) {
+          this.guardar(despues);
+        } else if (guardar === false) {
+          this.limpiar();
+          despues();
+        }
+      });
   }
 
   private mostrarMensaje(
