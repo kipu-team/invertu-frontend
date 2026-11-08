@@ -2,7 +2,6 @@
   "chatbot": {
     "titulo": "InvertU Assistant",
     "abrir": "Open assistant",
-    "abrir": "Open assistant",
     "cerrar": "Close assistant",
     "subtitulo": "Ask me about your finances",
     "bienvenida": "Hi! I'm your financial assistant. Ask me about your expenses, goals or subscriptions.",
@@ -11,7 +10,7 @@
     "escribiendo": "Typing...",
     "free": {
       "titulo": "Premium-only feature",
-      "texto": "The financial assistant is available only on the Premium plan. You can try it for free.",
+      "texto": "The financial assistant is available only on the Premium plan.",
       "boton": "Upgrade to Premium"
     }
   }
