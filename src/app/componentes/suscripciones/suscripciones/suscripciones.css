@@ -117,10 +117,6 @@
   background: var(--verde-claro);
 }
 
-.suscripcion__fila--clic {
-  cursor: pointer;
-}
-
 .suscripcion__fila {
   display: flex;
   align-items: center;
