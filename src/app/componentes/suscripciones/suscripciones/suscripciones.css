@@ -1,5 +1,17 @@
+/* Dos columnas: listado a la izquierda y formulario a la derecha */
+.pagina {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 340px;
+  gap: 24px;
+  align-items: start;
+}
+
+.pagina__panel {
+  position: sticky;
+  top: 24px;
+}
+
 .suscripciones {
-  max-width: 640px;
   display: flex;
   flex-direction: column;
   gap: 16px;
@@ -197,6 +209,17 @@
   margin: 4px 0 0;
   color: var(--texto-suave);
   font-size: 0.85rem;
+}
+
+/* Tablets: el formulario pasa debajo del listado */
+@media (max-width: 1100px) {
+  .pagina {
+    grid-template-columns: 1fr;
+  }
+
+  .pagina__panel {
+    position: static;
+  }
 }
 
 /* Responsive: tablets y celulares */

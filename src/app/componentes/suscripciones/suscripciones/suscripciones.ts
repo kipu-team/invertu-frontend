@@ -15,13 +15,14 @@ import { SuscripcionService } from '../../../servicios/suscripcion-service';
 import { SuscripcionResumen } from '../../../modelo/suscripcion';
 import { EstadoSuscripcion } from '../../../modelo/comun';
 import { SuscripcionDetalleDialogo } from '../suscripcion-detalle-dialogo/suscripcion-detalle-dialogo';
+import { SuscripcionFormulario } from '../suscripcion-formulario/suscripcion-formulario';
 
 /** Filtro de la lista: todas, solo activas o solo canceladas */
 type FiltroEstado = 'TODAS' | EstadoSuscripcion;
 
 @Component({
   selector: 'app-suscripciones',
-  imports: [DatePipe, DecimalPipe, MatButton, MatIcon, TranslatePipe],
+  imports: [DatePipe, DecimalPipe, MatButton, MatIcon, TranslatePipe, SuscripcionFormulario],
   templateUrl: './suscripciones.html',
   changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './suscripciones.css',

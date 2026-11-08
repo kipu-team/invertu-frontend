@@ -1,0 +1,14 @@
+<div class="mensaje">
+  <button mat-icon-button mat-dialog-close class="mensaje__cerrar" [attr.aria-label]="'suscripciones.mensajes.cerrar' | translate">
+    <mat-icon>close</mat-icon>
+  </button>
+
+  <span class="mensaje__icono" [class.mensaje__icono--error]="datos.tipo === 'error'">
+    <mat-icon>{{ datos.tipo === 'exito' ? 'check' : 'error' }}</mat-icon>
+  </span>
+
+  <h2>{{ datos.titulo | translate }}</h2>
+  <p>{{ datos.mensaje | translate }}</p>
+
+  <button mat-flat-button mat-dialog-close class="boton-verde">{{ datos.boton | translate }}</button>
+</div>

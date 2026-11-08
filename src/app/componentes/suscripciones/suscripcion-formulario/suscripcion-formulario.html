@@ -1,0 +1,76 @@
+<form class="panel" [formGroup]="formulario" (ngSubmit)="guardar()" novalidate>
+  <header>
+    <h2>{{ 'suscripciones.formulario.titulo' | translate }}</h2>
+    <p>{{ 'suscripciones.formulario.subtitulo' | translate }}</p>
+  </header>
+
+  <!-- Nombre del servicio -->
+  <label class="campo">
+    <span>{{ 'suscripciones.formulario.nombre' | translate }}</span>
+    <div class="campo__caja" [class.campo__caja--error]="tieneError('nombreServicio')">
+      <mat-icon>edit_note</mat-icon>
+      <input #primerCampo formControlName="nombreServicio" maxlength="100"
+             [placeholder]="'suscripciones.formulario.nombrePlaceholder' | translate" />
+    </div>
+    @if (tieneError('nombreServicio')) {
+      <small class="error"><mat-icon>error</mat-icon>{{ 'suscripciones.formulario.errores.nombre' | translate }}</small>
+    }
+  </label>
+
+  <!-- Monto -->
+  <label class="campo">
+    <span>{{ 'suscripciones.formulario.monto' | translate }}</span>
+    <div class="campo__caja" [class.campo__caja--error]="tieneError('monto')">
+      <mat-icon>attach_money</mat-icon>
+      <input type="number" formControlName="monto" min="0.01" step="0.01" placeholder="S/ 0.00" />
+    </div>
+    @if (tieneError('monto')) {
+      <small class="error"><mat-icon>error</mat-icon>{{ 'suscripciones.formulario.errores.monto' | translate }}</small>
+    }
+  </label>
+
+  <!-- Frecuencia -->
+  <label class="campo">
+    <span>{{ 'suscripciones.formulario.frecuencia' | translate }}</span>
+    <div class="campo__caja">
+      <select formControlName="frecuencia">
+        @for (f of frecuencias(); track f) {
+          <option [value]="f">{{ 'suscripciones.frecuencias.' + f | translate }}</option>
+        }
+      </select>
+    </div>
+  </label>
+
+  <!-- Fecha del próximo cobro -->
+  <label class="campo">
+    <span>{{ 'suscripciones.formulario.fecha' | translate }}</span>
+    <div class="campo__caja" [class.campo__caja--error]="tieneError('proximaFechaCobro')">
+      <mat-icon>calendar_today</mat-icon>
+      <input type="date" formControlName="proximaFechaCobro" [min]="hoy" />
+    </div>
+    @if (tieneError('proximaFechaCobro')) {
+      <small class="error">
+        <mat-icon>error</mat-icon>
+        {{ (formulario.controls.proximaFechaCobro.hasError('fechaPasada')
+        ? 'suscripciones.formulario.errores.fechaPasada'
+        : 'suscripciones.formulario.errores.fecha') | translate }}
+      </small>
+    }
+  </label>
+
+  <!-- Descripción (opcional) -->
+  <label class="campo">
+    <span>{{ 'suscripciones.formulario.descripcion' | translate }}</span>
+    <div class="campo__caja">
+      <input formControlName="descripcion" maxlength="500"
+             [placeholder]="'suscripciones.formulario.descripcionPlaceholder' | translate" />
+    </div>
+  </label>
+
+  <button mat-flat-button type="submit" class="boton-verde" [disabled]="guardando()">
+    {{ 'suscripciones.formulario.guardar' | translate }}
+  </button>
+  <button type="button" class="enlace" (click)="limpiar()">
+    {{ 'suscripciones.formulario.cancelar' | translate }}
+  </button>
+</form>
