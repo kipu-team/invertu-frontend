@@ -180,3 +180,36 @@ h3 {
   --mat-button-filled-container-color: var(--verde-esmeralda);
   --mat-button-filled-label-text-color: #ffffff;
 }
+
+/* Responsive: celulares */
+@media (max-width: 640px) {
+  .detalle {
+    min-width: 0;
+  }
+
+  .monto strong {
+    font-size: 1.5rem;
+  }
+
+  .datos > div {
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .detalle__acciones {
+    flex-direction: column-reverse;
+    align-items: stretch;
+  }
+
+  .detalle__acciones .espacio {
+    display: none;
+  }
+
+  .detalle__acciones button {
+    margin: 0;
+  }
+
+  .enlace-rojo {
+    padding: 8px 0;
+  }
+}
