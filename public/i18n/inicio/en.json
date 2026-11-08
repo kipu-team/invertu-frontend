@@ -1,5 +1,28 @@
 {
   "inicio": {
-    "titulo": "Home"
+    "titulo": "Home",
+    "orientacion": {
+      "saludo": "Hi, {{nombre}}!",
+      "titulo": "Take control of your university finances",
+      "descripcion": "We know managing fixed and variable income while studying can be a challenge. InvertU helps you organize your budget in a simple, visual way designed for your academic life.",
+      "imagenAlt": "Books, coins and a growing plant",
+      "primerosPasos": "Your first steps:",
+      "paso": "Step {{numero}}",
+      "pendiente": "0% completed",
+      "completado": "100% completed",
+      "listo": "Done",
+      "pasos": {
+        "movimiento": {
+          "titulo": "Record your first transaction",
+          "descripcion": "Add your allowance, your scholarship stipend or your photocopy expenses to see your monthly indicators and charts.",
+          "boton": "Record income/expense"
+        },
+        "meta": {
+          "titulo": "Create your first savings goal",
+          "descripcion": "A new laptop, the semester or a trip? Set how much you need and track your progress with each contribution.",
+          "boton": "Create savings goal"
+        }
+      }
+    }
   }
 }
