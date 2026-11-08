@@ -1,0 +1,200 @@
+.suscripciones {
+  max-width: 640px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* Título y botón "Nueva suscripción" */
+.suscripciones__cabecera {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.suscripciones__cabecera h1 {
+  margin: 0;
+  font-size: 1.6rem;
+}
+
+.boton-verde {
+  --mat-button-filled-container-color: var(--verde-esmeralda);
+  --mat-button-filled-label-text-color: #ffffff;
+}
+
+/* Tarjetas de resumen */
+.resumen {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+}
+
+.resumen__item {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+  font-size: 0.85rem;
+  color: var(--texto-suave);
+}
+
+.contador {
+  min-width: 28px;
+  padding: 2px 10px;
+  border-radius: 999px;
+  text-align: center;
+  font-size: 1rem;
+}
+
+.contador--activa {
+  background: var(--verde-claro);
+  color: var(--verde-esmeralda);
+}
+
+.contador--cancelada {
+  background: #fdeaea;
+  color: var(--gasto);
+}
+
+.contador--proxima {
+  background: var(--dorado-claro);
+  color: #b88a00;
+}
+
+/* Filtros Todas / Activas / Canceladas */
+.filtros {
+  display: flex;
+  gap: 8px;
+}
+
+.filtro {
+  padding: 6px 14px;
+  border: 1px solid var(--borde);
+  border-radius: 999px;
+  background: var(--superficie);
+  color: var(--texto-suave);
+  font: inherit;
+  font-size: 0.85rem;
+  cursor: pointer;
+}
+
+.filtro--activo {
+  border-color: var(--verde-esmeralda);
+  background: var(--verde-esmeralda);
+  color: #ffffff;
+}
+
+/* Tarjeta de cada suscripción: borde verde si está activa, rojo si está cancelada */
+.suscripcion {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 14px 16px;
+  border: 1.5px solid var(--verde-esmeralda);
+  border-radius: var(--radio);
+  background: var(--superficie);
+}
+
+.suscripcion--cancelada {
+  border-color: var(--gasto);
+}
+
+.suscripcion__fila {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.suscripcion__logo {
+  display: grid;
+  place-items: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 8px;
+  background: var(--verde-claro);
+  color: var(--verde-oscuro);
+  font-weight: 700;
+}
+
+.suscripcion__datos {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.suscripcion__datos small {
+  color: var(--texto-suave);
+}
+
+.suscripcion__datos b {
+  color: var(--texto);
+}
+
+.etiqueta {
+  padding: 2px 10px;
+  border-radius: 999px;
+  background: var(--verde-claro);
+  color: var(--verde-esmeralda);
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+.etiqueta--cancelada {
+  background: #fdeaea;
+  color: var(--gasto);
+}
+
+.suscripcion__pie {
+  justify-content: space-between;
+}
+
+.suscripcion__cobro {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 0.8rem;
+  color: var(--texto-suave);
+}
+
+.suscripcion__cobro mat-icon {
+  width: 16px;
+  height: 16px;
+  font-size: 16px;
+}
+
+/* Botones de texto: Ver detalles, Registrar pago, Reactivar, Cancelar */
+.suscripcion__acciones {
+  display: flex;
+  gap: 12px;
+}
+
+.accion {
+  padding: 0;
+  border: none;
+  background: none;
+  color: var(--texto);
+  font: inherit;
+  font-size: 0.8rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.accion--verde {
+  color: var(--verde-esmeralda);
+}
+
+.accion--suave {
+  color: var(--texto-suave);
+}
+
+/* Estado vacío (Figura 48, sin suscripciones) */
+.vacio {
+  padding: 32px 16px;
+  text-align: center;
+}
+
+.vacio p {
+  margin: 4px 0 0;
+  color: var(--texto-suave);
+  font-size: 0.85rem;
+}
