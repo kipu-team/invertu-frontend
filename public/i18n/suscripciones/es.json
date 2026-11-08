@@ -34,6 +34,26 @@
       "titulo": "Aún no tienes suscripciones registradas.",
       "texto": "Registra una nueva suscripción para ver tu lista de suscripciones.",
       "filtro": "No tienes suscripciones en esta categoría."
+    },
+    "detalle": {
+      "cerrar": "Cerrar detalle",
+      "categoria": "Categoría",
+      "alertaSaldo": "Alerta de saldo insuficiente",
+      "monto": "Monto del cobro",
+      "renovacion": "Frecuencia de renovación",
+      "frecuencia": "Frecuencia",
+      "recordatorio": "Recordatorio",
+      "diasAntes": "{{dias}} días antes",
+      "desactivado": "Desactivado",
+      "descripcion": "Descripción",
+      "historial": "Historial de pagos recientes",
+      "fecha": "Fecha",
+      "montoPago": "Monto",
+      "estado": "Estado",
+      "pagado": "Pagado",
+      "sinPagos": "Aún no hay pagos registrados.",
+      "cancelar": "Cancelar suscripción",
+      "editar": "Editar suscripción"
     }
   }
 }

@@ -34,6 +34,26 @@
       "titulo": "You don't have any subscriptions yet.",
       "texto": "Add a new subscription to see your subscription list.",
       "filtro": "You don't have subscriptions in this category."
+    },
+    "detalle": {
+      "cerrar": "Close details",
+      "categoria": "Category",
+      "alertaSaldo": "Low balance alert",
+      "monto": "Charge amount",
+      "renovacion": "Renewal frequency",
+      "frecuencia": "Frequency",
+      "recordatorio": "Reminder",
+      "diasAntes": "{{dias}} days before",
+      "desactivado": "Off",
+      "descripcion": "Description",
+      "historial": "Recent payment history",
+      "fecha": "Date",
+      "montoPago": "Amount",
+      "estado": "Status",
+      "pagado": "Paid",
+      "sinPagos": "No payments recorded yet.",
+      "cancelar": "Cancel subscription",
+      "editar": "Edit subscription"
     }
   }
 }
