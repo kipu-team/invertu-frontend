@@ -1,7 +1,7 @@
 @if (abierto()) {
   <section class="chatbot__ventana" role="dialog" [attr.aria-label]="'chatbot.titulo' | translate">
     <header class="chatbot__cabecera">
-      <mat-icon class="chatbot__avatar">smart_toy</mat-icon>
+      <mat-icon class="chatbot__avatar">robot_2</mat-icon>
       <div class="chatbot__titulos">
         <strong>{{ 'chatbot.titulo' | translate }}</strong>
         <small>{{ 'chatbot.subtitulo' | translate }}</small>
@@ -61,5 +61,5 @@
   (click)="alternar()"
   [attr.aria-label]="(abierto() ? 'chatbot.cerrar' : 'chatbot.abrir') | translate"
 >
-  <mat-icon>{{ abierto() ? 'close' : 'smart_toy' }}</mat-icon>
+  <mat-icon>{{ abierto() ? 'close' : 'robot_2' }}</mat-icon>
 </button>
