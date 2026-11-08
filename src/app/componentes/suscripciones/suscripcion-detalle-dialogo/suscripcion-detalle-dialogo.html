@@ -89,13 +89,13 @@
   <!-- Acciones (se conectan en las US-28, US-29 y US-30) -->
   <mat-dialog-actions class="detalle__acciones">
     @if (s.estado === 'ACTIVA') {
-      <button type="button" class="enlace-rojo">{{ 'suscripciones.detalle.cancelar' | translate }}</button>
+      <button type="button" class="enlace-rojo" [mat-dialog-close]="'cancelar'">{{ 'suscripciones.detalle.cancelar' | translate }}</button>
       <span class="espacio"></span>
       <button mat-stroked-button [mat-dialog-close]="'editar'">{{ 'suscripciones.detalle.editar' | translate }}</button>
       <button mat-flat-button class="boton-verde">{{ 'suscripciones.acciones.registrarPago' | translate }}</button>
     } @else {
       <span class="espacio"></span>
-      <button mat-flat-button class="boton-verde">{{ 'suscripciones.acciones.reactivar' | translate }}</button>
+      <button mat-flat-button class="boton-verde" [mat-dialog-close]="'reactivar'">{{ 'suscripciones.acciones.reactivar' | translate }}</button>
     }
   </mat-dialog-actions>
 }

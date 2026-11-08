@@ -17,6 +17,9 @@ import { SuscripcionResumen } from '../../../modelo/suscripcion';
 import { EstadoSuscripcion } from '../../../modelo/comun';
 import { SuscripcionDetalleDialogo } from '../suscripcion-detalle-dialogo/suscripcion-detalle-dialogo';
 import { SuscripcionFormulario } from '../suscripcion-formulario/suscripcion-formulario';
+import { SuscripcionMensajeDialogo } from '../suscripcion-mensaje-dialogo/suscripcion-mensaje-dialogo';
+import { ReactivarDialogo } from '../reactivar-dialogo/reactivar-dialogo';
+import { ConfirmarDialogo } from '../../compartidos/confirmar-dialogo/confirmar-dialogo';
 
 /** Filtro de la lista: todas, solo activas o solo canceladas */
 type FiltroEstado = 'TODAS' | EstadoSuscripcion;
@@ -71,12 +74,68 @@ export class Suscripciones implements OnInit {
         this.cargar();
         // US-29: "Editar suscripción" en el detalle cierra la ventana con 'editar'
         if (resultado === 'editar') this.editar(id);
+        // US-30: "Cancelar suscripción" y "Reactivar" del detalle
+        if (resultado === 'cancelar') this.cancelar(id);
+        if (resultado === 'reactivar') this.reactivar(id);
       });
   }
 
   // US-29: carga la suscripción en el panel de la derecha (Figura 49)
   editar(id: number): void {
     this.panel().editar(id);
+  }
+
+  // US-30: pide confirmación y cancela (Figura 61)
+  cancelar(id: number): void {
+    this.dialog
+      .open(ConfirmarDialogo, {
+        data: {
+          titulo: 'suscripciones.cancelar.titulo',
+          mensaje: 'suscripciones.cancelar.mensaje',
+          textoConfirmar: 'suscripciones.cancelar.confirmar',
+          textoCancelar: 'suscripciones.cancelar.volver',
+          peligro: true,
+        },
+        maxWidth: '95vw',
+      })
+      .afterClosed()
+      .subscribe((confirmo) => {
+        if (!confirmo) return;
+        this.suscripcionService.cancelar(id).subscribe(() => {
+          if (this.panel().idEditando() === id) this.panel().limpiar(); // ya no se puede editar
+          this.cargar();
+          this.mostrarMensaje(
+            'suscripciones.mensajes.canceladaTitulo',
+            'suscripciones.mensajes.canceladaTexto',
+          );
+        });
+      });
+  }
+
+  // US-30: pide la nueva fecha de cobro y reactiva (Figuras 58 y 60)
+  reactivar(id: number): void {
+    const nombre = this.suscripciones().find((s) => s.idSuscripcion === id)?.nombreServicio ?? '';
+    this.dialog
+      .open(ReactivarDialogo, { data: nombre, width: '420px', maxWidth: '95vw' })
+      .afterClosed()
+      .subscribe((fecha) => {
+        if (!fecha) return;
+        this.suscripcionService.reactivar(id, { proximaFechaCobro: fecha }).subscribe(() => {
+          this.cargar();
+          this.mostrarMensaje(
+            'suscripciones.mensajes.reactivadaTitulo',
+            'suscripciones.mensajes.reactivadaTexto',
+          );
+        });
+      });
+  }
+
+  private mostrarMensaje(titulo: string, mensaje: string): void {
+    this.dialog.open(SuscripcionMensajeDialogo, {
+      data: { tipo: 'exito', titulo, mensaje, boton: 'suscripciones.mensajes.continuar' },
+      width: '420px',
+      maxWidth: '95vw',
+    });
   }
 
   // Próxima renovación = el cobro es dentro de los próximos 7 días
