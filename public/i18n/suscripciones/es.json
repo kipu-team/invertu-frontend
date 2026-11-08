@@ -67,6 +67,9 @@
       "descripcionPlaceholder": "Agregar notas sobre la renovación...",
       "guardar": "Guardar suscripción",
       "cancelar": "Cancelar",
+      "tituloEditar": "Editar suscripción",
+      "subtituloEditar": "Modifica los datos de tu suscripción",
+      "guardarCambios": "Guardar cambios",
       "errores": {
         "nombre": "Ingresa el nombre del servicio",
         "monto": "El monto debe ser mayor a S/ 0.00",
@@ -80,7 +83,15 @@
       "registradaTexto": "Tu suscripción se agregó a la lista de activas.",
       "continuar": "Continuar",
       "errorTitulo": "Error",
-      "reintentar": "Intentar de nuevo"
+      "reintentar": "Intentar de nuevo",
+      "editadaTitulo": "¡Cambios guardados!",
+      "editadaTexto": "Los datos de tu suscripción se actualizaron."
+    },
+    "confirmarCambios": {
+      "titulo": "¿Guardar cambios?",
+      "mensaje": "Tienes cambios sin guardar en tu suscripción. ¿Qué deseas hacer?",
+      "descartar": "Descartar",
+      "guardar": "Guardar"
     }
   }
 }
