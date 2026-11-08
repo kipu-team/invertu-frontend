@@ -54,6 +54,33 @@
       "sinPagos": "No payments recorded yet.",
       "cancelar": "Cancel subscription",
       "editar": "Edit subscription"
+    },
+    "formulario": {
+      "titulo": "Register new subscription",
+      "subtitulo": "Enter the details to stay in control",
+      "nombre": "Service name",
+      "nombrePlaceholder": "E.g. Amazon Prime, Gym, etc.",
+      "monto": "Amount (S/)",
+      "frecuencia": "Frequency",
+      "fecha": "Next charge date",
+      "descripcion": "Description (optional)",
+      "descripcionPlaceholder": "Add notes about the renewal...",
+      "guardar": "Save subscription",
+      "cancelar": "Cancel",
+      "errores": {
+        "nombre": "Enter the service name",
+        "monto": "The amount must be greater than S/ 0.00",
+        "fecha": "Enter the next charge date",
+        "fechaPasada": "The next charge date cannot be earlier than today"
+      }
+    },
+    "mensajes": {
+      "cerrar": "Close",
+      "registradaTitulo": "Subscription registered!",
+      "registradaTexto": "Your subscription was added to the active list.",
+      "continuar": "Continue",
+      "errorTitulo": "Error",
+      "reintentar": "Try again"
     }
   }
 }

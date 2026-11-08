@@ -54,6 +54,33 @@
       "sinPagos": "Aún no hay pagos registrados.",
       "cancelar": "Cancelar suscripción",
       "editar": "Editar suscripción"
+    },
+    "formulario": {
+      "titulo": "Registrar nueva suscripción",
+      "subtitulo": "Ingresa los detalles para mantener el control",
+      "nombre": "Nombre del servicio",
+      "nombrePlaceholder": "Ej. Amazon Prime, Gym, etc.",
+      "monto": "Monto (S/)",
+      "frecuencia": "Frecuencia",
+      "fecha": "Fecha del próximo cobro",
+      "descripcion": "Descripción (opcional)",
+      "descripcionPlaceholder": "Agregar notas sobre la renovación...",
+      "guardar": "Guardar suscripción",
+      "cancelar": "Cancelar",
+      "errores": {
+        "nombre": "Ingresa el nombre del servicio",
+        "monto": "El monto debe ser mayor a S/ 0.00",
+        "fecha": "Ingresa la próxima fecha de cobro",
+        "fechaPasada": "La próxima fecha de cobro no puede ser anterior a la fecha actual"
+      }
+    },
+    "mensajes": {
+      "cerrar": "Cerrar",
+      "registradaTitulo": "¡Suscripción registrada!",
+      "registradaTexto": "Tu suscripción se agregó a la lista de activas.",
+      "continuar": "Continuar",
+      "errorTitulo": "Error",
+      "reintentar": "Intentar de nuevo"
     }
   }
 }
