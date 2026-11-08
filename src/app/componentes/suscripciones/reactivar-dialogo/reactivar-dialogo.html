@@ -1,0 +1,28 @@
+<h2 mat-dialog-title>{{ 'suscripciones.reactivar.titulo' | translate: { nombre: nombreServicio } }}</h2>
+
+<mat-dialog-content class="contenido">
+  <p>{{ 'suscripciones.reactivar.mensaje' | translate }}</p>
+
+  <label class="campo">
+    <span>{{ 'suscripciones.formulario.fecha' | translate }}</span>
+    <div class="campo__caja" [class.campo__caja--error]="fecha.invalid && fecha.touched">
+      <mat-icon>calendar_today</mat-icon>
+      <input type="date" [formControl]="fecha" [min]="hoy" />
+    </div>
+    @if (fecha.invalid && fecha.touched) {
+      <small class="error">
+        <mat-icon>error</mat-icon>
+        {{ (fecha.hasError('fechaPasada')
+        ? 'suscripciones.formulario.errores.fechaPasada'
+        : 'suscripciones.formulario.errores.fecha') | translate }}
+      </small>
+    }
+  </label>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end" class="acciones">
+  <button mat-button type="button" (click)="cancelar()">{{ 'compartido.acciones.cancelar' | translate }}</button>
+  <button mat-flat-button type="button" class="boton-verde" (click)="reactivar()">
+    {{ 'suscripciones.acciones.reactivar' | translate }}
+  </button>
+</mat-dialog-actions>

@@ -85,13 +85,27 @@
       "errorTitulo": "Error",
       "reintentar": "Intentar de nuevo",
       "editadaTitulo": "¡Cambios guardados!",
-      "editadaTexto": "Los datos de tu suscripción se actualizaron."
+      "editadaTexto": "Los datos de tu suscripción se actualizaron.",
+      "canceladaTitulo": "¡Suscripción cancelada!",
+      "canceladaTexto": "La suscripción pasó a la sección Canceladas.",
+      "reactivadaTitulo": "¡Suscripción reactivada!",
+      "reactivadaTexto": "Volvió a la sección Activas con su nueva fecha de cobro."
     },
     "confirmarCambios": {
       "titulo": "¿Guardar cambios?",
       "mensaje": "Tienes cambios sin guardar en tu suscripción. ¿Qué deseas hacer?",
       "descartar": "Descartar",
       "guardar": "Guardar"
+    },
+    "cancelar": {
+      "titulo": "¿Cancelar suscripción?",
+      "mensaje": "La suscripción pasará a la sección Canceladas y dejarás de recibir sus recordatorios. Podrás reactivarla después.",
+      "confirmar": "Sí, cancelar",
+      "volver": "Volver"
+    },
+    "reactivar": {
+      "titulo": "Reactivar {{nombre}}",
+      "mensaje": "Elige la nueva fecha del próximo cobro para volver a activar la suscripción."
     }
   }
 }

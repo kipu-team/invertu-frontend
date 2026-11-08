@@ -85,13 +85,27 @@
       "errorTitulo": "Error",
       "reintentar": "Try again",
       "editadaTitulo": "Changes saved!",
-      "editadaTexto": "Your subscription details were updated."
+      "editadaTexto": "Your subscription details were updated.",
+      "canceladaTitulo": "Subscription cancelled!",
+      "canceladaTexto": "The subscription moved to the Cancelled section.",
+      "reactivadaTitulo": "Subscription reactivated!",
+      "reactivadaTexto": "It is back in the Active section with its new charge date."
     },
     "confirmarCambios": {
-      "titulo": "¿Guardar cambios?",
-      "mensaje": "Tienes cambios sin guardar en tu suscripción. ¿Qué deseas hacer?",
-      "descartar": "Descartar",
-      "guardar": "Guardar"
+      "titulo": "Save changes?",
+      "mensaje": "You have unsaved changes in your subscription. What would you like to do?",
+      "descartar": "Discard",
+      "guardar": "Save"
+    },
+    "cancelar": {
+      "titulo": "Cancel subscription?",
+      "mensaje": "The subscription will move to the Cancelled section and you will stop receiving its reminders. You can reactivate it later.",
+      "confirmar": "Yes, cancel",
+      "volver": "Go back"
+    },
+    "reactivar": {
+      "titulo": "Reactivate {{nombre}}",
+      "mensaje": "Choose the new next charge date to activate the subscription again."
     }
   }
 }
