@@ -1,5 +1,28 @@
 {
   "inicio": {
-    "titulo": "Inicio"
+    "titulo": "Inicio",
+    "orientacion": {
+      "saludo": "¡Hola, {{nombre}}!",
+      "titulo": "Toma el control de tus finanzas universitarias",
+      "descripcion": "Sabemos que administrar ingresos fijos y variables mientras estudias puede ser un reto. InvertU te ayuda a organizar tu presupuesto de manera fácil, visual y pensada para tu vida académica.",
+      "imagenAlt": "Libros, monedas y una planta que crece",
+      "primerosPasos": "Tus primeros pasos:",
+      "paso": "Paso {{numero}}",
+      "pendiente": "0% completado",
+      "completado": "100% completado",
+      "listo": "Listo",
+      "pasos": {
+        "movimiento": {
+          "titulo": "Registra tu primer movimiento",
+          "descripcion": "Suma tu mesada, tu sueldo de beca o el gasto de tus fotocopias para ver tus indicadores y gráficos del mes.",
+          "boton": "Registrar ingreso/gasto"
+        },
+        "meta": {
+          "titulo": "Crea tu primera meta de ahorro",
+          "descripcion": "¿Una laptop nueva, el semestre o un viaje? Define cuánto necesitas y sigue tu avance con cada aporte.",
+          "boton": "Crear meta de ahorro"
+        }
+      }
+    }
   }
 }

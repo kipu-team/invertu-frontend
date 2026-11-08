@@ -1,9 +1,16 @@
-<app-en-construccion
-  titulo="inicio.titulo"
-  responsable="Mafer"
-  figuras="21–22"
-  [pendientes]="pendientes"
-/>
+<div class="inicio">
+  <!-- US-05: orientación inicial (Figura 21) -->
+  @if (orientacion?.mostrarOrientacion) {
+    <app-orientacion [orientacion]="orientacion!" />
+  }
+
+  <app-en-construccion
+    titulo="inicio.titulo"
+    responsable="Mafer"
+    figuras="22"
+    [pendientes]="pendientes"
+  />
+</div>
 
 <!-- Chatbot (Luz). Déjalo al final de la pantalla de Inicio. -->
 <app-chatbot-flotante />
