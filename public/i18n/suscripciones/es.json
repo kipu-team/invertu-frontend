@@ -106,6 +106,18 @@
     "reactivar": {
       "titulo": "Reactivar {{nombre}}",
       "mensaje": "Elige la nueva fecha del próximo cobro para volver a activar la suscripción."
+    },
+    "recordatorio": {
+      "titulo": "Recordarme cancelar antes de renovar",
+      "texto": "Te avisaremos por correo antes de que se renueve automáticamente.",
+      "anticipacion": "Avisarme",
+      "dias": {
+        "1": "Un día antes",
+        "3": "3 días antes",
+        "7": "7 días antes"
+      },
+      "free": "Con el plan Free puedes activar recordatorios en hasta 3 suscripciones.",
+      "limite": "Alcanzaste el límite de 3 recordatorios del plan Free. Pásate a Premium para activar recordatorios en todas tus suscripciones."
     }
   }
 }

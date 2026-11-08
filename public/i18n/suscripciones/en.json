@@ -106,6 +106,18 @@
     "reactivar": {
       "titulo": "Reactivate {{nombre}}",
       "mensaje": "Choose the new next charge date to activate the subscription again."
+    },
+    "recordatorio": {
+      "titulo": "Remind me to cancel before renewal",
+      "texto": "We will email you before it renews automatically.",
+      "anticipacion": "Notify me",
+      "dias": {
+        "1": "One day before",
+        "3": "3 days before",
+        "7": "7 days before"
+      },
+      "free": "With the Free plan you can turn on reminders for up to 3 subscriptions.",
+      "limite": "You reached the limit of 3 reminders on the Free plan. Upgrade to Premium to turn on reminders for all your subscriptions."
     }
   }
 }

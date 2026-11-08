@@ -41,17 +41,36 @@
         <dt>{{ 'suscripciones.proximoCobro' | translate }}</dt>
         <dd>{{ s.proximaFechaCobro | date: 'dd/MM/yyyy' }}</dd>
       </div>
-      <div>
-        <dt>{{ 'suscripciones.detalle.recordatorio' | translate }}</dt>
-        <dd>
-          @if (s.recordatorioActivo) {
-            {{ 'suscripciones.detalle.diasAntes' | translate: { dias: s.diasAnticipacion } }}
-          } @else {
-            {{ 'suscripciones.detalle.desactivado' | translate }}
-          }
-        </dd>
-      </div>
     </dl>
+
+    <!-- US-31: recordatorio por correo (solo suscripciones activas) -->
+    @if (s.estado === 'ACTIVA') {
+      <section class="recordatorio">
+        <div class="recordatorio__fila">
+          <div>
+            <strong>{{ 'suscripciones.recordatorio.titulo' | translate }}</strong>
+            <small>{{ 'suscripciones.recordatorio.texto' | translate }}</small>
+          </div>
+          <mat-slide-toggle [checked]="s.recordatorioActivo" (change)="cambiarRecordatorio($event)"
+                            [attr.aria-label]="'suscripciones.recordatorio.titulo' | translate" />
+        </div>
+
+        @if (s.recordatorioActivo) {
+          <label class="recordatorio__dias">
+            <span>{{ 'suscripciones.recordatorio.anticipacion' | translate }}</span>
+            <select [value]="s.diasAnticipacion" (change)="cambiarDias(+$any($event.target).value)">
+              @for (d of opcionesDias; track d) {
+                <option [value]="d" [selected]="d === s.diasAnticipacion">{{ 'suscripciones.recordatorio.dias.' + d | translate }}</option>
+              }
+            </select>
+          </label>
+        }
+
+        @if (!sesion.esPremium()) {
+          <p class="recordatorio__free">{{ 'suscripciones.recordatorio.free' | translate }}</p>
+        }
+      </section>
+    }
 
     @if (s.descripcion) {
       <div class="descripcion">
