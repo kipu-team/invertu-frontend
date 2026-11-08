@@ -31,7 +31,7 @@
   align-items: center;
   gap: 10px;
   padding: 12px 8px 12px 16px;
-  background: var(--verde-oscuro);
+  background: linear-gradient(135deg, #16a063 0%, var(--verde-oscuro) 100%);
   color: #ffffff;
 }
 
