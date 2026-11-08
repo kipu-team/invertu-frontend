@@ -60,10 +60,10 @@
           <div class="suscripcion__acciones">
             <button type="button" class="accion" (click)="verDetalle(s.idSuscripcion)">{{ 'suscripciones.acciones.verDetalles' | translate }}</button>
             @if (s.estado === 'ACTIVA') {
-              <button type="button" class="accion accion--verde" (click)="reactivar(s.idSuscripcion)">{{ 'suscripciones.acciones.reactivar' | translate }}</button>
+              <button type="button" class="accion accion--verde">{{ 'suscripciones.acciones.registrarPago' | translate }}</button>
               <button type="button" class="accion accion--suave" (click)="cancelar(s.idSuscripcion)">{{ 'suscripciones.acciones.cancelar' | translate }}</button>
             } @else {
-              <button type="button" class="accion accion--verde">{{ 'suscripciones.acciones.reactivar' | translate }}</button>
+              <button type="button" class="accion accion--verde" (click)="reactivar(s.idSuscripcion)">{{ 'suscripciones.acciones.reactivar' | translate }}</button>
             }
           </div>
         </div>
