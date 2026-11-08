@@ -1,5 +1,39 @@
 {
   "suscripciones": {
-    "titulo": "Mis suscripciones"
+    "titulo": "Suscripciones",
+    "nueva": "Nueva suscripción",
+    "resumen": {
+      "activas": "Activas",
+      "canceladas": "Canceladas",
+      "proximas": "Próximas renovaciones"
+    },
+    "filtros": {
+      "TODAS": "Todas",
+      "ACTIVA": "Activas",
+      "CANCELADA": "Canceladas"
+    },
+    "estados": {
+      "ACTIVA": "Activa",
+      "CANCELADA": "Cancelada"
+    },
+    "frecuencias": {
+      "SEMANAL": "Semanal",
+      "MENSUAL": "Mensual",
+      "TRIMESTRAL": "Trimestral",
+      "SEMESTRAL": "Semestral",
+      "ANUAL": "Anual"
+    },
+    "proximoCobro": "Próximo cobro",
+    "acciones": {
+      "verDetalles": "Ver detalles",
+      "registrarPago": "Registrar pago",
+      "reactivar": "Reactivar",
+      "cancelar": "Cancelar"
+    },
+    "vacio": {
+      "titulo": "Aún no tienes suscripciones registradas.",
+      "texto": "Registra una nueva suscripción para ver tu lista de suscripciones.",
+      "filtro": "No tienes suscripciones en esta categoría."
+    }
   }
 }
