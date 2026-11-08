@@ -111,6 +111,16 @@
   border-color: var(--gasto);
 }
 
+
+/* US-29: tarjeta que se está editando en el panel (Figura 49) */
+.suscripcion--seleccionada {
+  background: var(--verde-claro);
+}
+
+.suscripcion__fila--clic {
+  cursor: pointer;
+}
+
 .suscripcion__fila {
   display: flex;
   align-items: center;

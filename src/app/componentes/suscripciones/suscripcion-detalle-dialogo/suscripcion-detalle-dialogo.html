@@ -91,7 +91,7 @@
     @if (s.estado === 'ACTIVA') {
       <button type="button" class="enlace-rojo">{{ 'suscripciones.detalle.cancelar' | translate }}</button>
       <span class="espacio"></span>
-      <button mat-stroked-button>{{ 'suscripciones.detalle.editar' | translate }}</button>
+      <button mat-stroked-button [mat-dialog-close]="'editar'">{{ 'suscripciones.detalle.editar' | translate }}</button>
       <button mat-flat-button class="boton-verde">{{ 'suscripciones.acciones.registrarPago' | translate }}</button>
     } @else {
       <span class="espacio"></span>

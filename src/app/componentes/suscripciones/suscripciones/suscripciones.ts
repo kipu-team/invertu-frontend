@@ -4,6 +4,7 @@ import {
   inject,
   OnInit,
   signal,
+  viewChild,
   ChangeDetectionStrategy,
 } from '@angular/core';
 import { DatePipe, DecimalPipe } from '@angular/common';
@@ -30,6 +31,7 @@ type FiltroEstado = 'TODAS' | EstadoSuscripcion;
 export class Suscripciones implements OnInit {
   private suscripcionService = inject(SuscripcionService);
   private dialog = inject(MatDialog);
+  private panel = viewChild.required(SuscripcionFormulario);
   readonly filtros: FiltroEstado[] = ['TODAS', 'ACTIVA', 'CANCELADA'];
 
   suscripciones = signal<SuscripcionResumen[]>([]);
@@ -65,7 +67,16 @@ export class Suscripciones implements OnInit {
     this.dialog
       .open(SuscripcionDetalleDialogo, { data: id, width: '560px', maxWidth: '95vw' })
       .afterClosed()
-      .subscribe(() => this.cargar());
+      .subscribe((resultado) => {
+        this.cargar();
+        // US-29: "Editar suscripción" en el detalle cierra la ventana con 'editar'
+        if (resultado === 'editar') this.editar(id);
+      });
+  }
+
+  // US-29: carga la suscripción en el panel de la derecha (Figura 49)
+  editar(id: number): void {
+    this.panel().editar(id);
   }
 
   // Próxima renovación = el cobro es dentro de los próximos 7 días

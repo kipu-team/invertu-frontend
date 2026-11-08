@@ -36,8 +36,10 @@
 
     <!-- Lista de suscripciones -->
     @for (s of suscripcionesFiltradas(); track s.idSuscripcion) {
-      <article class="suscripcion" [class.suscripcion--cancelada]="s.estado === 'CANCELADA'">
-        <div class="suscripcion__fila">
+      <article class="suscripcion" [class.suscripcion--cancelada]="s.estado === 'CANCELADA'"
+               [class.suscripcion--seleccionada]="formulario.idEditando() === s.idSuscripcion">
+        <div class="suscripcion__fila" [class.suscripcion__fila--clic]="s.estado === 'ACTIVA'"
+             (click)="s.estado === 'ACTIVA' && editar(s.idSuscripcion)">
           <span class="suscripcion__logo">{{ s.nombreServicio.charAt(0) }}</span>
           <div class="suscripcion__datos">
             <strong>{{ s.nombreServicio }}</strong>
