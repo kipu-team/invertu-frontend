@@ -198,3 +198,35 @@
   color: var(--texto-suave);
   font-size: 0.85rem;
 }
+
+/* Responsive: tablets y celulares */
+@media (max-width: 640px) {
+  .suscripciones__cabecera {
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+
+  .resumen {
+    grid-template-columns: 1fr;
+  }
+
+  .resumen__item {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .filtros {
+    flex-wrap: wrap;
+  }
+
+  .suscripcion__pie {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .suscripcion__acciones {
+    flex-wrap: wrap;
+  }
+}
