@@ -1,0 +1,101 @@
+@if (detalle(); as s) {
+  <mat-dialog-content class="detalle">
+    <!-- Encabezado: nombre, categoría, estado y botón cerrar -->
+    <header class="detalle__cabecera">
+      <div>
+        <h2>{{ s.nombreServicio }}</h2>
+        @if (s.ultimaCategoria) {
+          <small>{{ 'suscripciones.detalle.categoria' | translate }}: {{ s.ultimaCategoria.nombre }}</small>
+        }
+      </div>
+      <span class="etiqueta" [class.etiqueta--cancelada]="s.estado === 'CANCELADA'">
+        {{ 'suscripciones.estados.' + s.estado | translate }}
+      </span>
+      <button mat-icon-button mat-dialog-close [attr.aria-label]="'suscripciones.detalle.cerrar' | translate">
+        <mat-icon>close</mat-icon>
+      </button>
+    </header>
+
+    <!-- Frecuencia y alerta de saldo (la alerta se activa en la US-32) -->
+    <div class="detalle__fila">
+      <span class="chip-frecuencia">{{ 'suscripciones.frecuencias.' + s.frecuencia | translate }}</span>
+      <mat-slide-toggle [checked]="s.alertaSaldoActiva" disabled labelPosition="before">
+        {{ 'suscripciones.detalle.alertaSaldo' | translate }}
+      </mat-slide-toggle>
+    </div>
+
+    <!-- Monto destacado -->
+    <div class="monto">
+      <small>{{ 'suscripciones.detalle.monto' | translate }}</small>
+      <strong>S/ {{ s.monto | number: '1.2-2' }}</strong>
+      <small>{{ 'suscripciones.detalle.renovacion' | translate }}: {{ 'suscripciones.frecuencias.' + s.frecuencia | translate }}</small>
+    </div>
+
+    <!-- Datos -->
+    <dl class="datos">
+      <div>
+        <dt>{{ 'suscripciones.detalle.frecuencia' | translate }}</dt>
+        <dd>{{ 'suscripciones.frecuencias.' + s.frecuencia | translate }}</dd>
+      </div>
+      <div>
+        <dt>{{ 'suscripciones.proximoCobro' | translate }}</dt>
+        <dd>{{ s.proximaFechaCobro | date: 'dd/MM/yyyy' }}</dd>
+      </div>
+      <div>
+        <dt>{{ 'suscripciones.detalle.recordatorio' | translate }}</dt>
+        <dd>
+          @if (s.recordatorioActivo) {
+            {{ 'suscripciones.detalle.diasAntes' | translate: { dias: s.diasAnticipacion } }}
+          } @else {
+            {{ 'suscripciones.detalle.desactivado' | translate }}
+          }
+        </dd>
+      </div>
+    </dl>
+
+    @if (s.descripcion) {
+      <div class="descripcion">
+        <small>{{ 'suscripciones.detalle.descripcion' | translate }}</small>
+        <p>{{ s.descripcion }}</p>
+      </div>
+    }
+
+    <!-- Historial de pagos -->
+    <h3>{{ 'suscripciones.detalle.historial' | translate }}</h3>
+    @if (s.pagos.length > 0) {
+      <table class="pagos">
+        <thead>
+        <tr>
+          <th>{{ 'suscripciones.detalle.fecha' | translate }}</th>
+          <th>{{ 'suscripciones.detalle.montoPago' | translate }}</th>
+          <th>{{ 'suscripciones.detalle.estado' | translate }}</th>
+        </tr>
+        </thead>
+        <tbody>
+          @for (pago of s.pagos; track $index) {
+            <tr>
+              <td>{{ pago.fecha | date: 'dd/MM/yyyy' }}</td>
+              <td>S/ {{ pago.monto | number: '1.2-2' }}</td>
+              <td class="pagado"><mat-icon>check_circle</mat-icon>{{ 'suscripciones.detalle.pagado' | translate }}</td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    } @else {
+      <p class="sin-pagos">{{ 'suscripciones.detalle.sinPagos' | translate }}</p>
+    }
+  </mat-dialog-content>
+
+  <!-- Acciones (se conectan en las US-28, US-29 y US-30) -->
+  <mat-dialog-actions class="detalle__acciones">
+    @if (s.estado === 'ACTIVA') {
+      <button type="button" class="enlace-rojo">{{ 'suscripciones.detalle.cancelar' | translate }}</button>
+      <span class="espacio"></span>
+      <button mat-stroked-button>{{ 'suscripciones.detalle.editar' | translate }}</button>
+      <button mat-flat-button class="boton-verde">{{ 'suscripciones.acciones.registrarPago' | translate }}</button>
+    } @else {
+      <span class="espacio"></span>
+      <button mat-flat-button class="boton-verde">{{ 'suscripciones.acciones.reactivar' | translate }}</button>
+    }
+  </mat-dialog-actions>
+}
