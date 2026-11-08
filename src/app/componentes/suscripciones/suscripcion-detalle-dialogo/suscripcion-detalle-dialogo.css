@@ -23,6 +23,8 @@
 }
 
 .detalle__cabecera small {
+  display: block;
+  margin-top: 4px;
   color: var(--texto-suave);
 }
 
