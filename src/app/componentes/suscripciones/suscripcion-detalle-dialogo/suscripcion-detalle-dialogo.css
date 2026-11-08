@@ -1,0 +1,217 @@
+.detalle {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  min-width: min(520px, 80vw);
+  color: var(--texto);
+}
+
+/* Encabezado */
+.detalle__cabecera {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+}
+
+.detalle__cabecera > div {
+  flex: 1;
+}
+
+.detalle__cabecera h2 {
+  margin: 0;
+  font-size: 1.3rem;
+}
+
+.detalle__cabecera small {
+  display: block;
+  margin-top: 4px;
+  color: var(--texto-suave);
+}
+
+.etiqueta {
+  margin-top: 4px;
+  padding: 2px 10px;
+  border-radius: 999px;
+  background: var(--verde-claro);
+  color: var(--verde-esmeralda);
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+.etiqueta--cancelada {
+  background: #fdeaea;
+  color: var(--gasto);
+}
+
+/* Frecuencia y alerta de saldo */
+.detalle__fila {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.chip-frecuencia {
+  padding: 2px 10px;
+  border-radius: 6px;
+  background: var(--dorado-claro);
+  color: #8a6700;
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+
+/* Monto destacado */
+.monto {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 14px 16px;
+  border: 1px solid var(--verde-esmeralda);
+  border-radius: var(--radio);
+  background: var(--verde-claro);
+}
+
+.monto small {
+  color: var(--texto-suave);
+}
+
+.monto strong {
+  font-size: 1.8rem;
+  color: var(--verde-esmeralda);
+}
+
+/* Datos en filas: etiqueta a la izquierda, valor a la derecha */
+.datos {
+  margin: 0;
+}
+
+.datos > div {
+  display: flex;
+  justify-content: space-between;
+  padding: 8px 0;
+  border-bottom: 1px solid var(--borde);
+}
+
+.datos dt {
+  color: var(--texto-suave);
+}
+
+.datos dd {
+  margin: 0;
+  font-weight: 600;
+}
+
+.descripcion small {
+  color: var(--texto-suave);
+}
+
+.descripcion p {
+  margin: 4px 0 0;
+}
+
+h3 {
+  margin: 4px 0 0;
+  font-size: 1rem;
+}
+
+/* Historial de pagos */
+.pagos {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.85rem;
+}
+
+.pagos th {
+  padding: 8px;
+  background: var(--fondo);
+  color: var(--texto-suave);
+  font-weight: 500;
+  text-align: left;
+}
+
+.pagos td {
+  padding: 8px;
+  border-bottom: 1px solid var(--borde);
+}
+
+.pagado {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  color: var(--verde-esmeralda);
+  font-weight: 600;
+}
+
+.pagado mat-icon {
+  width: 16px;
+  height: 16px;
+  font-size: 16px;
+}
+
+.sin-pagos {
+  margin: 0;
+  color: var(--texto-suave);
+  font-size: 0.85rem;
+}
+
+/* Botones de abajo */
+.detalle__acciones {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.espacio {
+  flex: 1;
+}
+
+.enlace-rojo {
+  padding: 0;
+  border: none;
+  background: none;
+  color: var(--gasto);
+  font: inherit;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.boton-verde {
+  --mat-button-filled-container-color: var(--verde-esmeralda);
+  --mat-button-filled-label-text-color: #ffffff;
+}
+
+/* Responsive: celulares */
+@media (max-width: 640px) {
+  .detalle {
+    min-width: 0;
+  }
+
+  .monto strong {
+    font-size: 1.5rem;
+  }
+
+  .datos > div {
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .detalle__acciones {
+    flex-direction: column-reverse;
+    align-items: stretch;
+  }
+
+  .detalle__acciones .espacio {
+    display: none;
+  }
+
+  .detalle__acciones button {
+    margin: 0;
+  }
+
+  .enlace-rojo {
+    padding: 8px 0;
+  }
+}

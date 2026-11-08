@@ -9,10 +9,12 @@ import {
 import { DatePipe, DecimalPipe } from '@angular/common';
 import { MatButton } from '@angular/material/button';
 import { MatIcon } from '@angular/material/icon';
+import { MatDialog } from '@angular/material/dialog';
 import { TranslatePipe } from '@ngx-translate/core';
 import { SuscripcionService } from '../../../servicios/suscripcion-service';
 import { SuscripcionResumen } from '../../../modelo/suscripcion';
 import { EstadoSuscripcion } from '../../../modelo/comun';
+import { SuscripcionDetalleDialogo } from '../suscripcion-detalle-dialogo/suscripcion-detalle-dialogo';
 
 /** Filtro de la lista: todas, solo activas o solo canceladas */
 type FiltroEstado = 'TODAS' | EstadoSuscripcion;
@@ -24,10 +26,9 @@ type FiltroEstado = 'TODAS' | EstadoSuscripcion;
   changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './suscripciones.css',
 })
-
 export class Suscripciones implements OnInit {
   private suscripcionService = inject(SuscripcionService);
-
+  private dialog = inject(MatDialog);
   readonly filtros: FiltroEstado[] = ['TODAS', 'ACTIVA', 'CANCELADA'];
 
   suscripciones = signal<SuscripcionResumen[]>([]);
@@ -40,9 +41,14 @@ export class Suscripciones implements OnInit {
 
   // Números de las 3 tarjetas de resumen
   totalActivas = computed(() => this.suscripciones().filter((s) => s.estado === 'ACTIVA').length);
-  totalCanceladas = computed(() => this.suscripciones().filter((s) => s.estado === 'CANCELADA').length);
+  totalCanceladas = computed(
+    () => this.suscripciones().filter((s) => s.estado === 'CANCELADA').length,
+  );
   totalProximas = computed(
-    () => this.suscripciones().filter((s) => s.estado === 'ACTIVA' && this.cobraPronto(s.proximaFechaCobro)).length,
+    () =>
+      this.suscripciones().filter(
+        (s) => s.estado === 'ACTIVA' && this.cobraPronto(s.proximaFechaCobro),
+      ).length,
   );
 
   ngOnInit(): void {
@@ -51,6 +57,14 @@ export class Suscripciones implements OnInit {
 
   cargar(): void {
     this.suscripcionService.listar().subscribe((data) => this.suscripciones.set(data));
+  }
+
+  // US-27: abre la ventana de detalle; al cerrarla se recarga la lista por si hubo cambios
+  verDetalle(id: number): void {
+    this.dialog
+      .open(SuscripcionDetalleDialogo, { data: id, width: '560px', maxWidth: '95vw' })
+      .afterClosed()
+      .subscribe(() => this.cargar());
   }
 
   // Próxima renovación = el cobro es dentro de los próximos 7 días
