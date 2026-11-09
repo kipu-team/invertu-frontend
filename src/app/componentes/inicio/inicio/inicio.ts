@@ -7,6 +7,7 @@ import { EnConstruccion } from '../../compartidos/en-construccion/en-construccio
 import { ChatbotFlotante } from '../../chatbot/chatbot-flotante/chatbot-flotante';
 import { OrientacionInicial } from '../orientacion/orientacion';
 import { MesAnio, SelectorMes } from '../selector-mes/selector-mes';
+import { TarjetasIndicadores } from '../indicadores/indicadores';
 import { InicioService } from '../../../servicios/inicio-service';
 import { Indicadores, Orientacion } from '../../../modelo/inicio';
 
@@ -21,6 +22,7 @@ import { Indicadores, Orientacion } from '../../../modelo/inicio';
     ChatbotFlotante,
     OrientacionInicial,
     SelectorMes,
+    TarjetasIndicadores,
   ],
   templateUrl: './inicio.html',
   changeDetection: ChangeDetectionStrategy.Eager,
@@ -36,7 +38,6 @@ export class Inicio implements OnInit {
   indicadores: Indicadores | null = null;
 
   pendientes = [
-    'Tarjetas de indicadores (US-07, Figura 22)',
     'Gráficos de ingresos y gastos (US-08, Figura 22)',
     'El chatbot ya está colocado abajo (<app-chatbot-flotante>): no lo muevas, lo hace Luz',
   ];

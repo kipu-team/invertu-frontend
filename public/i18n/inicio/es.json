@@ -76,6 +76,19 @@
       "10": "octubre",
       "11": "noviembre",
       "12": "diciembre"
+    },
+    "indicadores": {
+      "ingresos": "Ingresos del período",
+      "gastos": "Gastos del período",
+      "balance": "Balance del período",
+      "ahorro": "Ahorro destinado a metas",
+      "fijos": "Fijos: {{pct}}%",
+      "variables": "Variables: {{pct}}%",
+      "positivo": "Positivo",
+      "negativo": "Negativo",
+      "balanceNota": "Ingresos menos gastos y aportes a metas",
+      "tasa": "{{pct}}% de tus ingresos",
+      "ahorroNota": "Aportes a tus metas en este mes"
     }
   }
 }

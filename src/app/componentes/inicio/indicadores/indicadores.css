@@ -1,0 +1,89 @@
+/* US-07: tarjetas de indicadores (Figura 22) */
+.indicadores {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+}
+
+.indicador {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  border-radius: 16px;
+}
+
+.indicador h3 {
+  margin: 0;
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  color: var(--texto-suave);
+}
+
+.indicador__monto {
+  margin: 0;
+  white-space: nowrap;
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+
+.indicador__reparto {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.75rem;
+  color: var(--texto-suave);
+}
+
+.indicador__barra {
+  display: flex;
+  height: 8px;
+  border-radius: 4px;
+  overflow: hidden;
+  background: var(--borde);
+}
+
+.indicador__fijo {
+  background: var(--verde-esmeralda);
+}
+
+.indicador__variable {
+  background: var(--dorado);
+}
+
+.indicador__chip {
+  align-self: flex-start;
+  padding: 3px 8px;
+  border-radius: 6px;
+  background: var(--verde-claro);
+  color: var(--verde-esmeralda);
+  font-size: 0.7rem;
+  font-weight: 700;
+}
+
+.indicador__chip--negativo {
+  background: color-mix(in srgb, var(--gasto) 12%, transparent);
+  color: var(--gasto);
+}
+
+.indicador__chip--dorado {
+  background: var(--dorado-claro);
+  color: #9a6b00;
+}
+
+.indicador__nota {
+  margin: 0;
+  font-size: 0.75rem;
+  color: var(--texto-suave);
+}
+
+@media (max-width: 1100px) {
+  .indicadores {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 600px) {
+  .indicadores {
+    grid-template-columns: 1fr;
+  }
+}
