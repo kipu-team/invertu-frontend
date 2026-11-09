@@ -14,7 +14,8 @@
     },
     "estados": {
       "ACTIVA": "Activa",
-      "CANCELADA": "Cancelada"
+      "CANCELADA": "Cancelada",
+      "SIN_PAGO": "Pago sin registrar"
     },
     "frecuencias": {
       "SEMANAL": "Semanal",
@@ -28,7 +29,8 @@
       "verDetalles": "Ver detalles",
       "registrarPago": "Registrar pago",
       "reactivar": "Reactivar",
-      "cancelar": "Cancelar"
+      "cancelar": "Cancelar",
+      "registrarPendiente": "Registrar pago pendiente"
     },
     "vacio": {
       "titulo": "Aún no tienes suscripciones registradas.",
@@ -89,7 +91,9 @@
       "canceladaTitulo": "¡Suscripción cancelada!",
       "canceladaTexto": "La suscripción pasó a la sección Canceladas.",
       "reactivadaTitulo": "¡Suscripción reactivada!",
-      "reactivadaTexto": "Volvió a la sección Activas con su nueva fecha de cobro."
+      "reactivadaTexto": "Volvió a la sección Activas con su nueva fecha de cobro.",
+      "pagoTitulo": "¡Pago registrado!",
+      "pagoTexto": "Pago registrado correctamente."
     },
     "confirmarCambios": {
       "titulo": "¿Guardar cambios?",
@@ -121,6 +125,21 @@
       "alerta": {
         "soloPremium": "La alerta de saldo insuficiente es exclusiva del plan Premium: te avisamos si tu saldo no alcanza para el próximo cobro."
       }
+    },
+    "pago": {
+      "titulo": "Registrar pago de {{nombre}}",
+      "texto": "Se guardará como un gasto fijo en tus movimientos.",
+      "fecha": "Fecha del pago",
+      "categoria": "Categoría",
+      "medioPago": "Medio de pago (opcional)",
+      "sinMedio": "Sin especificar",
+      "descripcion": "Pago {{nombre}}",
+      "errores": {
+        "fecha": "Ingresa la fecha del pago",
+        "fechaFutura": "La fecha no puede ser futura",
+        "categoria": "Selecciona una categoría"
+      },
+      "aviso": "Ya pasó un cobro de esta suscripción y aún no lo registras. Regístralo para que tu saldo esté al día."
     }
   }
 }

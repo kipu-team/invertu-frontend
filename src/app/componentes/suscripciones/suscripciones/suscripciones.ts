@@ -19,6 +19,7 @@ import { SuscripcionDetalleDialogo } from '../suscripcion-detalle-dialogo/suscri
 import { SuscripcionFormulario } from '../suscripcion-formulario/suscripcion-formulario';
 import { SuscripcionMensajeDialogo } from '../suscripcion-mensaje-dialogo/suscripcion-mensaje-dialogo';
 import { ReactivarDialogo } from '../reactivar-dialogo/reactivar-dialogo';
+import { RegistrarPagoDialogo } from '../registrar-pago-dialogo/registrar-pago-dialogo';
 import { ConfirmarDialogo } from '../../compartidos/confirmar-dialogo/confirmar-dialogo';
 
 /** Filtro de la lista: todas, solo activas o solo canceladas */
@@ -77,6 +78,8 @@ export class Suscripciones implements OnInit {
         // US-30: "Cancelar suscripción" y "Reactivar" del detalle
         if (resultado === 'cancelar') this.cancelar(id);
         if (resultado === 'reactivar') this.reactivar(id);
+        // US-28: "Registrar pago" del detalle
+        if (resultado === 'pagar') this.registrarPago(id);
       });
   }
 
@@ -127,6 +130,18 @@ export class Suscripciones implements OnInit {
             'suscripciones.mensajes.reactivadaTexto',
           );
         });
+      });
+  }
+
+  // US-28: registra el pago como un gasto de la suscripción (Figuras 54 y 55)
+  registrarPago(id: number): void {
+    this.dialog
+      .open(RegistrarPagoDialogo, { data: id, width: '440px', maxWidth: '95vw' })
+      .afterClosed()
+      .subscribe((registrado) => {
+        if (!registrado) return;
+        this.cargar();
+        this.mostrarMensaje('suscripciones.mensajes.pagoTitulo', 'suscripciones.mensajes.pagoTexto');
       });
   }
 
