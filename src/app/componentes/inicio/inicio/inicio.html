@@ -29,6 +29,9 @@
       </a>
     </div>
   } @else if (indicadores) {
+    <!-- US-07: tarjetas de indicadores -->
+    <app-indicadores [indicadores]="indicadores" />
+
     <app-en-construccion
       titulo="inicio.titulo"
       responsable="Mafer"

@@ -76,6 +76,19 @@
       "10": "October",
       "11": "November",
       "12": "December"
+    },
+    "indicadores": {
+      "ingresos": "Income for the period",
+      "gastos": "Expenses for the period",
+      "balance": "Balance for the period",
+      "ahorro": "Savings toward goals",
+      "fijos": "Fixed: {{pct}}%",
+      "variables": "Variable: {{pct}}%",
+      "positivo": "Positive",
+      "negativo": "Negative",
+      "balanceNota": "Income minus expenses and goal contributions",
+      "tasa": "{{pct}}% of your income",
+      "ahorroNota": "Contributions to your goals this month"
     }
   }
 }
