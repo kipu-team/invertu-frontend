@@ -89,6 +89,18 @@
       "balanceNota": "Ingresos menos gastos y aportes a metas",
       "tasa": "{{pct}}% de tus ingresos",
       "ahorroNota": "Aportes a tus metas en este mes"
+    },
+    "graficos": {
+      "semanal": "Ingresos vs gastos por semana",
+      "semanalDescripcion": "Comparación de tus ingresos y gastos en cada semana del mes seleccionado.",
+      "ingresos": "Ingresos",
+      "gastos": "Gastos",
+      "semana": "Semana {{numero}}",
+      "gastosCategoria": "Distribución de gastos por categoría",
+      "ingresosFuente": "Distribución de ingresos por fuente",
+      "total": "Total",
+      "sinGastos": "No registraste gastos en este mes.",
+      "sinIngresos": "No registraste ingresos en este mes."
     }
   }
 }

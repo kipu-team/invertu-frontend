@@ -68,7 +68,10 @@ export class InicioService {
     this.delMes(anio, mes, tipo).forEach((m) => {
       totales[m.categoria] = (totales[m.categoria] ?? 0) + m.monto;
     });
-    return Object.entries(totales).map(([categoria, total]) => ({ categoria, total }));
+    // Igual que el backend: de mayor a menor
+    return Object.entries(totales)
+      .map(([categoria, total]) => ({ categoria, total }))
+      .sort((a, b) => b.total - a.total);
   }
 
   /** Igual que el backend: semana 1 = días 1-7, semana 2 = días 8-14, ..., semana 5 = días 29-31 */
