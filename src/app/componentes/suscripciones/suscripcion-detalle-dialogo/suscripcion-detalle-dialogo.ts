@@ -100,4 +100,21 @@ export class SuscripcionDetalleDialogo implements OnInit {
         })),
       );
   }
+
+  // US-32: alerta de saldo insuficiente. Solo Premium; un Free ve el aviso Premium (Figuras 64 y 65)
+  cambiarAlertaSaldo(evento: MatSlideToggleChange): void {
+    if (!this.sesion.esPremium()) {
+      evento.source.checked = false; // el interruptor vuelve a apagarse
+      this.dialog.open(AvisoPremiumDialogo, {
+        data: { mensaje: 'suscripciones.alerta.soloPremium' },
+        maxWidth: '95vw',
+      });
+      return;
+    }
+    this.suscripcionService
+      .configurarAlertaSaldo(this.idSuscripcion, { activa: evento.checked })
+      .subscribe((r) =>
+        this.detalle.update((s) => ({ ...s!, alertaSaldoActiva: r.alertaSaldoActiva })),
+      );
+  }
 }
