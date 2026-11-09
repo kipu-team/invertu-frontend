@@ -23,6 +23,59 @@
           "boton": "Create savings goal"
         }
       }
+    },
+    "subtitulo": "See the status of your income, expenses and savings for the selected month.",
+    "meses": {
+      "1": "January",
+      "2": "February",
+      "3": "March",
+      "4": "April",
+      "5": "May",
+      "6": "June",
+      "7": "July",
+      "8": "August",
+      "9": "September",
+      "10": "October",
+      "11": "November",
+      "12": "December"
+    },
+    "mesesCortos": {
+      "1": "Jan",
+      "2": "Feb",
+      "3": "Mar",
+      "4": "Apr",
+      "5": "May",
+      "6": "Jun",
+      "7": "Jul",
+      "8": "Aug",
+      "9": "Sep",
+      "10": "Oct",
+      "11": "Nov",
+      "12": "Dec"
+    },
+    "selectorMes": {
+      "etiqueta": "Choose month",
+      "anioAnterior": "Previous year",
+      "anioSiguiente": "Next year"
+    },
+    "vacio": {
+      "titulo": "You have no transactions in {{mes}} {{anio}} yet",
+      "descripcion": "When you record income or an expense for this month, your indicators and charts will appear here.",
+      "boton": "Record income/expense"
+    },
+    "mesesEnFrase": {
+      "1": "January",
+      "2": "February",
+      "3": "March",
+      "4": "April",
+      "5": "May",
+      "6": "June",
+      "7": "July",
+      "8": "August",
+      "9": "September",
+      "10": "October",
+      "11": "November",
+      "12": "December"
     }
   }
 }

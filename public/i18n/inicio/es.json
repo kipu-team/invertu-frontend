@@ -23,6 +23,59 @@
           "boton": "Crear meta de ahorro"
         }
       }
+    },
+    "subtitulo": "Visualiza el estado de tus ingresos, gastos y ahorro del mes seleccionado.",
+    "meses": {
+      "1": "Enero",
+      "2": "Febrero",
+      "3": "Marzo",
+      "4": "Abril",
+      "5": "Mayo",
+      "6": "Junio",
+      "7": "Julio",
+      "8": "Agosto",
+      "9": "Septiembre",
+      "10": "Octubre",
+      "11": "Noviembre",
+      "12": "Diciembre"
+    },
+    "mesesCortos": {
+      "1": "Ene",
+      "2": "Feb",
+      "3": "Mar",
+      "4": "Abr",
+      "5": "May",
+      "6": "Jun",
+      "7": "Jul",
+      "8": "Ago",
+      "9": "Sep",
+      "10": "Oct",
+      "11": "Nov",
+      "12": "Dic"
+    },
+    "selectorMes": {
+      "etiqueta": "Elegir mes",
+      "anioAnterior": "Año anterior",
+      "anioSiguiente": "Año siguiente"
+    },
+    "vacio": {
+      "titulo": "Aún no tienes movimientos en {{mes}} de {{anio}}",
+      "descripcion": "Cuando registres un ingreso o un gasto de este mes, aquí verás tus indicadores y gráficos.",
+      "boton": "Registrar ingreso/gasto"
+    },
+    "mesesEnFrase": {
+      "1": "enero",
+      "2": "febrero",
+      "3": "marzo",
+      "4": "abril",
+      "5": "mayo",
+      "6": "junio",
+      "7": "julio",
+      "8": "agosto",
+      "9": "septiembre",
+      "10": "octubre",
+      "11": "noviembre",
+      "12": "diciembre"
     }
   }
 }
