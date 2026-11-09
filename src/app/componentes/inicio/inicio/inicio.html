@@ -4,12 +4,38 @@
     <app-orientacion [orientacion]="orientacion!" />
   }
 
-  <app-en-construccion
-    titulo="inicio.titulo"
-    responsable="Mafer"
-    figuras="22"
-    [pendientes]="pendientes"
-  />
+  <!-- US-06: título y selector de mes (Figura 22) -->
+  <header class="inicio__encabezado">
+    <div>
+      <h1>{{ 'inicio.titulo' | translate }}</h1>
+      <p>{{ 'inicio.subtitulo' | translate }}</p>
+    </div>
+    <app-selector-mes [valor]="periodo" (cambio)="alCambiarMes($event)" />
+  </header>
+
+  @if (mesVacio) {
+    <!-- US-06: estado vacío del mes -->
+    <div class="tarjeta inicio__vacio">
+      <span class="inicio__vacio-icono"><mat-icon>event_busy</mat-icon></span>
+      <h2>
+        {{
+          'inicio.vacio.titulo'
+            | translate: { mes: ('inicio.mesesEnFrase.' + periodo.mes | translate), anio: periodo.anio }
+        }}
+      </h2>
+      <p>{{ 'inicio.vacio.descripcion' | translate }}</p>
+      <a mat-flat-button class="inicio__boton-verde" routerLink="/movimientos">
+        {{ 'inicio.vacio.boton' | translate }}
+      </a>
+    </div>
+  } @else if (indicadores) {
+    <app-en-construccion
+      titulo="inicio.titulo"
+      responsable="Mafer"
+      figuras="22"
+      [pendientes]="pendientes"
+    />
+  }
 </div>
 
 <!-- Chatbot (Luz). Déjalo al final de la pantalla de Inicio. -->

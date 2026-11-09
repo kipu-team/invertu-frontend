@@ -3,3 +3,77 @@
   flex-direction: column;
   gap: 24px;
 }
+
+/* US-06: título y selector de mes */
+.inicio__encabezado {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 16px;
+}
+
+.inicio__encabezado h1 {
+  margin: 0;
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+
+.inicio__encabezado p {
+  margin: 6px 0 0;
+  font-size: 0.875rem;
+  color: var(--texto-suave);
+}
+
+/* US-06: estado vacío del mes */
+.inicio__vacio {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  padding: 48px 24px;
+  text-align: center;
+}
+
+.inicio__vacio-icono {
+  display: grid;
+  place-items: center;
+  width: 64px;
+  height: 64px;
+  margin-bottom: 8px;
+  border-radius: 50%;
+  background: var(--verde-claro);
+  color: var(--verde-esmeralda);
+}
+
+.inicio__vacio-icono mat-icon {
+  font-size: 32px;
+  width: 32px;
+  height: 32px;
+}
+
+.inicio__vacio h2 {
+  margin: 0;
+  font-size: 1.1rem;
+  font-weight: 700;
+}
+
+.inicio__vacio p {
+  max-width: 420px;
+  margin: 0 0 12px;
+  font-size: 0.875rem;
+  color: var(--texto-suave);
+}
+
+/* Botón verde (el tema global pone los botones en dorado) */
+.inicio__boton-verde {
+  --mat-button-filled-container-color: var(--verde-esmeralda);
+  --mat-button-filled-label-text-color: #ffffff;
+  --mat-button-filled-container-shape: 8px;
+  font-weight: 700;
+}
+
+@media (max-width: 700px) {
+  .inicio__encabezado {
+    flex-direction: column;
+  }
+}
