@@ -89,6 +89,18 @@
       "balanceNota": "Income minus expenses and goal contributions",
       "tasa": "{{pct}}% of your income",
       "ahorroNota": "Contributions to your goals this month"
+    },
+    "graficos": {
+      "semanal": "Income vs expenses by week",
+      "semanalDescripcion": "Comparison of your income and expenses in each week of the selected month.",
+      "ingresos": "Income",
+      "gastos": "Expenses",
+      "semana": "Week {{numero}}",
+      "gastosCategoria": "Expenses by category",
+      "ingresosFuente": "Income by source",
+      "total": "Total",
+      "sinGastos": "You recorded no expenses this month.",
+      "sinIngresos": "You recorded no income this month."
     }
   }
 }

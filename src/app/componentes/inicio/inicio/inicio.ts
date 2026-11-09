@@ -3,13 +3,13 @@ import { MatButton } from '@angular/material/button';
 import { MatIcon } from '@angular/material/icon';
 import { RouterLink } from '@angular/router';
 import { TranslatePipe } from '@ngx-translate/core';
-import { EnConstruccion } from '../../compartidos/en-construccion/en-construccion';
 import { ChatbotFlotante } from '../../chatbot/chatbot-flotante/chatbot-flotante';
 import { OrientacionInicial } from '../orientacion/orientacion';
 import { MesAnio, SelectorMes } from '../selector-mes/selector-mes';
 import { TarjetasIndicadores } from '../indicadores/indicadores';
+import { GraficosMes } from '../graficos/graficos';
 import { InicioService } from '../../../servicios/inicio-service';
-import { Indicadores, Orientacion } from '../../../modelo/inicio';
+import { Graficos, Indicadores, Orientacion } from '../../../modelo/inicio';
 
 @Component({
   selector: 'app-inicio',
@@ -18,11 +18,11 @@ import { Indicadores, Orientacion } from '../../../modelo/inicio';
     RouterLink,
     MatButton,
     MatIcon,
-    EnConstruccion,
     ChatbotFlotante,
     OrientacionInicial,
     SelectorMes,
     TarjetasIndicadores,
+    GraficosMes,
   ],
   templateUrl: './inicio.html',
   changeDetection: ChangeDetectionStrategy.Eager,
@@ -36,11 +36,8 @@ export class Inicio implements OnInit {
   // US-06: mes consultado (empieza en el mes actual)
   periodo: MesAnio = { anio: new Date().getFullYear(), mes: new Date().getMonth() + 1 };
   indicadores: Indicadores | null = null;
+  graficos: Graficos | null = null;
 
-  pendientes = [
-    'Gráficos de ingresos y gastos (US-08, Figura 22)',
-    'El chatbot ya está colocado abajo (<app-chatbot-flotante>): no lo muevas, lo hace Luz',
-  ];
 
   ngOnInit(): void {
     // US-05: el backend dice si se muestra la orientación (hasta tener un movimiento y una meta)
@@ -66,6 +63,12 @@ export class Inicio implements OnInit {
       .obtenerIndicadores(this.periodo.anio, this.periodo.mes)
       .subscribe((data) => {
         this.indicadores = data;
+      });
+    // US-08: gráficos del mismo mes
+    this.inicioService
+      .obtenerGraficos(this.periodo.anio, this.periodo.mes)
+      .subscribe((data) => {
+        this.graficos = data;
       });
   }
 }

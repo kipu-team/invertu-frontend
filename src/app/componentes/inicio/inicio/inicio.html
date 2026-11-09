@@ -32,12 +32,10 @@
     <!-- US-07: tarjetas de indicadores -->
     <app-indicadores [indicadores]="indicadores" />
 
-    <app-en-construccion
-      titulo="inicio.titulo"
-      responsable="Mafer"
-      figuras="22"
-      [pendientes]="pendientes"
-    />
+    <!-- US-08: gráficos -->
+    @if (graficos) {
+      <app-graficos [graficos]="graficos" />
+    }
   }
 </div>
 
