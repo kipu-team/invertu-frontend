@@ -1,7 +1,46 @@
 {
   "premium": {
     "pasar": {
-      "titulo": "Pásate a Premium"
+      "titulo": "Pásate a Premium",
+      "subtitulo": "Compara los planes y elige el que mejor se adapta a tu vida universitaria.",
+      "planActual": "Tu plan actual",
+      "porMes": "/ mes",
+      "free": {
+        "nombre": "Plan Free",
+        "descripcion": "Lo esencial para ordenar tus finanzas."
+      },
+      "premium": {
+        "nombre": "Plan Premium",
+        "descripcion": "Todas las herramientas de InvertU, sin límites."
+      },
+      "caracteristicas": {
+        "movimientos": "Registro manual de ingresos y gastos",
+        "dashboard": "Indicadores y gráficos del mes",
+        "suscripciones": "Registro de suscripciones",
+        "metas": "Metas de ahorro activas:",
+        "recordatorios": "Recordatorios de suscripciones:",
+        "fechaEstimada": "Fecha estimada para cumplir tus metas",
+        "calendario": "Calendario financiero",
+        "comprobante": "Registro con IA desde comprobante",
+        "categorias": "Categorías personalizadas",
+        "alertaSaldo": "Alerta de saldo para suscripciones",
+        "chatbot": "Chatbot financiero"
+      },
+      "limites": {
+        "hasta3": "hasta 3",
+        "sinLimite": "sin límite"
+      },
+      "notaPrueba": "Versión de prueba: el pago es simulado y no se te cobrará nada.",
+      "boton": "Activar prueba gratuita",
+      "exito": {
+        "titulo": "¡Ya eres Premium!",
+        "descripcion": "Ya puedes usar todas las funciones Premium de InvertU.",
+        "boton": "Ir al inicio"
+      },
+      "errores": {
+        "yaPremium": "Ya cuentas con el plan Premium",
+        "servidor": "No se pudo activar Premium. Intenta de nuevo."
+      }
     },
     "aviso": {
       "titulo": "Función exclusiva Premium",
