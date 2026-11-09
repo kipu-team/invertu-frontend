@@ -14,7 +14,8 @@
     },
     "estados": {
       "ACTIVA": "Active",
-      "CANCELADA": "Cancelled"
+      "CANCELADA": "Cancelled",
+      "SIN_PAGO": "Unrecorded payment"
     },
     "frecuencias": {
       "SEMANAL": "Weekly",
@@ -28,7 +29,8 @@
       "verDetalles": "View details",
       "registrarPago": "Record payment",
       "reactivar": "Reactivate",
-      "cancelar": "Cancel"
+      "cancelar": "Cancel",
+      "registrarPendiente": "Record pending payment"
     },
     "vacio": {
       "titulo": "You don't have any subscriptions yet.",
@@ -89,7 +91,9 @@
       "canceladaTitulo": "Subscription cancelled!",
       "canceladaTexto": "The subscription moved to the Cancelled section.",
       "reactivadaTitulo": "Subscription reactivated!",
-      "reactivadaTexto": "It is back in the Active section with its new charge date."
+      "reactivadaTexto": "It is back in the Active section with its new charge date.",
+      "pagoTitulo": "Payment recorded!",
+      "pagoTexto": "Payment recorded successfully."
     },
     "confirmarCambios": {
       "titulo": "Save changes?",
@@ -121,6 +125,21 @@
       "alerta": {
         "soloPremium": "The low balance alert is a Premium-only feature: we let you know if your balance won't cover the next charge."
       }
+    },
+    "pago": {
+      "titulo": "Record payment for {{nombre}}",
+      "texto": "It will be saved as a fixed expense in your transactions.",
+      "fecha": "Payment date",
+      "categoria": "Category",
+      "medioPago": "Payment method (optional)",
+      "sinMedio": "Not specified",
+      "descripcion": "{{nombre}} payment",
+      "errores": {
+        "fecha": "Enter the payment date",
+        "fechaFutura": "The date cannot be in the future",
+        "categoria": "Select a category"
+      },
+      "aviso": "A charge for this subscription has passed and you haven't recorded it yet. Record it to keep your balance up to date."
     }
   }
 }

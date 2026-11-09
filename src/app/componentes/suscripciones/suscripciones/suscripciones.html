@@ -47,10 +47,20 @@
               <b>S/ {{ s.monto | number: '1.2-2' }}</b>
             </small>
           </div>
-          <span class="etiqueta" [class.etiqueta--cancelada]="s.estado === 'CANCELADA'">
-            {{ 'suscripciones.estados.' + s.estado | translate }}
+          <!-- US-28: "Pago sin registrar" en dorado si falta registrar el último cobro (Figura 52) -->
+          <span class="etiqueta" [class.etiqueta--cancelada]="s.estado === 'CANCELADA'"
+                [class.etiqueta--sin-pago]="s.pagoSinRegistrar">
+            {{ 'suscripciones.estados.' + (s.pagoSinRegistrar ? 'SIN_PAGO' : s.estado) | translate }}
           </span>
         </div>
+
+        <!-- US-28: aviso con texto cuando falta registrar el último cobro -->
+        @if (s.pagoSinRegistrar && s.estado === 'ACTIVA') {
+          <p class="suscripcion__aviso">
+            <mat-icon>warning_amber</mat-icon>
+            {{ 'suscripciones.pago.aviso' | translate }}
+          </p>
+        }
 
         <div class="suscripcion__fila suscripcion__pie">
           <span class="suscripcion__cobro">
@@ -60,7 +70,10 @@
           <div class="suscripcion__acciones">
             <button type="button" class="accion" (click)="verDetalle(s.idSuscripcion)">{{ 'suscripciones.acciones.verDetalles' | translate }}</button>
             @if (s.estado === 'ACTIVA') {
-              <button type="button" class="accion accion--verde">{{ 'suscripciones.acciones.registrarPago' | translate }}</button>
+              <button type="button" class="accion accion--verde" [class.accion--resaltada]="s.pagoSinRegistrar"
+                      (click)="registrarPago(s.idSuscripcion)">
+                {{ (s.pagoSinRegistrar ? 'suscripciones.acciones.registrarPendiente' : 'suscripciones.acciones.registrarPago') | translate }}
+              </button>
               <button type="button" class="accion accion--suave" (click)="cancelar(s.idSuscripcion)">{{ 'suscripciones.acciones.cancelar' | translate }}</button>
             } @else {
               <button type="button" class="accion accion--verde" (click)="reactivar(s.idSuscripcion)">{{ 'suscripciones.acciones.reactivar' | translate }}</button>
