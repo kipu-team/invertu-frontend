@@ -1,9 +1,12 @@
 import { Service } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { Graficos, Indicadores, Orientacion, TotalCategoria } from '../modelo/inicio';
-import { METAS, MOVIMIENTOS, PERFIL } from './datos-prueba/datos-prueba';
+import { APORTES, METAS, MOVIMIENTOS, PERFIL } from './datos-prueba/datos-prueba';
 
-/** Dashboard de Inicio (backend: /api/v1/inicio). Por ahora con datos de prueba. */
+/**
+ * Dashboard de Inicio (backend: /api/v1/inicio). Por ahora con datos de prueba.
+ * Igual que el backend, indicadores y gráficos se calculan solo con lo del mes consultado.
+ */
 @Service()
 export class InicioService {
   obtenerOrientacion(): Observable<Orientacion> {
@@ -18,16 +21,19 @@ export class InicioService {
   }
 
   obtenerIndicadores(anio: number, mes: number): Observable<Indicadores> {
-    const ingresos = this.sumar('INGRESO');
-    const gastos = this.sumar('GASTO');
-    const aportesMetas = 150;
+    const ingresos = this.sumar(anio, mes, 'INGRESO');
+    const gastos = this.sumar(anio, mes, 'GASTO');
+    const aportesMetas = Object.values(APORTES)
+      .flat()
+      .filter((a) => this.esDelMes(a.fecha, anio, mes))
+      .reduce((total, a) => total + a.monto, 0);
     return of({
       ingresos,
-      ingresosFijos: this.sumar('INGRESO', 'FIJO'),
-      ingresosVariables: this.sumar('INGRESO', 'VARIABLE'),
+      ingresosFijos: this.sumar(anio, mes, 'INGRESO', 'FIJO'),
+      ingresosVariables: this.sumar(anio, mes, 'INGRESO', 'VARIABLE'),
       gastos,
-      gastosFijos: this.sumar('GASTO', 'FIJO'),
-      gastosVariables: this.sumar('GASTO', 'VARIABLE'),
+      gastosFijos: this.sumar(anio, mes, 'GASTO', 'FIJO'),
+      gastosVariables: this.sumar(anio, mes, 'GASTO', 'VARIABLE'),
       aportesMetas,
       disponible: Math.round((ingresos - gastos - aportesMetas) * 100) / 100,
       ahorroTotal: METAS.reduce((total, m) => total + m.montoAportado, 0),
@@ -36,28 +42,48 @@ export class InicioService {
 
   obtenerGraficos(anio: number, mes: number): Observable<Graficos> {
     return of({
-      evolucionSemanal: [
-        { semana: 1, ingresos: 800, gastos: 14.5 },
-        { semana: 2, ingresos: 450, gastos: 59.9 },
-        { semana: 3, ingresos: 0, gastos: 65 },
-        { semana: 4, ingresos: 0, gastos: 8 },
-      ],
-      gastosPorCategoria: this.agruparPorCategoria('GASTO'),
-      ingresosPorFuente: this.agruparPorCategoria('INGRESO'),
+      evolucionSemanal: this.agruparPorSemana(anio, mes),
+      gastosPorCategoria: this.agruparPorCategoria(anio, mes, 'GASTO'),
+      ingresosPorFuente: this.agruparPorCategoria(anio, mes, 'INGRESO'),
     });
   }
 
-  private sumar(tipo: string, clasificacion?: string): number {
-    return MOVIMIENTOS.filter(
-      (m) => m.tipo === tipo && (!clasificacion || m.clasificacion === clasificacion),
-    ).reduce((total, m) => total + m.monto, 0);
+  /** fecha 'YYYY-MM-DD' */
+  private esDelMes(fecha: string, anio: number, mes: number): boolean {
+    return fecha.startsWith(`${anio}-${String(mes).padStart(2, '0')}`);
   }
 
-  private agruparPorCategoria(tipo: string): TotalCategoria[] {
+  private delMes(anio: number, mes: number, tipo: string) {
+    return MOVIMIENTOS.filter((m) => m.tipo === tipo && this.esDelMes(m.fecha, anio, mes));
+  }
+
+  private sumar(anio: number, mes: number, tipo: string, clasificacion?: string): number {
+    return this.delMes(anio, mes, tipo)
+      .filter((m) => !clasificacion || m.clasificacion === clasificacion)
+      .reduce((total, m) => total + m.monto, 0);
+  }
+
+  private agruparPorCategoria(anio: number, mes: number, tipo: string): TotalCategoria[] {
     const totales: Record<string, number> = {};
-    MOVIMIENTOS.filter((m) => m.tipo === tipo).forEach((m) => {
+    this.delMes(anio, mes, tipo).forEach((m) => {
       totales[m.categoria] = (totales[m.categoria] ?? 0) + m.monto;
     });
     return Object.entries(totales).map(([categoria, total]) => ({ categoria, total }));
+  }
+
+  /** Igual que el backend: semana 1 = días 1-7, semana 2 = días 8-14, ..., semana 5 = días 29-31 */
+  private agruparPorSemana(anio: number, mes: number) {
+    const diasDelMes = new Date(anio, mes, 0).getDate();
+    const semanas = Array.from({ length: Math.ceil(diasDelMes / 7) }, (_, i) => ({
+      semana: i + 1,
+      ingresos: 0,
+      gastos: 0,
+    }));
+    MOVIMIENTOS.filter((m) => this.esDelMes(m.fecha, anio, mes)).forEach((m) => {
+      const s = semanas[Math.floor((Number(m.fecha.slice(8, 10)) - 1) / 7)];
+      if (m.tipo === 'INGRESO') s.ingresos += m.monto;
+      else s.gastos += m.monto;
+    });
+    return semanas;
   }
 }
