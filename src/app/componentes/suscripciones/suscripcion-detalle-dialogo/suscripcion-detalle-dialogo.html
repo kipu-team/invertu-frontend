@@ -16,12 +16,18 @@
       </button>
     </header>
 
-    <!-- Frecuencia y alerta de saldo (la alerta se activa en la US-32) -->
+    <!-- Frecuencia y alerta de saldo (US-32: solo Premium y solo suscripciones activas) -->
     <div class="detalle__fila">
       <span class="chip-frecuencia">{{ 'suscripciones.frecuencias.' + s.frecuencia | translate }}</span>
-      <mat-slide-toggle [checked]="s.alertaSaldoActiva" disabled labelPosition="before">
-        {{ 'suscripciones.detalle.alertaSaldo' | translate }}
-      </mat-slide-toggle>
+      <div class="alerta">
+        @if (!sesion.esPremium()) {
+          <span class="chip-premium">{{ 'compartido.soloPremium' | translate }}</span>
+        }
+        <mat-slide-toggle [checked]="s.alertaSaldoActiva" [disabled]="s.estado !== 'ACTIVA'"
+                          (change)="cambiarAlertaSaldo($event)" labelPosition="before">
+          {{ 'suscripciones.detalle.alertaSaldo' | translate }}
+        </mat-slide-toggle>
+      </div>
     </div>
 
     <!-- Monto destacado -->

@@ -61,6 +61,23 @@
   font-weight: 600;
 }
 
+/* US-32: alerta de saldo con la etiqueta "Solo Premium" para el plan Free */
+.alerta {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.chip-premium {
+  padding: 2px 8px;
+  border-radius: 6px;
+  background: var(--dorado);
+  color: #2b2100;
+  font-size: 0.7rem;
+  font-weight: 700;
+}
+
 /* Monto destacado */
 .monto {
   display: flex;
