@@ -7,17 +7,18 @@
       "correo": "Correo electrónico",
       "correoPlaceholder": "correo@ejemplo.com",
       "contrasena": "Contraseña",
-      "recuerdame": "Recuérdame",
+      "recuerdame": "Recordarme",
       "olvidaste": "¿Olvidaste tu contraseña?",
       "ingresar": "Iniciar sesión",
       "sinCuenta": "¿No tienes cuenta?",
       "registrate": "Regístrate",
       "errores": {
-        "correoRequerido": "Ingresa tu correo",
+        "correoRequerido": "Este campo es obligatorio",
         "correoInvalido": "Ingresa un correo válido",
-        "contrasenaRequerida": "Ingresa tu contraseña",
+        "contrasenaRequerida": "Este campo es obligatorio",
         "credenciales": "Correo o contraseña incorrectos",
-        "servidor": "No se pudo conectar con el servidor. Intenta de nuevo."
+        "servidor": "No se pudo conectar con el servidor. Intenta de nuevo.",
+        "demasiadosIntentos": "Demasiados intentos fallidos. Intenta nuevamente en 15 minutos"
       }
     },
     "registro": {

@@ -13,11 +13,12 @@
       "sinCuenta": "Don't have an account?",
       "registrate": "Sign up",
       "errores": {
-        "correoRequerido": "Enter your email",
+        "correoRequerido": "This field is required",
         "correoInvalido": "Enter a valid email",
-        "contrasenaRequerida": "Enter your password",
+        "contrasenaRequerida": "This field is required",
         "credenciales": "Incorrect email or password",
-        "servidor": "Could not connect to the server. Try again."
+        "servidor": "Could not connect to the server. Try again.",
+        "demasiadosIntentos": "Too many failed attempts. Try again in 15 minutes"
       }
     },
     "registro": {

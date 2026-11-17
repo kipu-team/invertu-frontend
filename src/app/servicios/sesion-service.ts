@@ -58,6 +58,14 @@ export class SesionService {
     this.estudianteActual.update((e) => ({ ...e, rol }));
   }
 
+  /** Después de "Pasar a Premium": el backend manda un token nuevo con el rol nuevo (lo usa Luz en T-117). */
+  actualizarToken(token: string, rol: Rol): void {
+    const almacen = localStorage.getItem(CLAVE_TOKEN) !== null ? localStorage : sessionStorage;
+    almacen.setItem(CLAVE_TOKEN, token);
+    this.cambiarRol(rol);
+    almacen.setItem(CLAVE_ESTUDIANTE, JSON.stringify(this.estudianteActual()));
+  }
+
   /** Para revisar ambas vistas: menú del avatar → "Ver como Premium / Free (prueba)" */
   alternarRol(): void {
     this.cambiarRol(this.esPremium() ? 'ROLE_FREE' : 'ROLE_PREMIUM');

@@ -76,10 +76,14 @@ export class IniciarSesion {
       },
       error: (err: HttpErrorResponse) => {
         this.cargando = false;
-        this.errorClave =
-          err.status === 401
-            ? 'autenticacion.iniciarSesion.errores.credenciales'
-            : 'autenticacion.iniciarSesion.errores.servidor';
+        // 401: credenciales incorrectas. 429: 5 intentos fallidos, bloqueo de 15 minutos (US-02)
+        if (err.status === 401) {
+          this.errorClave = 'autenticacion.iniciarSesion.errores.credenciales';
+        } else if (err.status === 429) {
+          this.errorClave = 'autenticacion.iniciarSesion.errores.demasiadosIntentos';
+        } else {
+          this.errorClave = 'autenticacion.iniciarSesion.errores.servidor';
+        }
       },
     });
   }
