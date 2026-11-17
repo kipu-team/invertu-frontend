@@ -1,6 +1,6 @@
 <header class="registrar__encabezado">
-  <h1>{{ 'metas.registrar.titulo' | translate }}</h1>
-  <p>{{ 'metas.registrar.subtitulo' | translate }}</p>
+  <h1>{{ (editando ? 'metas.editar.titulo' : 'metas.registrar.titulo') | translate }}</h1>
+  <p>{{ (editando ? 'metas.editar.subtitulo' : 'metas.registrar.subtitulo') | translate }}</p>
 </header>
 
 <form class="tarjeta" [formGroup]="formulario" (ngSubmit)="registrar()">
@@ -10,12 +10,18 @@
         {{ 'metas.registrar.nombre' | translate }}
         <span class="obligatorio">{{ 'metas.registrar.obligatorio' | translate }}</span>
       </span>
-      <input formControlName="nombre" [placeholder]="'metas.registrar.nombrePlaceholder' | translate" />
+      <input
+        formControlName="nombre"
+        [placeholder]="'metas.registrar.nombrePlaceholder' | translate"
+      />
     </label>
 
     <label>
       <span class="etiqueta">{{ 'metas.registrar.descripcion' | translate }}</span>
-      <textarea formControlName="descripcion" [placeholder]="'metas.registrar.descripcionPlaceholder' | translate"></textarea>
+      <textarea
+        formControlName="descripcion"
+        [placeholder]="'metas.registrar.descripcionPlaceholder' | translate"
+      ></textarea>
     </label>
   </div>
 
@@ -47,7 +53,11 @@
           <span class="obligatorio">{{ 'metas.registrar.obligatorio' | translate }}</span>
         }
       </span>
-      <input type="date" formControlName="fechaObjetivo" [class.invalido]="fecha.errors?.['fechaPasada']" />
+      <input
+        type="date"
+        formControlName="fechaObjetivo"
+        [class.invalido]="fecha.errors?.['fechaPasada']"
+      />
       @if (fecha.errors?.['fechaPasada']) {
         <small class="error">{{ 'metas.registrar.fechaPasada' | translate }}</small>
       }
@@ -57,9 +67,15 @@
       <span class="etiqueta">{{ 'metas.registrar.frecuencia' | translate }}</span>
       <select formControlName="frecuenciaAporte">
         <option value="DIARIA">{{ 'metas.registrar.frecuenciaOpcion.DIARIA' | translate }}</option>
-        <option value="SEMANAL">{{ 'metas.registrar.frecuenciaOpcion.SEMANAL' | translate }}</option>
-        <option value="MENSUAL">{{ 'metas.registrar.frecuenciaOpcion.MENSUAL' | translate }}</option>
-        <option value="SIN_FRECUENCIA">{{ 'metas.registrar.frecuenciaOpcion.SIN_FRECUENCIA' | translate }}</option>
+        <option value="SEMANAL">
+          {{ 'metas.registrar.frecuenciaOpcion.SEMANAL' | translate }}
+        </option>
+        <option value="MENSUAL">
+          {{ 'metas.registrar.frecuenciaOpcion.MENSUAL' | translate }}
+        </option>
+        <option value="SIN_FRECUENCIA">
+          {{ 'metas.registrar.frecuenciaOpcion.SIN_FRECUENCIA' | translate }}
+        </option>
       </select>
     </label>
   </div>
@@ -72,14 +88,14 @@
       type="submit"
       mat-flat-button
       class="boton-dorado acciones__registrar"
-      [disabled]="limiteAlcanzado || (formulario.invalid && formulario.dirty)"
+      [disabled]="(limiteAlcanzado && !editando) || (formulario.invalid && formulario.dirty)"
     >
-      {{ 'metas.registrar.registrar' | translate }}
+      {{ (editando ? 'metas.editar.guardar' : 'metas.registrar.registrar') | translate }}
     </button>
   </div>
 </form>
 
-@if (limiteAlcanzado) {
+@if (limiteAlcanzado && !editando) {
   <aside class="aviso-limite">
     <mat-icon class="aviso-limite__icono">warning_amber</mat-icon>
     <div class="aviso-limite__texto">

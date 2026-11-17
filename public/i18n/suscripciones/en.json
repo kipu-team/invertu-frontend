@@ -1,5 +1,145 @@
 {
   "suscripciones": {
-    "titulo": "My subscriptions"
+    "titulo": "Subscriptions",
+    "nueva": "New subscription",
+    "resumen": {
+      "activas": "Active",
+      "canceladas": "Cancelled",
+      "proximas": "Upcoming renewals"
+    },
+    "filtros": {
+      "TODAS": "All",
+      "ACTIVA": "Active",
+      "CANCELADA": "Cancelled"
+    },
+    "estados": {
+      "ACTIVA": "Active",
+      "CANCELADA": "Cancelled",
+      "SIN_PAGO": "Unrecorded payment"
+    },
+    "frecuencias": {
+      "SEMANAL": "Weekly",
+      "MENSUAL": "Monthly",
+      "TRIMESTRAL": "Quarterly",
+      "SEMESTRAL": "Semiannual",
+      "ANUAL": "Yearly"
+    },
+    "proximoCobro": "Next charge",
+    "acciones": {
+      "verDetalles": "View details",
+      "registrarPago": "Record payment",
+      "reactivar": "Reactivate",
+      "cancelar": "Cancel",
+      "registrarPendiente": "Record pending payment"
+    },
+    "vacio": {
+      "titulo": "You don't have any subscriptions yet.",
+      "texto": "Add a new subscription to see your subscription list.",
+      "filtro": "You don't have subscriptions in this category."
+    },
+    "detalle": {
+      "cerrar": "Close details",
+      "categoria": "Category",
+      "alertaSaldo": "Low balance alert",
+      "monto": "Charge amount",
+      "renovacion": "Renewal frequency",
+      "frecuencia": "Frequency",
+      "recordatorio": "Reminder",
+      "diasAntes": "{{dias}} days before",
+      "desactivado": "Off",
+      "descripcion": "Description",
+      "historial": "Recent payment history",
+      "fecha": "Date",
+      "montoPago": "Amount",
+      "estado": "Status",
+      "pagado": "Paid",
+      "sinPagos": "No payments recorded yet.",
+      "cancelar": "Cancel subscription",
+      "editar": "Edit subscription"
+    },
+    "formulario": {
+      "titulo": "Register new subscription",
+      "subtitulo": "Enter the details to stay in control",
+      "nombre": "Service name",
+      "nombrePlaceholder": "E.g. Amazon Prime, Gym, etc.",
+      "monto": "Amount (S/)",
+      "frecuencia": "Frequency",
+      "fecha": "Next charge date",
+      "descripcion": "Description (optional)",
+      "descripcionPlaceholder": "Add notes about the renewal...",
+      "guardar": "Save subscription",
+      "cancelar": "Cancel",
+      "tituloEditar": "Edit subscription",
+      "subtituloEditar": "Update your subscription details",
+      "guardarCambios": "Save changes",
+      "errores": {
+        "nombre": "Enter the service name",
+        "monto": "The amount must be greater than S/ 0.00",
+        "fecha": "Enter the next charge date",
+        "fechaPasada": "The next charge date cannot be earlier than today"
+      }
+    },
+    "mensajes": {
+      "cerrar": "Close",
+      "registradaTitulo": "Subscription registered!",
+      "registradaTexto": "Your subscription was added to the active list.",
+      "continuar": "Continue",
+      "errorTitulo": "Error",
+      "reintentar": "Try again",
+      "editadaTitulo": "Changes saved!",
+      "editadaTexto": "Your subscription details were updated.",
+      "canceladaTitulo": "Subscription cancelled!",
+      "canceladaTexto": "The subscription moved to the Cancelled section.",
+      "reactivadaTitulo": "Subscription reactivated!",
+      "reactivadaTexto": "It is back in the Active section with its new charge date.",
+      "pagoTitulo": "Payment recorded!",
+      "pagoTexto": "Payment recorded successfully."
+    },
+    "confirmarCambios": {
+      "titulo": "Save changes?",
+      "mensaje": "You have unsaved changes in your subscription. What would you like to do?",
+      "descartar": "Discard",
+      "guardar": "Save"
+    },
+    "cancelar": {
+      "titulo": "Cancel subscription?",
+      "mensaje": "The subscription will move to the Cancelled section and you will stop receiving its reminders. You can reactivate it later.",
+      "confirmar": "Yes, cancel",
+      "volver": "Go back"
+    },
+    "reactivar": {
+      "titulo": "Reactivate {{nombre}}",
+      "mensaje": "Choose the new next charge date to activate the subscription again."
+    },
+    "recordatorio": {
+      "titulo": "Remind me to cancel before renewal",
+      "texto": "We will email you before it renews automatically.",
+      "anticipacion": "Notify me",
+      "dias": {
+        "1": "One day before",
+        "3": "3 days before",
+        "7": "7 days before"
+      },
+      "free": "With the Free plan you can turn on reminders for up to 3 subscriptions.",
+      "limite": "You reached the limit of 3 reminders on the Free plan. Upgrade to Premium to turn on reminders for all your subscriptions.",
+      "alerta": {
+        "soloPremium": "The low balance alert is a Premium-only feature: we let you know if your balance won't cover the next charge."
+      }
+    },
+    "pago": {
+      "titulo": "Record payment for {{nombre}}",
+      "texto": "It will be saved as a fixed expense in your transactions.",
+      "fecha": "Payment date",
+      "categoria": "Category",
+      "medioPago": "Payment method (optional)",
+      "sinMedio": "Not specified",
+      "descripcion": "{{nombre}} payment",
+      "errores": {
+        "fecha": "Enter the payment date",
+        "fechaFutura": "The date cannot be in the future",
+        "categoria": "Select a category"
+      },
+      "aviso": "A charge for this subscription has passed and you haven't recorded it yet. Record it to keep your balance up to date."
+    }
   }
 }

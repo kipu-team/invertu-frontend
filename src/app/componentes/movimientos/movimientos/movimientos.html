@@ -1,6 +1,256 @@
-<app-en-construccion
-  titulo="movimientos.titulo"
-  responsable="Meme"
-  figuras="24–46"
-  [pendientes]="pendientes"
-/>
+<section class="movimientos">
+  <header class="movimientos__encabezado">
+    <span class="movimientos__etiqueta">{{ 'movimientos.etiqueta' | translate }}</span>
+    <h1>{{ 'movimientos.titulo' | translate }}</h1>
+    <div class="movimientos__periodo">
+      <button mat-icon-button (click)="mesAnterior()" [attr.aria-label]="'movimientos.mesAnterior' | translate">
+        <mat-icon>chevron_left</mat-icon>
+      </button>
+      <span>
+        {{ 'movimientos.meses.' + mes | translate }} {{ anio }} ·
+        {{ (dataSource.data.length === 1 ? 'movimientos.contadorUno' : 'movimientos.contador') | translate: { cantidad: dataSource.data.length } }}      </span>
+      <button mat-icon-button (click)="mesSiguiente()" [attr.aria-label]="'movimientos.mesSiguiente' | translate">
+        <mat-icon>chevron_right</mat-icon>
+      </button>
+    </div>
+  </header>
+
+  <div class="movimientos__contenido">
+    <div class="movimientos__principal">
+  <!-- Barra de busqueda y botón de filtros de US-14 -->
+  <div class="movimientos__barra">
+    <mat-form-field class="movimientos__buscador" appearance="outline" subscriptSizing="dynamic">
+      <mat-icon matPrefix>search</mat-icon>
+      <input matInput [formControl]="busqueda" [placeholder]="'movimientos.buscar' | translate" />
+    </mat-form-field>
+
+    <button mat-stroked-button type="button" (click)="panelAbierto = !panelAbierto">
+      <mat-icon>filter_list</mat-icon>
+      {{ 'movimientos.filtrar' | translate }}
+    </button>
+
+    <!-- Panel flotante de filtros -->
+    @if (panelAbierto) {
+      <div class="movimientos__fondo" (click)="cerrarPanel()"></div>
+      <form
+        class="tarjeta movimientos__panel"
+        [formGroup]="filtrosForm"
+        (ngSubmit)="aplicarFiltros()"
+        (keydown.escape)="cerrarPanel()"
+      >
+        <div class="movimientos__panel-titulo">
+          <h3>{{ 'movimientos.filtros.titulo' | translate }}</h3>
+          @if (criteriosActivos > 0) {
+            <span class="movimientos__criterios">
+              {{ (criteriosActivos === 1 ? 'movimientos.filtros.criteriosUno' : 'movimientos.filtros.criterios') | translate: { cantidad: criteriosActivos } }}
+            </span>
+          }
+        </div>
+
+        <!-- Cada mat-select está conectado a un campo de filtrosForm con formControlName -->
+        <div class="movimientos__panel-campos">
+          <mat-form-field appearance="outline">
+            <mat-label>{{ 'movimientos.filtros.tipo' | translate }}</mat-label>
+            <mat-select formControlName="tipo">
+              <mat-option [value]="null">{{ 'movimientos.filtros.todos' | translate }}</mat-option>
+              @for (t of tipos; track t) {
+                <mat-option [value]="t">{{ 'movimientos.tipo.' + t | translate }}</mat-option>
+              }
+            </mat-select>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline">
+            <mat-label>{{ 'movimientos.filtros.clasificacion' | translate }}</mat-label>
+            <mat-select formControlName="clasificacion">
+              <mat-option [value]="null">{{ 'movimientos.filtros.todas' | translate }}</mat-option>
+              @for (c of clasificaciones; track c) {
+                <mat-option [value]="c">{{ 'movimientos.clasificacion.' + c | translate }}</mat-option>
+              }
+            </mat-select>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline">
+            <mat-label>{{ 'movimientos.filtros.categoria' | translate }}</mat-label>
+            <mat-select formControlName="idCategoria">
+              <mat-option [value]="null">{{ 'movimientos.filtros.todas' | translate }}</mat-option>
+              @for (cat of categorias; track cat.idCategoria) {
+                <mat-option [value]="cat.idCategoria">{{ cat.nombre }}</mat-option>
+              }
+            </mat-select>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline">
+            <mat-label>{{ 'movimientos.filtros.medioPago' | translate }}</mat-label>
+            <mat-select formControlName="medioPago">
+              <mat-option [value]="null">{{ 'movimientos.filtros.todos' | translate }}</mat-option>
+              @for (medio of mediosPago; track medio) {
+                <mat-option [value]="medio">{{ 'movimientos.medios.' + medio | translate }}</mat-option>
+              }
+            </mat-select>
+          </mat-form-field>
+        </div>
+
+        <div class="movimientos__panel-acciones">
+          <button mat-button type="button" (click)="limpiarFiltros()">
+            {{ 'movimientos.filtros.limpiar' | translate }}
+          </button>
+          <button mat-flat-button type="submit">
+            {{ 'movimientos.filtros.aplicar' | translate }}
+          </button>
+        </div>
+      </form>
+    }
+  </div>
+
+  <!-- Tabla del historial de US-10 -->
+  <div class="tarjeta movimientos__tabla">
+    @if (dataSource.data.length > 0) {
+      <table mat-table [dataSource]="dataSource">
+        <ng-container matColumnDef="fecha">
+          <th mat-header-cell *matHeaderCellDef>{{ 'movimientos.columnas.fecha' | translate }}</th>
+          <td mat-cell *matCellDef="let m">{{ m.fecha | date: 'dd/MM/yyyy' }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="descripcion">
+          <th mat-header-cell *matHeaderCellDef>{{ 'movimientos.columnas.descripcion' | translate }}</th>
+          <td mat-cell *matCellDef="let m">
+            {{ m.descripcion }}
+            @if (m.suscripcion) {
+              <small class="movimientos__sub">{{ 'movimientos.suscripcion' | translate }}</small>
+            }
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="categoria">
+          <th mat-header-cell *matHeaderCellDef>{{ 'movimientos.columnas.categoria' | translate }}</th>
+          <td mat-cell *matCellDef="let m">{{ m.categoria }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="clasificacion">
+          <th mat-header-cell *matHeaderCellDef>{{ 'movimientos.columnas.tipo' | translate }}</th>
+          <td mat-cell *matCellDef="let m">
+            <mat-chip class="chip" [class.chip--fijo]="m.clasificacion === 'FIJO'" [class.chip--variable]="m.clasificacion === 'VARIABLE'">
+              {{ 'movimientos.clasificacion.' + m.clasificacion | translate }}
+            </mat-chip>
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="monto">
+          <th mat-header-cell *matHeaderCellDef class="columna-monto">{{ 'movimientos.columnas.monto' | translate }}</th>
+          <td mat-cell *matCellDef="let m" class="columna-monto">
+            <span class="fila__acciones">
+              <button
+                mat-icon-button
+                type="button"
+                class="fila__boton"
+                (click)="editarMovimiento(m.idMovimiento); $event.stopPropagation()"
+                [attr.aria-label]="'movimientos.detalle.editar' | translate"
+              >
+                <mat-icon>edit</mat-icon>
+              </button>
+              <button
+                mat-icon-button
+                type="button"
+                class="fila__boton fila__boton--peligro"
+                (click)="eliminarMovimiento(m.idMovimiento); $event.stopPropagation()"
+                [attr.aria-label]="'movimientos.eliminar.confirmar' | translate"
+              >
+                <mat-icon>delete</mat-icon>
+              </button>            </span>
+            @if (m.tipo === 'INGRESO') {
+              <span class="monto-ingreso">+ S/ {{ m.monto | number: '1.2-2' }}</span>
+            } @else {
+              <span class="monto-gasto">- S/ {{ m.monto | number: '1.2-2' }}</span>
+            }
+          </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="columnas"></tr>
+        <tr
+          mat-row
+          *matRowDef="let row; columns: columnas"
+          class="fila"
+          [class.fila--activa]="esFilaActiva(row.idMovimiento)"
+          (click)="verDetalle(row.idMovimiento)"
+        ></tr>
+      </table>
+    } @else if (hayBusqueda) {
+      <div class="movimientos__vacio">
+        <span class="movimientos__vacio-icono"><mat-icon>search_off</mat-icon></span>
+        <h3>{{ 'movimientos.sinResultados.titulo' | translate }}</h3>
+        <p>{{ 'movimientos.sinResultados.descripcion' | translate }}</p>
+        <button mat-stroked-button type="button" (click)="limpiarTodo()">
+          <mat-icon>refresh</mat-icon>
+          {{ 'movimientos.sinResultados.limpiar' | translate }}
+        </button>
+      </div>
+    } @else {
+      <div class="movimientos__vacio">
+        <span class="movimientos__vacio-icono"><mat-icon>receipt_long</mat-icon></span>
+        <h3>{{ 'movimientos.vacio.titulo' | translate }}</h3>
+        <p>{{ 'movimientos.vacio.descripcion' | translate }}</p>
+      </div>
+    }
+
+  </div>
+    </div>
+
+    <!-- Panel de registro segun US-16 -->
+    <aside class="tarjeta registro">
+      @if (vistaRegistro === 'metodo') {
+        <h2 class="registro__titulo">{{ 'movimientos.registro.titulo' | translate }}</h2>
+
+        <button mat-stroked-button type="button" class="registro__manual" (click)="vistaRegistro = 'manual'">
+          <mat-icon>edit</mat-icon>
+          {{ 'movimientos.registro.manual' | translate }}
+        </button>
+
+        <div class="registro__auto">
+          <div class="registro__auto-titulo">
+            <h3>{{ 'movimientos.registro.automatico' | translate }}</h3>
+            <span class="registro__premium">
+              <mat-icon>bolt</mat-icon>
+              {{ 'movimientos.registro.premium' | translate }}
+            </span>
+          </div>
+
+          @if (sesion.esPremium()) {
+            <p>{{ 'movimientos.registro.autoDescripcion' | translate }}</p>
+            <button mat-flat-button type="button" (click)="vistaRegistro = 'ia'">
+              <mat-icon>photo_camera</mat-icon>
+              {{ 'movimientos.registro.subirComprobante' | translate }}
+            </button>
+          } @else {
+            <p>{{ 'movimientos.registro.autoDescripcionFree' | translate }}</p>
+            <a mat-stroked-button routerLink="/pasar-premium">
+              {{ 'movimientos.registro.pasarPremium' | translate }}
+            </a>
+          }
+        </div>
+
+        <p class="registro__ayuda">{{ 'movimientos.registro.ayuda' | translate }}</p>
+      } @else if (vistaRegistro === 'manual') {
+        <app-registro-manual (volver)="vistaRegistro = 'metodo'" (registrado)="cargar()" />
+      } @else if (vistaRegistro === 'ia') {
+        <app-registro-ia
+          (volver)="vistaRegistro = 'metodo'"
+          (irManual)="vistaRegistro = 'manual'"
+          (registrado)="cargar()"
+        />
+      } @else if (vistaRegistro === 'detalle') {
+        <app-detalle-movimiento
+          [idMovimiento]="idSeleccionado"
+          (volver)="vistaRegistro = 'metodo'"
+          (editar)="vistaRegistro = 'editar'"
+          (eliminar)="eliminarMovimiento($event)"
+        />
+      } @else {
+        <app-registro-manual
+          [idMovimiento]="idSeleccionado"
+          (volver)="vistaRegistro = 'detalle'"
+          (registrado)="alGuardarEdicion()"
+        />
+      }
+    </aside>
+  </div>
+</section>

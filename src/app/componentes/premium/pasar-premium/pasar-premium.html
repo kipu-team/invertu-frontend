@@ -1,6 +1,89 @@
-<app-en-construccion
-  titulo="premium.pasar.titulo"
-  responsable="Matias"
-  figuras="98"
-  [pendientes]="pendientes"
-/>
+<div class="premium">
+  <header class="premium__encabezado">
+    <h1>{{ 'premium.pasar.titulo' | translate }}</h1>
+    <p>{{ 'premium.pasar.subtitulo' | translate }}</p>
+  </header>
+
+  @if (activado) {
+    <div class="premium__exito">
+      <mat-icon>workspace_premium</mat-icon>
+      <div>
+        <strong>{{ 'premium.pasar.exito.titulo' | translate }}</strong>
+        <span>{{ 'premium.pasar.exito.descripcion' | translate }}</span>
+      </div>
+      <a mat-flat-button class="premium__boton premium__boton--chico" routerLink="/inicio">
+        {{ 'premium.pasar.exito.boton' | translate }}
+      </a>
+    </div>
+  }
+
+  <div class="premium__planes">
+    <!-- Plan Free -->
+    <section class="tarjeta plan">
+      <div class="plan__cabecera">
+        <h2>{{ 'premium.pasar.free.nombre' | translate }}</h2>
+        @if (!sesion.esPremium()) {
+          <span class="plan__actual">{{ 'premium.pasar.planActual' | translate }}</span>
+        }
+      </div>
+      <p class="plan__precio">S/ 0.00 <span>{{ 'premium.pasar.porMes' | translate }}</span></p>
+      <p class="plan__descripcion">{{ 'premium.pasar.free.descripcion' | translate }}</p>
+
+      <ul class="plan__lista">
+        @for (c of caracteristicas; track c.clave) {
+          <li [class.plan__no-incluye]="c.free === false">
+            <mat-icon>{{ c.free === false ? 'close' : 'check' }}</mat-icon>
+            <span>
+              {{ 'premium.pasar.caracteristicas.' + c.clave | translate }}
+              @if (esTexto(c.free)) {
+                <em>{{ c.free | translate }}</em>
+              }
+            </span>
+          </li>
+        }
+      </ul>
+    </section>
+
+    <!-- Plan Premium -->
+    <section class="tarjeta plan plan--premium">
+      <div class="plan__cabecera">
+        <h2>
+          <mat-icon>workspace_premium</mat-icon>{{ 'premium.pasar.premium.nombre' | translate }}
+        </h2>
+        @if (sesion.esPremium()) {
+          <span class="plan__actual plan__actual--premium">{{ 'premium.pasar.planActual' | translate }}</span>
+        }
+      </div>
+      <p class="plan__precio">S/ 9.90 <span>{{ 'premium.pasar.porMes' | translate }}</span></p>
+      <p class="plan__descripcion">{{ 'premium.pasar.premium.descripcion' | translate }}</p>
+
+      <ul class="plan__lista">
+        @for (c of caracteristicas; track c.clave) {
+          <li>
+            <mat-icon>check</mat-icon>
+            <span>
+              {{ 'premium.pasar.caracteristicas.' + c.clave | translate }}
+              @if (esTexto(c.premium)) {
+                <em>{{ c.premium | translate }}</em>
+              }
+            </span>
+          </li>
+        }
+      </ul>
+
+      @if (!sesion.esPremium()) {
+        <p class="plan__nota">
+          <mat-icon>info</mat-icon>{{ 'premium.pasar.notaPrueba' | translate }}
+        </p>
+        @if (errorClave) {
+          <div class="plan__error">
+            <mat-icon>error</mat-icon><span>{{ errorClave | translate }}</span>
+          </div>
+        }
+        <button mat-flat-button class="premium__boton" [disabled]="cargando" (click)="activarPrueba()">
+          {{ 'premium.pasar.boton' | translate }}
+        </button>
+      }
+    </section>
+  </div>
+</div>

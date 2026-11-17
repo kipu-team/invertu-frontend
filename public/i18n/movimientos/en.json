@@ -1,5 +1,160 @@
 {
   "movimientos": {
-    "titulo": "My transactions"
+    "etiqueta": "Transactions",
+    "titulo": "My transactions",
+    "contador": "{{cantidad}} transactions recorded",
+    "contadorUno": "{{cantidad}} transaction recorded",
+    "mesAnterior": "Previous month",
+    "mesSiguiente": "Next month",
+    "suscripcion": "Subscription",
+    "buscar": "Search transaction...",
+    "filtrar": "Filter",
+    "meses": {
+      "1": "January",
+      "2": "February",
+      "3": "March",
+      "4": "April",
+      "5": "May",
+      "6": "June",
+      "7": "July",
+      "8": "August",
+      "9": "September",
+      "10": "October",
+      "11": "November",
+      "12": "December"
+    },
+    "columnas": {
+      "fecha": "Date",
+      "descripcion": "Description",
+      "categoria": "Category",
+      "tipo": "Type",
+      "monto": "Amount"
+    },
+    "clasificacion": {
+      "FIJO": "Fixed",
+      "VARIABLE": "Variable"
+    },
+    "tipo": {
+      "INGRESO": "Income",
+      "GASTO": "Expense"
+    },
+    "medios": {
+      "EFECTIVO": "Cash",
+      "TRANSFERENCIA": "Bank transfer",
+      "TARJETA_DEBITO": "Debit card",
+      "TARJETA_CREDITO": "Credit card",
+      "BILLETERA_DIGITAL": "Digital wallet",
+      "OTRO": "Other"
+    },
+    "filtros": {
+      "titulo": "Filter transactions",
+      "criterios": "{{cantidad}} criteria",
+      "criteriosUno": "{{cantidad}} criterion",
+      "tipo": "Type",
+      "clasificacion": "Classification",
+      "categoria": "Category",
+      "medioPago": "Payment method",
+      "todos": "All",
+      "todas": "All",
+      "limpiar": "Clear filters",
+      "aplicar": "Apply filters"
+    },
+    "vacio": {
+      "titulo": "No transactions recorded in this period",
+      "descripcion": "Record your first transaction from the side form to start tracking your finances."
+    },
+    "sinResultados": {
+      "titulo": "No transactions found",
+      "descripcion": "No transactions match your search. Check the spelling or try another term.",
+      "limpiar": "Clear search"
+    },
+    "registro": {
+      "titulo": "Record transaction",
+      "manual": "Record manually",
+      "automatico": "Automatic recording",
+      "premium": "Premium",
+      "autoDescripcion": "Record your transactions automatically with a photo of your receipt.",
+      "autoDescripcionFree": "Record your transactions automatically with a photo of your receipt. Available in Premium.",
+      "subirComprobante": "Upload receipt",
+      "pasarPremium": "Go Premium",
+      "ayuda": "Enter your transaction details manually",
+      "volver": "Back",
+      "tituloManual": "Record manual transaction",
+      "tituloIa": "Record with receipt"
+    },
+    "manual": {
+      "descripcion": "Description",
+      "descripcionPlaceholder": "Enter a short description",
+      "fecha": "Date",
+      "monto": "Amount",
+      "categoria": "Category",
+      "clasificacion": "Classification",
+      "medio": "Payment method",
+      "medioPago": "Payment method (optional)",
+      "medioIngreso": "Income method (optional)",
+      "suscripcion": "Linked subscription (optional)",
+      "suscripcionResumen": "Linked subscription",
+      "ninguno": "None",
+      "ninguna": "None",
+      "registrar": "Record",
+      "exitoIngreso": "Income recorded successfully!",
+      "exitoGasto": "Expense recorded successfully!",
+      "exitoIngresoDetalle": "Your income of S/ {{monto}} has been recorded.",
+      "exitoGastoDetalle": "Your expense of S/ {{monto}} has been recorded.",
+      "registrarOtro": "Record another",
+      "verMovimientos": "Done",
+      "errores": {
+        "descripcion": "Enter a description",
+        "fecha": "Enter a date",
+        "fechaInvalida": "Enter a valid date (DD/MM/YYYY)",
+        "fechaFutura": "The date cannot be in the future",
+        "monto": "Enter an amount",
+        "montoMinimo": "The amount must be greater than S/ 0.00",
+        "montoDecimales": "The amount allows at most two decimals",
+        "categoria": "Select a category"
+      }
+    },
+    "ia": {
+      "activa": "AI active",
+      "subirTitulo": "Upload a photo or PDF of your receipt",
+      "formatos": "JPG, PNG or PDF up to 5 MB",
+      "seleccionar": "Select file",
+      "analizando": "Analyzing your receipt...",
+      "errorArchivo": "Only JPG, PNG or PDF files up to 5 MB are accepted",
+      "errorIlegible": "We couldn't read your receipt",
+      "errorIlegibleDetalle": "Fill in the details manually or try a clearer photo.",
+      "otroArchivo": "Try another file",
+      "manual": "Record manually",
+      "manualDetalle": "Or fill in the standard form",
+      "consejoTitulo": "Tip:",
+      "consejo": "Make sure the photo is well lit and the text is fully legible.",
+      "procesado": "Processed successfully",
+      "montoDetectado": "Detected amount",
+      "detectado": "Details detected automatically by AI",
+      "confirmar": "Confirm",
+      "cancelar": "Cancel"
+    },
+    "detalle": {
+      "titulo": "Transaction details",
+      "montoDebitado": "Amount debited",
+      "montoRecibido": "Amount received",
+      "suscripcion": "Subscription",
+      "fecha": "Date",
+      "categoria": "Category",
+      "tipo": "Type",
+      "clasificacion": "Classification",
+      "medio": "Payment method",
+      "verComprobante": "View receipt",
+      "editar": "Edit"
+    },
+    "editar": {
+      "titulo": "Edit transaction",
+      "guardar": "Save changes"
+    },
+    "eliminar": {
+      "titulo": "Delete this transaction?",
+      "mensaje": "This action can't be undone and the amount will be removed from your totals.",
+      "confirmar": "Delete"
+    }
   }
 }

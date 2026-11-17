@@ -43,6 +43,17 @@ export const PERFIL: Perfil = {
   plan: { precioMensual: 0, maxMetasActivas: 2, maxRecordatorios: 2 },
 };
 
+export const UNIVERSIDADES: string[] = [
+  'Universidad Peruana de Ciencias Aplicadas',
+  'Pontificia Universidad Católica del Perú',
+  'Universidad de Lima',
+  'Universidad del Pacífico',
+  'Universidad Nacional Mayor de San Marcos',
+  'Universidad Nacional de Ingeniería',
+  'Universidad San Ignacio de Loyola',
+  'Universidad Tecnológica del Perú',
+];
+
 export const PLAN_PREMIUM = { precioMensual: 9.9, maxMetasActivas: null, maxRecordatorios: null };
 export const PLAN_FREE = { precioMensual: 0, maxMetasActivas: 2, maxRecordatorios: 2 };
 
@@ -278,6 +289,16 @@ export const SUSCRIPCIONES: SuscripcionDetalle[] = [
     ultimaCategoria: null,
     pagos: [],
   },
+];
+
+export const EVENTOS_PRUEBA = [
+  { id: '1', titulo: 'Aporte Laptop', tipo: 'META', fecha: '2026-11-06' },
+  { id: '2', titulo: 'Internet', tipo: 'SUSCRIPCION', monto: 120.00, estado: 'Próx. Renovación: 25 dic', fecha: '2026-11-06' },
+  { id: '3', titulo: 'Netflix', tipo: 'SUSCRIPCION', fecha: '2026-11-08' },
+  { id: '4', titulo: 'Laptop', tipo: 'META', fecha: '2026-11-16' },
+  { id: '5', titulo: 'Deuda Universitaria', tipo: 'DEUDA', monto: 450.00, estado: 'Pendiente', fecha: '2026-11-26' },
+  { id: '6', titulo: 'Amazon', tipo: 'SUSCRIPCION', fecha: '2026-11-27' },
+  { id: '7', titulo: 'Laptop', tipo: 'META', fecha: '2026-11-30' }
 ];
 
 export const RESPUESTAS_CHATBOT: string[] = [

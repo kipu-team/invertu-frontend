@@ -1,0 +1,51 @@
+<section class="indicadores">
+  <!-- Ingresos -->
+  <article class="tarjeta indicador">
+    <h3>{{ 'inicio.indicadores.ingresos' | translate }}</h3>
+    <p class="indicador__monto">S/ {{ indicadores().ingresos | number: '1.2-2' }}</p>
+    <div class="indicador__reparto">
+      <span>{{ 'inicio.indicadores.fijos' | translate: { pct: ingresosFijoPct() } }}</span>
+      <span>{{ 'inicio.indicadores.variables' | translate: { pct: porcentajeVariable(ingresosFijoPct(), indicadores().ingresos) } }}</span>
+    </div>
+    <div class="indicador__barra">
+      <div class="indicador__fijo" [style.width.%]="ingresosFijoPct()"></div>
+      <div class="indicador__variable" [style.width.%]="porcentajeVariable(ingresosFijoPct(), indicadores().ingresos)"></div>
+    </div>
+  </article>
+
+  <!-- Gastos -->
+  <article class="tarjeta indicador">
+    <h3>{{ 'inicio.indicadores.gastos' | translate }}</h3>
+    <p class="indicador__monto">S/ {{ indicadores().gastos | number: '1.2-2' }}</p>
+    <div class="indicador__reparto">
+      <span>{{ 'inicio.indicadores.fijos' | translate: { pct: gastosFijoPct() } }}</span>
+      <span>{{ 'inicio.indicadores.variables' | translate: { pct: porcentajeVariable(gastosFijoPct(), indicadores().gastos) } }}</span>
+    </div>
+    <div class="indicador__barra">
+      <div class="indicador__fijo" [style.width.%]="gastosFijoPct()"></div>
+      <div class="indicador__variable" [style.width.%]="porcentajeVariable(gastosFijoPct(), indicadores().gastos)"></div>
+    </div>
+  </article>
+
+  <!-- Balance (disponible = ingresos - gastos - aportes a metas) -->
+  <article class="tarjeta indicador">
+    <h3>{{ 'inicio.indicadores.balance' | translate }}</h3>
+    <p class="indicador__monto" [class.monto-gasto]="!balancePositivo()">
+      {{ balancePositivo() ? '' : '-' }}S/ {{ (balancePositivo() ? indicadores().disponible : -indicadores().disponible) | number: '1.2-2' }}
+    </p>
+    <span class="indicador__chip" [class.indicador__chip--negativo]="!balancePositivo()">
+      {{ (balancePositivo() ? 'inicio.indicadores.positivo' : 'inicio.indicadores.negativo') | translate }}
+    </span>
+    <p class="indicador__nota">{{ 'inicio.indicadores.balanceNota' | translate }}</p>
+  </article>
+
+  <!-- Ahorro destinado a metas -->
+  <article class="tarjeta indicador">
+    <h3>{{ 'inicio.indicadores.ahorro' | translate }}</h3>
+    <p class="indicador__monto">S/ {{ indicadores().aportesMetas | number: '1.2-2' }}</p>
+    <span class="indicador__chip indicador__chip--dorado">
+      {{ 'inicio.indicadores.tasa' | translate: { pct: (tasaAhorro() | number: '1.0-1') } }}
+    </span>
+    <p class="indicador__nota">{{ 'inicio.indicadores.ahorroNota' | translate }}</p>
+  </article>
+</section>

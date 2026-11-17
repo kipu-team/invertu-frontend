@@ -1,0 +1,158 @@
+/* US-05: orientación inicial (Figura 21) */
+.orientacion {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.orientacion__bienvenida {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 32px;
+  padding: 32px;
+  border-radius: 20px;
+}
+
+.orientacion__textos {
+  max-width: 560px;
+}
+
+.orientacion__saludo {
+  display: inline-block;
+  padding: 6px 12px;
+  border-radius: 99px;
+  background: var(--verde-claro);
+  color: var(--verde-esmeralda);
+  font-size: 1.1rem;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.orientacion__textos h1 {
+  margin: 16px 0 12px;
+  font-size: 1.75rem;
+  line-height: 1.25;
+  font-weight: 700;
+}
+
+.orientacion__textos p {
+  margin: 0;
+  font-size: 0.95rem;
+  line-height: 1.6;
+  color: var(--texto-suave);
+}
+
+.orientacion__imagen {
+  flex: none;
+  width: 320px;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 12px;
+}
+
+.orientacion__subtitulo {
+  margin: 8px 0 0;
+  font-size: 1rem;
+  font-weight: 700;
+}
+
+.orientacion__pasos {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+}
+
+.orientacion__paso {
+  display: flex;
+  flex-direction: column;
+}
+
+.orientacion__paso-cabecera {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.orientacion__etiqueta {
+  padding: 3px 8px;
+  border-radius: 4px;
+  background: var(--verde-claro);
+  color: var(--verde-esmeralda);
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.orientacion__avance {
+  font-size: 0.8rem;
+  color: var(--texto-suave);
+}
+
+.orientacion__avance--hecho {
+  color: var(--verde-esmeralda);
+  font-weight: 700;
+}
+
+.orientacion__paso h3 {
+  margin: 10px 0 6px;
+  font-size: 1rem;
+  font-weight: 700;
+}
+
+.orientacion__paso p {
+  margin: 0 0 16px;
+  font-size: 0.8rem;
+  line-height: 1.5;
+  color: var(--texto-suave);
+}
+
+.orientacion__pie {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-top: auto;
+}
+
+.orientacion__barra {
+  max-width: 120px;
+  --mat-progress-bar-active-indicator-color: var(--verde-esmeralda);
+  --mat-progress-bar-track-color: var(--borde);
+}
+
+/* Botón verde (el tema global pone los botones en dorado) */
+.orientacion__boton {
+  --mat-button-filled-container-color: var(--verde-esmeralda);
+  --mat-button-filled-label-text-color: #ffffff;
+  --mat-button-filled-container-shape: 8px;
+  font-weight: 700;
+}
+
+.orientacion__listo {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--verde-esmeralda);
+  font-size: 0.85rem;
+  font-weight: 700;
+}
+
+.orientacion__listo mat-icon {
+  font-size: 18px;
+  width: 18px;
+  height: 18px;
+}
+
+@media (max-width: 900px) {
+  .orientacion__bienvenida {
+    flex-direction: column-reverse;
+    align-items: flex-start;
+  }
+  .orientacion__imagen {
+    width: 100%;
+  }
+  .orientacion__pasos {
+    grid-template-columns: 1fr;
+  }
+}

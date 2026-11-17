@@ -1,0 +1,88 @@
+.pago {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.pago__texto {
+  margin: 0;
+  color: var(--texto-suave);
+}
+
+.campo {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--texto);
+}
+
+.campo__caja {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 0 12px;
+  border: 1px solid var(--borde);
+  border-radius: 8px;
+}
+
+.campo__caja:focus-within {
+  border-color: var(--verde-esmeralda);
+}
+
+.campo__caja--error {
+  border-color: var(--gasto);
+}
+
+.campo__caja mat-icon {
+  width: 18px;
+  height: 18px;
+  font-size: 18px;
+  color: var(--texto-suave);
+}
+
+.campo__caja input,
+.campo__caja select {
+  flex: 1;
+  min-width: 0;
+  padding: 10px 0;
+  border: none;
+  outline: none;
+  background: transparent;
+  color: var(--texto);
+  font: inherit;
+  font-weight: 400;
+}
+
+.error {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  color: var(--gasto);
+  font-weight: 500;
+}
+
+.error mat-icon {
+  width: 16px;
+  height: 16px;
+  font-size: 16px;
+}
+
+.boton-verde {
+  --mat-button-filled-container-color: var(--verde-esmeralda);
+  --mat-button-filled-label-text-color: #ffffff;
+}
+
+/* Responsive: en celular los botones van uno debajo del otro y a lo ancho */
+@media (max-width: 640px) {
+  .acciones {
+    flex-direction: column-reverse;
+    align-items: stretch;
+    gap: 8px;
+  }
+
+  .acciones button {
+    margin: 0;
+  }
+}

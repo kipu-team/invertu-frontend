@@ -10,7 +10,13 @@ import {
   MovimientoLista,
   MovimientoRequest,
 } from '../modelo/movimiento';
-import { CATEGORIAS, MOVIMIENTOS, fechaRelativa, siguienteId } from './datos-prueba/datos-prueba';
+import {
+  CATEGORIAS,
+  MOVIMIENTOS,
+  SUSCRIPCIONES,
+  fechaRelativa,
+  siguienteId,
+} from './datos-prueba/datos-prueba';
 
 /** Movimientos (backend: /api/v1/movimientos). Por ahora con datos de prueba. */
 @Service()
@@ -18,7 +24,21 @@ export class MovimientoService {
   registrar(datos: MovimientoRequest): Observable<Movimiento> {
     const nuevo = this.aItem(siguienteId(MOVIMIENTOS, 'idMovimiento'), datos);
     MOVIMIENTOS.push(nuevo);
+    this.registrarPagoDeSuscripcion(datos, nuevo);
     return of(this.aMovimiento(nuevo));
+  }
+
+  /**
+   * Solo datos de prueba (US-28): si el gasto es el pago de una suscripción, lo agrega a su historial,
+   * quita "Pago sin registrar" y guarda la categoría del último pago, como hace el backend.
+   */
+  private registrarPagoDeSuscripcion(datos: MovimientoRequest, item: MovimientoItem): void {
+    const s = SUSCRIPCIONES.find((x) => x.idSuscripcion === datos.idSuscripcion);
+    if (!s || datos.tipo !== 'GASTO') return;
+    s.pagos.unshift({ fecha: datos.fecha, monto: datos.monto, medioPago: datos.medioPago ?? null });
+    s.pagoSinRegistrar = false;
+    s.ultimaCategoria = { idCategoria: datos.idCategoria, nombre: item.categoria };
+    item.suscripcion = s.nombreServicio;
   }
 
   /** Historial del mes, con búsqueda y filtros opcionales. */

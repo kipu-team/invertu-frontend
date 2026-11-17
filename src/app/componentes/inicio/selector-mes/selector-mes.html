@@ -1,0 +1,52 @@
+<button
+  mat-stroked-button
+  class="selector"
+  [matMenuTriggerFor]="menuMeses"
+  (menuOpened)="abrir()"
+  [attr.aria-label]="'inicio.selectorMes.etiqueta' | translate"
+>
+  <mat-icon>calendar_month</mat-icon>
+  {{ 'inicio.meses.' + valor().mes | translate }} {{ valor().anio }}
+  <mat-icon iconPositionEnd>expand_more</mat-icon>
+</button>
+
+<mat-menu #menuMeses="matMenu" xPosition="before" class="selector-menu">
+  <!-- $event.stopPropagation(): que el menú no se cierre al cambiar de año -->
+  <div class="selector__panel" (click)="$event.stopPropagation()" (keydown)="$event.stopPropagation()">
+    <div class="selector__anio">
+      <button
+        mat-icon-button
+        type="button"
+        (click)="cambiarAnio(-1)"
+        [disabled]="anioVisible <= anioMinimo"
+        [attr.aria-label]="'inicio.selectorMes.anioAnterior' | translate"
+      >
+        <mat-icon>chevron_left</mat-icon>
+      </button>
+      <strong>{{ anioVisible }}</strong>
+      <button
+        mat-icon-button
+        type="button"
+        (click)="cambiarAnio(1)"
+        [disabled]="anioVisible >= anioActual"
+        [attr.aria-label]="'inicio.selectorMes.anioSiguiente' | translate"
+      >
+        <mat-icon>chevron_right</mat-icon>
+      </button>
+    </div>
+
+    <div class="selector__meses">
+      @for (m of meses; track m) {
+        <button
+          type="button"
+          class="selector__mes"
+          [class.selector__mes--elegido]="esElegido(m)"
+          [disabled]="esFuturo(m)"
+          (click)="elegir(m); menuMeses.close.emit()"
+        >
+          {{ 'inicio.mesesCortos.' + m | translate }}
+        </button>
+      }
+    </div>
+  </div>
+</mat-menu>

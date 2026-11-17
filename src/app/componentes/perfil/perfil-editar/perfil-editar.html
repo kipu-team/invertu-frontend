@@ -1,0 +1,41 @@
+<div class="perfil-editar">
+  <h2>{{ 'perfil.editar.titulo' | translate }}</h2>
+
+  <form #formulario="ngForm" (ngSubmit)="guardar()">
+    <!-- Campo Nombres -->
+    <mat-form-field appearance="outline" class="campo-formulario-mdc" style="width: 100%; display: block; margin-bottom: 16px;">
+      <mat-label>{{ 'perfil.campos.nombres' | translate }}</mat-label>
+      <input matInput id="nombres" name="nombres" type="text" [(ngModel)]="nombres" required maxlength="100" />
+    </mat-form-field>
+
+    <!-- Campo Apellidos -->
+    <mat-form-field appearance="outline" class="campo-formulario-mdc" style="width: 100%; display: block; margin-bottom: 16px;">
+      <mat-label>{{ 'perfil.campos.apellidos' | translate }}</mat-label>
+      <input matInput id="apellidos" name="apellidos" type="text" [(ngModel)]="apellidos" required maxlength="100" />
+    </mat-form-field>
+
+    <!-- Campo Universidad -->
+    <mat-form-field appearance="outline" class="campo-formulario-mdc" style="width: 100%; display: block; margin-bottom: 16px;">
+      <mat-label>{{ 'perfil.campos.universidad' | translate }}</mat-label>
+      <mat-select id="universidad" name="universidad" [(ngModel)]="universidad" required>
+        <mat-option value="" disabled>{{ 'perfil.campos.selecciona_universidad' | translate }}</mat-option>
+        @for (opcion of universidades; track opcion) {
+          <mat-option [value]="opcion">{{ opcion }}</mat-option>
+        }
+      </mat-select>
+    </mat-form-field>
+
+    @if (mensajeError) {
+      <p class="mensaje-error">{{ mensajeError }}</p>
+    }
+
+    <div class="acciones" style="display: flex; justify-content: flex-end; gap: 12px; margin-top: 24px;">
+      <button mat-button type="button" (click)="cancelar.emit()" [disabled]="guardando">
+        {{ 'compartido.acciones.cancelar' | translate }}
+      </button>
+      <button mat-flat-button type="submit" [disabled]="guardando || formulario.invalid">
+        {{ (guardando ? 'perfil.editar.guardando' : 'compartido.acciones.guardar') | translate }}
+      </button>
+    </div>
+  </form>
+</div>

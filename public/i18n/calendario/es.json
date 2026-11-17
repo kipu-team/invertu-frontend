@@ -1,5 +1,18 @@
 {
   "calendario": {
-    "titulo": "Calendario financiero"
+    "titulo": "Calendario Financiero",
+    "de": "de",
+    "filtrar_por": "Filtrar por:",
+    "deudas": "Deudas",
+    "suscripciones": "Suscripciones",
+    "metas": "Metas",
+    "metas_aportes": "Metas / Aportes",
+    "eventos_dia": "Eventos del día",
+    "programados_uno": "1 evento programado",
+    "programados_varios": "{{ cantidad }} eventos programados",
+    "ver_detalle": "Ver detalle en {{ tipo }}",
+    "sin_eventos_titulo": "Aún no tienes eventos financieros registrados.",
+    "sin_eventos_desc": "Registra una meta, una deuda o una suscripción para comenzar a visualizar eventos en tu calendario financiero.",
+    "sincronizar": "Sincronizar con Google Calendar"
   }
 }

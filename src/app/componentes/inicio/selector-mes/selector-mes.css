@@ -1,0 +1,53 @@
+/* US-06: selector de mes y año (Figura 22) */
+.selector {
+  height: 40px;
+  border-radius: 8px;
+  --mat-button-outlined-label-text-color: var(--texto);
+  --mat-button-outlined-outline-color: var(--borde);
+  font-weight: 600;
+}
+
+.selector__panel {
+  padding: 8px 12px 12px;
+  width: 232px;
+}
+
+.selector__anio {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 8px;
+}
+
+.selector__meses {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 6px;
+}
+
+.selector__mes {
+  height: 34px;
+  border: 1px solid var(--borde);
+  border-radius: 8px;
+  background: var(--superficie);
+  color: var(--texto);
+  font: inherit;
+  font-size: 0.8rem;
+  cursor: pointer;
+}
+
+.selector__mes:hover:not(:disabled) {
+  border-color: var(--verde-esmeralda);
+}
+
+.selector__mes--elegido {
+  border-color: var(--verde-esmeralda);
+  background: var(--verde-esmeralda);
+  color: #ffffff;
+  font-weight: 700;
+}
+
+.selector__mes:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}

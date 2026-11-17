@@ -1,5 +1,106 @@
 {
   "inicio": {
-    "titulo": "Inicio"
+    "titulo": "Inicio",
+    "orientacion": {
+      "saludo": "¡Hola, {{nombre}}!",
+      "titulo": "Toma el control de tus finanzas universitarias",
+      "descripcion": "Sabemos que administrar ingresos fijos y variables mientras estudias puede ser un reto. InvertU te ayuda a organizar tu presupuesto de manera fácil, visual y pensada para tu vida académica.",
+      "imagenAlt": "Libros, monedas y una planta que crece",
+      "primerosPasos": "Tus primeros pasos:",
+      "paso": "Paso {{numero}}",
+      "pendiente": "0% completado",
+      "completado": "100% completado",
+      "listo": "Listo",
+      "pasos": {
+        "movimiento": {
+          "titulo": "Registra tu primer movimiento",
+          "descripcion": "Suma tu mesada, tu sueldo de beca o el gasto de tus fotocopias para ver tus indicadores y gráficos del mes.",
+          "boton": "Registrar ingreso/gasto"
+        },
+        "meta": {
+          "titulo": "Crea tu primera meta de ahorro",
+          "descripcion": "¿Una laptop nueva, el semestre o un viaje? Define cuánto necesitas y sigue tu avance con cada aporte.",
+          "boton": "Crear meta de ahorro"
+        }
+      }
+    },
+    "subtitulo": "Visualiza el estado de tus ingresos, gastos y ahorro del mes seleccionado.",
+    "meses": {
+      "1": "Enero",
+      "2": "Febrero",
+      "3": "Marzo",
+      "4": "Abril",
+      "5": "Mayo",
+      "6": "Junio",
+      "7": "Julio",
+      "8": "Agosto",
+      "9": "Septiembre",
+      "10": "Octubre",
+      "11": "Noviembre",
+      "12": "Diciembre"
+    },
+    "mesesCortos": {
+      "1": "Ene",
+      "2": "Feb",
+      "3": "Mar",
+      "4": "Abr",
+      "5": "May",
+      "6": "Jun",
+      "7": "Jul",
+      "8": "Ago",
+      "9": "Sep",
+      "10": "Oct",
+      "11": "Nov",
+      "12": "Dic"
+    },
+    "selectorMes": {
+      "etiqueta": "Elegir mes",
+      "anioAnterior": "Año anterior",
+      "anioSiguiente": "Año siguiente"
+    },
+    "vacio": {
+      "titulo": "Aún no tienes movimientos en {{mes}} de {{anio}}",
+      "descripcion": "Cuando registres un ingreso o un gasto de este mes, aquí verás tus indicadores y gráficos.",
+      "boton": "Registrar ingreso/gasto"
+    },
+    "mesesEnFrase": {
+      "1": "enero",
+      "2": "febrero",
+      "3": "marzo",
+      "4": "abril",
+      "5": "mayo",
+      "6": "junio",
+      "7": "julio",
+      "8": "agosto",
+      "9": "septiembre",
+      "10": "octubre",
+      "11": "noviembre",
+      "12": "diciembre"
+    },
+    "indicadores": {
+      "ingresos": "Ingresos del período",
+      "gastos": "Gastos del período",
+      "balance": "Balance del período",
+      "ahorro": "Ahorro destinado a metas",
+      "fijos": "Fijos: {{pct}}%",
+      "variables": "Variables: {{pct}}%",
+      "positivo": "Positivo",
+      "negativo": "Negativo",
+      "balanceNota": "Ingresos menos gastos y aportes a metas",
+      "tasa": "{{pct}}% de tus ingresos",
+      "ahorroNota": "Aportes a tus metas en este mes"
+    },
+    "graficos": {
+      "semanal": "Ingresos vs gastos por semana",
+      "semanalDescripcion": "Comparación de tus ingresos y gastos en cada semana del mes seleccionado.",
+      "ingresos": "Ingresos",
+      "gastos": "Gastos",
+      "semana": "Semana {{numero}}",
+      "gastosCategoria": "Distribución de gastos por categoría",
+      "ingresosFuente": "Distribución de ingresos por fuente",
+      "total": "Total",
+      "sinGastos": "No registraste gastos en este mes.",
+      "sinIngresos": "No registraste ingresos en este mes."
+    }
   }
 }

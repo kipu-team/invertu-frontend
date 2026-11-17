@@ -9,7 +9,7 @@ import {
 import { MatButton } from '@angular/material/button';
 import { MatDialog } from '@angular/material/dialog';
 import { MatIcon } from '@angular/material/icon';
-import { Router, RouterLink } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { TranslatePipe } from '@ngx-translate/core';
 import { MetaService } from '../../../servicios/meta-service';
 import { SesionService } from '../../../servicios/sesion-service';
@@ -36,8 +36,10 @@ export class MetaRegistrar {
   private router = inject(Router);
   private dialog = inject(MatDialog);
   private sesion = inject(SesionService);
+  private route = inject(ActivatedRoute);
 
   limiteAlcanzado = false;
+  idMeta: number | null = null;
 
   formulario = this.fb.group({
     nombre: ['', Validators.required],
@@ -52,6 +54,9 @@ export class MetaRegistrar {
   get fecha() {
     return this.formulario.controls.fechaObjetivo;
   }
+  get editando() {
+    return this.idMeta !== null;
+  }
 
   constructor() {
     effect(() => {
@@ -60,10 +65,16 @@ export class MetaRegistrar {
         this.limiteAlcanzado = estado.limiteAlcanzado;
       });
     });
+    this.route.params.subscribe((data) => {
+      if (data['id']) {
+        this.idMeta = +data['id'];
+        this.cargarMeta(this.idMeta);
+      }
+    });
   }
 
   registrar(): void {
-    if (this.formulario.invalid || this.limiteAlcanzado) {
+    if (this.formulario.invalid || (this.limiteAlcanzado && !this.editando)) {
       this.formulario.markAllAsTouched();
       return;
     }
@@ -75,15 +86,42 @@ export class MetaRegistrar {
       frecuenciaAporte: v.frecuenciaAporte as FrecuenciaAporte,
       descripcion: v.descripcion || undefined,
     };
-    this.metaService.crear(datos).subscribe(() => {
-      this.dialog
-        .open(MetaCreadaDialogo, { disableClose: true })
-        .afterClosed()
-        .subscribe(() => this.router.navigate(['/metas']));
-    });
+    if (this.idMeta !== null) {
+      this.metaService.actualizar(this.idMeta, datos).subscribe(() => {
+        this.dialog
+          .open(MetaCreadaDialogo, {
+            disableClose: true,
+            data: { mensaje: 'metas.editar.exito', boton: 'metas.editar.verDetalle' },
+          })
+          .afterClosed()
+          .subscribe(() => this.router.navigate(['/metas', this.idMeta]));
+      });
+    } else {
+      this.metaService.crear(datos).subscribe(() => {
+        this.dialog
+          .open(MetaCreadaDialogo, {
+            disableClose: true,
+            data: { mensaje: 'metas.registrar.exito', boton: 'metas.registrar.verMisMetas' },
+          })
+          .afterClosed()
+          .subscribe(() => this.router.navigate(['/metas']));
+      });
+    }
   }
 
   cancelar(): void {
-    this.router.navigate(['/metas']);
+    this.router.navigate(this.editando ? ['/metas', this.idMeta] : ['/metas']);
+  }
+
+  private cargarMeta(id: number): void {
+    this.metaService.obtenerDetalle(id).subscribe((meta) => {
+      this.formulario.patchValue({
+        nombre: meta.nombre,
+        montoObjetivo: meta.montoObjetivo,
+        fechaObjetivo: meta.fechaObjetivo,
+        frecuenciaAporte: meta.frecuenciaAporte,
+        descripcion: meta.descripcion ?? '',
+      });
+    });
   }
 }

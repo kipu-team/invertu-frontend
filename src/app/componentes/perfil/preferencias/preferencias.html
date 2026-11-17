@@ -1,0 +1,79 @@
+<div class="preferencias">
+  <h1 class="preferencias-titulo">{{ 'perfil.preferencias.titulo' | translate }}</h1>
+  <p class="preferencias-subtitulo">{{ 'perfil.preferencias.subtitulo' | translate }}</p>
+
+  <section class="tarjeta-configuracion">
+    <h3 class="seccion-titulo">{{ 'perfil.preferencias.apariencia' | translate }}</h3>
+
+    <div class="opciones-tema">
+      <!-- Botón Claro -->
+      <button type="button" class="opcion-tema" [class.seleccionado]="tema() === 'CLARO'" (click)="cambiarTema('CLARO')">
+        <mat-icon>light_mode</mat-icon>
+        <span>{{ 'perfil.preferencias.claro' | translate }}</span>
+      </button>
+
+      <!-- Botón Oscuro -->
+      <button type="button" class="opcion-tema" [class.seleccionado]="tema() === 'OSCURO'" (click)="cambiarTema('OSCURO')">
+        <mat-icon>dark_mode</mat-icon>
+        <span>{{ 'perfil.preferencias.oscuro' | translate }}</span>
+      </button>
+
+      <!-- Botón Sistema -->
+      <button type="button" class="opcion-tema" [class.seleccionado]="tema() === 'SISTEMA'" (click)="cambiarTema('SISTEMA')">
+        <mat-icon>desktop_windows</mat-icon>
+        <span>{{ 'perfil.preferencias.sistema' | translate }}</span>
+      </button>
+    </div>
+
+    <button mat-button type="button" class="boton-restaurar" (click)="restaurarConfiguracion()" style="padding: 0; margin-top: 12px; margin-bottom: 24px; display: block;">
+      {{ 'perfil.preferencias.restaurar' | translate }}
+    </button>
+
+    <h3 class="seccion-titulo titulo-idioma">{{ 'perfil.preferencias.idioma' | translate }}</h3>
+    <div class="idioma-contenedor" style="display: flex; justify-content: space-between; align-items: center; margin: 18px 0 8px;">
+      <div class="idioma-informacion">
+        <strong>{{ 'perfil.preferencias.escoger_idioma' | translate }}</strong>
+        <p style="margin-top: 3px;">{{ 'perfil.preferencias.descripcion_idioma' | translate }}</p>
+      </div>
+
+      <mat-form-field appearance="outline" subscriptSizing="dynamic" style="min-width: 140px;">
+        <mat-select [value]="idioma()" (selectionChange)="cambiarIdioma($event.value)">
+          <mat-option value="es_419">ES (Español)</mat-option>
+          <mat-option value="en_US">EN (English)</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+
+    <button mat-button type="button" class="boton-restaurar" (click)="restaurarTema()" style="padding: 0; margin-top: 12px;">
+      {{ 'perfil.preferencias.restaurar_tema' | translate }}
+    </button>
+  </section>
+
+  <section class="tarjeta-configuracion tarjeta-notificaciones">
+    <h3 class="seccion-titulo">{{ 'perfil.preferencias.notificaciones' | translate }}</h3>
+
+    <div class="notificacion" style="display: flex; justify-content: space-between; align-items: center; padding: 7px 0; border-bottom: 1px solid var(--borde);">
+      <div class="notificacion-texto">
+        <strong>{{ 'perfil.preferencias.alertas_gastos' | translate }}</strong>
+        <p style="margin-top: 3px;">{{ 'perfil.preferencias.desc_alertas' | translate }}</p>
+      </div>
+      <mat-slide-toggle [checked]="notificaciones().alertasGastos" (change)="cambiarNotificacion('alertasGastos', $event.checked)"></mat-slide-toggle>
+    </div>
+
+    <div class="notificacion" style="display: flex; justify-content: space-between; align-items: center; padding: 7px 0; border-bottom: 1px solid var(--borde);">
+      <div class="notificacion-texto">
+        <strong>{{ 'perfil.preferencias.recordatorios_metas' | translate }}</strong>
+        <p style="margin-top: 3px;">{{ 'perfil.preferencias.desc_recordatorios' | translate }}</p>
+      </div>
+      <mat-slide-toggle [checked]="notificaciones().recordatoriosMetas" (change)="cambiarNotificacion('recordatoriosMetas', $event.checked)"></mat-slide-toggle>
+    </div>
+
+    <div class="notificacion" style="display: flex; justify-content: space-between; align-items: center; padding: 7px 0;">
+      <div class="notificacion-texto">
+        <strong>{{ 'perfil.preferencias.actualizaciones' | translate }}</strong>
+        <p style="margin-top: 3px;">{{ 'perfil.preferencias.desc_actualizaciones' | translate }}</p>
+      </div>
+      <mat-slide-toggle [checked]="notificaciones().actualizacionesSistema" (change)="cambiarNotificacion('actualizacionesSistema', $event.checked)"></mat-slide-toggle>
+    </div>
+  </section>
+</div>

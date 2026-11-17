@@ -1,0 +1,104 @@
+<section class="graficos">
+  <!-- Ingresos vs gastos por semana -->
+  <article class="tarjeta grafico grafico--ancho">
+    <div class="grafico__cabecera">
+      <div>
+        <h3>{{ 'inicio.graficos.semanal' | translate }}</h3>
+        <p>{{ 'inicio.graficos.semanalDescripcion' | translate }}</p>
+      </div>
+      <div class="grafico__leyenda-lineas">
+        <span><i class="punto punto--ingreso"></i>{{ 'inicio.graficos.ingresos' | translate }}</span>
+        <span><i class="punto punto--gasto"></i>{{ 'inicio.graficos.gastos' | translate }}</span>
+      </div>
+    </div>
+
+    <div class="grafico__area">
+      <svg
+        class="grafico__lineas"
+        [attr.viewBox]="'0 0 ' + ancho + ' ' + alto"
+        preserveAspectRatio="none"
+        role="img"
+        [attr.aria-label]="'inicio.graficos.semanal' | translate"
+      >
+        @for (g of guias; track g) {
+          <line class="guia" x1="0" [attr.x2]="ancho" [attr.y1]="g" [attr.y2]="g" />
+        }
+        <polyline class="linea linea--gasto" [attr.points]="lineaGastos()" />
+        <polyline class="linea linea--ingreso" [attr.points]="lineaIngresos()" />
+      </svg>
+      <!-- Puntos en HTML (en el SVG estirado se verían ovalados) -->
+      @for (p of puntos(); track p.semana) {
+        <i class="marca marca--gasto" [style.left.%]="(p.x / ancho) * 100" [style.top.%]="(p.yGastos / alto) * 100"></i>
+        <i class="marca marca--ingreso" [style.left.%]="(p.x / ancho) * 100" [style.top.%]="(p.yIngresos / alto) * 100"></i>
+      }
+    </div>
+    <!-- Cada etiqueta va justo debajo de su punto (misma posición x que en el SVG) -->
+    <div class="grafico__semanas">
+      @for (p of puntos(); track p.semana) {
+        <span [style.left.%]="(p.x / ancho) * 100">
+          {{ 'inicio.graficos.semana' | translate: { numero: p.semana } }}
+        </span>
+      }
+    </div>
+  </article>
+
+  <!-- Gastos por categoría -->
+  <article class="tarjeta grafico">
+    <h3>{{ 'inicio.graficos.gastosCategoria' | translate }}</h3>
+    @if (segmentosDona().length) {
+      <div class="dona">
+        <svg viewBox="0 0 42 42" class="dona__svg" role="img" [attr.aria-label]="'inicio.graficos.gastosCategoria' | translate">
+          @for (s of segmentosDona(); track s.categoria) {
+            <circle
+              cx="21"
+              cy="21"
+              [attr.r]="radio"
+              fill="none"
+              stroke-width="6"
+              [style.stroke]="s.color"
+              [attr.stroke-dasharray]="s.trazo"
+              [attr.stroke-dashoffset]="s.desfase"
+            />
+          }
+        </svg>
+        <div class="dona__centro">
+          <span>{{ 'inicio.graficos.total' | translate }}</span>
+          <strong>S/ {{ totalGastos() | number: '1.0-0' }}</strong>
+        </div>
+        <ul class="leyenda">
+          @for (s of segmentosDona(); track s.categoria) {
+            <li>
+              <i class="punto" [style.background]="s.color"></i>
+              <span class="leyenda__nombre">{{ s.categoria }}</span>
+              <span>S/ {{ s.total | number: '1.2-2' }}</span>
+            </li>
+          }
+        </ul>
+      </div>
+    } @else {
+      <p class="grafico__vacio">{{ 'inicio.graficos.sinGastos' | translate }}</p>
+    }
+  </article>
+
+  <!-- Ingresos por fuente -->
+  <article class="tarjeta grafico">
+    <h3>{{ 'inicio.graficos.ingresosFuente' | translate }}</h3>
+    @if (fuentes().length) {
+      <ul class="fuentes">
+        @for (f of fuentes(); track f.categoria) {
+          <li>
+            <div class="fuentes__fila">
+              <span>{{ f.categoria }}</span>
+              <strong>S/ {{ f.total | number: '1.2-2' }} ({{ f.pct }}%)</strong>
+            </div>
+            <div class="fuentes__barra">
+              <div [style.width.%]="f.pct" [style.background]="f.color"></div>
+            </div>
+          </li>
+        }
+      </ul>
+    } @else {
+      <p class="grafico__vacio">{{ 'inicio.graficos.sinIngresos' | translate }}</p>
+    }
+  </article>
+</section>

@@ -1,0 +1,53 @@
+<section class="orientacion">
+  <div class="tarjeta orientacion__bienvenida">
+    <div class="orientacion__textos">
+      <span class="orientacion__saludo">
+        {{ 'inicio.orientacion.saludo' | translate: { nombre: orientacion().nombreEstudiante } }}
+      </span>
+      <h1>{{ 'inicio.orientacion.titulo' | translate }}</h1>
+      <p>{{ 'inicio.orientacion.descripcion' | translate }}</p>
+    </div>
+    <img
+      class="orientacion__imagen"
+      src="/img/orientacion.png"
+      [alt]="'inicio.orientacion.imagenAlt' | translate"
+    />
+  </div>
+
+  <h2 class="orientacion__subtitulo">{{ 'inicio.orientacion.primerosPasos' | translate }}</h2>
+
+  <div class="orientacion__pasos">
+    @for (paso of pasos(); track paso.clave; let i = $index) {
+      <article class="tarjeta orientacion__paso">
+        <div class="orientacion__paso-cabecera">
+          <span class="orientacion__etiqueta">
+            {{ 'inicio.orientacion.paso' | translate: { numero: i + 1 } }}
+          </span>
+          <span class="orientacion__avance" [class.orientacion__avance--hecho]="paso.hecho">
+            {{ (paso.hecho ? 'inicio.orientacion.completado' : 'inicio.orientacion.pendiente') | translate }}
+          </span>
+        </div>
+
+        <h3>{{ 'inicio.orientacion.pasos.' + paso.clave + '.titulo' | translate }}</h3>
+        <p>{{ 'inicio.orientacion.pasos.' + paso.clave + '.descripcion' | translate }}</p>
+
+        <div class="orientacion__pie">
+          <mat-progress-bar
+            class="orientacion__barra"
+            mode="determinate"
+            [value]="paso.hecho ? 100 : 0"
+          />
+          @if (paso.hecho) {
+            <span class="orientacion__listo">
+              <mat-icon>check_circle</mat-icon>{{ 'inicio.orientacion.listo' | translate }}
+            </span>
+          } @else {
+            <a mat-flat-button class="orientacion__boton" [routerLink]="paso.ruta">
+              {{ 'inicio.orientacion.pasos.' + paso.clave + '.boton' | translate }}
+            </a>
+          }
+        </div>
+      </article>
+    }
+  </div>
+</section>

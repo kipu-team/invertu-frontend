@@ -1,0 +1,113 @@
+<div class="contrasena-seccion">
+
+  <h1 class="contrasena-titulo">Cambiar contraseña</h1>
+  <p class="contrasena-subtitulo">Actualiza tu contraseña para mantener tu cuenta segura.</p>
+
+  <section class="contrasena-tarjeta">
+    <form [formGroup]="formulario" (ngSubmit)="guardar()">
+
+      <!-- CONTRASEÑA ACTUAL -->
+      <mat-form-field appearance="outline" class="bloque-input">
+        <mat-label>Contraseña actual</mat-label>
+        <input
+          matInput
+          [type]="ocultarActual ? 'password' : 'text'"
+          formControlName="contrasenaActual"
+        />
+        <button
+          mat-icon-button
+          matSuffix
+          type="button"
+          (click)="ocultarActual = !ocultarActual"
+          [attr.aria-label]="'Ocultar contraseña'"
+        >
+          <mat-icon>{{ ocultarActual ? 'visibility_off' : 'visibility' }}</mat-icon>
+        </button>
+      </mat-form-field>
+
+      <!-- NUEVA CONTRASEÑA -->
+      <mat-form-field appearance="outline" class="bloque-input">
+        <mat-label>Nueva contraseña</mat-label>
+        <input
+          matInput
+          [type]="ocultarNueva ? 'password' : 'text'"
+          formControlName="nuevaContrasena"
+        />
+        <button
+          mat-icon-button
+          matSuffix
+          type="button"
+          (click)="ocultarNueva = !ocultarNueva"
+        >
+          <mat-icon>{{ ocultarNueva ? 'visibility_off' : 'visibility' }}</mat-icon>
+        </button>
+      </mat-form-field>
+
+      <!-- CONFIRMAR NUEVA CONTRASEÑA -->
+      <mat-form-field appearance="outline" class="bloque-input">
+        <mat-label>Confirmar nueva contraseña</mat-label>
+        <input
+          matInput
+          [type]="ocultarConfirmar ? 'password' : 'text'"
+          formControlName="confirmarContrasena"
+        />
+        <button
+          mat-icon-button
+          matSuffix
+          type="button"
+          (click)="ocultarConfirmar = !ocultarConfirmar"
+        >
+          <mat-icon>{{ ocultarConfirmar ? 'visibility_off' : 'visibility' }}</mat-icon>
+        </button>
+        @if (formulario.hasError('noCoincide') && campoConfirmar?.touched) {
+          <mat-error>
+            Las contraseñas no coinciden.
+          </mat-error>
+        }
+      </mat-form-field>
+
+      <!-- REQUISITOS EN TIEMPO REAL -->
+      <div class="requisitos-contenedor">
+        <p class="requisitos-titulo-label">Requisitos de la contraseña:</p>
+        <div class="requisitos-grid">
+
+          <div class="requisito-item" [class.valido]="cumpleMinimo()">
+            <mat-icon>{{ cumpleMinimo() ? 'check_circle' : 'radio_button_unchecked' }}</mat-icon>
+            <span>Mínimo 8 caracteres</span>
+          </div>
+
+          <div class="requisito-item" [class.valido]="cumpleMayuscula()">
+            <mat-icon>{{ cumpleMayuscula() ? 'check_circle' : 'radio_button_unchecked' }}</mat-icon>
+            <span>Al menos una mayúscula</span>
+          </div>
+
+          <div class="requisito-item" [class.valido]="cumpleNumero()">
+            <mat-icon>{{ cumpleNumero() ? 'check_circle' : 'radio_button_unchecked' }}</mat-icon>
+            <span>Al menos un número</span>
+          </div>
+
+          <div class="requisito-item" [class.valido]="cumpleEspecial()">
+            <mat-icon>{{ cumpleEspecial() ? 'check_circle' : 'radio_button_unchecked' }}</mat-icon>
+            <span>Al menos un carácter especial</span>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- BOTONES DE ACCIÓN -->
+      <div class="acciones-formulario">
+        <button mat-button type="button" routerLink="/perfil">Cancelar</button>
+        <button
+          mat-flat-button
+          class="boton-guardar-verde"
+          type="submit"
+          [disabled]="formulario.invalid || guardando"
+        >
+          Guardar contraseña
+        </button>
+      </div>
+
+    </form>
+  </section>
+
+</div>
