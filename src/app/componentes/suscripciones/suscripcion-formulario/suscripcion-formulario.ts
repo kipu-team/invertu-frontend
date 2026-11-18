@@ -102,26 +102,38 @@ export class SuscripcionFormulario implements OnInit {
         ? this.suscripcionService.registrar(datos)
         : this.suscripcionService.editar(id, datos);
 
-    peticion.subscribe(() => {
-      this.guardando.set(false);
-      this.limpiar();
-      this.guardada.emit();
-      if (id === null) {
+    peticion.subscribe({
+      next: () => {
+        this.guardando.set(false);
+        this.limpiar();
+        this.guardada.emit();
+        if (id === null) {
+          this.mostrarMensaje(
+            'exito',
+            'suscripciones.mensajes.registradaTitulo',
+            'suscripciones.mensajes.registradaTexto',
+            'suscripciones.mensajes.continuar',
+          );
+        } else {
+          this.mostrarMensaje(
+            'exito',
+            'suscripciones.mensajes.editadaTitulo',
+            'suscripciones.mensajes.editadaTexto',
+            'suscripciones.mensajes.continuar',
+          );
+        }
+        despues?.();
+      },
+      // T-113: si el backend responde error, se avisa y se puede volver a intentar
+      error: () => {
+        this.guardando.set(false);
         this.mostrarMensaje(
-          'exito',
-          'suscripciones.mensajes.registradaTitulo',
-          'suscripciones.mensajes.registradaTexto',
-          'suscripciones.mensajes.continuar',
+          'error',
+          'suscripciones.mensajes.errorTitulo',
+          'suscripciones.mensajes.errorTexto',
+          'suscripciones.mensajes.reintentar',
         );
-      } else {
-        this.mostrarMensaje(
-          'exito',
-          'suscripciones.mensajes.editadaTitulo',
-          'suscripciones.mensajes.editadaTexto',
-          'suscripciones.mensajes.continuar',
-        );
-      }
-      despues?.();
+      },
     });
   }
 

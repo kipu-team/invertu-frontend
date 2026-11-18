@@ -1,5 +1,6 @@
-import { Service } from '@angular/core';
-import { Observable, of } from 'rxjs';
+import { Service, inject } from '@angular/core';
+import { HttpClient, HttpParams } from '@angular/common/http';
+import { Observable } from 'rxjs';
 import { EstadoSuscripcion, FrecuenciaSuscripcion } from '../modelo/comun';
 import {
   AlertaSaldo,
@@ -12,114 +13,59 @@ import {
   SuscripcionRequest,
   SuscripcionResumen,
 } from '../modelo/suscripcion';
-import { SUSCRIPCIONES, siguienteId } from './datos-prueba/datos-prueba';
+import { environment } from '../../environments/environment';
 
-/** Suscripciones (backend: /api/v1/suscripciones). Por ahora con datos de prueba. */
+/**
+ * Suscripciones (backend: /api/v1/suscripciones). T-113: todos los métodos usan la API real.
+ * El token lo agrega el interceptor (autenticacion-interceptor.ts).
+ */
 @Service()
 export class SuscripcionService {
+  private http = inject(HttpClient);
+  private url = `${environment.apiUrl}/suscripciones`;
+
+  /** US-26. 201: creada. 400: datos inválidos. */
   registrar(datos: SuscripcionRequest): Observable<Suscripcion> {
-    const nueva: SuscripcionDetalle = {
-      idSuscripcion: siguienteId(SUSCRIPCIONES, 'idSuscripcion'),
-      nombreServicio: datos.nombreServicio,
-      descripcion: datos.descripcion ?? null,
-      monto: datos.monto,
-      frecuencia: datos.frecuencia,
-      proximaFechaCobro: datos.proximaFechaCobro,
-      estado: 'ACTIVA',
-      recordatorioActivo: false,
-      diasAnticipacion: null,
-      alertaSaldoActiva: false,
-      pagoSinRegistrar: false,
-      ultimaCategoria: null,
-      pagos: [],
-    };
-    SUSCRIPCIONES.push(nueva);
-    return of(this.aSuscripcion(nueva));
+    return this.http.post<Suscripcion>(this.url, datos);
   }
 
   listarFrecuencias(): Observable<FrecuenciaSuscripcion[]> {
-    return of(['SEMANAL', 'MENSUAL', 'TRIMESTRAL', 'SEMESTRAL', 'ANUAL']);
+    return this.http.get<FrecuenciaSuscripcion[]>(`${this.url}/frecuencias`);
   }
 
-  /** Sin estado = todas. */
+  /** US-27. Sin estado = todas. */
   listar(estado?: EstadoSuscripcion): Observable<SuscripcionResumen[]> {
-    return of(
-      SUSCRIPCIONES.filter((s) => !estado || s.estado === estado).map((s) => ({
-        idSuscripcion: s.idSuscripcion,
-        nombreServicio: s.nombreServicio,
-        monto: s.monto,
-        frecuencia: s.frecuencia,
-        proximaFechaCobro: s.proximaFechaCobro,
-        estado: s.estado,
-        recordatorioActivo: s.recordatorioActivo,
-        pagoSinRegistrar: s.pagoSinRegistrar,
-      })),
-    );
+    const params = estado ? new HttpParams().set('estado', estado) : undefined;
+    return this.http.get<SuscripcionResumen[]>(this.url, { params });
   }
 
+  /** US-27. 404: no existe o no es del estudiante. */
   obtenerDetalle(id: number): Observable<SuscripcionDetalle> {
-    return of({ ...SUSCRIPCIONES.find((s) => s.idSuscripcion === id)! });
+    return this.http.get<SuscripcionDetalle>(`${this.url}/${id}`);
   }
 
+  /** US-29 */
   editar(id: number, datos: SuscripcionRequest): Observable<Suscripcion> {
-    const s = this.buscar(id);
-    Object.assign(s, { ...datos, descripcion: datos.descripcion ?? null });
-    return of(this.aSuscripcion(s));
+    return this.http.put<Suscripcion>(`${this.url}/${id}`, datos);
   }
 
+  /** US-30 */
   cancelar(id: number): Observable<Suscripcion> {
-    const s = this.buscar(id);
-    s.estado = 'CANCELADA';
-    return of(this.aSuscripcion(s));
+    return this.http.patch<Suscripcion>(`${this.url}/${id}/cancelar`, {});
   }
 
+  /** US-30. 400: la fecha no puede ser pasada. */
   reactivar(id: number, datos: ReactivarSuscripcionRequest): Observable<Suscripcion> {
-    const s = this.buscar(id);
-    s.estado = 'ACTIVA';
-    s.proximaFechaCobro = datos.proximaFechaCobro;
-    return of(this.aSuscripcion(s));
+    return this.http.patch<Suscripcion>(`${this.url}/${id}/reactivar`, datos);
   }
 
+  /** US-31. Plan Free: máximo 3 recordatorios (el backend responde error si se pasa). */
   configurarRecordatorio(id: number, datos: RecordatorioRequest): Observable<Recordatorio> {
-    const s = this.buscar(id);
-    s.recordatorioActivo = datos.activo;
-    s.diasAnticipacion = datos.activo ? (datos.diasAnticipacion ?? 1) : null;
-    return of({
-      idSuscripcion: id,
-      recordatorioActivo: s.recordatorioActivo,
-      diasAnticipacion: s.diasAnticipacion,
-    });
+    return this.http.put<Recordatorio>(`${this.url}/${id}/recordatorio`, datos);
   }
 
-  /** Solo Premium (Free → aviso, Figura 65) */
+  /** US-32. Solo Premium (403 para Free; la pantalla ya muestra el aviso Premium, Figura 65). */
   configurarAlertaSaldo(id: number, datos: AlertaSaldoRequest): Observable<AlertaSaldo> {
-    const s = this.buscar(id);
-    s.alertaSaldoActiva = datos.activa;
-    return of({ idSuscripcion: id, alertaSaldoActiva: s.alertaSaldoActiva });
-  }
-
-  private buscar(id: number): SuscripcionDetalle {
-    return SUSCRIPCIONES.find((s) => s.idSuscripcion === id)!;
-  }
-
-  private aSuscripcion(s: SuscripcionDetalle): Suscripcion {
-    const ahora = new Date().toISOString();
-    return {
-      idSuscripcion: s.idSuscripcion,
-      nombreServicio: s.nombreServicio,
-      descripcion: s.descripcion,
-      monto: s.monto,
-      frecuencia: s.frecuencia,
-      proximaFechaCobro: s.proximaFechaCobro,
-      recordatorioActivo: s.recordatorioActivo,
-      diasAnticipacion: s.diasAnticipacion,
-      ultimaFechaRecordatorio: null,
-      alertaSaldoActiva: s.alertaSaldoActiva,
-      ultimaFechaAlertaSaldo: null,
-      estado: s.estado,
-      fechaCancelacion: s.estado === 'CANCELADA' ? ahora.slice(0, 10) : null,
-      fechaCreacion: ahora,
-      fechaActualizacion: ahora,
-    };
+    return this.http.put<AlertaSaldo>(`${this.url}/${id}/alerta-saldo`, datos);
   }
 }

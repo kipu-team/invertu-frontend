@@ -93,7 +93,8 @@
       "reactivadaTitulo": "¡Suscripción reactivada!",
       "reactivadaTexto": "Volvió a la sección Activas con su nueva fecha de cobro.",
       "pagoTitulo": "¡Pago registrado!",
-      "pagoTexto": "Pago registrado correctamente."
+      "pagoTexto": "Pago registrado correctamente.",
+      "errorTexto": "No se pudo guardar. Revisa tu conexión e inténtalo de nuevo."
     },
     "confirmarCambios": {
       "titulo": "¿Guardar cambios?",
@@ -121,10 +122,10 @@
         "7": "7 días antes"
       },
       "free": "Con el plan Free puedes activar recordatorios en hasta 3 suscripciones.",
-      "limite": "Alcanzaste el límite de 3 recordatorios del plan Free. Pásate a Premium para activar recordatorios en todas tus suscripciones.",
-      "alerta": {
-        "soloPremium": "La alerta de saldo insuficiente es exclusiva del plan Premium: te avisamos si tu saldo no alcanza para el próximo cobro."
-      }
+      "limite": "Alcanzaste el límite de 3 recordatorios del plan Free. Pásate a Premium para activar recordatorios en todas tus suscripciones."
+    },
+    "alerta": {
+      "soloPremium": "La alerta de saldo insuficiente es exclusiva del plan Premium: te avisamos si tu saldo no alcanza para el próximo cobro."
     },
     "pago": {
       "titulo": "Registrar pago de {{nombre}}",
