@@ -33,8 +33,9 @@ export class AutenticacionService {
     return this.http.post<AuthResponse>(`${this.url}/iniciar-sesion`, datos);
   }
 
+  /** END-AUTH-03. Siempre 200 (exista o no el correo). 429: debe esperar 1 minuto para reenviar. */
   recuperarContrasena(datos: RecuperarContrasenaRequest): Observable<Mensaje> {
-    return of({ mensaje: 'Si el correo está registrado, te enviamos un enlace de recuperación' });
+    return this.http.post<Mensaje>(`${this.url}/recuperar-contrasena`, datos);
   }
 
   /** Con el token "expirado" simula un enlace vencido (Figura 13). */

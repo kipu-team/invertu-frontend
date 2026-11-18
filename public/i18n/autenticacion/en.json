@@ -50,7 +50,24 @@
       }
     },
     "recuperar": {
-      "titulo": "Forgot your password?"
+      "titulo": "Forgot your password?",
+      "subtitulo": "Enter your email and we will send you a link to reset it.",
+      "enviar": "Send link",
+      "teAcordaste": "Remembered it?",
+      "volverLogin": "Back to log in",
+      "enviado": {
+        "titulo": "Link sent",
+        "descripcion": "If {{correo}} is registered, you will receive a link to reset your password. The link expires in 30 minutes.",
+        "reenviar": "Resend link",
+        "reenviarEn": "Resend link (available in {{tiempo}})",
+        "noLlego": "Didn't get it? Check your spam folder, use",
+        "otroCorreo": "another email",
+        "o": "or",
+        "volverLogin": "go back to log in"
+      },
+      "errores": {
+        "esperar": "You must wait 1 minute to resend the link"
+      }
     },
     "restablecer": {
       "titulo": "Create your new password"
