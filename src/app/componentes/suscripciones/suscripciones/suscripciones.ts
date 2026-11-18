@@ -11,6 +11,7 @@ import { DatePipe, DecimalPipe } from '@angular/common';
 import { MatButton } from '@angular/material/button';
 import { MatIcon } from '@angular/material/icon';
 import { MatDialog } from '@angular/material/dialog';
+import { ActivatedRoute } from '@angular/router';
 import { TranslatePipe } from '@ngx-translate/core';
 import { SuscripcionService } from '../../../servicios/suscripcion-service';
 import { SuscripcionResumen } from '../../../modelo/suscripcion';
@@ -35,6 +36,7 @@ type FiltroEstado = 'TODAS' | EstadoSuscripcion;
 export class Suscripciones implements OnInit {
   private suscripcionService = inject(SuscripcionService);
   private dialog = inject(MatDialog);
+  private route = inject(ActivatedRoute);
   private panel = viewChild.required(SuscripcionFormulario);
   readonly filtros: FiltroEstado[] = ['TODAS', 'ACTIVA', 'CANCELADA'];
 
@@ -60,6 +62,8 @@ export class Suscripciones implements OnInit {
 
   ngOnInit(): void {
     this.cargar();
+    const id = this.route.snapshot.queryParamMap.get('id');
+    if (id) this.verDetalle(Number(id));
   }
 
   cargar(): void {
