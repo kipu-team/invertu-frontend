@@ -31,7 +31,7 @@
         "sinLimite": "unlimited"
       },
       "notaPrueba": "Trial version: payment is simulated and you won't be charged.",
-      "boton": "Start free trial",
+      "boton": "Upgrade to Premium",
       "exito": {
         "titulo": "You're Premium now!",
         "descripcion": "You can now use every Premium feature in InvertU.",
@@ -40,6 +40,25 @@
       "errores": {
         "yaPremium": "You already have the Premium plan",
         "servidor": "Premium could not be activated. Please try again."
+      }
+    },
+    "pago": {
+      "titulo": "Premium payment",
+      "aviso": "Simulated payment, you will not be charged. Card details are not saved or sent.",
+      "total": "Total",
+      "titular": "Cardholder name",
+      "titularPlaceholder": "As shown on the card",
+      "numero": "Card number",
+      "vencimiento": "Expiration",
+      "vencimientoPlaceholder": "MM/YY",
+      "cvv": "CVV",
+      "pagar": "Pay S/ 9.90",
+      "errores": {
+        "titular": "Enter the cardholder name",
+        "numero": "The number must have 16 digits",
+        "vencimiento": "Use the MM/YY format",
+        "vencida": "The card has expired",
+        "cvv": "The CVV must have 3 digits"
       }
     },
     "aviso": {
