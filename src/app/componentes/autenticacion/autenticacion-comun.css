@@ -124,6 +124,8 @@
   --mat-form-field-outlined-outline-color: var(--borde);
   --mat-form-field-container-height: 44px;
   --mat-form-field-container-vertical-padding: 10px;
+  /* Texto de ejemplo más claro, para que no parezca un dato ya escrito */
+  --mat-form-field-outlined-input-text-placeholder-color: color-mix(in srgb, var(--texto-suave) 55%, transparent);
 }
 
 .enlace {

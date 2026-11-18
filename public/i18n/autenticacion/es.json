@@ -50,7 +50,24 @@
       }
     },
     "recuperar": {
-      "titulo": "¿Olvidaste tu contraseña?"
+      "titulo": "¿Olvidaste tu contraseña?",
+      "subtitulo": "Ingresa tu correo y te enviaremos un enlace para restablecerla.",
+      "enviar": "Enviar enlace",
+      "teAcordaste": "¿Te acordaste?",
+      "volverLogin": "Volver al inicio de sesión",
+      "enviado": {
+        "titulo": "Enlace enviado",
+        "descripcion": "Si {{correo}} está registrado, recibirás un enlace para restablecer tu contraseña. El enlace vence en 30 minutos.",
+        "reenviar": "Reenviar enlace",
+        "reenviarEn": "Reenviar enlace (disponible en {{tiempo}})",
+        "noLlego": "¿No te llegó? Revisa tu carpeta de spam, usa",
+        "otroCorreo": "otro correo",
+        "o": "o",
+        "volverLogin": "vuelve al inicio de sesión"
+      },
+      "errores": {
+        "esperar": "Debes esperar 1 minuto para reenviar el enlace"
+      }
     },
     "restablecer": {
       "titulo": "Crea tu nueva contraseña"

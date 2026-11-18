@@ -1,0 +1,52 @@
+/* Solo lo propio de recuperar contraseña. Lo común está en ../autenticacion-comun.css */
+
+.campo {
+  margin-bottom: 8px;
+}
+
+/* Vista "Enlace enviado" (Figura 10) */
+.enviado {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.enviado .alerta-error {
+  width: 100%;
+  box-sizing: border-box;
+  text-align: left;
+}
+
+.enviado__icono {
+  display: grid;
+  place-items: center;
+  width: 64px;
+  height: 64px;
+  margin-bottom: 16px;
+  border-radius: 50%;
+  background: var(--verde-claro);
+  color: var(--verde-esmeralda);
+}
+
+.enviado__icono mat-icon {
+  font-size: 32px;
+  width: 32px;
+  height: 32px;
+}
+
+/* Botón deshabilitado mientras corre el contador */
+.boton-principal:disabled {
+  --mat-button-filled-disabled-container-color: var(--borde);
+  --mat-button-filled-disabled-label-text-color: var(--texto-suave);
+}
+
+/* "otro correo" se ve como enlace pero es un botón */
+.enlace-boton {
+  padding: 0;
+  border: none;
+  background: none;
+  font: inherit;
+  font-weight: 700;
+  cursor: pointer;
+}

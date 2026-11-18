@@ -1,6 +1,86 @@
-<app-en-construccion
-  titulo="autenticacion.recuperar.titulo"
-  responsable="Mafer"
-  figuras="9–10"
-  [pendientes]="pendientes"
-/>
+<div class="pagina">
+  <section class="panel-izquierdo">
+    <div class="encabezado">
+      <img class="logo" src="/img/logo.png" alt="InvertU" />
+      <a routerLink="/" class="volver">
+        <mat-icon>arrow_back</mat-icon>
+        {{ 'autenticacion.iniciarSesion.volverInicio' | translate }}
+      </a>
+    </div>
+
+    <div class="tarjeta">
+      @if (!enviado) {
+        <!-- Figura 9: formulario -->
+        <h1 class="titulo">{{ 'autenticacion.recuperar.titulo' | translate }}</h1>
+        <p class="subtitulo">{{ 'autenticacion.recuperar.subtitulo' | translate }}</p>
+
+        @if (errorClave) {
+          <div class="alerta-error">
+            <mat-icon>error</mat-icon>
+            <span>{{ errorClave | translate }}</span>
+          </div>
+        }
+
+        <form [formGroup]="formulario" (ngSubmit)="enviar()">
+          <label class="etiqueta" for="correo">{{ 'autenticacion.iniciarSesion.correo' | translate }}</label>
+          <mat-form-field appearance="outline" class="campo">
+            <mat-icon matPrefix>mail</mat-icon>
+            <input matInput id="correo" type="email" formControlName="correo" autocomplete="email"
+              [placeholder]="'autenticacion.iniciarSesion.correoPlaceholder' | translate" />
+            @if (correo.hasError('required')) {
+              <mat-error>{{ 'autenticacion.registro.errores.obligatorio' | translate }}</mat-error>
+            } @else if (correo.hasError('pattern')) {
+              <mat-error>{{ 'autenticacion.iniciarSesion.errores.correoInvalido' | translate }}</mat-error>
+            }
+          </mat-form-field>
+
+          <button mat-flat-button type="submit" class="boton-principal" [disabled]="cargando">
+            {{ 'autenticacion.recuperar.enviar' | translate }}
+          </button>
+        </form>
+
+        <p class="pie-tarjeta">
+          {{ 'autenticacion.recuperar.teAcordaste' | translate }}
+          <a routerLink="/iniciar-sesion" class="enlace">{{ 'autenticacion.recuperar.volverLogin' | translate }}</a>
+        </p>
+      } @else {
+        <!-- Figura 10: enlace enviado con contador de 1 minuto -->
+        <div class="enviado">
+          <span class="enviado__icono"><mat-icon>mark_email_read</mat-icon></span>
+          <h1 class="titulo">{{ 'autenticacion.recuperar.enviado.titulo' | translate }}</h1>
+          <p class="subtitulo">
+            {{ 'autenticacion.recuperar.enviado.descripcion' | translate: { correo: correo.value } }}
+          </p>
+
+          @if (errorClave) {
+            <div class="alerta-error">
+              <mat-icon>error</mat-icon>
+              <span>{{ errorClave | translate }}</span>
+            </div>
+          }
+
+          <button mat-flat-button type="button" class="boton-principal"
+            [disabled]="cargando || segundosRestantes > 0" (click)="enviar()">
+            <mat-icon>schedule</mat-icon>
+            @if (segundosRestantes > 0) {
+              {{ 'autenticacion.recuperar.enviado.reenviarEn' | translate: { tiempo: tiempo } }}
+            } @else {
+              {{ 'autenticacion.recuperar.enviado.reenviar' | translate }}
+            }
+          </button>
+
+          <p class="pie-tarjeta">
+            {{ 'autenticacion.recuperar.enviado.noLlego' | translate }}
+            <button type="button" class="enlace enlace-boton" (click)="cambiarCorreo()">
+              {{ 'autenticacion.recuperar.enviado.otroCorreo' | translate }}
+            </button>
+            {{ 'autenticacion.recuperar.enviado.o' | translate }}
+            <a routerLink="/iniciar-sesion" class="enlace">{{ 'autenticacion.recuperar.enviado.volverLogin' | translate }}</a>
+          </p>
+        </div>
+      }
+    </div>
+  </section>
+
+  <app-panel-autenticacion />
+</div>
