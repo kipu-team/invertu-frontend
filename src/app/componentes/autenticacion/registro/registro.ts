@@ -1,12 +1,6 @@
 import { Component, ChangeDetectionStrategy, inject } from '@angular/core';
 import { HttpErrorResponse } from '@angular/common/http';
-import {
-  AbstractControl,
-  FormBuilder,
-  ReactiveFormsModule,
-  ValidationErrors,
-  Validators,
-} from '@angular/forms';
+import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatButton, MatIconButton } from '@angular/material/button';
 import { MatError, MatFormField, MatPrefix, MatSuffix } from '@angular/material/form-field';
 import { MatIcon } from '@angular/material/icon';
@@ -16,23 +10,11 @@ import { TranslatePipe } from '@ngx-translate/core';
 import { AutenticacionService } from '../../../servicios/autenticacion-service';
 import { RegistroRequest } from '../../../modelo/autenticacion';
 import { PanelAutenticacion } from '../panel-autenticacion/panel-autenticacion';
+import { RequisitosContrasena } from '../requisitos-contrasena/requisitos-contrasena';
+import { PATRON_CONTRASENA, contrasenasCoinciden } from '../validadores-contrasena';
 
 /** Mismas reglas que RegistroRequestDTO del backend (END-AUTH-01) */
 const PATRON_CORREO = /.+@.+\..+/;
-const PATRON_CONTRASENA = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^A-Za-z0-9\s]).{8,}$/;
-
-/** Validador del formulario: la confirmación debe ser igual a la contraseña */
-function contrasenasCoinciden(grupo: AbstractControl): ValidationErrors | null {
-  const contrasena = grupo.get('contrasena')?.value;
-  const confirmar = grupo.get('confirmarContrasena');
-  if (confirmar?.value && contrasena !== confirmar.value) {
-    confirmar.setErrors({ ...confirmar.errors, noCoinciden: true });
-  } else if (confirmar?.hasError('noCoinciden')) {
-    const { noCoinciden, ...resto } = confirmar.errors ?? {};
-    confirmar.setErrors(Object.keys(resto).length ? resto : null);
-  }
-  return null;
-}
 
 /**
  * US-01: registro de cuenta (Figuras 14–20). Conectado con END-AUTH-01.
@@ -53,6 +35,7 @@ function contrasenasCoinciden(grupo: AbstractControl): ValidationErrors | null {
     MatIconButton,
     MatIcon,
     PanelAutenticacion,
+    RequisitosContrasena,
   ],
   templateUrl: './registro.html',
   changeDetection: ChangeDetectionStrategy.Eager,
@@ -77,23 +60,11 @@ export class Registro {
       contrasena: ['', [Validators.required, Validators.pattern(PATRON_CONTRASENA), Validators.maxLength(72)]],
       confirmarContrasena: ['', Validators.required],
     },
-    { validators: contrasenasCoinciden },
+    { validators: contrasenasCoinciden('contrasena', 'confirmarContrasena') },
   );
 
   get c() {
     return this.formulario.controls;
-  }
-
-  /** Lista de requisitos de la contraseña: en verde si se cumple, en gris si no (US-01) */
-  get requisitos() {
-    const v = this.c.contrasena.value ?? '';
-    return [
-      { clave: 'minimo', ok: v.length >= 8 },
-      { clave: 'mayuscula', ok: /[A-Z]/.test(v) },
-      { clave: 'minuscula', ok: /[a-z]/.test(v) },
-      { clave: 'numero', ok: /\d/.test(v) },
-      { clave: 'especial', ok: /[^A-Za-z0-9\s]/.test(v) },
-    ];
   }
 
   /** "Este campo es obligatorio" también si solo escribió espacios */

@@ -78,14 +78,7 @@
 
         <!-- Requisitos: verde si se cumple, gris si no (US-01). Aparecen al escribir la contraseña -->
         @if (c.contrasena.value || c.contrasena.touched) {
-          <ul class="requisitos">
-            @for (r of requisitos; track r.clave) {
-              <li [class.requisitos__ok]="r.ok">
-                <mat-icon>{{ r.ok ? 'check_circle' : 'radio_button_unchecked' }}</mat-icon>
-                {{ 'autenticacion.registro.requisitos.' + r.clave | translate }}
-              </li>
-            }
-          </ul>
+          <app-requisitos-contrasena [contrasena]="c.contrasena.value ?? ''" />
         }
 
         <label class="etiqueta" for="confirmarContrasena">{{ 'autenticacion.registro.confirmar' | translate }}</label>

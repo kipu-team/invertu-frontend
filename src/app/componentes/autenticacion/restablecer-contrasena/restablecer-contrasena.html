@@ -1,6 +1,103 @@
-<app-en-construccion
-  titulo="autenticacion.restablecer.titulo"
-  responsable="Mafer"
-  figuras="11–13"
-  [pendientes]="pendientes"
-/>
+<div class="pagina">
+  <section class="panel-izquierdo">
+    <div class="encabezado">
+      <img class="logo" src="/img/logo.png" alt="InvertU" />
+      <a routerLink="/" class="volver">
+        <mat-icon>arrow_back</mat-icon>
+        {{ 'autenticacion.iniciarSesion.volverInicio' | translate }}
+      </a>
+    </div>
+
+    <div class="tarjeta">
+      @switch (vista) {
+        @case ('validando') {
+          <div class="estado">
+            <mat-spinner diameter="40" />
+            <p class="subtitulo">{{ 'autenticacion.restablecer.validando' | translate }}</p>
+          </div>
+        }
+
+        @case ('formulario') {
+          <!-- Figura 11 -->
+          <h1 class="titulo">{{ 'autenticacion.restablecer.titulo' | translate }}</h1>
+          <p class="subtitulo">{{ 'autenticacion.restablecer.subtitulo' | translate }}</p>
+
+          @if (errorClave) {
+            <div class="alerta-error">
+              <mat-icon>error</mat-icon>
+              <span>{{ errorClave | translate }}</span>
+            </div>
+          }
+
+          <form [formGroup]="formulario" (ngSubmit)="restablecer()">
+            <label class="etiqueta" for="nuevaContrasena">{{ 'autenticacion.restablecer.nueva' | translate }}</label>
+            <mat-form-field appearance="outline" class="campo" subscriptSizing="dynamic">
+              <mat-icon matPrefix>key</mat-icon>
+              <input matInput id="nuevaContrasena" formControlName="nuevaContrasena" autocomplete="new-password"
+                [type]="mostrarContrasena ? 'text' : 'password'" />
+              <button mat-icon-button matSuffix type="button" (click)="mostrarContrasena = !mostrarContrasena"
+                [attr.aria-label]="'autenticacion.registro.verContrasena' | translate">
+                <mat-icon>{{ mostrarContrasena ? 'visibility' : 'visibility_off' }}</mat-icon>
+              </button>
+              @if (c.nuevaContrasena.hasError('required')) {
+                <mat-error>{{ 'autenticacion.registro.errores.obligatorio' | translate }}</mat-error>
+              }
+            </mat-form-field>
+
+            <app-requisitos-contrasena [contrasena]="c.nuevaContrasena.value ?? ''" />
+
+            <label class="etiqueta" for="confirmarContrasena">{{ 'autenticacion.registro.confirmar' | translate }}</label>
+            <mat-form-field appearance="outline" class="campo" subscriptSizing="dynamic">
+              <mat-icon matPrefix>key</mat-icon>
+              <input matInput id="confirmarContrasena" formControlName="confirmarContrasena" autocomplete="new-password"
+                [type]="mostrarConfirmar ? 'text' : 'password'" />
+              <button mat-icon-button matSuffix type="button" (click)="mostrarConfirmar = !mostrarConfirmar"
+                [attr.aria-label]="'autenticacion.registro.verContrasena' | translate">
+                <mat-icon>{{ mostrarConfirmar ? 'visibility' : 'visibility_off' }}</mat-icon>
+              </button>
+              @if (c.confirmarContrasena.hasError('required')) {
+                <mat-error>{{ 'autenticacion.registro.errores.obligatorio' | translate }}</mat-error>
+              } @else if (c.confirmarContrasena.hasError('noCoinciden')) {
+                <mat-error>{{ 'autenticacion.registro.errores.noCoinciden' | translate }}</mat-error>
+              }
+            </mat-form-field>
+
+            <button mat-flat-button type="submit" class="boton-principal" [disabled]="cargando">
+              {{ 'autenticacion.restablecer.boton' | translate }}
+            </button>
+          </form>
+        }
+
+        @case ('exito') {
+          <!-- Figura 12 -->
+          <div class="estado">
+            <span class="estado__icono"><mat-icon>check</mat-icon></span>
+            <h1 class="titulo">{{ 'autenticacion.restablecer.exito.titulo' | translate }}</h1>
+            <p class="subtitulo">{{ 'autenticacion.restablecer.exito.descripcion' | translate }}</p>
+            <a mat-flat-button class="boton-principal" routerLink="/iniciar-sesion">
+              {{ 'autenticacion.restablecer.exito.boton' | translate }}
+            </a>
+          </div>
+        }
+
+        @case ('invalido') {
+          <!-- Figura 13 -->
+          <div class="estado">
+            <span class="estado__icono estado__icono--error"><mat-icon>close</mat-icon></span>
+            <h1 class="titulo">{{ 'autenticacion.restablecer.invalido.titulo' | translate }}</h1>
+            <p class="subtitulo">{{ 'autenticacion.restablecer.invalido.descripcion' | translate }}</p>
+            <a mat-flat-button class="boton-principal" routerLink="/recuperar-contrasena">
+              <mat-icon>schedule</mat-icon>
+              {{ 'autenticacion.restablecer.invalido.boton' | translate }}
+            </a>
+            <p class="pie-tarjeta">
+              <a routerLink="/iniciar-sesion" class="enlace">{{ 'autenticacion.recuperar.volverLogin' | translate }}</a>
+            </p>
+          </div>
+        }
+      }
+    </div>
+  </section>
+
+  <app-panel-autenticacion />
+</div>

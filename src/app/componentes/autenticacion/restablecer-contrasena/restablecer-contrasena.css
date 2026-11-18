@@ -1,0 +1,39 @@
+/* Solo lo propio de restablecer contraseña. Lo común está en ../autenticacion-comun.css */
+
+.campo {
+  margin-bottom: 14px;
+}
+
+/* Vistas centradas: validando, éxito (Figura 12) y enlace inválido (Figura 13) */
+.estado {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.estado mat-spinner {
+  margin-bottom: 16px;
+}
+
+.estado__icono {
+  display: grid;
+  place-items: center;
+  width: 64px;
+  height: 64px;
+  margin-bottom: 16px;
+  border-radius: 50%;
+  background: var(--verde-claro);
+  color: var(--verde-esmeralda);
+}
+
+.estado__icono--error {
+  background: color-mix(in srgb, var(--gasto) 12%, transparent);
+  color: var(--gasto);
+}
+
+.estado__icono mat-icon {
+  font-size: 32px;
+  width: 32px;
+  height: 32px;
+}
