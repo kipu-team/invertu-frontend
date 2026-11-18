@@ -10,121 +10,54 @@ import {
   MetaResumen,
   Proyeccion,
 } from '../modelo/meta';
-import { SesionService } from './sesion-service';
-import { APORTES, METAS, fechaRelativa, siguienteId } from './datos-prueba/datos-prueba';
+import { HttpClient } from '@angular/common/http';
+import { environment } from '../../environments/environment';
 
-/** Metas de ahorro (backend: /api/v1/metas). Los aportes están en aporte-service.ts. Por ahora con datos de prueba. */
 @Service()
 export class MetaService {
-  private sesion: SesionService = inject(SesionService);
-
+  private http: HttpClient = inject(HttpClient);
+  private url = environment.apiUrl + '/metas';
   crear(datos: MetaRequest): Observable<Meta> {
-    const nueva: MetaDetalle = {
-      idMeta: siguienteId(METAS, 'idMeta'),
-      nombre: datos.nombre,
-      descripcion: datos.descripcion ?? null,
-      montoObjetivo: datos.montoObjetivo,
-      montoAportado: 0,
-      porcentaje: 0,
-      fechaObjetivo: datos.fechaObjetivo,
-      frecuenciaAporte: datos.frecuenciaAporte,
-      proximaFechaAporte: null,
-      estado: 'ACTIVA',
-      vencida: false,
-    };
-    METAS.push(nueva);
-    APORTES[nueva.idMeta] = [];
-    return of(this.aMeta(nueva));
+    return this.http.post<Meta>(this.url, datos);
   }
 
-  /** Antes de "Nueva meta": el plan Free tiene máximo 2 metas activas (Figura 67). */
   consultarEstadoLimite(): Observable<EstadoLimite> {
-    const premium = this.sesion.esPremium();
-    const metasActivas = METAS.filter((m) => m.estado === 'ACTIVA').length;
-    const limite = premium ? null : 2;
-    return of({
-      rol: premium ? 'ROLE_PREMIUM' : 'ROLE_FREE',
-      metasActivas,
-      limite,
-      limiteAlcanzado: limite !== null && metasActivas >= limite,
-    });
+    return this.http.get<EstadoLimite>(this.url + '/estado-limite');
   }
 
   listarActivas(): Observable<MetaResumen[]> {
-    return of(METAS.filter((m) => m.estado === 'ACTIVA').map((m) => this.aResumen(m)));
+    return this.http.get<MetaResumen[]>(this.url + '/activas');
   }
 
-  /** Metas cumplidas y canceladas */
   listarFinalizadas(): Observable<MetaResumen[]> {
-    return of(METAS.filter((m) => m.estado !== 'ACTIVA').map((m) => this.aResumen(m)));
+    return  this.http.get<MetaResumen[]>(this.url + '/finalizadas');
   }
 
   obtenerDetalle(id: number): Observable<MetaDetalle> {
-    return of({ ...METAS.find((m) => m.idMeta === id)! });
+    return this.http.get<MetaDetalle>(this.url + '/' + id);
   }
 
-  /** Solo Premium (Free → proyección bloqueada, Figura 75) */
   obtenerProyeccion(id: number): Observable<Proyeccion> {
-    return of({
-      fechaEstimada: fechaRelativa(120),
-      mensaje: 'Si mantienes tu ritmo de aportes, cumplirás tu meta antes de la fecha límite',
-    });
+    return this.http.get<Proyeccion>(this.url + '/' + id +'/proyeccion');
   }
 
   actualizar(id: number, datos: MetaRequest): Observable<Meta> {
-    const meta = METAS.find((m) => m.idMeta === id)!;
-    Object.assign(meta, { ...datos, descripcion: datos.descripcion ?? null });
-    meta.porcentaje = Math.round((meta.montoAportado / meta.montoObjetivo) * 100);
-    return of(this.aMeta(meta));
+    return this.http.put<Meta>(this.url + '/' + id, datos);
   }
 
   extenderFecha(id: number, datos: ExtenderFechaRequest): Observable<Meta> {
-    const meta = METAS.find((m) => m.idMeta === id)!;
-    meta.fechaObjetivo = datos.nuevaFechaObjetivo;
-    meta.vencida = false;
-    return of(this.aMeta(meta));
+    return this.http.patch<Meta>(this.url + '/' + id + '/extender-fecha', datos);
   }
 
   cancelar(id: number): Observable<Meta> {
-    const meta = METAS.find((m) => m.idMeta === id)!;
-    meta.estado = 'CANCELADA';
-    return of(this.aMeta(meta));
+    return this.http.patch<Meta>(this.url + '/' + id + '/cancelar', {});
   }
 
   reactivar(id: number): Observable<Meta> {
-    const meta = METAS.find((m) => m.idMeta === id)!;
-    meta.estado = 'ACTIVA';
-    return of(this.aMeta(meta));
+    return this.http.patch<Meta>(this.url + '/' + id + '/reactivar', {});
   }
 
   eliminar(id: number): Observable<Mensaje> {
-    const i = METAS.findIndex((m) => m.idMeta === id);
-    if (i >= 0) METAS.splice(i, 1);
-    return of({ mensaje: 'Meta eliminada' });
-  }
-
-  private aMeta(m: MetaDetalle): Meta {
-    return {
-      idMeta: m.idMeta,
-      nombre: m.nombre,
-      montoObjetivo: m.montoObjetivo,
-      montoAportado: m.montoAportado,
-      fechaObjetivo: m.fechaObjetivo,
-      estado: m.estado,
-    };
-  }
-
-  private aResumen(m: MetaDetalle): MetaResumen {
-    return {
-      idMeta: m.idMeta,
-      nombre: m.nombre,
-      montoObjetivo: m.montoObjetivo,
-      montoAportado: m.montoAportado,
-      porcentaje: m.porcentaje,
-      fechaObjetivo: m.fechaObjetivo,
-      vencida: m.vencida,
-      estado: m.estado,
-      fechaCumplimiento: m.estado === 'CUMPLIDA' ? m.fechaObjetivo : null,
-    };
+    return this.http.delete<Mensaje>(this.url + '/' + id);
   }
 }
