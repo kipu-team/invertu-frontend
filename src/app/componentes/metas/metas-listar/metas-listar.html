@@ -183,13 +183,17 @@
           <a mat-stroked-button class="meta-final__boton" [routerLink]="['/metas', meta.idMeta]">
             {{ 'metas.verDetalle' | translate }}
           </a>
-          <button
-            type="button"
-            class="meta-final__compartir"
-            [attr.aria-label]="'metas.compartir' | translate"
-          >
-            <mat-icon>share</mat-icon>
-          </button>
+          @if (meta.estado === 'CUMPLIDA') {
+            <button
+              type="button"
+              class="meta-final__compartir"
+              [attr.aria-label]="'metas.compartir' | translate"
+              [matMenuTriggerFor]="menuCompartir"
+              [matMenuTriggerData]="{ meta: meta }"
+            >
+              <mat-icon>share</mat-icon>
+            </button>
+          }
         </article>
       }
     </div>
@@ -212,3 +216,16 @@
     </div>
   }
 </ng-template>
+
+<mat-menu #menuCompartir="matMenu">
+  <ng-template matMenuContent let-meta="meta">
+    <button mat-menu-item (click)="compartirWhatsapp(meta)">
+      <mat-icon>chat</mat-icon>
+      <span>{{ 'metas.compartirOpciones.whatsapp' | translate }}</span>
+    </button>
+    <button mat-menu-item (click)="copiarTexto(meta)">
+      <mat-icon>content_copy</mat-icon>
+      <span>{{ 'metas.compartirOpciones.copiar' | translate }}</span>
+    </button>
+  </ng-template>
+</mat-menu>

@@ -3,11 +3,14 @@ import { DecimalPipe, NgTemplateOutlet } from '@angular/common';
 import { TranslatePipe, TranslateService } from '@ngx-translate/core';
 import { MatButton } from '@angular/material/button';
 import { MatIcon } from '@angular/material/icon';
+import { MatMenu, MatMenuContent, MatMenuItem, MatMenuTrigger } from '@angular/material/menu';
 import { MatProgressSpinner } from '@angular/material/progress-spinner';
 import { MetaService } from '../../../servicios/meta-service';
 import { MetaResumen } from '../../../modelo/meta';
 import { RouterLink } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
+import { Clipboard } from '@angular/cdk/clipboard';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { ExtenderFechaDialogo } from '../extender-fecha-dialogo/extender-fecha-dialogo';
 import {
   ConfirmarDialogo,
@@ -22,6 +25,10 @@ import {
     NgTemplateOutlet,
     MatButton,
     MatIcon,
+    MatMenu,
+    MatMenuContent,
+    MatMenuItem,
+    MatMenuTrigger,
     MatProgressSpinner,
     RouterLink,
   ],
@@ -33,6 +40,8 @@ export class MetasListar implements OnInit {
   private metaService = inject(MetaService);
   private dialog = inject(MatDialog);
   private traductor = inject(TranslateService);
+  private portapapeles = inject(Clipboard);
+  private snack = inject(MatSnackBar);
 
   destacada: MetaResumen | null = null;
   otras: MetaResumen[] = [];
@@ -91,5 +100,25 @@ export class MetasListar implements OnInit {
 
   anio(fecha: string): string {
     return fecha.slice(0, 4);
+  }
+
+  private textoCompartir(meta: MetaResumen): string {
+    const monto = meta.montoObjetivo.toLocaleString('en-US', {
+      minimumFractionDigits: 2,
+      maximumFractionDigits: 2,
+    });
+    return this.traductor.instant('metas.compartirMensaje', { nombre: meta.nombre, monto });
+  }
+
+  compartirWhatsapp(meta: MetaResumen): void {
+    const url = 'https://wa.me/?text=' + encodeURIComponent(this.textoCompartir(meta));
+    window.open(url, '_blank', 'noopener');
+  }
+
+  copiarTexto(meta: MetaResumen): void {
+    this.portapapeles.copy(this.textoCompartir(meta));
+    this.snack.open(this.traductor.instant('metas.compartirOpciones.copiado'), undefined, {
+      duration: 2500,
+    });
   }
 }
