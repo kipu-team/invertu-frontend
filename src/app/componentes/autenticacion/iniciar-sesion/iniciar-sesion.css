@@ -1,0 +1,159 @@
+.pagina {
+  display: flex;
+  min-height: 100vh;
+  background: var(--superficie);
+}
+
+/* Panel izquierdo (42% en el Figma). El derecho es <app-panel-autenticacion /> */
+.panel-izquierdo {
+  flex: 0 0 42%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 24px;
+  padding: 140px 56px 48px;
+  background: var(--fondo);
+  box-sizing: border-box;
+  position: relative;
+}
+
+/* Logo y "Volver al inicio", arriba a la izquierda */
+.encabezado {
+  position: absolute;
+  top: 27px;
+  left: 56px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.logo {
+  width: 92px;
+  height: 68px;
+  object-fit: contain;
+  filter: drop-shadow(0 4px 4px rgba(0, 0, 0, 0.25));
+}
+
+.volver {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--verde-esmeralda);
+  text-decoration: none;
+}
+
+.volver mat-icon {
+  font-size: 16px;
+  width: 16px;
+  height: 16px;
+}
+
+.tarjeta {
+  width: 100%;
+  max-width: 493px;
+  padding: 40px;
+  background: var(--superficie);
+  border: 1px solid var(--borde);
+  border-radius: 24px;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.04);
+  box-sizing: border-box;
+}
+
+.titulo {
+  margin: 0 0 8px;
+  font-size: 28px;
+  font-weight: 800;
+  color: var(--verde-oscuro);
+}
+
+.subtitulo {
+  margin: 0 0 24px;
+  font-size: 14px;
+  color: var(--texto-suave);
+}
+
+/* Caja roja del error 401 */
+.alerta-error {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 20px;
+  padding: 12px;
+  border: 1px solid color-mix(in srgb, var(--gasto) 45%, white);
+  border-radius: 8px;
+  background: color-mix(in srgb, var(--gasto) 8%, white);
+  color: var(--gasto);
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.etiqueta {
+  display: block;
+  margin-bottom: 6px;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--verde-oscuro);
+}
+
+/* Inputs tipo píldora */
+.campo {
+  width: 100%;
+  --mat-form-field-outlined-container-shape: 99px;
+  --mat-form-field-outlined-outline-color: var(--borde);
+  --mat-form-field-container-height: 44px;
+  --mat-form-field-container-vertical-padding: 10px;
+}
+
+.opciones {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  font-size: 13px;
+  color: var(--texto-suave);
+}
+
+.enlace {
+  font-weight: 700;
+  color: var(--verde-esmeralda);
+  text-decoration: none;
+}
+
+/* Botón verde (el tema global lo pone dorado) */
+.boton-principal {
+  width: 100%;
+  height: 44px;
+  --mat-button-filled-container-color: var(--verde-esmeralda);
+  --mat-button-filled-label-text-color: #ffffff;
+  --mat-button-filled-container-shape: 99px;
+  font-size: 15px;
+  font-weight: 800;
+}
+
+.pie-tarjeta {
+  margin: 24px 0 0;
+  text-align: center;
+  font-size: 14px;
+  color: var(--texto-suave);
+}
+
+
+/* Celular: el panel ocupa todo el ancho */
+@media (max-width: 768px) {
+  .panel-izquierdo {
+    flex-basis: 100%;
+    padding: 140px 16px 24px;
+  }
+  .encabezado {
+    left: 16px;
+  }
+  app-panel-autenticacion {
+    display: none;
+  }
+  .tarjeta {
+    padding: 24px;
+  }
+}
