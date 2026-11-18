@@ -27,6 +27,10 @@
         <span class="ia__icono ia__icono--error"><mat-icon>close</mat-icon></span>
         @if (error === 'archivo') {
           <p class="ia__zona-titulo">{{ 'movimientos.ia.errorArchivo' | translate }}</p>
+        } @else if (error === 'premium') {
+          <p class="ia__zona-titulo">{{ 'movimientos.errores.premium' | translate }}</p>
+        } @else if (error === 'servidor') {
+          <p class="ia__zona-titulo">{{ 'movimientos.errores.servidor' | translate }}</p>
         } @else {
           <p class="ia__zona-titulo">{{ 'movimientos.ia.errorIlegible' | translate }}</p>
           <p class="ia__zona-texto">{{ 'movimientos.ia.errorIlegibleDetalle' | translate }}</p>

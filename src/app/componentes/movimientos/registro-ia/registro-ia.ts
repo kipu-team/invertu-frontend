@@ -6,6 +6,7 @@ import { MatProgressSpinner } from '@angular/material/progress-spinner';
 import { MovimientoService } from '../../../servicios/movimiento-service';
 import { AnalisisComprobante } from '../../../modelo/movimiento';
 import { RegistroManual } from '../registro-manual/registro-manual';
+import { HttpErrorResponse } from '@angular/common/http';
 
 // Reglas del comprobante
 const TIPOS_PERMITIDOS = ['image/jpeg', 'image/png', 'application/pdf'];
@@ -26,7 +27,7 @@ export class RegistroIa {
   private movimientoService = inject(MovimientoService);
 
   estado: 'carga' | 'analizando' | 'formulario' = 'carga';
-  error: 'archivo' | 'ilegible' | null = null;
+  error: 'archivo' | 'ilegible' | 'premium' | 'servidor' | null = null;
   archivo: File | null = null;
   analisis: AnalisisComprobante | null = null;
   private yaRegistrado = false;
@@ -50,9 +51,15 @@ export class RegistroIa {
         this.analisis = data;
         this.estado = 'formulario';
       },
-      // Si la IA no puede leerlo, el backend responde con error
-      error: () => {
-        this.error = 'ilegible';
+      // 403: solo Premium. 0: no hay conexión con el servidor. Otro: no se pudo leer el comprobante
+      error: (err: HttpErrorResponse) => {
+        if (err.status === 403) {
+          this.error = 'premium';
+        } else if (err.status === 0) {
+          this.error = 'servidor';
+        } else {
+          this.error = 'ilegible';
+        }
         this.estado = 'carga';
       },
     });
