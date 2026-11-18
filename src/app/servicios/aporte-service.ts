@@ -1,51 +1,23 @@
-import { Service } from '@angular/core';
-import { Observable, of } from 'rxjs';
+import { inject, Service } from '@angular/core';
+import { Observable } from 'rxjs';
 import { Aporte, AporteRequest } from '../modelo/aporte';
-import { APORTES, METAS, siguienteId } from './datos-prueba/datos-prueba';
+import { HttpClient } from '@angular/common/http';
+import { environment } from '../../environments/environment';
 
-/** Aportes de una meta (backend: /api/v1/metas/{idMeta}/aportes). Por ahora con datos de prueba. */
 @Service()
 export class AporteService {
+  private http: HttpClient = inject(HttpClient);
+  private url = environment.apiUrl + '/metas';
+
   listar(idMeta: number): Observable<Aporte[]> {
-    return of([...(APORTES[idMeta] ?? [])]);
+    return this.http.get<Aporte[]>(this.url + '/' + idMeta + '/aportes');
   }
 
-  /** Suma el aporte a la meta; si llega al 100 %, la meta pasa a CUMPLIDA (Figura 79). */
   registrar(idMeta: number, datos: AporteRequest): Observable<Aporte> {
-    const meta = METAS.find((m) => m.idMeta === idMeta)!;
-    meta.montoAportado += datos.monto;
-    meta.porcentaje = Math.round((meta.montoAportado / meta.montoObjetivo) * 100);
-    if (meta.montoAportado >= meta.montoObjetivo) meta.estado = 'CUMPLIDA';
-
-    const nuevo: Aporte = {
-      idAporte: siguienteId(Object.values(APORTES).flat(), 'idAporte'),
-      fecha: datos.fecha,
-      monto: datos.monto,
-      descripcion: datos.descripcion ?? null,
-      montoAportado: meta.montoAportado,
-      porcentaje: meta.porcentaje,
-      estadoMeta: meta.estado,
-    };
-    (APORTES[idMeta] ??= []).push(nuevo);
-    return of(nuevo);
+    return this.http.post<Aporte>(this.url + '/' + idMeta + '/aportes', datos);
   }
 
   eliminar(idMeta: number, idAporte: number): Observable<Aporte> {
-    const lista = APORTES[idMeta];
-    const meta = METAS.find((m) => m.idMeta === idMeta)!;
-    const [eliminado] = lista.splice(
-      lista.findIndex((a) => a.idAporte === idAporte),
-      1,
-    );
-    meta.montoAportado -= eliminado.monto;
-    meta.porcentaje = Math.round((meta.montoAportado / meta.montoObjetivo) * 100);
-    if (meta.estado === 'CUMPLIDA' && meta.montoAportado < meta.montoObjetivo)
-      meta.estado = 'ACTIVA';
-    return of({
-      ...eliminado,
-      montoAportado: meta.montoAportado,
-      porcentaje: meta.porcentaje,
-      estadoMeta: meta.estado,
-    });
+    return this.http.delete<Aporte>(this.url + '/' + idMeta+ '/aportes/' + idAporte);
   }
 }

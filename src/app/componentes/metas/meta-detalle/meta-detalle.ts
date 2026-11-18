@@ -79,6 +79,7 @@ export class MetaDetalle implements OnInit {
   }
 
   private cargarProyeccion() {
+    if (!this.sesion.esPremium()) return;
     this.metaService.obtenerProyeccion(this.id).subscribe({
       next: (data) => {
         this.proyeccion = data;
@@ -98,6 +99,27 @@ export class MetaDetalle implements OnInit {
         if (aporte.estadoMeta === 'CUMPLIDA') {
           this.dialog.open(MetaCumplidaDialogo);
         }
+      });
+  }
+
+  eliminarAporte(aporte: Aporte) {
+    this.dialog
+      .open<ConfirmarDialogo, DatosConfirmacion, boolean>(ConfirmarDialogo, {
+        data: {
+          titulo: 'metas.aporte.eliminarTitulo',
+          mensaje: 'metas.aporte.eliminarMensaje',
+          textoConfirmar: 'metas.eliminar.confirmar',
+          peligro: true,
+        },
+      })
+      .afterClosed()
+      .subscribe((confirmo) => {
+        if (!confirmo) return;
+        this.aporteService.eliminar(this.id, aporte.idAporte).subscribe(() => {
+          this.cargarMeta();
+          this.cargarAportes();
+          this.cargarProyeccion();
+        });
       });
   }
 

@@ -175,7 +175,9 @@
             <h3>{{ meta.nombre }}</h3>
             <span class="meta-final__estado">
               {{ 'metas.estado.' + meta.estado | translate }}
-              {{ 'metas.mes.' + mes(fecha) | translate }} {{ anio(fecha) }}
+              @if (fecha) {
+                {{ 'metas.mes.' + mes(fecha) | translate }} {{ anio(fecha) }}
+              }
             </span>
           </div>
           <a mat-stroked-button class="meta-final__boton" [routerLink]="['/metas', meta.idMeta]">
