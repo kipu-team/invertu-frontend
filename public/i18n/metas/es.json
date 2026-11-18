@@ -10,6 +10,10 @@
     "otrasActivas": "Otras metas activas",
     "consejoPrueba": "Este mes tuviste menos ingreso variable, te sugerimos destinar S/40 esta semana en vez de S/60. Mantienes la meta para febrero.",
     "compartir": "Compartir",
+    "compartirOpciones": {
+      "whatsapp": "Compartir por WhatsApp",
+      "copiar": "Copiar texto"
+    },
     "vacio": {
       "titulo": "Aún no tienes una meta activa",
       "descripcion": "Define algo que quieras lograr y te ayudamos a llegar ahí, ajustándonos a tu ingreso real cada semana.",

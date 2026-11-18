@@ -188,6 +188,8 @@
               type="button"
               class="meta-final__compartir"
               [attr.aria-label]="'metas.compartir' | translate"
+              [matMenuTriggerFor]="menuCompartir"
+              [matMenuTriggerData]="{ meta: meta }"
             >
               <mat-icon>share</mat-icon>
             </button>
@@ -214,3 +216,16 @@
     </div>
   }
 </ng-template>
+
+<mat-menu #menuCompartir="matMenu">
+  <ng-template matMenuContent let-meta="meta">
+    <button mat-menu-item>
+      <mat-icon>chat</mat-icon>
+      <span>{{ 'metas.compartirOpciones.whatsapp' | translate }}</span>
+    </button>
+    <button mat-menu-item>
+      <mat-icon>content_copy</mat-icon>
+      <span>{{ 'metas.compartirOpciones.copiar' | translate }}</span>
+    </button>
+  </ng-template>
+</mat-menu>

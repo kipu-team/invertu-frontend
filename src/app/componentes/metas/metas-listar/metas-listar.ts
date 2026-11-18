@@ -3,6 +3,7 @@ import { DecimalPipe, NgTemplateOutlet } from '@angular/common';
 import { TranslatePipe, TranslateService } from '@ngx-translate/core';
 import { MatButton } from '@angular/material/button';
 import { MatIcon } from '@angular/material/icon';
+import { MatMenu, MatMenuContent, MatMenuItem, MatMenuTrigger } from '@angular/material/menu';
 import { MatProgressSpinner } from '@angular/material/progress-spinner';
 import { MetaService } from '../../../servicios/meta-service';
 import { MetaResumen } from '../../../modelo/meta';
@@ -22,6 +23,10 @@ import {
     NgTemplateOutlet,
     MatButton,
     MatIcon,
+    MatMenu,
+    MatMenuContent,
+    MatMenuItem,
+    MatMenuTrigger,
     MatProgressSpinner,
     RouterLink,
   ],
