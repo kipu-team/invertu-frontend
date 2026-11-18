@@ -80,7 +80,10 @@ export class RegistrarPagoDialogo implements OnInit {
       // Precarga del detalle: monto y categoría del pago más reciente (o "Suscripciones")
       this.suscripcionService.obtenerDetalle(this.idSuscripcion).subscribe((s) => {
         this.nombreServicio.set(s.nombreServicio);
-        const porDefecto = lista.find((c) => c.nombre === 'Suscripciones')?.idCategoria ?? null;
+        // Primer pago: el backend no tiene categoría "Suscripciones", así que se propone "Servicios"
+        const porDefecto =
+          lista.find((c) => c.nombre === 'Suscripciones' || c.nombre === 'Servicios')
+            ?.idCategoria ?? null;
         this.formulario.patchValue({
           monto: s.monto,
           idCategoria: s.ultimaCategoria?.idCategoria ?? porDefecto,
@@ -114,7 +117,10 @@ export class RegistrarPagoDialogo implements OnInit {
         medioPago: v.medioPago,
         idSuscripcion: this.idSuscripcion,
       })
-      .subscribe(() => this.dialogRef.close(true));
+      .subscribe({
+        next: () => this.dialogRef.close(true),
+        error: () => this.guardando.set(false), // T-113: se puede volver a intentar
+      });
   }
 
   cancelar(): void {

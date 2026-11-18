@@ -51,9 +51,19 @@ export class SuscripcionDetalleDialogo implements OnInit {
   private readonly limiteFree = 3;
 
   ngOnInit(): void {
+    this.cargar();
+  }
+
+  private cargar(): void {
     this.suscripcionService
       .obtenerDetalle(this.idSuscripcion)
       .subscribe((data) => this.detalle.set(data));
+  }
+
+  // T-113: si el backend rechaza un cambio, se vuelve a cargar el detalle y los interruptores muestran lo guardado
+  private deshacer(): void {
+    this.detalle.set(null);
+    this.cargar();
   }
 
   // US-31: activar o desactivar el recordatorio por correo (Figura 53)
@@ -92,13 +102,15 @@ export class SuscripcionDetalleDialogo implements OnInit {
   private guardarRecordatorio(activo: boolean, dias: number | null): void {
     this.suscripcionService
       .configurarRecordatorio(this.idSuscripcion, { activo, diasAnticipacion: dias })
-      .subscribe((r) =>
-        this.detalle.update((s) => ({
-          ...s!,
-          recordatorioActivo: r.recordatorioActivo,
-          diasAnticipacion: r.diasAnticipacion,
-        })),
-      );
+      .subscribe({
+        next: (r) =>
+          this.detalle.update((s) => ({
+            ...s!,
+            recordatorioActivo: r.recordatorioActivo,
+            diasAnticipacion: r.diasAnticipacion,
+          })),
+        error: () => this.deshacer(),
+      });
   }
 
   // US-32: alerta de saldo insuficiente. Solo Premium; un Free ve el aviso Premium (Figuras 64 y 65)
@@ -113,8 +125,10 @@ export class SuscripcionDetalleDialogo implements OnInit {
     }
     this.suscripcionService
       .configurarAlertaSaldo(this.idSuscripcion, { activa: evento.checked })
-      .subscribe((r) =>
-        this.detalle.update((s) => ({ ...s!, alertaSaldoActiva: r.alertaSaldoActiva })),
-      );
+      .subscribe({
+        next: (r) =>
+          this.detalle.update((s) => ({ ...s!, alertaSaldoActiva: r.alertaSaldoActiva })),
+        error: () => this.deshacer(),
+      });
   }
 }
