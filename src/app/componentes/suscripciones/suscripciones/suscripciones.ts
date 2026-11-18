@@ -11,7 +11,7 @@ import { DatePipe, DecimalPipe } from '@angular/common';
 import { MatButton } from '@angular/material/button';
 import { MatIcon } from '@angular/material/icon';
 import { MatDialog } from '@angular/material/dialog';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { TranslatePipe } from '@ngx-translate/core';
 import { SuscripcionService } from '../../../servicios/suscripcion-service';
 import { SuscripcionResumen } from '../../../modelo/suscripcion';
@@ -36,6 +36,7 @@ type FiltroEstado = 'TODAS' | EstadoSuscripcion;
 export class Suscripciones implements OnInit {
   private suscripcionService = inject(SuscripcionService);
   private dialog = inject(MatDialog);
+  private router = inject(Router);
   private route = inject(ActivatedRoute);
   private panel = viewChild.required(SuscripcionFormulario);
   readonly filtros: FiltroEstado[] = ['TODAS', 'ACTIVA', 'CANCELADA'];
@@ -62,8 +63,24 @@ export class Suscripciones implements OnInit {
 
   ngOnInit(): void {
     this.cargar();
-    const id = this.route.snapshot.queryParamMap.get('id');
-    if (id) this.verDetalle(Number(id));
+    this.abrirDesdeCalendario();
+  }
+
+  // T-129: el calendario llega con /suscripciones?id=5 → se abre el detalle de esa suscripción
+  private abrirDesdeCalendario(): void {
+    const parametro = this.route.snapshot.queryParamMap.get('id');
+    if (!parametro) return;
+    // Se quita ?id de la dirección para que no se vuelva a abrir al recargar
+    this.router.navigate([], { queryParams: {}, replaceUrl: true });
+    const id = Number(parametro);
+    if (!id) return;
+    // Solo se abre si la suscripción existe (si no, se queda en la lista)
+    this.suscripcionService.obtenerDetalle(id).subscribe({
+      next: (s) => {
+        if (s?.idSuscripcion) this.verDetalle(id);
+      },
+      error: () => {},
+    });
   }
 
   cargar(): void {
@@ -145,7 +162,10 @@ export class Suscripciones implements OnInit {
       .subscribe((registrado) => {
         if (!registrado) return;
         this.cargar();
-        this.mostrarMensaje('suscripciones.mensajes.pagoTitulo', 'suscripciones.mensajes.pagoTexto');
+        this.mostrarMensaje(
+          'suscripciones.mensajes.pagoTitulo',
+          'suscripciones.mensajes.pagoTexto',
+        );
       });
   }
 
