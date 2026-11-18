@@ -70,7 +70,24 @@
       }
     },
     "restablecer": {
-      "titulo": "Crea tu nueva contraseña"
+      "titulo": "Crea tu nueva contraseña",
+      "subtitulo": "Elige una contraseña segura para tu cuenta.",
+      "validando": "Validando el enlace...",
+      "nueva": "Nueva contraseña",
+      "boton": "Restablecer contraseña",
+      "exito": {
+        "titulo": "¡Contraseña restablecida!",
+        "descripcion": "Ya puedes iniciar sesión con tu nueva contraseña.",
+        "boton": "Ir a iniciar sesión"
+      },
+      "invalido": {
+        "titulo": "Enlace expirado",
+        "descripcion": "El enlace expiró o no es válido",
+        "boton": "Solicitar nuevo enlace"
+      },
+      "errores": {
+        "noCumple": "La contraseña no cumple los requisitos o no coincide con la confirmación."
+      }
     },
     "panel": {
       "titulo": "Decide hoy, vive tu mejor versión financiera",

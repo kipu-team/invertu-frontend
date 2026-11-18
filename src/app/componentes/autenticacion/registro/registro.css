@@ -17,40 +17,8 @@
   min-width: 0;
 }
 
-/* Requisitos de la contraseña: gris si falta, verde si se cumple */
-.requisitos {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 6px 12px;
-  margin: -6px 0 14px;
-  padding: 12px;
-  border-radius: 10px;
-  background: var(--fondo);
-  list-style: none;
-  font-size: 12px;
-  color: var(--texto-suave);
-}
-
-.requisitos li {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-}
-
-.requisitos mat-icon {
-  font-size: 16px;
-  width: 16px;
-  height: 16px;
-}
-
-.requisitos__ok {
-  color: var(--verde-esmeralda);
-  font-weight: 600;
-}
-
 @media (max-width: 768px) {
-  .fila-doble,
-  .requisitos {
+  .fila-doble {
     grid-template-columns: 1fr;
   }
 }

@@ -1,0 +1,8 @@
+<ul class="requisitos">
+  @for (r of requisitos(); track r.clave) {
+    <li [class.requisitos__ok]="r.ok">
+      <mat-icon>{{ r.ok ? 'check_circle' : 'radio_button_unchecked' }}</mat-icon>
+      {{ 'autenticacion.registro.requisitos.' + r.clave | translate }}
+    </li>
+  }
+</ul>

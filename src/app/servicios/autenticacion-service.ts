@@ -1,6 +1,6 @@
 import { Service, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable, of, throwError } from 'rxjs';
+import { Observable } from 'rxjs';
 import {
   AuthRequest,
   AuthResponse,
@@ -16,7 +16,7 @@ import { environment } from '../../environments/environment';
 
 /**
  * Autenticación (backend: /api/v1/autenticacion).
- * iniciarSesion ya usa la API real; el resto sigue con datos de prueba.
+ * Todos los métodos usan la API real (END-AUTH-01 a END-AUTH-05).
  */
 @Service()
 export class AutenticacionService {
@@ -38,15 +38,13 @@ export class AutenticacionService {
     return this.http.post<Mensaje>(`${this.url}/recuperar-contrasena`, datos);
   }
 
-  /** Con el token "expirado" simula un enlace vencido (Figura 13). */
+  /** END-AUTH-04. 200: enlace vigente. 400: "El enlace expiró o no es válido". El token va en el cuerpo. */
   validarToken(datos: ValidarTokenRequest): Observable<ValidarTokenResponse> {
-    if (datos.token === 'expirado') {
-      return of({ valido: false, mensaje: 'El enlace expiró o no es válido' });
-    }
-    return of({ valido: true, mensaje: 'Token válido' });
+    return this.http.post<ValidarTokenResponse>(`${this.url}/restablecer-contrasena/validar`, datos);
   }
 
+  /** END-AUTH-05. 200: contraseña cambiada. 400: no cumple requisitos, no coinciden o enlace inválido. */
   restablecerContrasena(datos: RestablecerContrasenaRequest): Observable<Mensaje> {
-    return of({ mensaje: 'Contraseña restablecida' });
+    return this.http.post<Mensaje>(`${this.url}/restablecer-contrasena`, datos);
   }
 }

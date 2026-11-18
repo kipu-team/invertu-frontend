@@ -70,7 +70,24 @@
       }
     },
     "restablecer": {
-      "titulo": "Create your new password"
+      "titulo": "Create your new password",
+      "subtitulo": "Choose a secure password for your account.",
+      "validando": "Validating the link...",
+      "nueva": "New password",
+      "boton": "Reset password",
+      "exito": {
+        "titulo": "Password reset!",
+        "descripcion": "You can now log in with your new password.",
+        "boton": "Go to log in"
+      },
+      "invalido": {
+        "titulo": "Link expired",
+        "descripcion": "The link has expired or is not valid",
+        "boton": "Request a new link"
+      },
+      "errores": {
+        "noCumple": "The password does not meet the requirements or does not match the confirmation."
+      }
     },
     "panel": {
       "titulo": "Decide today, live your best financial self",
