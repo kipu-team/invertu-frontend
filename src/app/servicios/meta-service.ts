@@ -1,5 +1,5 @@
 import { Service, inject } from '@angular/core';
-import { Observable, of } from 'rxjs';
+import { Observable } from 'rxjs';
 import { Mensaje } from '../modelo/comun';
 import {
   EstadoLimite,
