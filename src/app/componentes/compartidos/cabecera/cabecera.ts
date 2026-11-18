@@ -32,7 +32,7 @@ export class Cabecera {
   private dialog = inject(MatDialog);
   private router = inject(Router);
 
-  /** Figura 99: confirmación de cierre de sesión. Por ahora solo vuelve al login (aún no hay token que borrar). */
+  /** Figura 99: confirmación de cierre de sesión. Borra la sesión (token) y vuelve al login. */
   confirmarCierreSesion(): void {
     this.dialog
       .open(ConfirmarDialogo, {
@@ -45,6 +45,7 @@ export class Cabecera {
       .afterClosed()
       .subscribe((confirmo) => {
         if (confirmo) {
+          this.sesion.cerrarSesion()
           this.router.navigate(['/iniciar-sesion']);
         }
       });
