@@ -41,8 +41,16 @@ export class PasarPremium {
     { clave: 'movimientos', free: true, premium: true },
     { clave: 'dashboard', free: true, premium: true },
     { clave: 'suscripciones', free: true, premium: true },
-    { clave: 'metas', free: 'premium.pasar.limites.hasta3', premium: 'premium.pasar.limites.sinLimite' },
-    { clave: 'recordatorios', free: 'premium.pasar.limites.hasta3', premium: 'premium.pasar.limites.sinLimite' },
+    {
+      clave: 'metas',
+      free: 'premium.pasar.limites.hasta3',
+      premium: 'premium.pasar.limites.sinLimite',
+    },
+    {
+      clave: 'recordatorios',
+      free: 'premium.pasar.limites.hasta3',
+      premium: 'premium.pasar.limites.sinLimite',
+    },
     { clave: 'fechaEstimada', free: false, premium: true },
     { clave: 'calendario', free: false, premium: true },
     { clave: 'comprobante', free: false, premium: true },
@@ -62,7 +70,8 @@ export class PasarPremium {
     this.perfilService.pasarPremium().subscribe({
       next: (respuesta) => {
         this.cargando = false;
-        this.sesion.cambiarRol(respuesta.rol);
+        // T-117: el backend manda un token nuevo con ROLE_PREMIUM; se guarda para las siguientes peticiones
+        this.sesion.actualizarToken(respuesta.token, respuesta.rol);
         this.activado = true;
       },
       error: (err: HttpErrorResponse) => {
