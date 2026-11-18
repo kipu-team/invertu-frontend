@@ -176,7 +176,7 @@ export class Calendario implements OnInit {
     if (evento.tipo === 'META') {
       void this.router.navigate(['/metas']);
     } else if (evento.tipo === 'SUSCRIPCION') {
-      void this.router.navigate(['/suscripciones']);
+      void this.router.navigate(['/suscripciones'], { queryParams: { id: evento.id } });
     } else if (evento.tipo === 'DEUDA') {
       void this.router.navigate(['/movimientos']);
     }
