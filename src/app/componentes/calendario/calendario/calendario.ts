@@ -8,7 +8,7 @@ import { MatChipsModule } from '@angular/material/chips';
 import { MatCardModule } from '@angular/material/card';
 import { SesionService } from '../../../servicios/sesion-service';
 import { CalendarioPremiumDialogo } from '../calendario-premium-dialogo/calendario-premium-dialogo';
-import { EVENTOS_PRUEBA } from '../../../servicios/datos-prueba/datos-prueba';
+import { CalendarioService } from '../../../servicios/calendario-service';
 import { TranslatePipe } from '@ngx-translate/core';
 
 @Component({
@@ -31,6 +31,7 @@ export class Calendario implements OnInit {
   private router = inject(Router);
   private dialog = inject(MatDialog);
   public sesion = inject(SesionService);
+  private calendarioService = inject(CalendarioService);
 
   filtroMetas = signal(true);
   filtroDeudas = signal(true);
@@ -75,7 +76,7 @@ export class Calendario implements OnInit {
     'DEC',
   ];
 
-  eventosGlobales = signal<any[]>(EVENTOS_PRUEBA);
+  eventosGlobales = signal<any[]>([]);
 
   diasMes = computed(() => {
     const cantidad = new Date(this.anioActual(), this.mesActual() + 1, 0).getDate();
@@ -103,6 +104,7 @@ export class Calendario implements OnInit {
 
   ngOnInit(): void {
     this.actualizarFechaCadena(this.diaSeleccionadoNumero());
+    this.cargarEventos();
 
     if (!this.sesion.esPremium()) {
       setTimeout(() => {
@@ -114,6 +116,24 @@ export class Calendario implements OnInit {
     }
   }
 
+  private cargarEventos(): void {
+    if (!this.sesion.esPremium()) return;
+    this.calendarioService
+      .listarEventosDelMes(this.anioActual(), this.mesActual() + 1)
+      .subscribe((eventos) => {
+        this.eventosGlobales.set(
+          eventos.map((ev) => ({
+            id: ev.tipo + '-' + ev.idOrigen + '-' + ev.fecha,
+            idOrigen: ev.idOrigen,
+            tipo: ev.tipo === 'SUSCRIPCION' ? 'SUSCRIPCION' : 'META',
+            titulo: ev.nombre,
+            monto: ev.monto,
+            fecha: ev.fecha,
+          })),
+        );
+      });
+  }
+
   mesAnterior(): void {
     if (!this.sesion.esPremium()) return;
     if (this.mesActual() === 0) {
@@ -123,6 +143,7 @@ export class Calendario implements OnInit {
       this.mesActual.update((m) => m - 1);
     }
     this.actualizarFechaCadena(1);
+    this.cargarEventos();
   }
 
   mesSiguiente(): void {
@@ -134,6 +155,7 @@ export class Calendario implements OnInit {
       this.mesActual.update((m) => m + 1);
     }
     this.actualizarFechaCadena(1);
+    this.cargarEventos();
   }
 
   cambiarAnioSelector(direccion: number): void {
@@ -146,6 +168,7 @@ export class Calendario implements OnInit {
     this.mesActual.set(indiceMes);
     this.mostrarSelectorModal.set(false);
     this.actualizarFechaCadena(1);
+    this.cargarEventos();
   }
 
   obtenerEventosDia(dia: number): any[] {
@@ -174,9 +197,9 @@ export class Calendario implements OnInit {
 
   irAlDetalle(evento: any): void {
     if (evento.tipo === 'META') {
-      void this.router.navigate(['/metas']);
+      void this.router.navigate(['/metas', evento.idOrigen]);
     } else if (evento.tipo === 'SUSCRIPCION') {
-      void this.router.navigate(['/suscripciones'], { queryParams: { id: evento.id } });
+      void this.router.navigate(['/suscripciones'], { queryParams: { id: evento.idOrigen } });
     } else if (evento.tipo === 'DEUDA') {
       void this.router.navigate(['/movimientos']);
     }
