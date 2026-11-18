@@ -141,6 +141,8 @@
       "excedeTitulo": "Contribution above your available money",
       "excede": "You are contributing more than your available money this month. Do you want to continue?",
       "continuar": "Continue",
+      "eliminarTitulo": "Delete this contribution?",
+      "eliminarMensaje": "It will be removed from the history and the accumulated amount of your goal will be recalculated.",
       "cumplida": "Congratulations! You reached your goal",
       "aceptar": "Got it"
     }

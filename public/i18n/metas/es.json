@@ -141,6 +141,8 @@
       "excedeTitulo": "Aporte mayor a tu disponible",
       "excede": "Estás aportando más de tu dinero disponible este mes. ¿Deseas continuar?",
       "continuar": "Continuar",
+      "eliminarTitulo": "¿Eliminar este aporte?",
+      "eliminarMensaje": "Se quitará del historial y se recalculará el monto acumulado de tu meta.",
       "cumplida": "¡Felicidades! Cumpliste tu meta",
       "aceptar": "Aceptar"
     }
