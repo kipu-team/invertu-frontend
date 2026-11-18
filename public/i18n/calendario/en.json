@@ -12,7 +12,6 @@
     "programados_varios": "{{ cantidad }} events scheduled",
     "ver_detalle": "View details in {{ tipo }}",
     "sin_eventos_titulo": "You don't have any financial events registered yet.",
-    "sin_eventos_desc": "Register a goal, debt, or subscription to start viewing events in your financial calendar.",
-    "sincronizar": "Sync with Google Calendar"
+    "sin_eventos_desc": "Register a goal, debt, or subscription to start viewing events in your financial calendar."
   }
 }

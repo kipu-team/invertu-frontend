@@ -172,10 +172,6 @@ export class Calendario implements OnInit {
     this.diaSeleccionado.set(`${this.anioActual()}-${mesStr}-${diaStr}`);
   }
 
-  sincronizarGoogle(): void {
-    // solo clickable
-  }
-
   irAlDetalle(evento: any): void {
     if (evento.tipo === 'META') {
       void this.router.navigate(['/metas']);

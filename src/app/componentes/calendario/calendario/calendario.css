@@ -15,18 +15,6 @@
   color: var(--texto);
 }
 
-.calendario-footer-acciones {
-  margin-top: 20px;
-  display: flex;
-  justify-content: flex-start;
-}
-
-.boton-sincronizar-google {
-  border: 1px solid var(--borde) !important;
-  color: var(--texto) !important;
-  font-weight: 500 !important;
-}
-
 .panel-lateral {
   width: 320px;
   display: flex;
