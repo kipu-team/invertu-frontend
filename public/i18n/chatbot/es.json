@@ -12,6 +12,11 @@
       "titulo": "Función exclusiva Premium",
       "texto": "El asistente financiero está disponible solo para el plan Premium.",
       "boton": "Pasar a Premium"
+    },
+    "errores": {
+      "ia": "En este momento no puedo responder. Inténtalo de nuevo en unos minutos.",
+      "premium": "El asistente financiero está disponible solo para el plan Premium.",
+      "general": "No pude enviar tu pregunta. Revisa tu conexión e inténtalo de nuevo."
     }
   }
 }
