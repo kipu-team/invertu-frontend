@@ -1,5 +1,7 @@
 import { inject, Service } from '@angular/core';
-import { Observable, of } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { environment } from '../../environments/environment';
 import { Mensaje } from '../modelo/comun';
 import {
   CambiarContrasenaRequest,
@@ -8,38 +10,30 @@ import {
   PerfilRequest,
   Preferencias,
 } from '../modelo/perfil';
-import { SesionService } from './sesion-service';
-import { PERFIL, PLAN_FREE, PLAN_PREMIUM } from './datos-prueba/datos-prueba';
 
-/** Perfil del estudiante (backend: /api/v1/perfil). Por ahora con datos de prueba. */
+/** Perfil del estudiante (backend: /api/v1/perfil). */
 @Service()
 export class PerfilService {
-  private sesion: SesionService = inject(SesionService);
+  private http: HttpClient = inject(HttpClient);
+  private url = environment.apiUrl + '/perfil';
 
   obtener(): Observable<Perfil> {
-    const premium = this.sesion.esPremium();
-    return of({
-      ...PERFIL,
-      rol: premium ? 'ROLE_PREMIUM' : 'ROLE_FREE',
-      plan: premium ? PLAN_PREMIUM : PLAN_FREE,
-    });
+    return this.http.get<Perfil>(this.url);
   }
 
   actualizar(datos: PerfilRequest): Observable<Perfil> {
-    Object.assign(PERFIL, { ...datos, universidad: datos.universidad ?? null });
-    return this.obtener();
+    return this.http.put<Perfil>(this.url, datos);
   }
 
   actualizarPreferencias(datos: Preferencias): Observable<Preferencias> {
-    Object.assign(PERFIL, datos);
-    return of(datos);
+    return this.http.put<Preferencias>(this.url + '/preferencias', datos);
   }
 
   cambiarContrasena(datos: CambiarContrasenaRequest): Observable<Mensaje> {
-    return of({ mensaje: 'Contraseña actualizada' });
+    return this.http.put<Mensaje>(this.url + '/contrasena', datos);
   }
 
   pasarPremium(): Observable<PasarPremiumResponse> {
-    return of({ rol: 'ROLE_PREMIUM', token: 'token-de-prueba', mensaje: '¡Ahora eres Premium!' });
+    return this.http.post<PasarPremiumResponse>(this.url + '/pasar-premium', {});
   }
 }
