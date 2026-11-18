@@ -12,6 +12,14 @@
       <h1 class="titulo">{{ 'autenticacion.iniciarSesion.titulo' | translate }}</h1>
       <p class="subtitulo">{{ 'autenticacion.iniciarSesion.subtitulo' | translate }}</p>
 
+      <!-- US-01: mensaje al llegar desde el registro -->
+      @if (cuentaCreada && !errorClave) {
+        <div class="alerta-exito">
+          <mat-icon>check_circle</mat-icon>
+          <span>{{ 'autenticacion.iniciarSesion.cuentaCreada' | translate }}</span>
+        </div>
+      }
+
       <!-- ⑥ Si el backend respondió 401 (o falló), errorClave tiene texto y aparece la caja roja -->
       @if (errorClave) {
         <div class="alerta-error">
