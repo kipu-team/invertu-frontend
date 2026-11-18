@@ -219,11 +219,11 @@
 
 <mat-menu #menuCompartir="matMenu">
   <ng-template matMenuContent let-meta="meta">
-    <button mat-menu-item>
+    <button mat-menu-item (click)="compartirWhatsapp(meta)">
       <mat-icon>chat</mat-icon>
       <span>{{ 'metas.compartirOpciones.whatsapp' | translate }}</span>
     </button>
-    <button mat-menu-item>
+    <button mat-menu-item (click)="copiarTexto(meta)">
       <mat-icon>content_copy</mat-icon>
       <span>{{ 'metas.compartirOpciones.copiar' | translate }}</span>
     </button>
