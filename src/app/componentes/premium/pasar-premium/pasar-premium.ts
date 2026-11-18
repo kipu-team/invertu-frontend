@@ -2,10 +2,12 @@ import { Component, ChangeDetectionStrategy, inject } from '@angular/core';
 import { HttpErrorResponse } from '@angular/common/http';
 import { MatButton } from '@angular/material/button';
 import { MatIcon } from '@angular/material/icon';
+import { MatDialog } from '@angular/material/dialog';
 import { RouterLink } from '@angular/router';
 import { TranslatePipe } from '@ngx-translate/core';
 import { PerfilService } from '../../../servicios/perfil-service';
 import { SesionService } from '../../../servicios/sesion-service';
+import { PagoSimuladoDialogo } from '../pago-simulado-dialogo/pago-simulado-dialogo';
 
 /** Fila de la comparación: qué tiene cada plan (true/false o una clave de texto, ej. "Hasta 3") */
 interface Caracteristica {
@@ -31,6 +33,7 @@ interface Caracteristica {
 export class PasarPremium {
   private perfilService = inject(PerfilService);
   sesion = inject(SesionService);
+  private dialog = inject(MatDialog);
 
   cargando = false;
   activado = false; // true justo después de activar la prueba
@@ -64,7 +67,18 @@ export class PasarPremium {
     return typeof valor === 'string';
   }
 
-  activarPrueba(): void {
+  // T-144: primero el pago simulado; si la tarjeta es válida, recién se activa Premium
+  abrirPago(): void {
+    this.errorClave = '';
+    this.dialog
+      .open(PagoSimuladoDialogo, { width: '460px', maxWidth: '95vw' })
+      .afterClosed()
+      .subscribe((pagado) => {
+        if (pagado) this.activarPrueba();
+      });
+  }
+
+  private activarPrueba(): void {
     this.cargando = true;
     this.errorClave = '';
     this.perfilService.pasarPremium().subscribe({

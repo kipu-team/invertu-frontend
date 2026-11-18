@@ -1,0 +1,136 @@
+.pago {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+/* Aviso de pago simulado: siempre visible */
+.pago__aviso {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  margin: 0;
+  padding: 10px 12px;
+  border-radius: 8px;
+  background: var(--dorado-claro);
+  color: #8a6700;
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+.pago__aviso mat-icon {
+  flex-shrink: 0;
+  width: 20px;
+  height: 20px;
+  font-size: 20px;
+}
+
+.pago__total {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  margin: 0;
+  color: var(--texto-suave);
+}
+
+.pago__total strong {
+  color: var(--texto);
+  font-size: 1.3rem;
+}
+
+.pago__total small {
+  color: var(--texto-suave);
+  font-size: 0.8rem;
+  font-weight: 400;
+}
+
+.pago__fila {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 12px;
+}
+
+.campo {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  min-width: 0;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--texto);
+}
+
+.campo__caja {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 0 12px;
+  border: 1px solid var(--borde);
+  border-radius: 8px;
+}
+
+.campo__caja:focus-within {
+  border-color: var(--verde-esmeralda);
+}
+
+.campo__caja--error {
+  border-color: var(--gasto);
+}
+
+.campo__caja mat-icon {
+  width: 18px;
+  height: 18px;
+  font-size: 18px;
+  color: var(--texto-suave);
+}
+
+.campo__caja input {
+  flex: 1;
+  width: 100%;
+  min-width: 0;
+  padding: 10px 0;
+  border: none;
+  outline: none;
+  background: transparent;
+  color: var(--texto);
+  font: inherit;
+  font-weight: 400;
+}
+
+.error {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  color: var(--gasto);
+  font-weight: 500;
+}
+
+.error mat-icon {
+  flex-shrink: 0;
+  width: 16px;
+  height: 16px;
+  font-size: 16px;
+}
+
+.boton-dorado {
+  --mat-button-filled-container-color: var(--dorado);
+  --mat-button-filled-label-text-color: #2b2100;
+  font-weight: 800;
+}
+
+/* Responsive: en celular vencimiento y CVV uno debajo del otro, y botones a lo ancho */
+@media (max-width: 640px) {
+  .pago__fila {
+    grid-template-columns: 1fr;
+  }
+
+  .acciones {
+    flex-direction: column-reverse;
+    align-items: stretch;
+    gap: 8px;
+  }
+
+  .acciones button {
+    margin: 0;
+  }
+}

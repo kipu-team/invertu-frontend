@@ -1,0 +1,83 @@
+<h2 mat-dialog-title>{{ 'premium.pago.titulo' | translate }}</h2>
+
+<mat-dialog-content>
+  <form class="pago" [formGroup]="formulario" (ngSubmit)="pagar()" novalidate>
+    <!-- Aviso obligatorio: no hay cobro real -->
+    <p class="pago__aviso">
+      <mat-icon>info</mat-icon>
+      {{ 'premium.pago.aviso' | translate }}
+    </p>
+
+    <p class="pago__total">
+      <span>{{ 'premium.pago.total' | translate }}</span>
+      <strong>S/ 9.90 <small>{{ 'premium.pasar.porMes' | translate }}</small></strong>
+    </p>
+
+    <!-- Titular -->
+    <label class="campo">
+      <span>{{ 'premium.pago.titular' | translate }}</span>
+      <div class="campo__caja" [class.campo__caja--error]="tieneError('titular')">
+        <mat-icon>person</mat-icon>
+        <input type="text" formControlName="titular" autocomplete="off" maxlength="60"
+               [placeholder]="'premium.pago.titularPlaceholder' | translate" />
+      </div>
+      @if (tieneError('titular')) {
+        <small class="error"><mat-icon>error</mat-icon>{{ 'premium.pago.errores.titular' | translate }}</small>
+      }
+    </label>
+
+    <!-- Número de tarjeta: 16 dígitos -->
+    <label class="campo">
+      <span>{{ 'premium.pago.numero' | translate }}</span>
+      <div class="campo__caja" [class.campo__caja--error]="tieneError('numero')">
+        <mat-icon>credit_card</mat-icon>
+        <input type="text" formControlName="numero" inputmode="numeric" autocomplete="off"
+               placeholder="1234 5678 9012 3456" (input)="formatearNumero($event)" />
+      </div>
+      @if (tieneError('numero')) {
+        <small class="error"><mat-icon>error</mat-icon>{{ 'premium.pago.errores.numero' | translate }}</small>
+      }
+    </label>
+
+    <div class="pago__fila">
+      <!-- Vencimiento MM/AA, no vencida -->
+      <label class="campo">
+        <span>{{ 'premium.pago.vencimiento' | translate }}</span>
+        <div class="campo__caja" [class.campo__caja--error]="tieneError('vencimiento')">
+          <mat-icon>event</mat-icon>
+          <input type="text" formControlName="vencimiento" inputmode="numeric" autocomplete="off"
+                 [placeholder]="'premium.pago.vencimientoPlaceholder' | translate"
+                 (input)="formatearVencimiento($event)" />
+        </div>
+        @if (tieneError('vencimiento')) {
+          <small class="error">
+            <mat-icon>error</mat-icon>
+            {{ (formulario.controls.vencimiento.hasError('vencida')
+            ? 'premium.pago.errores.vencida'
+            : 'premium.pago.errores.vencimiento') | translate }}
+          </small>
+        }
+      </label>
+
+      <!-- CVV: 3 dígitos -->
+      <label class="campo">
+        <span>{{ 'premium.pago.cvv' | translate }}</span>
+        <div class="campo__caja" [class.campo__caja--error]="tieneError('cvv')">
+          <mat-icon>lock</mat-icon>
+          <input type="password" formControlName="cvv" inputmode="numeric" autocomplete="off"
+                 placeholder="123" (input)="formatearCvv($event)" />
+        </div>
+        @if (tieneError('cvv')) {
+          <small class="error"><mat-icon>error</mat-icon>{{ 'premium.pago.errores.cvv' | translate }}</small>
+        }
+      </label>
+    </div>
+  </form>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end" class="acciones">
+  <button mat-button type="button" (click)="cancelar()">{{ 'compartido.acciones.cancelar' | translate }}</button>
+  <button mat-flat-button type="button" class="boton-dorado" (click)="pagar()">
+    {{ 'premium.pago.pagar' | translate }}
+  </button>
+</mat-dialog-actions>
