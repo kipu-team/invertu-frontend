@@ -95,13 +95,6 @@
           </div>
         }
       </div>
-
-      <div class="calendario-footer-acciones">
-        <button mat-stroked-button class="boton-sincronizar-google" (click)="sincronizarGoogle()" [disabled]="!sesion.esPremium() || eventosDiaSeleccionado().length === 0">
-          <mat-icon>sync</mat-icon>
-          {{ 'calendario.sincronizar' | translate }}
-        </button>
-      </div>
     </mat-card>
   </div>
 

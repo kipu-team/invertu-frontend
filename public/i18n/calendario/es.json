@@ -12,7 +12,6 @@
     "programados_varios": "{{ cantidad }} eventos programados",
     "ver_detalle": "Ver detalle en {{ tipo }}",
     "sin_eventos_titulo": "Aún no tienes eventos financieros registrados.",
-    "sin_eventos_desc": "Registra una meta, una deuda o una suscripción para comenzar a visualizar eventos en tu calendario financiero.",
-    "sincronizar": "Sincronizar con Google Calendar"
+    "sin_eventos_desc": "Registra una meta, una deuda o una suscripción para comenzar a visualizar eventos en tu calendario financiero."
   }
 }
