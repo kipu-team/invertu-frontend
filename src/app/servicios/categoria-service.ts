@@ -1,30 +1,26 @@
-import { Service } from '@angular/core';
-import { Observable, of } from 'rxjs';
+import { Service, inject } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
 import { Categoria, CategoriaRequest } from '../modelo/categoria';
 import { Mensaje } from '../modelo/comun';
-import { CATEGORIAS, siguienteId } from './datos-prueba/datos-prueba';
+import { environment } from '../../environments/environment';
 
-/** Categorías (backend: /api/v1/categorias). Crear y eliminar son solo Premium. Por ahora con datos de prueba. */
+/** Categorías (backend: /api/v1/categorias). Crear y desactivar son solo Premium (Free recibe 403). */
 @Service()
 export class CategoriaService {
+  private http = inject(HttpClient);
+  private url = `${environment.apiUrl}/categorias`;
+
   listar(): Observable<Categoria[]> {
-    return of([...CATEGORIAS]);
+    return this.http.get<Categoria[]>(this.url);
   }
 
   crear(datos: CategoriaRequest): Observable<Categoria> {
-    const nueva: Categoria = {
-      idCategoria: siguienteId(CATEGORIAS, 'idCategoria'),
-      nombre: datos.nombre.trim(),
-      personalizada: true,
-    };
-    CATEGORIAS.push(nueva);
-    return of(nueva);
+    return this.http.post<Categoria>(this.url, datos);
   }
 
   /** "Eliminar" una categoría personalizada (el backend la desactiva). */
   desactivar(id: number): Observable<Mensaje> {
-    const i = CATEGORIAS.findIndex((c) => c.idCategoria === id && c.personalizada);
-    if (i >= 0) CATEGORIAS.splice(i, 1);
-    return of({ mensaje: 'Categoría eliminada' });
+    return this.http.patch<Mensaje>(`${this.url}/${id}/desactivar`, {});
   }
 }

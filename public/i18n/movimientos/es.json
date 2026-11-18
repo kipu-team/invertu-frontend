@@ -155,6 +155,12 @@
       "titulo": "¿Eliminar este movimiento?",
       "mensaje": "Esta acción no se puede deshacer y el monto se descontará de tus totales.",
       "confirmar": "Eliminar"
+    },
+    "errores": {
+      "noEncontrado": "No encontramos este movimiento. Puede que ya se haya eliminado.",
+      "servidor": "No pudimos completar la acción. Inténtalo de nuevo en unos minutos.",
+      "cargar": "No pudimos cargar tus movimientos. Inténtalo de nuevo.",
+      "premium": "Esta función es solo para usuarios Premium."
     }
   }
 }

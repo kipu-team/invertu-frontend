@@ -10,6 +10,7 @@ import {
   SimpleChanges,
   inject,
 } from '@angular/core';
+import { HttpErrorResponse } from '@angular/common/http';
 import { forkJoin } from 'rxjs';
 import { CategoriaService } from '../../../servicios/categoria-service';
 import { DatePipe, DecimalPipe } from '@angular/common';
@@ -138,6 +139,7 @@ export class RegistroManual implements OnInit, OnChanges {
   hoy: Date = new Date();
   // todavía no se registró
   resumen: ResumenRegistro | null = null;
+  errorServidor = '';
 
   formulario = this.fb.group({
     tipo: ['INGRESO' as TipoMovimiento, Validators.required],
@@ -214,7 +216,6 @@ export class RegistroManual implements OnInit, OnChanges {
   ngOnInit(): void {
     this.suscripcionService.listar('ACTIVA').subscribe((data) => (this.suscripciones = data));
 
-    // La suscripción solo aplica a gastos, si cambia a Ingreso se borra
     this.formulario.controls.tipo.valueChanges.subscribe((tipo) => {
       if (tipo === 'INGRESO') {
         this.formulario.controls.idSuscripcion.setValue(null);
@@ -239,6 +240,7 @@ export class RegistroManual implements OnInit, OnChanges {
       this.formulario.markAllAsTouched();
       return;
     }
+    this.errorServidor = '';
     const v = this.formulario.getRawValue();
     const datos: MovimientoRequest = {
       tipo: v.tipo as TipoMovimiento,
@@ -253,27 +255,41 @@ export class RegistroManual implements OnInit, OnChanges {
     };
     // para editar, guarda los cambios y avisa a la página
     if (this.idMovimiento) {
-      this.movimientoService.actualizar(this.idMovimiento, datos).subscribe(() => this.registrado.emit());
+      this.movimientoService.actualizar(this.idMovimiento, datos).subscribe({
+        next: () => this.registrado.emit(),
+        error: (err: HttpErrorResponse) => this.mostrarError(err),
+      });
       return;
     }
 
-    this.movimientoService.registrar(datos).subscribe((mov) => {
-      this.resumen = {
-        tipo: mov.tipo,
-        monto: mov.monto,
-        descripcion: mov.descripcion,
-        fecha: mov.fecha,
-        categoria: mov.categoria,
-        clasificacion: datos.clasificacion,
-        medioPago: datos.medioPago ?? null,
-        suscripcion:
-          this.suscripciones.find((s) => s.idSuscripcion === datos.idSuscripcion)?.nombreServicio ??
-          null,
-      };
-      this.registrado.emit(); // la página recarga la tabla
+    this.movimientoService.registrar(datos).subscribe({
+      next: (mov) => {
+        this.resumen = {
+          tipo: mov.tipo,
+          monto: mov.monto,
+          descripcion: mov.descripcion,
+          fecha: mov.fecha,
+          categoria: mov.categoria,
+          clasificacion: datos.clasificacion,
+          medioPago: datos.medioPago ?? null,
+          suscripcion:
+            this.suscripciones.find((s) => s.idSuscripcion === datos.idSuscripcion)
+              ?.nombreServicio ?? null,
+        };
+        this.registrado.emit();
+      },
+      error: (err: HttpErrorResponse) => this.mostrarError(err),
     });
   }
 
+  // 404: el movimiento ya no existe. Otro: error del servidor o sin conexión
+  private mostrarError(err: HttpErrorResponse): void {
+    if (err.status === 404) {
+      this.errorServidor = 'movimientos.errores.noEncontrado';
+    } else {
+      this.errorServidor = 'movimientos.errores.servidor';
+    }
+  }
   // de Registrar otro para volver al formulario vacío
   nuevoRegistro(): void {
     // En registro con IA, "Registrar otro" vuelve a la zona de carga
