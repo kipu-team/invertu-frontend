@@ -19,10 +19,35 @@
         "credenciales": "Incorrect email or password",
         "servidor": "Could not connect to the server. Try again.",
         "demasiadosIntentos": "Too many failed attempts. Try again in 15 minutes"
-      }
+      },
+      "cuentaCreada": "Your account was created. Log in to continue"
     },
     "registro": {
-      "titulo": "Create your account"
+      "titulo": "Create your account",
+      "subtitulo": "Sign up with your email to start organizing your finances.",
+      "nombres": "First names",
+      "nombresPlaceholder": "E.g. María",
+      "apellidos": "Last names",
+      "apellidosPlaceholder": "E.g. Gonzales",
+      "confirmar": "Confirm password",
+      "verContrasena": "Show or hide password",
+      "crear": "Create account",
+      "yaTienes": "Already have an account?",
+      "iniciaSesion": "Log in",
+      "requisitos": {
+        "minimo": "At least 8 characters",
+        "mayuscula": "One uppercase letter",
+        "minuscula": "One lowercase letter",
+        "numero": "One number",
+        "especial": "One special character"
+      },
+      "errores": {
+        "noCoinciden": "Passwords do not match",
+        "correoRegistrado": "This email is already registered.",
+        "datosInvalidos": "Please check the data you entered.",
+        "demasiadosIntentos": "Too many attempts. Try again in a few minutes",
+        "obligatorio": "This field is required"
+      }
     },
     "recuperar": {
       "titulo": "Forgot your password?"

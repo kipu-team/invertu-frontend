@@ -1,0 +1,56 @@
+/* Solo lo propio del registro. Lo común está en ../autenticacion-comun.css */
+
+/* Espacio entre campos (el mensaje de error solo ocupa lugar cuando aparece) */
+.campo {
+  margin-bottom: 14px;
+}
+
+/* Nombres y apellidos lado a lado */
+.fila-doble {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+/* Sin esto, el campo de Material no se achica y se sale de la tarjeta */
+.fila-doble > div {
+  min-width: 0;
+}
+
+/* Requisitos de la contraseña: gris si falta, verde si se cumple */
+.requisitos {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6px 12px;
+  margin: -6px 0 14px;
+  padding: 12px;
+  border-radius: 10px;
+  background: var(--fondo);
+  list-style: none;
+  font-size: 12px;
+  color: var(--texto-suave);
+}
+
+.requisitos li {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.requisitos mat-icon {
+  font-size: 16px;
+  width: 16px;
+  height: 16px;
+}
+
+.requisitos__ok {
+  color: var(--verde-esmeralda);
+  font-weight: 600;
+}
+
+@media (max-width: 768px) {
+  .fila-doble,
+  .requisitos {
+    grid-template-columns: 1fr;
+  }
+}

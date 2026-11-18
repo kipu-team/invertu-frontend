@@ -6,7 +6,7 @@ import { MatCheckbox } from '@angular/material/checkbox';
 import { MatError, MatFormField, MatPrefix, MatSuffix } from '@angular/material/form-field';
 import { MatIcon } from '@angular/material/icon';
 import { MatInput } from '@angular/material/input';
-import { Router, RouterLink } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { TranslatePipe } from '@ngx-translate/core';
 import { AutenticacionService } from '../../../servicios/autenticacion-service';
 import { SesionService } from '../../../servicios/sesion-service';
@@ -32,17 +32,21 @@ import { PanelAutenticacion } from '../panel-autenticacion/panel-autenticacion';
   ],
   templateUrl: './iniciar-sesion.html',
   changeDetection: ChangeDetectionStrategy.Eager,
-  styleUrl: './iniciar-sesion.css',
+  styleUrls: ['../autenticacion-comun.css', './iniciar-sesion.css'],
 })
 export class IniciarSesion {
   private fb = inject(FormBuilder);
   private autenticacionService = inject(AutenticacionService);
   private router = inject(Router);
   private sesion = inject(SesionService);
+  private ruta = inject(ActivatedRoute);
 
   cargando = false;
   mostrarContrasena = false;
   errorClave = ''; // clave i18n del error que se muestra en la caja roja
+
+  // US-01: al volver del registro llega ?registrado=1 y se muestra "Tu cuenta fue creada..."
+  cuentaCreada = this.ruta.snapshot.queryParamMap.has('registrado');
 
   formulario = this.fb.group({
     correo: ['', [Validators.required, Validators.email]],

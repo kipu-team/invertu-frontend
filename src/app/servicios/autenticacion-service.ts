@@ -12,7 +12,6 @@ import {
   ValidarTokenResponse,
 } from '../modelo/autenticacion';
 import { Mensaje } from '../modelo/comun';
-import { CORREO_PRUEBA } from './datos-prueba/datos-prueba';
 import { environment } from '../../environments/environment';
 
 /**
@@ -24,12 +23,9 @@ export class AutenticacionService {
   private http = inject(HttpClient);
   private url = `${environment.apiUrl}/autenticacion`;
 
+  /** END-AUTH-01. 201: cuenta creada. 409: correo ya registrado. 400: datos inválidos. */
   registrar(datos: RegistroRequest): Observable<RegistroResponse> {
-    // El backend responde 409 si el correo ya existe (Figuras 17 y 19)
-    if (datos.correo === CORREO_PRUEBA) {
-      return throwError(() => ({ status: 409, error: { error: 'El correo ya está registrado' } }));
-    }
-    return of({ idEstudiante: 2, nombres: datos.nombres, correo: datos.correo, rol: 'ROLE_FREE' });
+    return this.http.post<RegistroResponse>(`${this.url}/registro`, datos);
   }
 
   /** El backend responde 401 si el correo o la contraseña son incorrectos (Figura 8). */

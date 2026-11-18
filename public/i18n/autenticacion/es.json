@@ -19,10 +19,35 @@
         "credenciales": "Correo o contraseña incorrectos",
         "servidor": "No se pudo conectar con el servidor. Intenta de nuevo.",
         "demasiadosIntentos": "Demasiados intentos fallidos. Intenta nuevamente en 15 minutos"
-      }
+      },
+      "cuentaCreada": "Tu cuenta fue creada. Inicia sesión para continuar"
     },
     "registro": {
-      "titulo": "Crea tu cuenta"
+      "titulo": "Crea tu cuenta",
+      "subtitulo": "Regístrate con tu correo para empezar a ordenar tus finanzas.",
+      "nombres": "Nombres",
+      "nombresPlaceholder": "Ej. María",
+      "apellidos": "Apellidos",
+      "apellidosPlaceholder": "Ej. Gonzales",
+      "confirmar": "Confirmar contraseña",
+      "verContrasena": "Mostrar u ocultar contraseña",
+      "crear": "Crear cuenta",
+      "yaTienes": "¿Ya tienes cuenta?",
+      "iniciaSesion": "Inicia sesión",
+      "requisitos": {
+        "minimo": "Mínimo 8 caracteres",
+        "mayuscula": "Una mayúscula",
+        "minuscula": "Una minúscula",
+        "numero": "Un número",
+        "especial": "Un carácter especial"
+      },
+      "errores": {
+        "noCoinciden": "Las contraseñas no coinciden",
+        "correoRegistrado": "Este correo ya está registrado.",
+        "datosInvalidos": "Revisa los datos ingresados.",
+        "demasiadosIntentos": "Demasiados intentos. Intenta nuevamente en unos minutos",
+        "obligatorio": "Este campo es obligatorio"
+      }
     },
     "recuperar": {
       "titulo": "¿Olvidaste tu contraseña?"

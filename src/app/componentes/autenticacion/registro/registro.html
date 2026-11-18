@@ -1,6 +1,120 @@
-<app-en-construccion
-  titulo="autenticacion.registro.titulo"
-  responsable="Mafer"
-  figuras="14–20"
-  [pendientes]="pendientes"
-/>
+<div class="pagina">
+  <section class="panel-izquierdo">
+    <div class="encabezado">
+      <img class="logo" src="/img/logo.png" alt="InvertU" />
+      <a routerLink="/" class="volver">
+        <mat-icon>arrow_back</mat-icon>
+        {{ 'autenticacion.iniciarSesion.volverInicio' | translate }}
+      </a>
+    </div>
+
+    <div class="tarjeta">
+      <h1 class="titulo">{{ 'autenticacion.registro.titulo' | translate }}</h1>
+      <p class="subtitulo">{{ 'autenticacion.registro.subtitulo' | translate }}</p>
+
+      <!-- 409 (correo ya registrado), 400, 429 o sin conexión -->
+      @if (errorClave) {
+        <div class="alerta-error">
+          <mat-icon>error</mat-icon>
+          <span>
+            {{ errorClave | translate }}
+            @if (correoDuplicado) {
+              <a routerLink="/iniciar-sesion" class="enlace">{{ 'autenticacion.registro.iniciaSesion' | translate }}</a>
+            }
+          </span>
+        </div>
+      }
+
+      <form [formGroup]="formulario" (ngSubmit)="registrar()">
+        <!-- Nombres y apellidos lado a lado (sin ícono para que entre el texto de ejemplo) -->
+        <div class="fila-doble">
+          <div>
+            <label class="etiqueta" for="nombres">{{ 'autenticacion.registro.nombres' | translate }}</label>
+            <mat-form-field appearance="outline" class="campo" subscriptSizing="dynamic">
+              <input matInput id="nombres" formControlName="nombres" autocomplete="given-name"
+                [placeholder]="'autenticacion.registro.nombresPlaceholder' | translate" />
+              @if (vacio('nombres')) {
+                <mat-error>{{ 'autenticacion.registro.errores.obligatorio' | translate }}</mat-error>
+              }
+            </mat-form-field>
+          </div>
+          <div>
+            <label class="etiqueta" for="apellidos">{{ 'autenticacion.registro.apellidos' | translate }}</label>
+            <mat-form-field appearance="outline" class="campo" subscriptSizing="dynamic">
+              <input matInput id="apellidos" formControlName="apellidos" autocomplete="family-name"
+                [placeholder]="'autenticacion.registro.apellidosPlaceholder' | translate" />
+              @if (vacio('apellidos')) {
+                <mat-error>{{ 'autenticacion.registro.errores.obligatorio' | translate }}</mat-error>
+              }
+            </mat-form-field>
+          </div>
+        </div>
+
+        <label class="etiqueta" for="correo">{{ 'autenticacion.iniciarSesion.correo' | translate }}</label>
+        <mat-form-field appearance="outline" class="campo" subscriptSizing="dynamic">
+          <mat-icon matPrefix>mail</mat-icon>
+          <input matInput id="correo" type="email" formControlName="correo" autocomplete="email"
+            [placeholder]="'autenticacion.iniciarSesion.correoPlaceholder' | translate" />
+          @if (c.correo.hasError('required')) {
+            <mat-error>{{ 'autenticacion.registro.errores.obligatorio' | translate }}</mat-error>
+          } @else if (c.correo.hasError('pattern')) {
+            <mat-error>{{ 'autenticacion.iniciarSesion.errores.correoInvalido' | translate }}</mat-error>
+          }
+        </mat-form-field>
+
+        <label class="etiqueta" for="contrasena">{{ 'autenticacion.iniciarSesion.contrasena' | translate }}</label>
+        <mat-form-field appearance="outline" class="campo" subscriptSizing="dynamic">
+          <mat-icon matPrefix>key</mat-icon>
+          <input matInput id="contrasena" formControlName="contrasena" autocomplete="new-password"
+            [type]="mostrarContrasena ? 'text' : 'password'" />
+          <button mat-icon-button matSuffix type="button" (click)="mostrarContrasena = !mostrarContrasena"
+            [attr.aria-label]="'autenticacion.registro.verContrasena' | translate">
+            <mat-icon>{{ mostrarContrasena ? 'visibility' : 'visibility_off' }}</mat-icon>
+          </button>
+          @if (c.contrasena.hasError('required')) {
+            <mat-error>{{ 'autenticacion.registro.errores.obligatorio' | translate }}</mat-error>
+          }
+        </mat-form-field>
+
+        <!-- Requisitos: verde si se cumple, gris si no (US-01). Aparecen al escribir la contraseña -->
+        @if (c.contrasena.value || c.contrasena.touched) {
+          <ul class="requisitos">
+            @for (r of requisitos; track r.clave) {
+              <li [class.requisitos__ok]="r.ok">
+                <mat-icon>{{ r.ok ? 'check_circle' : 'radio_button_unchecked' }}</mat-icon>
+                {{ 'autenticacion.registro.requisitos.' + r.clave | translate }}
+              </li>
+            }
+          </ul>
+        }
+
+        <label class="etiqueta" for="confirmarContrasena">{{ 'autenticacion.registro.confirmar' | translate }}</label>
+        <mat-form-field appearance="outline" class="campo" subscriptSizing="dynamic">
+          <mat-icon matPrefix>key</mat-icon>
+          <input matInput id="confirmarContrasena" formControlName="confirmarContrasena" autocomplete="new-password"
+            [type]="mostrarConfirmar ? 'text' : 'password'" />
+          <button mat-icon-button matSuffix type="button" (click)="mostrarConfirmar = !mostrarConfirmar"
+            [attr.aria-label]="'autenticacion.registro.verContrasena' | translate">
+            <mat-icon>{{ mostrarConfirmar ? 'visibility' : 'visibility_off' }}</mat-icon>
+          </button>
+          @if (c.confirmarContrasena.hasError('required')) {
+            <mat-error>{{ 'autenticacion.registro.errores.obligatorio' | translate }}</mat-error>
+          } @else if (c.confirmarContrasena.hasError('noCoinciden')) {
+            <mat-error>{{ 'autenticacion.registro.errores.noCoinciden' | translate }}</mat-error>
+          }
+        </mat-form-field>
+
+        <button mat-flat-button type="submit" class="boton-principal" [disabled]="cargando">
+          {{ 'autenticacion.registro.crear' | translate }}
+        </button>
+      </form>
+
+      <p class="pie-tarjeta">
+        {{ 'autenticacion.registro.yaTienes' | translate }}
+        <a routerLink="/iniciar-sesion" class="enlace">{{ 'autenticacion.registro.iniciaSesion' | translate }}</a>
+      </p>
+    </div>
+  </section>
+
+  <app-panel-autenticacion />
+</div>
