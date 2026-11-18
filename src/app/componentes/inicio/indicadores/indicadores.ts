@@ -4,8 +4,9 @@ import { TranslatePipe } from '@ngx-translate/core';
 import { Indicadores } from '../../../modelo/inicio';
 
 /**
- * US-07: tarjetas de indicadores del mes (Figura 22).
- * Ingresos y gastos (con su parte fija y variable), balance disponible y ahorro destinado a metas.
+ * US-07: tarjetas de indicadores (Figura 22).
+ * Ingresos y gastos del mes (con su parte fija y variable), aportes a metas del mes,
+ * disponible del mes y ahorro total (acumulado, no depende del mes).
  *
  * Uso: <app-indicadores [indicadores]="indicadores" />
  */
@@ -43,5 +44,5 @@ export class TarjetasIndicadores {
     return total > 0 ? 100 - fijoPct : 0;
   }
 
-  readonly balancePositivo = computed(() => this.indicadores().disponible >= 0);
+  readonly disponibleNegativo = computed(() => this.indicadores().disponible < 0);
 }

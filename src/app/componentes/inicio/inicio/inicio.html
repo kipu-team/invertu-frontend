@@ -1,40 +1,43 @@
 <div class="inicio">
-  <!-- US-05: orientación inicial (Figura 21) -->
+  <!-- US-05: orientación inicial (Figura 21); el dashboard aparece cuando los 2 pasos están completos -->
   @if (orientacion?.mostrarOrientacion) {
     <app-orientacion [orientacion]="orientacion!" />
-  }
+  } @else if (orientacion) {
+    <!-- US-06: título y selector de mes (Figura 22) -->
+    <header class="inicio__encabezado">
+      <div>
+        <h1>{{ 'inicio.titulo' | translate }}</h1>
+        <p>{{ 'inicio.subtitulo' | translate }}</p>
+      </div>
+      <app-selector-mes [valor]="periodo" (cambio)="alCambiarMes($event)" />
+    </header>
 
-  <!-- US-06: título y selector de mes (Figura 22) -->
-  <header class="inicio__encabezado">
-    <div>
-      <h1>{{ 'inicio.titulo' | translate }}</h1>
-      <p>{{ 'inicio.subtitulo' | translate }}</p>
-    </div>
-    <app-selector-mes [valor]="periodo" (cambio)="alCambiarMes($event)" />
-  </header>
+    @if (errorMesFuturo) {
+      <p class="inicio__error" role="alert">{{ 'inicio.mesFuturo' | translate }}</p>
+    }
 
-  @if (mesVacio) {
-    <!-- US-06: estado vacío del mes -->
-    <div class="tarjeta inicio__vacio">
-      <span class="inicio__vacio-icono"><mat-icon>event_busy</mat-icon></span>
-      <h2>
-        {{
-          'inicio.vacio.titulo'
-            | translate: { mes: ('inicio.mesesEnFrase.' + periodo.mes | translate), anio: periodo.anio }
-        }}
-      </h2>
-      <p>{{ 'inicio.vacio.descripcion' | translate }}</p>
-      <a mat-flat-button class="inicio__boton-verde" routerLink="/movimientos">
-        {{ 'inicio.vacio.boton' | translate }}
-      </a>
-    </div>
-  } @else if (indicadores) {
-    <!-- US-07: tarjetas de indicadores -->
-    <app-indicadores [indicadores]="indicadores" />
+    @if (mesVacio) {
+      <!-- US-06: estado vacío del mes -->
+      <div class="tarjeta inicio__vacio">
+        <span class="inicio__vacio-icono"><mat-icon>event_busy</mat-icon></span>
+        <h2>
+          {{
+            'inicio.vacio.titulo'
+              | translate: { mes: ('inicio.mesesEnFrase.' + periodo.mes | translate), anio: periodo.anio }
+          }}
+        </h2>
+        <button mat-flat-button class="inicio__boton-verde" (click)="verMesActual()">
+          {{ 'inicio.vacio.boton' | translate }}
+        </button>
+      </div>
+    } @else if (indicadores) {
+      <!-- US-07: tarjetas de indicadores -->
+      <app-indicadores [indicadores]="indicadores" />
 
-    <!-- US-08: gráficos -->
-    @if (graficos) {
-      <app-graficos [graficos]="graficos" />
+      <!-- US-08: gráficos -->
+      @if (graficos) {
+        <app-graficos [graficos]="graficos" />
+      }
     }
   }
 </div>

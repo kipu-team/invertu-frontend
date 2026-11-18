@@ -43,6 +43,11 @@ export class GraficosMes {
   );
 
   /** Posición (x, y) de cada semana para ingresos y gastos */
+  /** US-08: el backend devuelve la lista vacía si en el mes no hubo ingresos ni gastos */
+  readonly haySemanas = computed(() =>
+    this.graficos().evolucionSemanal.some((s) => s.ingresos > 0 || s.gastos > 0),
+  );
+
   readonly puntos = computed(() => {
     const semanas = this.graficos().evolucionSemanal;
     const paso = (this.ancho - this.margen * 2) / Math.max(1, semanas.length - 1);

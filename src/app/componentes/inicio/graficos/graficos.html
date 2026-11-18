@@ -12,34 +12,38 @@
       </div>
     </div>
 
-    <div class="grafico__area">
-      <svg
-        class="grafico__lineas"
-        [attr.viewBox]="'0 0 ' + ancho + ' ' + alto"
-        preserveAspectRatio="none"
-        role="img"
-        [attr.aria-label]="'inicio.graficos.semanal' | translate"
-      >
-        @for (g of guias; track g) {
-          <line class="guia" x1="0" [attr.x2]="ancho" [attr.y1]="g" [attr.y2]="g" />
+    @if (haySemanas()) {
+      <div class="grafico__area">
+        <svg
+          class="grafico__lineas"
+          [attr.viewBox]="'0 0 ' + ancho + ' ' + alto"
+          preserveAspectRatio="none"
+          role="img"
+          [attr.aria-label]="'inicio.graficos.semanal' | translate"
+        >
+          @for (g of guias; track g) {
+            <line class="guia" x1="0" [attr.x2]="ancho" [attr.y1]="g" [attr.y2]="g" />
+          }
+          <polyline class="linea linea--gasto" [attr.points]="lineaGastos()" />
+          <polyline class="linea linea--ingreso" [attr.points]="lineaIngresos()" />
+        </svg>
+        <!-- Puntos en HTML (en el SVG estirado se verían ovalados) -->
+        @for (p of puntos(); track p.semana) {
+          <i class="marca marca--gasto" [style.left.%]="(p.x / ancho) * 100" [style.top.%]="(p.yGastos / alto) * 100"></i>
+          <i class="marca marca--ingreso" [style.left.%]="(p.x / ancho) * 100" [style.top.%]="(p.yIngresos / alto) * 100"></i>
         }
-        <polyline class="linea linea--gasto" [attr.points]="lineaGastos()" />
-        <polyline class="linea linea--ingreso" [attr.points]="lineaIngresos()" />
-      </svg>
-      <!-- Puntos en HTML (en el SVG estirado se verían ovalados) -->
-      @for (p of puntos(); track p.semana) {
-        <i class="marca marca--gasto" [style.left.%]="(p.x / ancho) * 100" [style.top.%]="(p.yGastos / alto) * 100"></i>
-        <i class="marca marca--ingreso" [style.left.%]="(p.x / ancho) * 100" [style.top.%]="(p.yIngresos / alto) * 100"></i>
-      }
-    </div>
-    <!-- Cada etiqueta va justo debajo de su punto (misma posición x que en el SVG) -->
-    <div class="grafico__semanas">
-      @for (p of puntos(); track p.semana) {
-        <span [style.left.%]="(p.x / ancho) * 100">
-          {{ 'inicio.graficos.semana' | translate: { numero: p.semana } }}
-        </span>
-      }
-    </div>
+      </div>
+      <!-- Cada etiqueta va justo debajo de su punto (misma posición x que en el SVG) -->
+      <div class="grafico__semanas">
+        @for (p of puntos(); track p.semana) {
+          <span [style.left.%]="(p.x / ancho) * 100">
+            {{ 'inicio.graficos.semana' | translate: { numero: p.semana } }}
+          </span>
+        }
+      </div>
+    } @else {
+      <p class="grafico__vacio">{{ 'inicio.graficos.sinInformacion' | translate }}</p>
+    }
   </article>
 
   <!-- Gastos por categoría -->
@@ -76,7 +80,7 @@
         </ul>
       </div>
     } @else {
-      <p class="grafico__vacio">{{ 'inicio.graficos.sinGastos' | translate }}</p>
+      <p class="grafico__vacio">{{ 'inicio.graficos.sinInformacion' | translate }}</p>
     }
   </article>
 
@@ -98,7 +102,7 @@
         }
       </ul>
     } @else {
-      <p class="grafico__vacio">{{ 'inicio.graficos.sinIngresos' | translate }}</p>
+      <p class="grafico__vacio">{{ 'inicio.graficos.sinInformacion' | translate }}</p>
     }
   </article>
 </section>

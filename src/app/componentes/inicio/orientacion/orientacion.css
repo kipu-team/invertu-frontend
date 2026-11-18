@@ -66,6 +66,12 @@
 .orientacion__paso {
   display: flex;
   flex-direction: column;
+  /* US-05: fondo del paso pendiente y del completado */
+  background: #f5f1e6;
+}
+
+.orientacion__paso--hecho {
+  background: #dff3e8;
 }
 
 .orientacion__paso-cabecera {
