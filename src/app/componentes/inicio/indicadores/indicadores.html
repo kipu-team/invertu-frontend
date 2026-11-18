@@ -1,6 +1,6 @@
 <section class="indicadores">
-  <!-- Ingresos -->
-  <article class="tarjeta indicador">
+  <!-- Ingresos del período -->
+  <article class="tarjeta indicador indicador--ancho">
     <h3>{{ 'inicio.indicadores.ingresos' | translate }}</h3>
     <p class="indicador__monto">S/ {{ indicadores().ingresos | number: '1.2-2' }}</p>
     <div class="indicador__reparto">
@@ -13,8 +13,8 @@
     </div>
   </article>
 
-  <!-- Gastos -->
-  <article class="tarjeta indicador">
+  <!-- Gastos del período -->
+  <article class="tarjeta indicador indicador--ancho">
     <h3>{{ 'inicio.indicadores.gastos' | translate }}</h3>
     <p class="indicador__monto">S/ {{ indicadores().gastos | number: '1.2-2' }}</p>
     <div class="indicador__reparto">
@@ -27,25 +27,35 @@
     </div>
   </article>
 
-  <!-- Balance (disponible = ingresos - gastos - aportes a metas) -->
+  <!-- Aportes a metas del mes -->
   <article class="tarjeta indicador">
-    <h3>{{ 'inicio.indicadores.balance' | translate }}</h3>
-    <p class="indicador__monto" [class.monto-gasto]="!balancePositivo()">
-      {{ balancePositivo() ? '' : '-' }}S/ {{ (balancePositivo() ? indicadores().disponible : -indicadores().disponible) | number: '1.2-2' }}
-    </p>
-    <span class="indicador__chip" [class.indicador__chip--negativo]="!balancePositivo()">
-      {{ (balancePositivo() ? 'inicio.indicadores.positivo' : 'inicio.indicadores.negativo') | translate }}
-    </span>
-    <p class="indicador__nota">{{ 'inicio.indicadores.balanceNota' | translate }}</p>
+    <h3>{{ 'inicio.indicadores.aportes' | translate }}</h3>
+    <p class="indicador__monto">S/ {{ indicadores().aportesMetas | number: '1.2-2' }}</p>
+    @if (indicadores().ingresos > 0) {
+      <span class="indicador__chip indicador__chip--dorado">
+        {{ 'inicio.indicadores.tasa' | translate: { pct: (tasaAhorro() | number: '1.0-1') } }}
+      </span>
+    }
+    <p class="indicador__nota">{{ 'inicio.indicadores.aportesNota' | translate }}</p>
   </article>
 
-  <!-- Ahorro destinado a metas -->
+  <!-- Disponible = ingresos - gastos - aportes (en rojo y con "−" si es negativo) -->
   <article class="tarjeta indicador">
-    <h3>{{ 'inicio.indicadores.ahorro' | translate }}</h3>
-    <p class="indicador__monto">S/ {{ indicadores().aportesMetas | number: '1.2-2' }}</p>
-    <span class="indicador__chip indicador__chip--dorado">
-      {{ 'inicio.indicadores.tasa' | translate: { pct: (tasaAhorro() | number: '1.0-1') } }}
-    </span>
-    <p class="indicador__nota">{{ 'inicio.indicadores.ahorroNota' | translate }}</p>
+    <h3>{{ 'inicio.indicadores.disponible' | translate }}</h3>
+    <p class="indicador__monto" [class.monto-gasto]="disponibleNegativo()">
+      {{ disponibleNegativo() ? '−' : '' }}S/ {{ (disponibleNegativo() ? -indicadores().disponible : indicadores().disponible) | number: '1.2-2' }}
+    </p>
+    @if (disponibleNegativo()) {
+      <p class="indicador__nota indicador__nota--negativa">{{ 'inicio.indicadores.disponibleNegativo' | translate }}</p>
+    } @else {
+      <p class="indicador__nota">{{ 'inicio.indicadores.disponibleNota' | translate }}</p>
+    }
+  </article>
+
+  <!-- Ahorro total: acumulado de todas las metas activas y cumplidas, no depende del mes -->
+  <article class="tarjeta indicador">
+    <h3>{{ 'inicio.indicadores.ahorroTotal' | translate }}</h3>
+    <p class="indicador__monto">S/ {{ indicadores().ahorroTotal | number: '1.2-2' }}</p>
+    <p class="indicador__nota">{{ 'inicio.indicadores.ahorroTotalNota' | translate }}</p>
   </article>
 </section>

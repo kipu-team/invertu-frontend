@@ -8,8 +8,8 @@
       "imagenAlt": "Libros, monedas y una planta que crece",
       "primerosPasos": "Tus primeros pasos:",
       "paso": "Paso {{numero}}",
-      "pendiente": "0% completado",
-      "completado": "100% completado",
+      "pendiente": "0 % completado",
+      "completado": "100 % completado",
       "listo": "Listo",
       "pasos": {
         "movimiento": {
@@ -59,9 +59,8 @@
       "anioSiguiente": "Año siguiente"
     },
     "vacio": {
-      "titulo": "Aún no tienes movimientos en {{mes}} de {{anio}}",
-      "descripcion": "Cuando registres un ingreso o un gasto de este mes, aquí verás tus indicadores y gráficos.",
-      "boton": "Registrar ingreso/gasto"
+      "titulo": "No se encontraron movimientos en {{mes}} de {{anio}}",
+      "boton": "Ver mes actual"
     },
     "mesesEnFrase": {
       "1": "enero",
@@ -80,15 +79,16 @@
     "indicadores": {
       "ingresos": "Ingresos del período",
       "gastos": "Gastos del período",
-      "balance": "Balance del período",
-      "ahorro": "Ahorro destinado a metas",
       "fijos": "Fijos: {{pct}}%",
       "variables": "Variables: {{pct}}%",
-      "positivo": "Positivo",
-      "negativo": "Negativo",
-      "balanceNota": "Ingresos menos gastos y aportes a metas",
       "tasa": "{{pct}}% de tus ingresos",
-      "ahorroNota": "Aportes a tus metas en este mes"
+      "aportes": "Aportes a metas",
+      "aportesNota": "Aportes a tus metas en este mes",
+      "disponible": "Disponible",
+      "disponibleNota": "Ingresos menos gastos y aportes a metas",
+      "disponibleNegativo": "Tus gastos y aportes superan tus ingresos de este mes",
+      "ahorroTotal": "Ahorro total",
+      "ahorroTotalNota": "Acumulado en tus metas activas y cumplidas"
     },
     "graficos": {
       "semanal": "Ingresos vs gastos por semana",
@@ -99,8 +99,8 @@
       "gastosCategoria": "Distribución de gastos por categoría",
       "ingresosFuente": "Distribución de ingresos por fuente",
       "total": "Total",
-      "sinGastos": "No registraste gastos en este mes.",
-      "sinIngresos": "No registraste ingresos en este mes."
-    }
+      "sinInformacion": "No hay información disponible"
+    },
+    "mesFuturo": "Solo puedes consultar el mes actual o meses anteriores"
   }
 }

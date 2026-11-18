@@ -1,15 +1,21 @@
 /* US-07: tarjetas de indicadores (Figura 22) */
 .indicadores {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  /* 1.ª fila: ingresos y gastos (más anchas, llevan la barra fijo/variable). 2.ª fila: las otras 3 */
+  grid-template-columns: repeat(6, 1fr);
   gap: 16px;
 }
 
 .indicador {
+  grid-column: span 2;
   display: flex;
   flex-direction: column;
   gap: 10px;
   border-radius: 16px;
+}
+
+.indicador--ancho {
+  grid-column: span 3;
 }
 
 .indicador h3 {
@@ -60,11 +66,6 @@
   font-weight: 700;
 }
 
-.indicador__chip--negativo {
-  background: color-mix(in srgb, var(--gasto) 12%, transparent);
-  color: var(--gasto);
-}
-
 .indicador__chip--dorado {
   background: var(--dorado-claro);
   color: #9a6b00;
@@ -76,9 +77,19 @@
   color: var(--texto-suave);
 }
 
-@media (max-width: 1100px) {
+.indicador__nota--negativa {
+  color: var(--gasto);
+  font-weight: 600;
+}
+
+@media (max-width: 900px) {
   .indicadores {
     grid-template-columns: repeat(2, 1fr);
+  }
+
+  .indicador,
+  .indicador--ancho {
+    grid-column: span 1;
   }
 }
 

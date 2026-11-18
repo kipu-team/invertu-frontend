@@ -18,7 +18,7 @@
 
   <div class="orientacion__pasos">
     @for (paso of pasos(); track paso.clave; let i = $index) {
-      <article class="tarjeta orientacion__paso">
+      <article class="tarjeta orientacion__paso" [class.orientacion__paso--hecho]="paso.hecho">
         <div class="orientacion__paso-cabecera">
           <span class="orientacion__etiqueta">
             {{ 'inicio.orientacion.paso' | translate: { numero: i + 1 } }}

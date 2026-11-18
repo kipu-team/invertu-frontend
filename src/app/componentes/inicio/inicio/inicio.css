@@ -24,6 +24,17 @@
   color: var(--texto-suave);
 }
 
+/* US-06 escenario 4: mes futuro */
+.inicio__error {
+  margin: 0;
+  padding: 10px 14px;
+  border-radius: 8px;
+  background: color-mix(in srgb, var(--gasto) 10%, transparent);
+  color: var(--gasto);
+  font-size: 0.875rem;
+  font-weight: 600;
+}
+
 /* US-06: estado vacío del mes */
 .inicio__vacio {
   display: flex;
@@ -52,16 +63,9 @@
 }
 
 .inicio__vacio h2 {
-  margin: 0;
+  margin: 0 0 12px;
   font-size: 1.1rem;
   font-weight: 700;
-}
-
-.inicio__vacio p {
-  max-width: 420px;
-  margin: 0 0 12px;
-  font-size: 0.875rem;
-  color: var(--texto-suave);
 }
 
 /* Botón verde (el tema global pone los botones en dorado) */
