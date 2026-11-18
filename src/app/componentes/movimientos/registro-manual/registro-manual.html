@@ -167,6 +167,9 @@
     @if (analisis) {
       <small class="manual__ia-nota"><mat-icon>auto_awesome</mat-icon>{{ 'movimientos.ia.detectado' | translate }}</small>
     }
+    @if (errorServidor) {
+      <small class="manual__error"><mat-icon>error</mat-icon>{{ errorServidor | translate }}</small>
+    }
     <button mat-flat-button type="submit" class="manual__registrar">
       {{ textoBoton | translate }}
     </button>

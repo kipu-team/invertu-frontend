@@ -21,6 +21,9 @@ import { RegistroIa } from '../registro-ia/registro-ia';
 import { DetalleMovimiento } from '../detalle-movimiento/detalle-movimiento';
 import { MatDialog } from '@angular/material/dialog';
 import { ConfirmarDialogo } from '../../compartidos/confirmar-dialogo/confirmar-dialogo';
+import { HttpErrorResponse } from '@angular/common/http';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-movimientos',
@@ -51,6 +54,8 @@ export class Movimientos implements OnInit {
   private categoriaService = inject(CategoriaService);
   private fb = inject(FormBuilder);
   private dialog = inject(MatDialog);
+  private snack = inject(MatSnackBar);
+  private traductor = inject(TranslateService);
   sesion = inject(SesionService);
 
   // Panel lateral de registro de US-16
@@ -64,7 +69,6 @@ export class Movimientos implements OnInit {
   anio: number = new Date().getFullYear();
   mes: number = new Date().getMonth() + 1;
 
-  // Búsqueda y filtros de US-14)
   // Opciones de filtros
   tipos: TipoMovimiento[] = ['INGRESO', 'GASTO'];
   clasificaciones: Clasificacion[] = ['FIJO', 'VARIABLE'];
@@ -78,7 +82,6 @@ export class Movimientos implements OnInit {
   ];
   categorias: Categoria[] = [];
 
-  // buscar en barra de búsqueda
   busqueda = new FormControl('', { nonNullable: true });
 
   panelAbierto: boolean = false;
@@ -111,10 +114,9 @@ export class Movimientos implements OnInit {
         idCategoria: f.idCategoria ?? undefined,
         medioPago: f.medioPago ?? undefined,
       })
-      .subscribe((data) => {
-        // borrar cuando se conecte la API
-        const prefijo = `${this.anio}-${String(this.mes).padStart(2, '0')}`;
-        this.dataSource.data = data.movimientos.filter((m) => m.fecha.startsWith(prefijo));
+      .subscribe({
+        next: (data) => (this.dataSource.data = data.movimientos),
+        error: () => this.avisar('movimientos.errores.cargar'),
       });
   }
 
@@ -171,12 +173,20 @@ export class Movimientos implements OnInit {
       .afterClosed()
       .subscribe((confirmo) => {
         if (confirmo) {
-          this.movimientoService.eliminar(id).subscribe(() => {
-            if (this.idSeleccionado === id) {
-              this.idSeleccionado = null;
-              this.vistaRegistro = 'metodo';
-            }
-            this.cargar();
+          this.movimientoService.eliminar(id).subscribe({
+            next: () => {
+              if (this.idSeleccionado === id) {
+                this.idSeleccionado = null;
+                this.vistaRegistro = 'metodo';
+              }
+              this.cargar();
+            },
+            error: (err: HttpErrorResponse) =>
+              this.avisar(
+                err.status === 404
+                  ? 'movimientos.errores.noEncontrado'
+                  : 'movimientos.errores.servidor',
+              ),
           });
         }
       });
@@ -210,5 +220,8 @@ export class Movimientos implements OnInit {
       this.mes++;
     }
     this.cargar();
+  }
+  private avisar(clave: string): void {
+    this.snack.open(this.traductor.instant(clave), undefined, { duration: 5000 });
   }
 }

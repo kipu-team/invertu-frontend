@@ -155,6 +155,12 @@
       "titulo": "Delete this transaction?",
       "mensaje": "This action can't be undone and the amount will be removed from your totals.",
       "confirmar": "Delete"
+    },
+    "errores": {
+      "noEncontrado": "We couldn't find this transaction. It may have been deleted.",
+      "servidor": "We couldn't complete the action. Please try again in a few minutes.",
+      "cargar": "We couldn't load your transactions. Please try again.",
+      "premium": "This feature is for Premium users only."
     }
   }
 }
