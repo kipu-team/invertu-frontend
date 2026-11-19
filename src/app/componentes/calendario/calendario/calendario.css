@@ -293,19 +293,139 @@
 @media (max-width: 950px) {
   .calendario-contenedor {
     flex-direction: column;
+    padding: 16px;
+    gap: 16px;
   }
+
   .panel-lateral {
     width: 100%;
+    box-sizing: border-box;
+  }
+}
+
+@media (max-width: 768px) {
+  .filtros-chips {
+    flex-wrap: wrap;
+    align-items: flex-start;
+  }
+
+  .lista-chips-contenedor {
+    max-width: 100%;
+    flex-wrap: wrap;
+  }
+
+  .calendario-leyenda {
+    flex-wrap: wrap;
+    gap: 8px 14px;
+  }
+
+  .calendario-tarjeta-base {
+    padding: 16px;
+  }
+
+  .celda-dia {
+    min-width: 0;
+    min-height: 68px;
   }
 }
 
 @media (max-width: 600px) {
-  .celda-dia {
-    min-height: 65px;
-    padding: 2px;
+  .calendario-contenedor {
+    padding: 10px;
+    gap: 12px;
   }
+
+  .calendario-titulo-texto {
+    font-size: 20px;
+  }
+
+  .filtros-chips {
+    gap: 8px;
+    margin-bottom: 12px;
+  }
+
+  .filtros-label {
+    flex: 0 0 100%;
+  }
+
+  .calendario-leyenda {
+    gap: 8px 12px;
+    margin-bottom: 12px;
+  }
+
+  .leyenda-item {
+    font-size: 12px;
+    gap: 5px;
+  }
+
+  .calendario-tarjeta-base {
+    padding: 8px;
+  }
+
+  .mes-navegacion {
+    gap: 2px;
+    margin-bottom: 12px;
+  }
+
+  .boton-mes-clickable {
+    font-size: 16px !important;
+  }
+
+  .dia-etiqueta {
+    font-size: 10px;
+    padding: 5px 1px;
+  }
+
+  .celda-dia {
+    min-height: 54px;
+    padding: 3px 2px;
+  }
+
+  .numero-dia-texto {
+    font-size: 10px;
+  }
+
+  .eventos-celda {
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 2px;
+  }
+
   .badge-mini {
-    display: none;
+    display: block;
+    width: 6px;
+    height: 6px;
+    min-width: 6px;
+    padding: 0;
+    border-radius: 50%;
+    font-size: 0;
+    line-height: 0;
+  }
+
+  .panel-lateral {
+    padding: 16px;
+  }
+
+  .selector-mes-cuadrcula-pop {
+    width: min(280px, calc(100vw - 40px));
+  }
+}
+
+@media (max-width: 380px) {
+  .calendario-grilla {
+    grid-template-columns: repeat(7, minmax(0, 1fr));
+  }
+
+  .celda-dia {
+    min-height: 46px;
+  }
+
+  .dia-etiqueta {
+    font-size: 9px;
+  }
+
+  .mes-navegacion {
+    gap: 0;
   }
 }
 
