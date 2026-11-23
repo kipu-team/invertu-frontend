@@ -1,95 +1,100 @@
-import { Service, computed, signal } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { AuthResponse, EstudianteSesion } from '../modelo/autenticacion';
 import { Rol } from '../modelo/comun';
 
-const CLAVE_TOKEN = 'invertu_token';
-const CLAVE_ESTUDIANTE = 'invertu_estudiante';
-
-/** Si nadie inició sesión, las pantallas usan a "Sofía" para poder probarlas. */
-const ESTUDIANTE_PRUEBA: EstudianteSesion = {
-  idEstudiante: 1,
-  nombres: 'Sofía',
-  rol: 'ROLE_FREE',
-  tema: 'SISTEMA',
-  idioma: 'es_419',
-};
-
-/**
- * Datos del estudiante que inició sesión, su plan (Free o Premium) y su token JWT.
- *
- * Uso en un componente:
- *   sesion = inject(SesionService);
- *   @if (sesion.esPremium()) { ... }
+/*
+ * Sesión del estudiante: token JWT y datos básicos (nombre y rol)
+ * Recordarme marcado: localStorage | sin marcar: sessionStorage (US-02)
  */
-@Service()
+@Injectable({
+  providedIn: 'root',
+})
 export class SesionService {
-  private estudianteActual = signal<EstudianteSesion>(
-    this.leerEstudianteGuardado() ?? ESTUDIANTE_PRUEBA,
-  );
+  // Prefijo invertu_ para no mezclarse con otros proyectos en localhost:4200
+  private claveToken: string = 'invertu_token';
+  private claveEstudiante: string = 'invertu_estudiante';
 
-  readonly estudiante = this.estudianteActual.asReadonly();
-  readonly esPremium = computed(() => this.estudianteActual().rol === 'ROLE_PREMIUM');
+  private estudianteVacio: EstudianteSesion = {
+    idEstudiante: 0,
+    nombres: '',
+    rol: 'ROLE_FREE',
+    tema: 'SISTEMA',
+    idioma: 'es_419',
+  };
 
-  /** Después del login. "recordar" viene del checkbox "Recuérdame". */
+  private estudianteActual: EstudianteSesion = this.leerEstudiante() ?? this.estudianteVacio;
+
+  constructor() { }
+
+  // Login exitoso: almacenamiento del token y del estudiante (US-02 E1)
   guardarSesion(respuesta: AuthResponse, recordar: boolean): void {
-    this.borrarGuardado();
+    this.borrarAlmacenamiento();
+
     const almacen = recordar ? localStorage : sessionStorage;
-    almacen.setItem(CLAVE_TOKEN, respuesta.token);
-    almacen.setItem(CLAVE_ESTUDIANTE, JSON.stringify(respuesta.estudiante));
-    this.estudianteActual.set(respuesta.estudiante);
+    almacen.setItem(this.claveToken, respuesta.token);
+    almacen.setItem(this.claveEstudiante, JSON.stringify(respuesta.estudiante));
+
+    this.estudianteActual = respuesta.estudiante;
   }
 
-  /** El interceptor lo usa para enviar el token en cada petición. */
   obtenerToken(): string | null {
-    return localStorage.getItem(CLAVE_TOKEN) ?? sessionStorage.getItem(CLAVE_TOKEN);
+    return localStorage.getItem(this.claveToken) ?? sessionStorage.getItem(this.claveToken);
   }
 
   estaAutenticado(): boolean {
-    return this.obtenerToken() !== null;
+    return this.obtenerToken() != null;
   }
 
+  estudiante(): EstudianteSesion {
+    return this.estudianteActual;
+  }
+
+  esPremium(): boolean {
+    return this.estudianteActual.rol === 'ROLE_PREMIUM';
+  }
+
+  // Cierre de sesión (US-40) o token vencido (401)
   cerrarSesion(): void {
-    this.borrarGuardado();
-    this.estudianteActual.set(ESTUDIANTE_PRUEBA);
+    this.borrarAlmacenamiento();
+    this.estudianteActual = this.estudianteVacio;
   }
 
-  /** Después de "Pasar a Premium" */
   cambiarRol(rol: Rol): void {
-    this.estudianteActual.update((e) => ({ ...e, rol }));
+    this.estudianteActual = { ...this.estudianteActual, rol: rol };
   }
 
-  /** Después de "Pasar a Premium": el backend manda un token nuevo con el rol nuevo (lo usa Luz en T-117). */
+  // Pasar a Premium: el backend devuelve un token nuevo con el rol actualizado (US-39)
   actualizarToken(token: string, rol: Rol): void {
-    const almacen = localStorage.getItem(CLAVE_TOKEN) !== null ? localStorage : sessionStorage;
-    almacen.setItem(CLAVE_TOKEN, token);
+    const almacen = localStorage.getItem(this.claveToken) != null ? localStorage : sessionStorage;
     this.cambiarRol(rol);
-    almacen.setItem(CLAVE_ESTUDIANTE, JSON.stringify(this.estudianteActual()));
+
+    almacen.setItem(this.claveToken, token);
+    almacen.setItem(this.claveEstudiante, JSON.stringify(this.estudianteActual));
   }
 
-  /** Para revisar ambas vistas: menú del avatar → "Ver como Premium / Free (prueba)" */
+  // Botón de prueba "Ver como Premium / Free" de la cabecera
   alternarRol(): void {
     this.cambiarRol(this.esPremium() ? 'ROLE_FREE' : 'ROLE_PREMIUM');
   }
 
-  private leerEstudianteGuardado(): EstudianteSesion | null {
-    const texto =
-      localStorage.getItem(CLAVE_ESTUDIANTE) ?? sessionStorage.getItem(CLAVE_ESTUDIANTE);
-    if (!texto) {
+  private leerEstudiante(): EstudianteSesion | null {
+    const texto = localStorage.getItem(this.claveEstudiante) ?? sessionStorage.getItem(this.claveEstudiante);
+    if (texto == null) {
       return null;
     }
+
     try {
       return JSON.parse(texto);
     } catch {
-      // Si el dato guardado está dañado, se borra la sesión para que la app no se rompa
-      this.borrarGuardado();
+      this.borrarAlmacenamiento(); // dato dañado: se descarta la sesión
       return null;
     }
   }
 
-  private borrarGuardado(): void {
-    for (const almacen of [localStorage, sessionStorage]) {
-      almacen.removeItem(CLAVE_TOKEN);
-      almacen.removeItem(CLAVE_ESTUDIANTE);
-    }
+  private borrarAlmacenamiento(): void {
+    localStorage.removeItem(this.claveToken);
+    localStorage.removeItem(this.claveEstudiante);
+    sessionStorage.removeItem(this.claveToken);
+    sessionStorage.removeItem(this.claveEstudiante);
   }
 }

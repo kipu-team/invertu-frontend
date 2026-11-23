@@ -22,7 +22,7 @@
   box-sizing: border-box;
 }
 
-/* Logo y "Volver al inicio", arriba a la izquierda (ocupan su propio espacio) */
+/* Logo y "Volver al inicio" */
 .encabezado {
   align-self: flex-start;
   display: flex;
@@ -54,7 +54,7 @@
 }
 
 .tarjeta {
-  /* margin auto: se centra en el espacio que queda; si no entra, crece hacia abajo (no se corta arriba) */
+  /* Centrado vertical sin cortar el contenido */
   margin: auto 0;
   width: 100%;
   max-width: 493px;
@@ -94,7 +94,7 @@
   font-weight: 700;
 }
 
-/* Caja verde de éxito (ej. "Tu cuenta fue creada" al volver del registro) */
+/* Caja verde de éxito */
 .alerta-exito {
   display: flex;
   align-items: center;
@@ -120,11 +120,11 @@
 /* Inputs tipo píldora */
 .campo {
   width: 100%;
-  --mat-form-field-outlined-container-shape: 22px; /* = la mitad del alto: se ve igual de redondo */
+  --mat-form-field-outlined-container-shape: 22px;
   --mat-form-field-outlined-outline-color: var(--borde);
   --mat-form-field-container-height: 44px;
   --mat-form-field-container-vertical-padding: 10px;
-  /* Texto de ejemplo más claro, para que no parezca un dato ya escrito */
+  /* Placeholder más claro */
   --mat-form-field-outlined-input-text-placeholder-color: color-mix(in srgb, var(--texto-suave) 55%, transparent);
 }
 

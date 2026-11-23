@@ -4,7 +4,7 @@
   margin-bottom: 8px;
 }
 
-/* Vista "Enlace enviado" (Figura 10) */
+/* Vista "Enlace enviado" */
 .enviado {
   display: flex;
   flex-direction: column;

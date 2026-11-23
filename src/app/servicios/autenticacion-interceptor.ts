@@ -1,37 +1,47 @@
-import { HttpErrorResponse, HttpInterceptorFn, HttpStatusCode } from '@angular/common/http';
+import { HttpInterceptorFn, HttpStatusCode } from '@angular/common/http';
 import { inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { catchError, throwError } from 'rxjs';
 import { environment } from '../../environments/environment';
 import { SesionService } from './sesion-service';
 
-/**
- * Agrega "Authorization: Bearer <token>" a cada petición a la API.
- * No lo agrega en /autenticacion (login, registro, recuperar), que no necesitan token,
- * ni en otras peticiones (por ejemplo, los archivos i18n).
- *
- * Si el backend responde 401 (token vencido o inválido), borra la sesión y manda al login.
+/*
+ * Interceptor JWT: header "Authorization: Bearer <token>" en cada petición a la API
+ * Generado con: ng g interceptor servicios/autenticacion --skip-tests
+ * Registro: app.config.ts → provideHttpClient(withInterceptors([autenticacionInterceptor]))
  */
 export const autenticacionInterceptor: HttpInterceptorFn = (req, next) => {
-  const sesion = inject(SesionService);
   const router = inject(Router);
-  const token = sesion.obtenerToken();
-  const esApi = req.url.startsWith(environment.apiUrl);
-  const esAutenticacion = req.url.startsWith(`${environment.apiUrl}/autenticacion`);
+  const sesionService = inject(SesionService);
+  const token = sesionService.obtenerToken();
 
-  if (!token || !esApi || esAutenticacion) {
-    return next(req); // sale tal cual
-  }
+  // Sin token en /autenticacion (login, registro, recuperar) ni fuera de la API (i18n)
+  const esApi: boolean = req.url.startsWith(environment.apiUrl);
+  const esAutenticacion: boolean = req.url.startsWith(environment.apiUrl + '/autenticacion');
+  const conToken: boolean = token != null && esApi && !esAutenticacion;
 
-  const conToken = req.clone({ setHeaders: { Authorization: `Bearer ${token}` } });
-  return next(conToken).pipe(
-    catchError((error: HttpErrorResponse) => {
-      if (error.status === HttpStatusCode.Unauthorized) {
-        sesion.cerrarSesion();
-        router.navigate(['/iniciar-sesion']);
+  // Copia de la petición con el header Authorization
+  const authReq = conToken
+    ? req.clone({ headers: req.headers.set('Authorization', `Bearer ${token}`) })
+    : req;
+
+  return next(authReq).pipe(
+    catchError((error) => {
+      switch (error.status) {
+
+        case HttpStatusCode.Unauthorized: // 401: token vencido o inválido → cierre de sesión
+          if (conToken) {
+            sesionService.cerrarSesion();
+            router.navigate(['/iniciar-sesion']);
+          }
+          return throwError(() => error);
+
+        case HttpStatusCode.Forbidden: // 403: función Premium → mensaje en cada pantalla
+          return throwError(() => error);
+
+        default:
+          return throwError(() => error);
       }
-      // El error sigue hasta el componente, para que pueda apagar su "cargando"
-      return throwError(() => error);
     }),
   );
 };

@@ -1,6 +1,6 @@
 /* Solo lo propio del registro. Lo común está en ../autenticacion-comun.css */
 
-/* Espacio entre campos (el mensaje de error solo ocupa lugar cuando aparece) */
+/* Espacio entre campos */
 .campo {
   margin-bottom: 14px;
 }
@@ -12,7 +12,7 @@
   gap: 12px;
 }
 
-/* Sin esto, el campo de Material no se achica y se sale de la tarjeta */
+/* Ancho mínimo 0 para que el campo no se salga de la tarjeta */
 .fila-doble > div {
   min-width: 0;
 }

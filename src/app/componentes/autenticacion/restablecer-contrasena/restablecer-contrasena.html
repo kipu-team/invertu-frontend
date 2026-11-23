@@ -18,7 +18,7 @@
         }
 
         @case ('formulario') {
-          <!-- Figura 11 -->
+          <!-- Formulario (enlace vigente) -->
           <h1 class="titulo">{{ 'autenticacion.restablecer.titulo' | translate }}</h1>
           <p class="subtitulo">{{ 'autenticacion.restablecer.subtitulo' | translate }}</p>
 
@@ -29,7 +29,7 @@
             </div>
           }
 
-          <form [formGroup]="formulario" (ngSubmit)="restablecer()">
+          <form [formGroup]="formulario" (ngSubmit)="onSubmit()">
             <label class="etiqueta" for="nuevaContrasena">{{ 'autenticacion.restablecer.nueva' | translate }}</label>
             <mat-form-field appearance="outline" class="campo" subscriptSizing="dynamic">
               <mat-icon matPrefix>key</mat-icon>
@@ -39,12 +39,12 @@
                 [attr.aria-label]="'autenticacion.registro.verContrasena' | translate">
                 <mat-icon>{{ mostrarContrasena ? 'visibility' : 'visibility_off' }}</mat-icon>
               </button>
-              @if (c.nuevaContrasena.hasError('required')) {
+              @if (formulario.get('nuevaContrasena')?.hasError('required')) {
                 <mat-error>{{ 'autenticacion.registro.errores.obligatorio' | translate }}</mat-error>
               }
             </mat-form-field>
 
-            <app-requisitos-contrasena [contrasena]="c.nuevaContrasena.value ?? ''" />
+            <app-requisitos-contrasena [contrasena]="formulario.get('nuevaContrasena')?.value" />
 
             <label class="etiqueta" for="confirmarContrasena">{{ 'autenticacion.registro.confirmar' | translate }}</label>
             <mat-form-field appearance="outline" class="campo" subscriptSizing="dynamic">
@@ -55,9 +55,9 @@
                 [attr.aria-label]="'autenticacion.registro.verContrasena' | translate">
                 <mat-icon>{{ mostrarConfirmar ? 'visibility' : 'visibility_off' }}</mat-icon>
               </button>
-              @if (c.confirmarContrasena.hasError('required')) {
+              @if (formulario.get('confirmarContrasena')?.hasError('required')) {
                 <mat-error>{{ 'autenticacion.registro.errores.obligatorio' | translate }}</mat-error>
-              } @else if (c.confirmarContrasena.hasError('noCoinciden')) {
+              } @else if (formulario.get('confirmarContrasena')?.hasError('noCoinciden')) {
                 <mat-error>{{ 'autenticacion.registro.errores.noCoinciden' | translate }}</mat-error>
               }
             </mat-form-field>
@@ -69,7 +69,7 @@
         }
 
         @case ('exito') {
-          <!-- Figura 12 -->
+          <!-- E1: contraseña restablecida -->
           <div class="estado">
             <span class="estado__icono"><mat-icon>check</mat-icon></span>
             <h1 class="titulo">{{ 'autenticacion.restablecer.exito.titulo' | translate }}</h1>
@@ -81,7 +81,7 @@
         }
 
         @case ('invalido') {
-          <!-- Figura 13 -->
+          <!-- E3: enlace expirado o ya usado -->
           <div class="estado">
             <span class="estado__icono estado__icono--error"><mat-icon>close</mat-icon></span>
             <h1 class="titulo">{{ 'autenticacion.restablecer.invalido.titulo' | translate }}</h1>

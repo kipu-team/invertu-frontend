@@ -12,7 +12,7 @@
       <h1 class="titulo">{{ 'autenticacion.registro.titulo' | translate }}</h1>
       <p class="subtitulo">{{ 'autenticacion.registro.subtitulo' | translate }}</p>
 
-      <!-- 409 (correo ya registrado), 400, 429 o sin conexión -->
+      <!-- E2: 409 | E3: 400 | 429 | error del servidor -->
       @if (errorClave) {
         <div class="alerta-error">
           <mat-icon>error</mat-icon>
@@ -25,8 +25,7 @@
         </div>
       }
 
-      <form [formGroup]="formulario" (ngSubmit)="registrar()">
-        <!-- Nombres y apellidos lado a lado (sin ícono para que entre el texto de ejemplo) -->
+      <form [formGroup]="formulario" (ngSubmit)="onSubmit()">
         <div class="fila-doble">
           <div>
             <label class="etiqueta" for="nombres">{{ 'autenticacion.registro.nombres' | translate }}</label>
@@ -55,9 +54,9 @@
           <mat-icon matPrefix>mail</mat-icon>
           <input matInput id="correo" type="email" formControlName="correo" autocomplete="email"
             [placeholder]="'autenticacion.iniciarSesion.correoPlaceholder' | translate" />
-          @if (c.correo.hasError('required')) {
+          @if (formulario.get('correo')?.hasError('required')) {
             <mat-error>{{ 'autenticacion.registro.errores.obligatorio' | translate }}</mat-error>
-          } @else if (c.correo.hasError('pattern')) {
+          } @else if (formulario.get('correo')?.hasError('pattern')) {
             <mat-error>{{ 'autenticacion.iniciarSesion.errores.correoInvalido' | translate }}</mat-error>
           }
         </mat-form-field>
@@ -71,14 +70,14 @@
             [attr.aria-label]="'autenticacion.registro.verContrasena' | translate">
             <mat-icon>{{ mostrarContrasena ? 'visibility' : 'visibility_off' }}</mat-icon>
           </button>
-          @if (c.contrasena.hasError('required')) {
+          @if (formulario.get('contrasena')?.hasError('required')) {
             <mat-error>{{ 'autenticacion.registro.errores.obligatorio' | translate }}</mat-error>
           }
         </mat-form-field>
 
-        <!-- Requisitos: verde si se cumple, gris si no (US-01). Aparecen al escribir la contraseña -->
-        @if (c.contrasena.value || c.contrasena.touched) {
-          <app-requisitos-contrasena [contrasena]="c.contrasena.value ?? ''" />
+        <!-- Requisitos de la contraseña -->
+        @if (formulario.get('contrasena')?.value || formulario.get('contrasena')?.touched) {
+          <app-requisitos-contrasena [contrasena]="formulario.get('contrasena')?.value" />
         }
 
         <label class="etiqueta" for="confirmarContrasena">{{ 'autenticacion.registro.confirmar' | translate }}</label>
@@ -90,9 +89,9 @@
             [attr.aria-label]="'autenticacion.registro.verContrasena' | translate">
             <mat-icon>{{ mostrarConfirmar ? 'visibility' : 'visibility_off' }}</mat-icon>
           </button>
-          @if (c.confirmarContrasena.hasError('required')) {
+          @if (formulario.get('confirmarContrasena')?.hasError('required')) {
             <mat-error>{{ 'autenticacion.registro.errores.obligatorio' | translate }}</mat-error>
-          } @else if (c.confirmarContrasena.hasError('noCoinciden')) {
+          } @else if (formulario.get('confirmarContrasena')?.hasError('noCoinciden')) {
             <mat-error>{{ 'autenticacion.registro.errores.noCoinciden' | translate }}</mat-error>
           }
         </mat-form-field>
