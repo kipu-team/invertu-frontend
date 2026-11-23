@@ -1,6 +1,4 @@
 <header class="cabecera">
-  <span class="cabecera__prueba">{{ 'compartido.datosPrueba' | translate }}</span>
-
   <button
     mat-button
     class="cabecera__idioma"
@@ -29,15 +27,6 @@
     <a mat-menu-item routerLink="/perfil" [queryParams]="{ pestana: 'configuracion' }">
       <mat-icon>settings</mat-icon>{{ 'compartido.usuario.configuracion' | translate }}
     </a>
-    <button mat-menu-item (click)="sesion.alternarRol()">
-      <mat-icon>swap_horiz</mat-icon>
-      {{
-        (sesion.esPremium()
-          ? 'compartido.usuario.verComoFree'
-          : 'compartido.usuario.verComoPremium'
-        ) | translate
-      }}
-    </button>
     <mat-divider />
     <button mat-menu-item class="cabecera__salir" (click)="confirmarCierreSesion()">
       <mat-icon>logout</mat-icon>{{ 'compartido.usuario.cerrarSesion' | translate }}

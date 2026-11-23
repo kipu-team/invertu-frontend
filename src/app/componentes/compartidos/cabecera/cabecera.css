@@ -9,16 +9,6 @@
   border-bottom: 1px solid var(--borde);
 }
 
-.cabecera__prueba {
-  margin-right: auto;
-  padding: 4px 10px;
-  border-radius: 999px;
-  background: var(--dorado-claro);
-  color: #7a5c00;
-  font-size: 0.75rem;
-  font-weight: 600;
-}
-
 .cabecera__idioma mat-icon {
   margin-right: 4px;
 }

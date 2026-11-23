@@ -5,7 +5,7 @@ import { TranslatePipe } from '@ngx-translate/core';
 
 import { Perfil, PerfilRequest } from '../../../modelo/perfil';
 import { PerfilService } from '../../../servicios/perfil-service';
-import { UNIVERSIDADES } from '../../../servicios/datos-prueba/datos-prueba';
+import { UNIVERSIDADES } from '../../../modelo/universidades';
 import { MatIconModule } from '@angular/material/icon';
 
 import { MatFormFieldModule } from '@angular/material/form-field';

@@ -8,7 +8,6 @@
       "calendario": "Calendar"
     },
     "soloPremium": "Premium only",
-    "datosPrueba": "Test data mode",
     "cambiarIdioma": "Change language",
     "plan": {
       "free": "Free plan",
@@ -17,8 +16,6 @@
     "usuario": {
       "perfil": "Profile",
       "configuracion": "Settings",
-      "verComoFree": "View as Free (test)",
-      "verComoPremium": "View as Premium (test)",
       "cerrarSesion": "Log out"
     },
     "cerrarSesion": {
