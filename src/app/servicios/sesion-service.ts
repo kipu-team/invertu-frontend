@@ -72,11 +72,6 @@ export class SesionService {
     almacen.setItem(this.claveEstudiante, JSON.stringify(this.estudianteActual));
   }
 
-  // Botón de prueba "Ver como Premium / Free" de la cabecera
-  alternarRol(): void {
-    this.cambiarRol(this.esPremium() ? 'ROLE_FREE' : 'ROLE_PREMIUM');
-  }
-
   private leerEstudiante(): EstudianteSesion | null {
     const texto = localStorage.getItem(this.claveEstudiante) ?? sessionStorage.getItem(this.claveEstudiante);
     if (texto == null) {
