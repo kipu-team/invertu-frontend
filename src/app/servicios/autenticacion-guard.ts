@@ -1,14 +1,25 @@
-import { inject } from '@angular/core';
-import { CanActivateFn, Router } from '@angular/router';
+import { inject, Injectable } from '@angular/core';
+import { CanActivate, Router } from '@angular/router';
 import { SesionService } from './sesion-service';
 
-/**
- * T-109: si no hay token, no deja entrar a las pantallas con menú lateral y manda al login.
- * Va en la ruta padre del Layout (app.routes.ts).
- * No hay guardia Premium: eso se maneja con @if (sesion.esPremium()) y el backend responde 403.
+/*
+ * Guardia de rutas: acceso solo con sesión iniciada
+ * Generado con: ng g guard servicios/autenticacion
+ * Uso: app.routes.ts → canActivate: [AutenticacionGuard]
  */
-export const autenticacionGuard: CanActivateFn = () => {
-  const sesion = inject(SesionService);
-  const router = inject(Router);
-  return sesion.estaAutenticado() ? true : router.createUrlTree(['/iniciar-sesion']);
-};
+@Injectable({
+  providedIn: 'root',
+})
+export class AutenticacionGuard implements CanActivate {
+  router: Router = inject(Router);
+  sesionService: SesionService = inject(SesionService);
+
+  canActivate(): boolean {
+    if (this.sesionService.estaAutenticado()) {
+      return true; // con token: acceso permitido
+    } else {
+      this.router.navigate(['/iniciar-sesion']); // sin token: redirección al login
+      return false;
+    }
+  }
+}

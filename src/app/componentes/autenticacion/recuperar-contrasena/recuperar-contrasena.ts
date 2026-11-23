@@ -1,6 +1,6 @@
-import { Component, ChangeDetectionStrategy, DestroyRef, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, OnDestroy } from '@angular/core';
 import { HttpErrorResponse } from '@angular/common/http';
-import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatButton } from '@angular/material/button';
 import { MatError, MatFormField, MatPrefix } from '@angular/material/form-field';
 import { MatIcon } from '@angular/material/icon';
@@ -8,14 +8,13 @@ import { MatInput } from '@angular/material/input';
 import { RouterLink } from '@angular/router';
 import { TranslatePipe } from '@ngx-translate/core';
 import { AutenticacionService } from '../../../servicios/autenticacion-service';
+import { Mensaje } from '../../../modelo/comun';
+import { RecuperarContrasenaRequest } from '../../../modelo/autenticacion';
 import { PanelAutenticacion } from '../panel-autenticacion/panel-autenticacion';
 
-const SEGUNDOS_REENVIO = 60; // US-03: "Reenviar enlace" se habilita al terminar el contador de 1 minuto
-
-/**
- * US-03: solicitar enlace de recuperación (Figuras 9 y 10). Conectado con END-AUTH-03.
- * Un solo componente con dos vistas: el formulario y "Enlace enviado" con el contador.
- * El backend responde igual exista o no el correo, para no revelar qué correos tienen cuenta.
+/*
+ * Solicitar enlace de recuperación (US-03) | END-AUTH-03: POST /autenticacion/recuperar-contrasena
+ * Vistas: formulario y "Enlace enviado" con contador de 1 minuto
  */
 @Component({
   selector: 'app-recuperar-contrasena',
@@ -32,76 +31,92 @@ const SEGUNDOS_REENVIO = 60; // US-03: "Reenviar enlace" se habilita al terminar
     PanelAutenticacion,
   ],
   templateUrl: './recuperar-contrasena.html',
-  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrls: ['../autenticacion-comun.css', './recuperar-contrasena.css'],
+  changeDetection: ChangeDetectionStrategy.Eager,
 })
-export class RecuperarContrasena {
-  private fb = inject(FormBuilder);
-  private autenticacionService = inject(AutenticacionService);
+export class RecuperarContrasena implements OnDestroy {
+  fb: FormBuilder = inject(FormBuilder);
+  autenticacionService: AutenticacionService = inject(AutenticacionService);
 
-  cargando = false;
-  enviado = false; // false = formulario, true = vista "Enlace enviado"
-  errorClave = '';
-  segundosRestantes = 0;
-  private temporizador?: ReturnType<typeof setInterval>;
+  formulario: FormGroup;
 
-  formulario = this.fb.group({
-    correo: ['', [Validators.required, Validators.pattern(/.+@.+\..+/)]],
-  });
+  cargando: boolean = false;
+  enviado: boolean = false; // false: formulario | true: "Enlace enviado"
+  errorClave: string = '';
 
-  get correo() {
-    return this.formulario.controls.correo;
-  }
-
-  /** "0:45" para el botón de reenviar */
-  get tiempo(): string {
-    const s = this.segundosRestantes;
-    return `${Math.floor(s / 60)}:${String(s % 60).padStart(2, '0')}`;
-  }
+  segundosRestantes: number = 0;
+  temporizador: any;
 
   constructor() {
-    // Si sale de la pantalla, se detiene el contador
-    inject(DestroyRef).onDestroy(() => clearInterval(this.temporizador));
-  }
-
-  /** Lo usan "Enviar enlace" y "Reenviar enlace": es el mismo endpoint (el reenvío invalida el enlace anterior) */
-  enviar(): void {
-    if (this.formulario.invalid) {
-      this.formulario.markAllAsTouched();
-      return;
-    }
-    this.cargando = true;
-    this.errorClave = '';
-    const correo = this.correo.value!.trim();
-    this.autenticacionService.recuperarContrasena({ correo }).subscribe({
-      next: () => {
-        this.cargando = false;
-        this.enviado = true;
-        this.iniciarContador();
-      },
-      error: (err: HttpErrorResponse) => {
-        this.cargando = false;
-        if (err.status === 429) {
-          this.errorClave = 'autenticacion.recuperar.errores.esperar';
-        } else if (err.status === 400) {
-          this.errorClave = 'autenticacion.iniciarSesion.errores.correoInvalido';
-        } else {
-          this.errorClave = 'autenticacion.iniciarSesion.errores.servidor';
-        }
-      },
+    this.formulario = this.fb.group({
+      correo: ['', [Validators.required, Validators.pattern(/.+@.+\..+/)]],
     });
   }
 
-  /** Volver al formulario para escribir otro correo */
+  // Salida de la pantalla: detención del contador
+  ngOnDestroy(): void {
+    clearInterval(this.temporizador);
+  }
+
+  // "Enviar enlace" y "Reenviar enlace": mismo endpoint (E1, E2 y E3)
+  onSubmit(): void {
+    if (this.formulario.valid) {
+
+      const recuperarRequest: RecuperarContrasenaRequest = {
+        correo: this.formulario.value.correo.trim(),
+      };
+
+      this.cargando = true;
+      this.errorClave = '';
+
+      this.autenticacionService.recuperarContrasena(recuperarRequest).subscribe({
+        next: (data: Mensaje): void => {
+          console.log('Enlace de recuperación solicitado');
+          this.cargando = false;
+          this.enviado = true; // 200 OK, exista o no el correo
+          this.iniciarContador();
+        },
+        error: (error: HttpErrorResponse) => {
+          console.error('Error al solicitar el enlace:', error.status);
+          this.cargando = false;
+
+          switch (error.status) {
+            case 429: // reenvío antes de 1 minuto
+              this.errorClave = 'autenticacion.recuperar.errores.esperar';
+              break;
+            case 400:
+              this.errorClave = 'autenticacion.iniciarSesion.errores.correoInvalido';
+              break;
+            default:
+              this.errorClave = 'autenticacion.iniciarSesion.errores.servidor';
+          }
+        },
+      });
+
+    } else {
+      this.formulario.markAllAsTouched();
+    }
+  }
+
+  // Regreso al formulario para usar otro correo
   cambiarCorreo(): void {
     clearInterval(this.temporizador);
     this.enviado = false;
     this.errorClave = '';
   }
 
-  private iniciarContador(): void {
+  // Contador en formato "0:45"
+  tiempo(): string {
+    const minutos: number = Math.floor(this.segundosRestantes / 60);
+    const segundos: number = this.segundosRestantes % 60;
+    return minutos + ':' + String(segundos).padStart(2, '0');
+  }
+
+  // Contador de 1 minuto para habilitar "Reenviar enlace"
+  iniciarContador(): void {
     clearInterval(this.temporizador);
-    this.segundosRestantes = SEGUNDOS_REENVIO;
+    this.segundosRestantes = 60;
+
     this.temporizador = setInterval(() => {
       this.segundosRestantes--;
       if (this.segundosRestantes <= 0) {

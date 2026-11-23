@@ -12,7 +12,7 @@
       <h1 class="titulo">{{ 'autenticacion.iniciarSesion.titulo' | translate }}</h1>
       <p class="subtitulo">{{ 'autenticacion.iniciarSesion.subtitulo' | translate }}</p>
 
-      <!-- US-01: mensaje al llegar desde el registro -->
+      <!-- US-01 E1: cuenta creada -->
       @if (cuentaCreada && !errorClave) {
         <div class="alerta-exito">
           <mat-icon>check_circle</mat-icon>
@@ -20,7 +20,7 @@
         </div>
       }
 
-      <!-- ⑥ Si el backend respondió 401 (o falló), errorClave tiene texto y aparece la caja roja -->
+      <!-- E2: 401 | 429 | error del servidor -->
       @if (errorClave) {
         <div class="alerta-error">
           <mat-icon>error</mat-icon>
@@ -28,9 +28,7 @@
         </div>
       }
 
-      <!-- ① El formulario se conecta con "formulario" del .ts.
-           ② Al hacer clic en el botón submit, se ejecuta iniciarSesion() -->
-      <form [formGroup]="formulario" (ngSubmit)="iniciarSesion()">
+      <form [formGroup]="formulario" (ngSubmit)="onSubmit()">
         <label class="etiqueta" for="correo">
           {{ 'autenticacion.iniciarSesion.correo' | translate }}
         </label>
@@ -43,9 +41,9 @@
             formControlName="correo"
             [placeholder]="'autenticacion.iniciarSesion.correoPlaceholder' | translate"
           />
-          @if (correo.hasError('required')) {
+          @if (formulario.get('correo')?.hasError('required')) {
             <mat-error>{{ 'autenticacion.iniciarSesion.errores.correoRequerido' | translate }}</mat-error>
-          } @else if (correo.hasError('email')) {
+          } @else if (formulario.get('correo')?.hasError('email')) {
             <mat-error>{{ 'autenticacion.iniciarSesion.errores.correoInvalido' | translate }}</mat-error>
           }
         </mat-form-field>
@@ -69,7 +67,7 @@
           >
             <mat-icon>{{ mostrarContrasena ? 'visibility' : 'visibility_off' }}</mat-icon>
           </button>
-          @if (contrasena.hasError('required')) {
+          @if (formulario.get('contrasena')?.hasError('required')) {
             <mat-error>{{ 'autenticacion.iniciarSesion.errores.contrasenaRequerida' | translate }}</mat-error>
           }
         </mat-form-field>
@@ -97,6 +95,5 @@
     </div>
   </section>
 
-  <!-- Panel verde de la derecha (compartido con registro y recuperar/restablecer) -->
   <app-panel-autenticacion />
 </div>

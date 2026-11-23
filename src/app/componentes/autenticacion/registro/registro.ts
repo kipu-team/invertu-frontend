@@ -1,6 +1,6 @@
-import { Component, ChangeDetectionStrategy, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { HttpErrorResponse } from '@angular/common/http';
-import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatButton, MatIconButton } from '@angular/material/button';
 import { MatError, MatFormField, MatPrefix, MatSuffix } from '@angular/material/form-field';
 import { MatIcon } from '@angular/material/icon';
@@ -8,17 +8,13 @@ import { MatInput } from '@angular/material/input';
 import { Router, RouterLink } from '@angular/router';
 import { TranslatePipe } from '@ngx-translate/core';
 import { AutenticacionService } from '../../../servicios/autenticacion-service';
-import { RegistroRequest } from '../../../modelo/autenticacion';
+import { RegistroRequest, RegistroResponse } from '../../../modelo/autenticacion';
 import { PanelAutenticacion } from '../panel-autenticacion/panel-autenticacion';
 import { RequisitosContrasena } from '../requisitos-contrasena/requisitos-contrasena';
 import { PATRON_CONTRASENA, contrasenasCoinciden } from '../validadores-contrasena';
 
-/** Mismas reglas que RegistroRequestDTO del backend (END-AUTH-01) */
-const PATRON_CORREO = /.+@.+\..+/;
-
-/**
- * US-01: registro de cuenta (Figuras 14–20). Conectado con END-AUTH-01.
- * Éxito (201) → /iniciar-sesion?registrado=1, donde se muestra "Tu cuenta fue creada...".
+/*
+ * Registro de cuenta (US-01) | END-AUTH-01: POST /autenticacion/registro
  */
 @Component({
   selector: 'app-registro',
@@ -38,75 +34,90 @@ const PATRON_CORREO = /.+@.+\..+/;
     RequisitosContrasena,
   ],
   templateUrl: './registro.html',
-  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrls: ['../autenticacion-comun.css', './registro.css'],
+  changeDetection: ChangeDetectionStrategy.Eager,
 })
 export class Registro {
-  private fb = inject(FormBuilder);
-  private autenticacionService = inject(AutenticacionService);
-  private router = inject(Router);
+  router: Router = inject(Router);
+  fb: FormBuilder = inject(FormBuilder);
+  autenticacionService: AutenticacionService = inject(AutenticacionService);
 
-  cargando = false;
-  mostrarContrasena = false;
-  mostrarConfirmar = false;
-  errorClave = ''; // clave i18n del error de la caja roja
-  correoDuplicado = false; // 409: muestra además el enlace "Inicia sesión"
+  formulario: FormGroup;
 
-  formulario = this.fb.group(
-    {
-      nombres: ['', [Validators.required, Validators.maxLength(100)]],
-      apellidos: ['', [Validators.required, Validators.maxLength(100)]],
-      correo: ['', [Validators.required, Validators.pattern(PATRON_CORREO), Validators.maxLength(150)]],
-      contrasena: ['', [Validators.required, Validators.pattern(PATRON_CONTRASENA), Validators.maxLength(72)]],
-      confirmarContrasena: ['', Validators.required],
-    },
-    { validators: contrasenasCoinciden('contrasena', 'confirmarContrasena') },
-  );
+  cargando: boolean = false;
+  mostrarContrasena: boolean = false;
+  mostrarConfirmar: boolean = false;
+  errorClave: string = '';
+  correoDuplicado: boolean = false; // 409: muestra el enlace "Inicia sesión"
 
-  get c() {
-    return this.formulario.controls;
+  // Formulario con las mismas reglas que RegistroRequestDTO (E3)
+  constructor() {
+    this.formulario = this.fb.group(
+      {
+        nombres: ['', [Validators.required, Validators.maxLength(100)]],
+        apellidos: ['', [Validators.required, Validators.maxLength(100)]],
+        correo: ['', [Validators.required, Validators.pattern(/.+@.+\..+/), Validators.maxLength(150)]],
+        contrasena: ['', [Validators.required, Validators.pattern(PATRON_CONTRASENA), Validators.maxLength(72)]],
+        confirmarContrasena: ['', Validators.required],
+      },
+      { validators: contrasenasCoinciden('contrasena', 'confirmarContrasena') },
+    );
   }
 
-  /** "Este campo es obligatorio" también si solo escribió espacios */
-  vacio(campo: 'nombres' | 'apellidos'): boolean {
-    const control = this.c[campo];
-    return control.hasError('required') || (control.touched && !(control.value ?? '').trim());
+  // Campo vacío o solo con espacios
+  vacio(campo: string): boolean {
+    const control = this.formulario.get(campo);
+    return control != null && control.touched && !(control.value ?? '').trim();
   }
 
-  registrar(): void {
-    const v = this.formulario.getRawValue();
-    if (this.formulario.invalid || !v.nombres?.trim() || !v.apellidos?.trim()) {
-      this.formulario.markAllAsTouched();
-      return;
+  onSubmit(): void {
+    const nombres: string = this.formulario.value.nombres.trim();
+    const apellidos: string = this.formulario.value.apellidos.trim();
+
+    if (this.formulario.valid && nombres && apellidos) {
+
+      const registroRequest: RegistroRequest = {
+        nombres: nombres,
+        apellidos: apellidos,
+        correo: this.formulario.value.correo.trim(),
+        contrasena: this.formulario.value.contrasena,
+        confirmarContrasena: this.formulario.value.confirmarContrasena,
+      };
+
+      this.cargando = true;
+      this.errorClave = '';
+      this.correoDuplicado = false;
+
+      this.autenticacionService.registrar(registroRequest).subscribe({
+        next: (data: RegistroResponse): void => {
+          console.log('Registro exitoso');
+          this.cargando = false;
+          // E1: 201 Created → login con el mensaje "Tu cuenta fue creada"
+          this.router.navigate(['/iniciar-sesion'], { queryParams: { registrado: 1 } });
+        },
+        error: (error: HttpErrorResponse) => {
+          console.error('Error en registro:', error.status);
+          this.cargando = false;
+
+          switch (error.status) {
+            case 409: // E2: correo ya registrado
+              this.errorClave = 'autenticacion.registro.errores.correoRegistrado';
+              this.correoDuplicado = true;
+              break;
+            case 400: // E3: datos inválidos
+              this.errorClave = 'autenticacion.registro.errores.datosInvalidos';
+              break;
+            case 429:
+              this.errorClave = 'autenticacion.registro.errores.demasiadosIntentos';
+              break;
+            default:
+              this.errorClave = 'autenticacion.iniciarSesion.errores.servidor';
+          }
+        },
+      });
+
+    } else {
+      this.formulario.markAllAsTouched(); // E3: mensajes en los campos, sin llamar al backend
     }
-    this.cargando = true;
-    this.errorClave = '';
-    this.correoDuplicado = false;
-    const datos: RegistroRequest = {
-      nombres: v.nombres!.trim(),
-      apellidos: v.apellidos!.trim(),
-      correo: v.correo!.trim(),
-      contrasena: v.contrasena!,
-      confirmarContrasena: v.confirmarContrasena!,
-    };
-    this.autenticacionService.registrar(datos).subscribe({
-      next: () => {
-        this.cargando = false;
-        this.router.navigate(['/iniciar-sesion'], { queryParams: { registrado: 1 } });
-      },
-      error: (err: HttpErrorResponse) => {
-        this.cargando = false;
-        if (err.status === 409) {
-          this.errorClave = 'autenticacion.registro.errores.correoRegistrado';
-          this.correoDuplicado = true;
-        } else if (err.status === 400) {
-          this.errorClave = 'autenticacion.registro.errores.datosInvalidos';
-        } else if (err.status === 429) {
-          this.errorClave = 'autenticacion.registro.errores.demasiadosIntentos';
-        } else {
-          this.errorClave = 'autenticacion.iniciarSesion.errores.servidor';
-        }
-      },
-    });
   }
 }

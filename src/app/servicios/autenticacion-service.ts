@@ -1,6 +1,8 @@
-import { Service, inject } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { map, Observable } from 'rxjs';
+import { environment } from '../../environments/environment';
+import { SesionService } from './sesion-service';
 import {
   AuthRequest,
   AuthResponse,
@@ -12,39 +14,47 @@ import {
   ValidarTokenResponse,
 } from '../modelo/autenticacion';
 import { Mensaje } from '../modelo/comun';
-import { environment } from '../../environments/environment';
 
-/**
- * Autenticación (backend: /api/v1/autenticacion).
- * Todos los métodos usan la API real (END-AUTH-01 a END-AUTH-05).
+/*
+ * Autenticación | END-AUTH-01 a END-AUTH-05: /api/v1/autenticacion
  */
-@Service()
+@Injectable({
+  providedIn: 'root',
+})
 export class AutenticacionService {
-  private http = inject(HttpClient);
-  private url = `${environment.apiUrl}/autenticacion`;
+  private url: string = environment.apiUrl + '/autenticacion';
+  private http: HttpClient = inject(HttpClient);
+  private sesionService: SesionService = inject(SesionService);
 
-  /** END-AUTH-01. 201: cuenta creada. 409: correo ya registrado. 400: datos inválidos. */
+  constructor() { }
+
+  // END-AUTH-01: registro (US-01)
   registrar(datos: RegistroRequest): Observable<RegistroResponse> {
-    return this.http.post<RegistroResponse>(`${this.url}/registro`, datos);
+    return this.http.post<RegistroResponse>(this.url + '/registro', datos);
   }
 
-  /** El backend responde 401 si el correo o la contraseña son incorrectos (Figura 8). */
-  iniciarSesion(datos: AuthRequest): Observable<AuthResponse> {
-    return this.http.post<AuthResponse>(`${this.url}/iniciar-sesion`, datos);
+  // END-AUTH-02: login y almacenamiento del token (US-02)
+  iniciarSesion(datos: AuthRequest, recordar: boolean): Observable<AuthResponse> {
+    return this.http.post<AuthResponse>(this.url + '/iniciar-sesion', datos).pipe(
+      map((respuesta) => {
+        this.sesionService.guardarSesion(respuesta, recordar);
+        return respuesta;
+      }),
+    );
   }
 
-  /** END-AUTH-03. Siempre 200 (exista o no el correo). 429: debe esperar 1 minuto para reenviar. */
+  // END-AUTH-03: envío del enlace de recuperación (US-03)
   recuperarContrasena(datos: RecuperarContrasenaRequest): Observable<Mensaje> {
-    return this.http.post<Mensaje>(`${this.url}/recuperar-contrasena`, datos);
+    return this.http.post<Mensaje>(this.url + '/recuperar-contrasena', datos);
   }
 
-  /** END-AUTH-04. 200: enlace vigente. 400: "El enlace expiró o no es válido". El token va en el cuerpo. */
+  // END-AUTH-04: validación del enlace (US-04)
   validarToken(datos: ValidarTokenRequest): Observable<ValidarTokenResponse> {
-    return this.http.post<ValidarTokenResponse>(`${this.url}/restablecer-contrasena/validar`, datos);
+    return this.http.post<ValidarTokenResponse>(this.url + '/restablecer-contrasena/validar', datos);
   }
 
-  /** END-AUTH-05. 200: contraseña cambiada. 400: no cumple requisitos, no coinciden o enlace inválido. */
+  // END-AUTH-05: nueva contraseña (US-04)
   restablecerContrasena(datos: RestablecerContrasenaRequest): Observable<Mensaje> {
-    return this.http.post<Mensaje>(`${this.url}/restablecer-contrasena`, datos);
+    return this.http.post<Mensaje>(this.url + '/restablecer-contrasena', datos);
   }
 }

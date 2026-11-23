@@ -1,6 +1,6 @@
-import { Component, ChangeDetectionStrategy, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, OnInit } from '@angular/core';
 import { HttpErrorResponse } from '@angular/common/http';
-import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatButton, MatIconButton } from '@angular/material/button';
 import { MatCheckbox } from '@angular/material/checkbox';
 import { MatError, MatFormField, MatPrefix, MatSuffix } from '@angular/material/form-field';
@@ -9,10 +9,12 @@ import { MatInput } from '@angular/material/input';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { TranslatePipe } from '@ngx-translate/core';
 import { AutenticacionService } from '../../../servicios/autenticacion-service';
-import { SesionService } from '../../../servicios/sesion-service';
-import { AuthRequest } from '../../../modelo/autenticacion';
+import { AuthRequest, AuthResponse } from '../../../modelo/autenticacion';
 import { PanelAutenticacion } from '../panel-autenticacion/panel-autenticacion';
 
+/*
+ * Inicio de sesión (US-02) | END-AUTH-02: POST /autenticacion/iniciar-sesion
+ */
 @Component({
   selector: 'app-iniciar-sesion',
   imports: [
@@ -31,64 +33,73 @@ import { PanelAutenticacion } from '../panel-autenticacion/panel-autenticacion';
     PanelAutenticacion,
   ],
   templateUrl: './iniciar-sesion.html',
-  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrls: ['../autenticacion-comun.css', './iniciar-sesion.css'],
+  changeDetection: ChangeDetectionStrategy.Eager,
 })
-export class IniciarSesion {
-  private fb = inject(FormBuilder);
-  private autenticacionService = inject(AutenticacionService);
-  private router = inject(Router);
-  private sesion = inject(SesionService);
-  private ruta = inject(ActivatedRoute);
+export class IniciarSesion implements OnInit {
+  router: Router = inject(Router);
+  route: ActivatedRoute = inject(ActivatedRoute);
+  fb: FormBuilder = inject(FormBuilder);
+  autenticacionService: AutenticacionService = inject(AutenticacionService);
 
-  cargando = false;
-  mostrarContrasena = false;
-  errorClave = ''; // clave i18n del error que se muestra en la caja roja
+  formulario: FormGroup;
 
-  // US-01: al volver del registro llega ?registrado=1 y se muestra "Tu cuenta fue creada..."
-  cuentaCreada = this.ruta.snapshot.queryParamMap.has('registrado');
+  cargando: boolean = false;
+  mostrarContrasena: boolean = false;
+  cuentaCreada: boolean = false;
+  errorClave: string = ''; // clave i18n del mensaje de error
 
-  formulario = this.fb.group({
-    correo: ['', [Validators.required, Validators.email]],
-    contrasena: ['', Validators.required],
-    recuerdame: [false],
-  });
-  get correo() {
-    return this.formulario.controls.correo;
-  }
-  get contrasena() {
-    return this.formulario.controls.contrasena;
-  }
-
-  iniciarSesion(): void {
-    if (this.formulario.invalid) {
-      this.formulario.markAllAsTouched();
-      return;
-    }
-    this.cargando = true;
-    this.errorClave = '';
-    const v = this.formulario.getRawValue();
-    const datos: AuthRequest = {
-      correo: v.correo ?? '',
-      contrasena: v.contrasena ?? '',
-    };
-    this.autenticacionService.iniciarSesion(datos).subscribe({
-      next: (respuesta) => {
-        this.cargando = false;
-        this.sesion.guardarSesion(respuesta, v.recuerdame ?? false);
-        this.router.navigate(['/inicio']);
-      },
-      error: (err: HttpErrorResponse) => {
-        this.cargando = false;
-        // 401: credenciales incorrectas. 429: 5 intentos fallidos, bloqueo de 15 minutos (US-02)
-        if (err.status === 401) {
-          this.errorClave = 'autenticacion.iniciarSesion.errores.credenciales';
-        } else if (err.status === 429) {
-          this.errorClave = 'autenticacion.iniciarSesion.errores.demasiadosIntentos';
-        } else {
-          this.errorClave = 'autenticacion.iniciarSesion.errores.servidor';
-        }
-      },
+  // Formulario: correo y contraseña obligatorios (E3)
+  constructor() {
+    this.formulario = this.fb.group({
+      correo: ['', [Validators.required, Validators.email]],
+      contrasena: ['', Validators.required],
+      recuerdame: [false],
     });
+  }
+
+  // Llegada desde el registro: "Tu cuenta fue creada" (US-01 E1)
+  ngOnInit(): void {
+    this.cuentaCreada = this.route.snapshot.queryParamMap.has('registrado');
+  }
+
+  onSubmit(): void {
+    if (this.formulario.valid) {
+
+      const authRequest: AuthRequest = {
+        correo: this.formulario.value.correo,
+        contrasena: this.formulario.value.contrasena,
+      };
+      const recordar: boolean = this.formulario.value.recuerdame;
+
+      this.cargando = true;
+      this.errorClave = '';
+
+      this.autenticacionService.iniciarSesion(authRequest, recordar).subscribe({
+        next: (data: AuthResponse): void => {
+          console.log('Login exitoso');
+          this.cargando = false;
+          this.router.navigate(['/inicio']); // E1: 200 OK
+        },
+        error: (error: HttpErrorResponse) => {
+          console.error('Error en login:', error.status);
+          this.cargando = false;
+
+          switch (error.status) {
+            case 401: // E2: credenciales incorrectas
+              this.errorClave = 'autenticacion.iniciarSesion.errores.credenciales';
+              break;
+            case 429: // bloqueo de 15 min tras 5 intentos
+              this.errorClave = 'autenticacion.iniciarSesion.errores.demasiadosIntentos';
+              break;
+            default:
+              this.errorClave = 'autenticacion.iniciarSesion.errores.servidor';
+          }
+        },
+      });
+
+    } else {
+      this.formulario.markAllAsTouched(); // E3: mensajes en los campos, sin llamar al backend
+    }
   }
 }
