@@ -162,3 +162,42 @@
 :host-context(.oscuro-theme) .modal-premium-titulo-central { color: #ffffff; }
 :host-context(.oscuro-theme) .modal-premium-sub { color: var(--texto-suave); }
 :host-context(.oscuro-theme) .beneficio-linea { color: #ffffff; }
+
+/* Precio y aviso de pago simulado (el pago real se hace en Pasar a Premium) */
+.modal-premium-precio {
+  display: flex;
+  align-items: baseline;
+  justify-content: center;
+  gap: 6px;
+  margin-bottom: 12px;
+}
+
+.modal-premium-precio strong {
+  font-size: 28px;
+  color: var(--texto);
+}
+
+.modal-premium-precio span {
+  font-size: 13px;
+  color: var(--texto-suave);
+}
+
+.modal-premium-nota {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  margin: 0;
+  padding: 10px 12px;
+  border-radius: 8px;
+  background: var(--dorado-claro);
+  color: #8a6700;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.modal-premium-nota mat-icon {
+  flex-shrink: 0;
+  width: 18px;
+  height: 18px;
+  font-size: 18px;
+}

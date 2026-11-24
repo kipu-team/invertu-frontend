@@ -2,8 +2,6 @@ import { Component, inject } from '@angular/core';
 import { MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
-import { MatInputModule } from '@angular/material/input';
-import { MatFormFieldModule } from '@angular/material/form-field';
 import { Router } from '@angular/router';
 import { TranslatePipe } from '@ngx-translate/core';
 
@@ -14,8 +12,6 @@ import { TranslatePipe } from '@ngx-translate/core';
     MatDialogModule,
     MatButtonModule,
     MatIconModule,
-    MatInputModule,
-    MatFormFieldModule,
     TranslatePipe,
   ],
   templateUrl: './calendario-premium-dialogo.html',

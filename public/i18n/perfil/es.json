@@ -87,23 +87,26 @@
     "premium_modal": {
       "titulo": "Pásate a Premium para activar el Calendario Financiero",
       "descripcion": "Consulta todos los eventos programados como metas, aportes, suscripciones, desde un solo lugar.",
-      "b1": "Sube imágenes o PDFs de tus boletas",
-      "b2": "Lectura automática de montos y fechas",
-      "b3": "Categorización inteligente",
-      "datos_pago": "DATOS DE PAGO",
-      "tarjeta": "Número de tarjeta",
-      "vencimiento": "Vencimiento (MM/AA)",
-      "cvv": "CVV",
-      "nombre": "Nombre en la tarjeta",
-      "encriptacion": "Pago seguro encriptado de 256 bits. Cancela cuando quieras.",
-      "suscribirse": "Suscribirse ahora - S/ 7.90/mes →",
+      "b1": "Todos tus cobros de suscripciones y aportes a metas en un solo calendario",
+      "b2": "Toca un cobro para abrir el detalle de esa suscripción",
+      "b3": "Planifica tu mes y evita cobros sorpresa",
+      "suscribirse": "Pasar a Premium - S/ 9.90/mes →",
       "volver": "Volver"
     },
     "protegido": "Contenido protegido para cuentas Premium.",
     "meses": {
-      "0": "Enero", "1": "Febrero", "2": "Marzo", "3": "Abril",
-      "4": "Mayo", "5": "Junio", "6": "Julio", "7": "Agosto",
-      "8": "Septiembre", "9": "Octubre", "10": "Noviembre", "11": "Diciembre"
+      "0": "Enero",
+      "1": "Febrero",
+      "2": "Marzo",
+      "3": "Abril",
+      "4": "Mayo",
+      "5": "Junio",
+      "6": "Julio",
+      "7": "Agosto",
+      "8": "Septiembre",
+      "9": "Octubre",
+      "10": "Noviembre",
+      "11": "Diciembre"
     }
   }
 }
