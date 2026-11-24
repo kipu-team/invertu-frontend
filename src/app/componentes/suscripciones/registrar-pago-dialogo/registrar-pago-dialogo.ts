@@ -86,7 +86,10 @@ export class RegistrarPagoDialogo implements OnInit {
       this.suscripcionService.obtenerDetalle(this.idSuscripcion).subscribe((s) => {
         this.nombreServicio.set(s.nombreServicio);
         // Si el último cobro ya está pagado (no hay "Pago sin registrar") y hay pagos, otro pago sería del mismo ciclo
-        if (!s.pagoSinRegistrar && s.pagos.length > 0) this.ultimoPago.set(s.pagos[0].fecha);
+        if (!s.pagoSinRegistrar && s.pagos.length > 0) {
+          this.ultimoPago.set(s.pagos[0].fecha);
+          this.avisoDuplicado.set(true); // el aviso se ve apenas se abre la ventana
+        }
         // Primer pago: el backend no tiene categoría "Suscripciones", así que se propone "Servicios"
         const porDefecto =
           lista.find((c) => c.nombre === 'Suscripciones' || c.nombre === 'Servicios')
