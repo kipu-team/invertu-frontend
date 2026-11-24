@@ -76,6 +76,7 @@
       "nombre": "Nombre de la meta",
       "nombrePlaceholder": "Ej. Laptop para la universidad, Viaje de fin de ciclo...",
       "obligatorio": "(Campo obligatorio)",
+      "errorObligatorio": "Este campo es obligatorio",
       "descripcion": "Descripción (Opcional)",
       "descripcionPlaceholder": "Describe brevemente para qué es esta meta...",
       "monto": "Monto objetivo",

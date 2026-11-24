@@ -39,6 +39,7 @@ export class MetaRegistrar {
   private route = inject(ActivatedRoute);
 
   limiteAlcanzado = false;
+  intentoEnvio = false;
   idMeta: number | null = null;
 
   formulario = this.fb.group({
@@ -48,6 +49,9 @@ export class MetaRegistrar {
     frecuenciaAporte: ['SEMANAL', Validators.required],
     descripcion: [''],
   });
+  get nombre() {
+    return this.formulario.controls.nombre;
+  }
   get monto() {
     return this.formulario.controls.montoObjetivo;
   }
@@ -75,7 +79,7 @@ export class MetaRegistrar {
 
   registrar(): void {
     if (this.formulario.invalid || (this.limiteAlcanzado && !this.editando)) {
-      this.formulario.markAllAsTouched();
+      this.intentoEnvio = true;
       return;
     }
     const v = this.formulario.getRawValue();

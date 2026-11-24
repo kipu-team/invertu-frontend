@@ -76,6 +76,7 @@
       "nombre": "Goal name",
       "nombrePlaceholder": "E.g. Laptop for university, End-of-term trip...",
       "obligatorio": "(Required field)",
+      "errorObligatorio": "This field is required",
       "descripcion": "Description (Optional)",
       "descripcionPlaceholder": "Briefly describe what this goal is for...",
       "monto": "Target amount",

@@ -8,12 +8,15 @@
     <label>
       <span class="etiqueta">
         {{ 'metas.registrar.nombre' | translate }}
-        <span class="obligatorio">{{ 'metas.registrar.obligatorio' | translate }}</span>
       </span>
       <input
         formControlName="nombre"
+        [class.invalido]="intentoEnvio && nombre.invalid"
         [placeholder]="'metas.registrar.nombrePlaceholder' | translate"
       />
+      @if (intentoEnvio && nombre.errors?.['required']) {
+        <small class="error">{{ 'metas.registrar.errorObligatorio' | translate }}</small>
+      }
     </label>
 
     <label>
@@ -29,17 +32,18 @@
     <label>
       <span class="etiqueta">
         {{ 'metas.registrar.monto' | translate }}
-        @if (monto.errors?.['min']) {
+        @if (intentoEnvio && monto.invalid) {
           <mat-icon class="icono-error">warning</mat-icon>
-        } @else {
-          <span class="obligatorio">{{ 'metas.registrar.obligatorio' | translate }}</span>
         }
       </span>
-      <div class="campo-monto" [class.invalido]="monto.errors?.['min']">
+      <div class="campo-monto" [class.invalido]="intentoEnvio && monto.invalid">
         <span class="campo-monto__moneda">S/</span>
         <input type="number" formControlName="montoObjetivo" placeholder="0.00" />
       </div>
-      @if (monto.errors?.['min']) {
+      @if (intentoEnvio && monto.errors?.['required']) {
+        <small class="error">{{ 'metas.registrar.errorObligatorio' | translate }}</small>
+      }
+      @if (intentoEnvio && monto.errors?.['min']) {
         <small class="error">{{ 'metas.registrar.montoMinimo' | translate }}</small>
       }
     </label>
@@ -47,18 +51,19 @@
     <label>
       <span class="etiqueta">
         {{ 'metas.registrar.fecha' | translate }}
-        @if (fecha.errors?.['fechaPasada']) {
+        @if (intentoEnvio && fecha.invalid) {
           <mat-icon class="icono-error">warning</mat-icon>
-        } @else {
-          <span class="obligatorio">{{ 'metas.registrar.obligatorio' | translate }}</span>
         }
       </span>
       <input
         type="date"
         formControlName="fechaObjetivo"
-        [class.invalido]="fecha.errors?.['fechaPasada']"
+        [class.invalido]="intentoEnvio && fecha.invalid"
       />
-      @if (fecha.errors?.['fechaPasada']) {
+      @if (intentoEnvio && fecha.errors?.['required']) {
+        <small class="error">{{ 'metas.registrar.errorObligatorio' | translate }}</small>
+      }
+      @if (intentoEnvio && fecha.errors?.['fechaPasada']) {
         <small class="error">{{ 'metas.registrar.fechaPasada' | translate }}</small>
       }
     </label>
@@ -88,7 +93,7 @@
       type="submit"
       mat-flat-button
       class="boton-dorado acciones__registrar"
-      [disabled]="(limiteAlcanzado && !editando) || (formulario.invalid && formulario.dirty)"
+      [disabled]="limiteAlcanzado && !editando"
     >
       {{ (editando ? 'metas.editar.guardar' : 'metas.registrar.registrar') | translate }}
     </button>
