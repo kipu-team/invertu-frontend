@@ -1,7 +1,7 @@
 /*
  * Estilos generales de InvertU (para toda la app).
  * El tema de Angular Material está aparte en custom-theme.scss.
- * Las fuentes (Inter y los íconos Material Symbols) se cargan en angular.json → "styles".
+ * Las fuentes (Nunito y los íconos Material Symbols) se cargan en angular.json → "styles".
  */
 
 /*
@@ -32,7 +32,7 @@ body {
 
 body {
   margin: 0;
-  font-family: 'Inter Variable', system-ui, sans-serif;
+  font-family: 'Nunito Variable', system-ui, sans-serif;
   background: var(--fondo);
   color: var(--texto);
 }
