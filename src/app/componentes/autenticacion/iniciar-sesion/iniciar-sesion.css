@@ -1,0 +1,9 @@
+/* Solo lo propio del login. Lo común está en ../autenticacion-comun.css */
+.opciones {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  font-size: 13px;
+  color: var(--texto-suave);
+}

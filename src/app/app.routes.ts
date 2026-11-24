@@ -14,6 +14,7 @@ import { Suscripciones } from './componentes/suscripciones/suscripciones/suscrip
 import { Calendario } from './componentes/calendario/calendario/calendario';
 import { Perfil } from './componentes/perfil/perfil/perfil';
 import { PasarPremium } from './componentes/premium/pasar-premium/pasar-premium';
+import { AutenticacionGuard } from './servicios/autenticacion-guard';
 
 /*
  * TODAS las rutas de la app. Ya están creadas: nadie debería necesitar editar este archivo.
@@ -30,6 +31,7 @@ export const routes: Routes = [
   {
     path: '',
     component: Layout,
+    canActivate: [AutenticacionGuard], // solo con sesión iniciada
     children: [
       { path: '', redirectTo: 'inicio', pathMatch: 'full' },
       { path: 'inicio', component: Inicio }, // Figuras 21–23 (Mafer; chatbot: Luz)

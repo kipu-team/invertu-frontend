@@ -1,6 +1,95 @@
-<app-en-construccion
-  titulo="autenticacion.iniciarSesion.titulo"
-  responsable="Mafer"
-  figuras="7–8"
-  [pendientes]="pendientes"
-/>
+<div class="pagina">
+  <section class="panel-izquierdo">
+    <div class="encabezado">
+      <img class="logo" src="/img/logo.png" alt="InvertU" />
+    </div>
+
+    <div class="tarjeta">
+      <h1 class="titulo">{{ 'autenticacion.iniciarSesion.titulo' | translate }}</h1>
+      <p class="subtitulo">{{ 'autenticacion.iniciarSesion.subtitulo' | translate }}</p>
+
+      <!-- US-01 E1: cuenta creada -->
+      @if (cuentaCreada && !errorClave) {
+        <div class="alerta-exito">
+          <mat-icon>check_circle</mat-icon>
+          <span>{{ 'autenticacion.iniciarSesion.cuentaCreada' | translate }}</span>
+        </div>
+      }
+
+      <!-- E2: 401 | 429 | error del servidor -->
+      @if (errorClave) {
+        <div class="alerta-error">
+          <mat-icon>error</mat-icon>
+          <span>{{ errorClave | translate }}</span>
+        </div>
+      }
+
+      <form [formGroup]="formulario" (ngSubmit)="onSubmit()">
+        <label class="etiqueta" for="correo">
+          {{ 'autenticacion.iniciarSesion.correo' | translate }}
+        </label>
+        <mat-form-field appearance="outline" class="campo">
+          <mat-icon matPrefix>mail</mat-icon>
+          <input
+            matInput
+            id="correo"
+            type="email"
+            formControlName="correo"
+            [placeholder]="'autenticacion.iniciarSesion.correoPlaceholder' | translate"
+          />
+          @if (formulario.get('correo')?.hasError('required')) {
+            <mat-error>{{ 'autenticacion.iniciarSesion.errores.correoRequerido' | translate }}</mat-error>
+          } @else if (formulario.get('correo')?.hasError('email')) {
+            <mat-error>{{ 'autenticacion.iniciarSesion.errores.correoInvalido' | translate }}</mat-error>
+          }
+        </mat-form-field>
+
+        <label class="etiqueta" for="contrasena">
+          {{ 'autenticacion.iniciarSesion.contrasena' | translate }}
+        </label>
+        <mat-form-field appearance="outline" class="campo">
+          <mat-icon matPrefix>key</mat-icon>
+          <input
+            matInput
+            id="contrasena"
+            [type]="mostrarContrasena ? 'text' : 'password'"
+            formControlName="contrasena"
+          />
+          <button
+            mat-icon-button
+            matSuffix
+            type="button"
+            (click)="mostrarContrasena = !mostrarContrasena"
+          >
+            <mat-icon>{{ mostrarContrasena ? 'visibility' : 'visibility_off' }}</mat-icon>
+          </button>
+          @if (formulario.get('contrasena')?.hasError('required')) {
+            <mat-error>{{ 'autenticacion.iniciarSesion.errores.contrasenaRequerida' | translate }}</mat-error>
+          }
+        </mat-form-field>
+
+        <div class="opciones">
+          <mat-checkbox formControlName="recuerdame">
+            {{ 'autenticacion.iniciarSesion.recuerdame' | translate }}
+          </mat-checkbox>
+          <a routerLink="/recuperar-contrasena" class="enlace">
+            {{ 'autenticacion.iniciarSesion.olvidaste' | translate }}
+          </a>
+        </div>
+
+        <button mat-flat-button type="submit" class="boton-principal" [disabled]="cargando">
+          {{ 'autenticacion.iniciarSesion.ingresar' | translate }}
+        </button>
+      </form>
+
+      <p class="pie-tarjeta">
+        {{ 'autenticacion.iniciarSesion.sinCuenta' | translate }}
+        <a routerLink="/registro" class="enlace">
+          {{ 'autenticacion.iniciarSesion.registrate' | translate }}
+        </a>
+      </p>
+    </div>
+  </section>
+
+  <app-panel-autenticacion />
+</div>

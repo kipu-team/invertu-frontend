@@ -1,5 +1,8 @@
-import { Service } from '@angular/core';
-import { Observable, of, throwError } from 'rxjs';
+import { inject, Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { map, Observable } from 'rxjs';
+import { environment } from '../../environments/environment';
+import { SesionService } from './sesion-service';
 import {
   AuthRequest,
   AuthResponse,
@@ -11,57 +14,47 @@ import {
   ValidarTokenResponse,
 } from '../modelo/autenticacion';
 import { Mensaje } from '../modelo/comun';
-import { CONTRASENA_PRUEBA, CORREO_PRUEBA, PERFIL } from './datos-prueba/datos-prueba';
 
-/**
- * Autenticación (backend: /api/v1/autenticacion).
- * Por ahora con datos de prueba. Usuario de prueba: sofia@correo.com / Clave123*
+/*
+ * Autenticación | END-AUTH-01 a END-AUTH-05: /api/v1/autenticacion
  */
-@Service()
+@Injectable({
+  providedIn: 'root',
+})
 export class AutenticacionService {
+  private url: string = environment.apiUrl + '/autenticacion';
+  private http: HttpClient = inject(HttpClient);
+  private sesionService: SesionService = inject(SesionService);
+
+  constructor() { }
+
+  // END-AUTH-01: registro (US-01)
   registrar(datos: RegistroRequest): Observable<RegistroResponse> {
-    // El backend responde 409 si el correo ya existe (Figuras 17 y 19)
-    if (datos.correo === CORREO_PRUEBA) {
-      return throwError(() => ({ status: 409, error: { error: 'El correo ya está registrado' } }));
-    }
-    return of({ idEstudiante: 2, nombres: datos.nombres, correo: datos.correo, rol: 'ROLE_FREE' });
+    return this.http.post<RegistroResponse>(this.url + '/registro', datos);
   }
 
-  iniciarSesion(datos: AuthRequest): Observable<AuthResponse> {
-    // El backend responde 401 si el correo o la contraseña son incorrectos (Figura 8)
-    if (datos.correo !== CORREO_PRUEBA || datos.contrasena !== CONTRASENA_PRUEBA) {
-      return throwError(() => ({
-        status: 401,
-        error: { error: 'Correo o contraseña incorrectos' },
-      }));
-    }
-    return of({
-      token: 'token-de-prueba',
-      tipo: 'Bearer',
-      expiraEn: 86400,
-      estudiante: {
-        idEstudiante: 1,
-        nombres: PERFIL.nombres,
-        rol: 'ROLE_FREE',
-        tema: PERFIL.tema,
-        idioma: PERFIL.idioma,
-      },
-    });
+  // END-AUTH-02: login y almacenamiento del token (US-02)
+  iniciarSesion(datos: AuthRequest, recordar: boolean): Observable<AuthResponse> {
+    return this.http.post<AuthResponse>(this.url + '/iniciar-sesion', datos).pipe(
+      map((respuesta) => {
+        this.sesionService.guardarSesion(respuesta, recordar);
+        return respuesta;
+      }),
+    );
   }
 
+  // END-AUTH-03: envío del enlace de recuperación (US-03)
   recuperarContrasena(datos: RecuperarContrasenaRequest): Observable<Mensaje> {
-    return of({ mensaje: 'Si el correo está registrado, te enviamos un enlace de recuperación' });
+    return this.http.post<Mensaje>(this.url + '/recuperar-contrasena', datos);
   }
 
-  /** Con el token "expirado" simula un enlace vencido (Figura 13). */
+  // END-AUTH-04: validación del enlace (US-04)
   validarToken(datos: ValidarTokenRequest): Observable<ValidarTokenResponse> {
-    if (datos.token === 'expirado') {
-      return of({ valido: false, mensaje: 'El enlace expiró o no es válido' });
-    }
-    return of({ valido: true, mensaje: 'Token válido' });
+    return this.http.post<ValidarTokenResponse>(this.url + '/restablecer-contrasena/validar', datos);
   }
 
+  // END-AUTH-05: nueva contraseña (US-04)
   restablecerContrasena(datos: RestablecerContrasenaRequest): Observable<Mensaje> {
-    return of({ mensaje: 'Contraseña restablecida' });
+    return this.http.post<Mensaje>(this.url + '/restablecer-contrasena', datos);
   }
 }

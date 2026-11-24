@@ -1,16 +1,99 @@
-import { Component, ChangeDetectionStrategy } from '@angular/core';
-import { EnConstruccion } from '../../compartidos/en-construccion/en-construccion';
+import { Component, ChangeDetectionStrategy, inject } from '@angular/core';
+import { HttpErrorResponse } from '@angular/common/http';
+import { MatButton } from '@angular/material/button';
+import { MatIcon } from '@angular/material/icon';
+import { MatDialog } from '@angular/material/dialog';
+import { RouterLink } from '@angular/router';
+import { TranslatePipe } from '@ngx-translate/core';
+import { PerfilService } from '../../../servicios/perfil-service';
+import { SesionService } from '../../../servicios/sesion-service';
+import { PagoSimuladoDialogo } from '../pago-simulado-dialogo/pago-simulado-dialogo';
 
+/** Fila de la comparación: qué tiene cada plan (true/false o una clave de texto, ej. "Hasta 3") */
+interface Caracteristica {
+  clave: string;
+  free: boolean | string;
+  premium: boolean | string;
+}
+
+/**
+ * US-39: pasar a Premium en versión de prueba (Figura 98).
+ * Comparación Free vs Premium con los límites y precios del backend (tabla plan):
+ * Free S/ 0.00 con hasta 3 metas activas y 3 recordatorios; Premium S/ 9.90 sin límites.
+ * El pago es simulado: no se cobra nada. El backend cambia el rol a ROLE_PREMIUM
+ * y devuelve un token nuevo (cuando se conecte la API en el Sprint 4, hay que guardarlo).
+ */
 @Component({
   selector: 'app-pasar-premium',
-  imports: [EnConstruccion],
+  imports: [TranslatePipe, RouterLink, MatButton, MatIcon],
   templateUrl: './pasar-premium.html',
   changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './pasar-premium.css',
 })
 export class PasarPremium {
-  pendientes = [
-    'Beneficios del plan y botón de prueba gratuita → perfilService.pasarPremium()',
-    'Después: sesion.cambiarRol(respuesta.rol) y volver a /inicio',
+  private perfilService = inject(PerfilService);
+  sesion = inject(SesionService);
+  private dialog = inject(MatDialog);
+
+  cargando = false;
+  activado = false; // true justo después de activar la prueba
+  errorClave = '';
+
+  /** Solo funciones que existen hoy en InvertU (los "solo Premium" tienen @PreAuthorize en el backend) */
+  readonly caracteristicas: Caracteristica[] = [
+    { clave: 'movimientos', free: true, premium: true },
+    { clave: 'dashboard', free: true, premium: true },
+    { clave: 'suscripciones', free: true, premium: true },
+    {
+      clave: 'metas',
+      free: 'premium.pasar.limites.hasta3',
+      premium: 'premium.pasar.limites.sinLimite',
+    },
+    {
+      clave: 'recordatorios',
+      free: 'premium.pasar.limites.hasta3',
+      premium: 'premium.pasar.limites.sinLimite',
+    },
+    { clave: 'fechaEstimada', free: false, premium: true },
+    { clave: 'calendario', free: false, premium: true },
+    { clave: 'comprobante', free: false, premium: true },
+    { clave: 'categorias', free: false, premium: true },
+    { clave: 'alertaSaldo', free: false, premium: true },
+    { clave: 'chatbot', free: false, premium: true },
   ];
+
+  /** Para el HTML: saber si el valor es un texto (límite) o un sí/no */
+  esTexto(valor: boolean | string): valor is string {
+    return typeof valor === 'string';
+  }
+
+  // T-144: primero el pago simulado; si la tarjeta es válida, recién se activa Premium
+  abrirPago(): void {
+    this.errorClave = '';
+    this.dialog
+      .open(PagoSimuladoDialogo, { width: '460px', maxWidth: '95vw' })
+      .afterClosed()
+      .subscribe((pagado) => {
+        if (pagado) this.activarPrueba();
+      });
+  }
+
+  private activarPrueba(): void {
+    this.cargando = true;
+    this.errorClave = '';
+    this.perfilService.pasarPremium().subscribe({
+      next: (respuesta) => {
+        this.cargando = false;
+        // T-117: el backend manda un token nuevo con ROLE_PREMIUM; se guarda para las siguientes peticiones
+        this.sesion.actualizarToken(respuesta.token, respuesta.rol);
+        this.activado = true;
+      },
+      error: (err: HttpErrorResponse) => {
+        this.cargando = false;
+        // 400: "Ya cuentas con el plan Premium"
+        this.errorClave =
+          err.status === 400 ? 'premium.pasar.errores.yaPremium' : 'premium.pasar.errores.servidor';
+      },
+    });
+  }
 }

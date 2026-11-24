@@ -1,5 +1,148 @@
 {
   "suscripciones": {
-    "titulo": "Mis suscripciones"
+    "titulo": "Suscripciones",
+    "nueva": "Nueva suscripción",
+    "resumen": {
+      "activas": "Activas",
+      "canceladas": "Canceladas",
+      "proximas": "Próximas renovaciones"
+    },
+    "filtros": {
+      "TODAS": "Todas",
+      "ACTIVA": "Activas",
+      "CANCELADA": "Canceladas"
+    },
+    "estados": {
+      "ACTIVA": "Activa",
+      "CANCELADA": "Cancelada",
+      "SIN_PAGO": "Pago sin registrar"
+    },
+    "frecuencias": {
+      "SEMANAL": "Semanal",
+      "MENSUAL": "Mensual",
+      "TRIMESTRAL": "Trimestral",
+      "SEMESTRAL": "Semestral",
+      "ANUAL": "Anual"
+    },
+    "proximoCobro": "Próximo cobro",
+    "acciones": {
+      "verDetalles": "Ver detalles",
+      "registrarPago": "Registrar pago",
+      "reactivar": "Reactivar",
+      "cancelar": "Cancelar",
+      "registrarPendiente": "Registrar pago pendiente"
+    },
+    "vacio": {
+      "titulo": "Aún no tienes suscripciones registradas.",
+      "texto": "Registra una nueva suscripción para ver tu lista de suscripciones.",
+      "filtro": "No tienes suscripciones en esta categoría."
+    },
+    "detalle": {
+      "cerrar": "Cerrar detalle",
+      "categoria": "Categoría",
+      "alertaSaldo": "Alerta de saldo insuficiente",
+      "monto": "Monto del cobro",
+      "renovacion": "Frecuencia de renovación",
+      "frecuencia": "Frecuencia",
+      "recordatorio": "Recordatorio",
+      "diasAntes": "{{dias}} días antes",
+      "desactivado": "Desactivado",
+      "descripcion": "Descripción",
+      "historial": "Historial de pagos recientes",
+      "fecha": "Fecha",
+      "montoPago": "Monto",
+      "estado": "Estado",
+      "pagado": "Pagado",
+      "sinPagos": "Aún no hay pagos registrados.",
+      "cancelar": "Cancelar suscripción",
+      "editar": "Editar suscripción"
+    },
+    "formulario": {
+      "titulo": "Registrar nueva suscripción",
+      "subtitulo": "Ingresa los detalles para mantener el control",
+      "nombre": "Nombre del servicio",
+      "nombrePlaceholder": "Ej. Amazon Prime, Gym, etc.",
+      "monto": "Monto (S/)",
+      "frecuencia": "Frecuencia",
+      "fecha": "Fecha del próximo cobro",
+      "descripcion": "Descripción (opcional)",
+      "descripcionPlaceholder": "Agregar notas sobre la renovación...",
+      "guardar": "Guardar suscripción",
+      "cancelar": "Cancelar",
+      "tituloEditar": "Editar suscripción",
+      "subtituloEditar": "Modifica los datos de tu suscripción",
+      "guardarCambios": "Guardar cambios",
+      "errores": {
+        "nombre": "Ingresa el nombre del servicio",
+        "monto": "El monto debe ser mayor a S/ 0.00",
+        "fecha": "Ingresa la próxima fecha de cobro",
+        "fechaPasada": "La próxima fecha de cobro no puede ser anterior a la fecha actual"
+      }
+    },
+    "mensajes": {
+      "cerrar": "Cerrar",
+      "registradaTitulo": "¡Suscripción registrada!",
+      "registradaTexto": "Tu suscripción se agregó a la lista de activas.",
+      "continuar": "Continuar",
+      "errorTitulo": "Error",
+      "reintentar": "Intentar de nuevo",
+      "editadaTitulo": "¡Cambios guardados!",
+      "editadaTexto": "Los datos de tu suscripción se actualizaron.",
+      "canceladaTitulo": "¡Suscripción cancelada!",
+      "canceladaTexto": "La suscripción pasó a la sección Canceladas.",
+      "reactivadaTitulo": "¡Suscripción reactivada!",
+      "reactivadaTexto": "Volvió a la sección Activas con su nueva fecha de cobro.",
+      "pagoTitulo": "¡Pago registrado!",
+      "pagoTexto": "Pago registrado correctamente.",
+      "errorTexto": "No se pudo guardar. Revisa tu conexión e inténtalo de nuevo."
+    },
+    "confirmarCambios": {
+      "titulo": "¿Guardar cambios?",
+      "mensaje": "Tienes cambios sin guardar en tu suscripción. ¿Qué deseas hacer?",
+      "descartar": "Descartar",
+      "guardar": "Guardar"
+    },
+    "cancelar": {
+      "titulo": "¿Cancelar suscripción?",
+      "mensaje": "La suscripción pasará a la sección Canceladas y dejarás de recibir sus recordatorios. Podrás reactivarla después.",
+      "confirmar": "Sí, cancelar",
+      "volver": "Volver"
+    },
+    "reactivar": {
+      "titulo": "Reactivar {{nombre}}",
+      "mensaje": "Elige la nueva fecha del próximo cobro para volver a activar la suscripción."
+    },
+    "recordatorio": {
+      "titulo": "Recordarme cancelar antes de renovar",
+      "texto": "Te avisaremos por correo antes de que se renueve automáticamente.",
+      "anticipacion": "Avisarme",
+      "dias": {
+        "1": "Un día antes",
+        "3": "3 días antes",
+        "7": "7 días antes"
+      },
+      "free": "Con el plan Free puedes activar recordatorios en hasta 3 suscripciones.",
+      "limite": "Alcanzaste el límite de 3 recordatorios del plan Free. Pásate a Premium para activar recordatorios en todas tus suscripciones."
+    },
+    "alerta": {
+      "soloPremium": "La alerta de saldo insuficiente es exclusiva del plan Premium: te avisamos si tu saldo no alcanza para el próximo cobro."
+    },
+    "pago": {
+      "titulo": "Registrar pago de {{nombre}}",
+      "texto": "Se guardará como un gasto fijo en tus movimientos.",
+      "fecha": "Fecha del pago",
+      "categoria": "Categoría",
+      "medioPago": "Medio de pago (opcional)",
+      "sinMedio": "Sin especificar",
+      "descripcion": "Pago {{nombre}}",
+      "errores": {
+        "fecha": "Ingresa la fecha del pago",
+        "fechaFutura": "La fecha no puede ser futura",
+        "categoria": "Selecciona una categoría"
+      },
+      "aviso": "Ya pasó un cobro de esta suscripción y aún no lo registras. Regístralo para que tu saldo esté al día.",
+      "duplicado": "Ya registraste un pago de {{nombre}} el {{fecha}}. ¿Quieres registrar otro?",
+      "registrarIgual": "Registrar de todos modos"
+    }
   }
 }

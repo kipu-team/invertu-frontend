@@ -1,17 +1,187 @@
-import { Component, ChangeDetectionStrategy } from '@angular/core';
-import { EnConstruccion } from '../../compartidos/en-construccion/en-construccion';
-
+import { Component, ChangeDetectionStrategy, OnInit, inject } from '@angular/core';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
+import { MetaService } from '../../../servicios/meta-service';
+import { MetaDetalle as MetaDetalleDatos, Proyeccion } from '../../../modelo/meta';
+import { SesionService } from '../../../servicios/sesion-service';
+import { TranslatePipe, TranslateService } from '@ngx-translate/core';
+import { MatButton, MatIconButton } from '@angular/material/button';
+import { MatIcon } from '@angular/material/icon';
+import { DatePipe, DecimalPipe } from '@angular/common';
+import { MatProgressSpinner } from '@angular/material/progress-spinner';
+import { AporteService } from '../../../servicios/aporte-service';
+import { Aporte } from '../../../modelo/aporte';
+import { MatDialog } from '@angular/material/dialog';
+import { AporteDialogo } from '../aporte-dialogo/aporte-dialogo';
+import { MetaCumplidaDialogo } from '../meta-cumplida-dialogo/meta-cumplida-dialogo';
+import { ExtenderFechaDialogo } from '../extender-fecha-dialogo/extender-fecha-dialogo';
+import {
+  ConfirmarDialogo,
+  DatosConfirmacion,
+} from '../../compartidos/confirmar-dialogo/confirmar-dialogo';
 @Component({
   selector: 'app-meta-detalle',
-  imports: [EnConstruccion],
+  imports: [
+    TranslatePipe,
+    DatePipe,
+    DecimalPipe,
+    MatButton,
+    MatIconButton,
+    MatIcon,
+    MatProgressSpinner,
+    RouterLink,
+  ],
   templateUrl: './meta-detalle.html',
   changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './meta-detalle.css',
 })
-export class MetaDetalle {
-  pendientes = [
-    'Detalle con progreso, historial de aportes y proyección (Premium; Free → bloqueada, 75)',
-    'Registrar aporte (77–79)',
-    'Meta vencida: extender fecha (82–84) o cancelar (85–86); eliminar (87)',
-  ];
+export class MetaDetalle implements OnInit {
+  private route = inject(ActivatedRoute);
+  private router = inject(Router);
+  private metaService = inject(MetaService);
+  private aporteService = inject(AporteService);
+  sesion = inject(SesionService);
+  private dialog = inject(MatDialog);
+  private traductor = inject(TranslateService);
+  errorLimite = false;
+  id = 0;
+  meta: MetaDetalleDatos | null = null;
+  aportes: Aporte[] = [];
+  proyeccion: Proyeccion | null = null;
+  ngOnInit() {
+    this.route.params.subscribe((data) => {
+      this.id = +data['id'];
+      this.cargarMeta();
+      this.cargarAportes();
+      this.cargarProyeccion();
+    });
+  }
+
+  private cargarMeta() {
+    this.metaService.obtenerDetalle(this.id).subscribe({
+      next: (data) => {
+        this.meta = data;
+      },
+    });
+  }
+  mes(fecha: string): string {
+    return fecha.slice(5, 7);
+  }
+
+  anio(fecha: string): string {
+    return fecha.slice(0, 4);
+  }
+
+  private cargarAportes() {
+    this.aporteService.listar(this.id).subscribe({
+      next: (data) => {
+        this.aportes = data;
+      },
+    });
+  }
+
+  private cargarProyeccion() {
+    if (!this.sesion.esPremium()) return;
+    this.metaService.obtenerProyeccion(this.id).subscribe({
+      next: (data) => {
+        this.proyeccion = data;
+      },
+    });
+  }
+  aportar() {
+    if (!this.meta) return;
+    this.dialog
+      .open<AporteDialogo, MetaDetalleDatos, Aporte>(AporteDialogo, { data: this.meta })
+      .afterClosed()
+      .subscribe((aporte) => {
+        if (!aporte) return;
+        this.cargarMeta();
+        this.cargarAportes();
+        this.cargarProyeccion();
+        if (aporte.estadoMeta === 'CUMPLIDA') {
+          this.dialog.open(MetaCumplidaDialogo);
+        }
+      });
+  }
+
+  eliminarAporte(aporte: Aporte) {
+    this.dialog
+      .open<ConfirmarDialogo, DatosConfirmacion, boolean>(ConfirmarDialogo, {
+        data: {
+          titulo: 'metas.aporte.eliminarTitulo',
+          mensaje: 'metas.aporte.eliminarMensaje',
+          textoConfirmar: 'metas.eliminar.confirmar',
+          peligro: true,
+        },
+      })
+      .afterClosed()
+      .subscribe((confirmo) => {
+        if (!confirmo) return;
+        this.aporteService.eliminar(this.id, aporte.idAporte).subscribe(() => {
+          this.cargarMeta();
+          this.cargarAportes();
+          this.cargarProyeccion();
+        });
+      });
+  }
+
+  extender() {
+    if (!this.meta) return;
+    this.dialog
+      .open<ExtenderFechaDialogo, void, string>(ExtenderFechaDialogo)
+      .afterClosed()
+      .subscribe((fecha) => {
+        if (!fecha) return;
+        this.metaService.extenderFecha(this.id, { nuevaFechaObjetivo: fecha }).subscribe(() => {
+          this.cargarMeta();
+          this.cargarProyeccion();
+        });
+      });
+  }
+
+  cancelar() {
+    if (!this.meta) return;
+    this.dialog
+      .open<ConfirmarDialogo, DatosConfirmacion, boolean>(ConfirmarDialogo, {
+        data: {
+          titulo: this.traductor.instant('metas.cancelar.titulo', { nombre: this.meta.nombre }),
+          mensaje: 'metas.cancelar.mensaje',
+          textoCancelar: 'metas.cancelar.volver',
+          textoConfirmar: 'metas.detalle.cancelar',
+          peligro: true,
+        },
+      })
+      .afterClosed()
+      .subscribe((confirmo) => {
+        if (!confirmo) return;
+        this.metaService.cancelar(this.id).subscribe(() => this.cargarMeta());
+      });
+  }
+
+  reactivar() {
+    this.errorLimite = false;
+    this.metaService.reactivar(this.id).subscribe({
+      next: () => this.cargarMeta(),
+      error: (e) => {
+        if (e.status === 403) this.errorLimite = true;
+      },
+    });
+  }
+
+  eliminar() {
+    if (!this.meta) return;
+    this.dialog
+      .open<ConfirmarDialogo, DatosConfirmacion, boolean>(ConfirmarDialogo, {
+        data: {
+          titulo: this.traductor.instant('metas.eliminar.titulo', { nombre: this.meta.nombre }),
+          mensaje: 'metas.eliminar.mensaje',
+          textoConfirmar: 'metas.eliminar.confirmar',
+          peligro: true,
+        },
+      })
+      .afterClosed()
+      .subscribe((confirmo) => {
+        if (!confirmo) return;
+        this.metaService.eliminar(this.id).subscribe(() => this.router.navigate(['/metas']));
+      });
+  }
 }

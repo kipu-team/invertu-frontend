@@ -1,5 +1,166 @@
 {
   "movimientos": {
-    "titulo": "Mis movimientos"
+    "etiqueta": "Movimientos",
+    "titulo": "Mis movimientos",
+    "contador": "{{cantidad}} movimientos registrados",
+    "contadorUno": "{{cantidad}} movimiento registrado",
+    "mesAnterior": "Mes anterior",
+    "mesSiguiente": "Mes siguiente",
+    "suscripcion": "Suscripción",
+    "buscar": "Buscar movimiento...",
+    "filtrar": "Filtrar",
+    "meses": {
+      "1": "Enero",
+      "2": "Febrero",
+      "3": "Marzo",
+      "4": "Abril",
+      "5": "Mayo",
+      "6": "Junio",
+      "7": "Julio",
+      "8": "Agosto",
+      "9": "Septiembre",
+      "10": "Octubre",
+      "11": "Noviembre",
+      "12": "Diciembre"
+    },
+    "columnas": {
+      "fecha": "Fecha",
+      "descripcion": "Descripción",
+      "categoria": "Categoría",
+      "tipo": "Tipo",
+      "monto": "Monto"
+    },
+    "clasificacion": {
+      "FIJO": "Fijo",
+      "VARIABLE": "Variable"
+    },
+    "tipo": {
+      "INGRESO": "Ingreso",
+      "GASTO": "Gasto"
+    },
+    "medios": {
+      "EFECTIVO": "Efectivo",
+      "TRANSFERENCIA": "Transferencia",
+      "TARJETA_DEBITO": "Tarjeta de débito",
+      "TARJETA_CREDITO": "Tarjeta de crédito",
+      "BILLETERA_DIGITAL": "Billetera digital",
+      "OTRO": "Otro"
+    },
+    "filtros": {
+      "titulo": "Filtrar movimientos",
+      "criterios": "{{cantidad}} criterios",
+      "criteriosUno": "{{cantidad}} criterio",
+      "tipo": "Tipo",
+      "clasificacion": "Clasificación",
+      "categoria": "Categoría",
+      "medioPago": "Medio de pago",
+      "todos": "Todos",
+      "todas": "Todas",
+      "limpiar": "Limpiar filtros",
+      "aplicar": "Aplicar filtros"
+    },
+    "vacio": {
+      "titulo": "No hay movimientos registrados en este periodo",
+      "descripcion": "Registra tu primer movimiento desde el formulario lateral para comenzar a monitorear tus finanzas."
+    },
+    "sinResultados": {
+      "titulo": "No se encontraron movimientos",
+      "descripcion": "No se encontraron movimientos que coincidan con tu búsqueda. Revisa la ortografía o intenta buscar otro término.",
+      "limpiar": "Limpiar búsqueda"
+    },
+    "registro": {
+      "titulo": "Registrar movimiento",
+      "manual": "Registrar manualmente",
+      "automatico": "Registro automático",
+      "premium": "Premium",
+      "autoDescripcion": "Registra tus movimientos automáticamente con una foto de tu boleta o comprobante.",
+      "autoDescripcionFree": "Registra tus movimientos automáticamente con una foto de tu boleta o comprobante. Disponible en Premium.",
+      "subirComprobante": "Subir comprobante",
+      "pasarPremium": "Pasar a Premium",
+      "ayuda": "Ingresa los datos de tu movimiento manualmente",
+      "volver": "Volver",
+      "tituloManual": "Registrar movimiento manual",
+      "tituloIa": "Registro con comprobante"
+    },
+    "manual": {
+      "descripcion": "Descripción",
+      "descripcionPlaceholder": "Ingrese una descripción corta",
+      "fecha": "Fecha",
+      "monto": "Monto",
+      "categoria": "Categoría",
+      "clasificacion": "Clasificación",
+      "medio": "Medio de pago",
+      "medioPago": "Medio de pago (opcional)",
+      "medioIngreso": "Medio de ingreso (opcional)",
+      "suscripcion": "Suscripción asociada (opcional)",
+      "suscripcionResumen": "Suscripción asociada",
+      "ninguno": "Ninguno",
+      "ninguna": "Ninguna",
+      "registrar": "Registrar",
+      "exitoIngreso": "¡Ingreso registrado correctamente!",
+      "exitoGasto": "¡Gasto registrado correctamente!",
+      "exitoIngresoDetalle": "Tu ingreso de S/ {{monto}} ha sido registrado.",
+      "exitoGastoDetalle": "Tu gasto de S/ {{monto}} ha sido registrado.",
+      "registrarOtro": "Registrar otro",
+      "verMovimientos": "Listo",
+      "errores": {
+        "descripcion": "Ingresa una descripción",
+        "fecha": "Ingresa una fecha",
+        "fechaInvalida": "Ingresa una fecha válida (DD/MM/AAAA)",
+        "fechaFutura": "La fecha no puede ser futura",
+        "monto": "Ingresa un monto",
+        "montoMinimo": "El monto debe ser mayor a S/ 0.00",
+        "montoDecimales": "El monto admite como máximo dos decimales",
+        "categoria": "Selecciona una categoría"
+      }
+    },
+    "ia": {
+      "activa": "IA activa",
+      "subirTitulo": "Sube una foto o PDF de tu boleta",
+      "formatos": "JPG, PNG o PDF de hasta 5 MB",
+      "seleccionar": "Seleccionar archivo",
+      "analizando": "Analizando tu comprobante...",
+      "errorArchivo": "Solo se aceptan archivos JPG, PNG o PDF de hasta 5 MB",
+      "errorIlegible": "No pudimos leer tu comprobante",
+      "errorIlegibleDetalle": "Completa los datos manualmente o intenta con una foto más clara.",
+      "otroArchivo": "Intentar subir otro archivo",
+      "manual": "Registrar manualmente",
+      "manualDetalle": "O completa los campos en el formulario estándar",
+      "consejoTitulo": "Consejo:",
+      "consejo": "Asegúrate de que la foto esté bien iluminada y el texto sea completamente legible.",
+      "procesado": "Procesado con éxito",
+      "montoDetectado": "Monto detectado",
+      "detectado": "Datos detectados automáticamente por IA",
+      "confirmar": "Confirmar registro",
+      "cancelar": "Cancelar"
+    },
+    "detalle": {
+      "titulo": "Detalle del movimiento",
+      "montoDebitado": "Monto debitado",
+      "montoRecibido": "Monto recibido",
+      "suscripcion": "Suscripción",
+      "fecha": "Fecha",
+      "categoria": "Categoría",
+      "tipo": "Tipo",
+      "clasificacion": "Clasificación",
+      "medio": "Medio de pago",
+      "verComprobante": "Ver comprobante",
+      "editar": "Editar"
+    },
+    "editar": {
+      "titulo": "Editar movimiento",
+      "guardar": "Guardar cambios"
+    },
+    "eliminar": {
+      "titulo": "¿Eliminar este movimiento?",
+      "mensaje": "Esta acción no se puede deshacer y el monto se descontará de tus totales.",
+      "confirmar": "Eliminar"
+    },
+    "errores": {
+      "noEncontrado": "No encontramos este movimiento. Puede que ya se haya eliminado.",
+      "servidor": "No pudimos completar la acción. Inténtalo de nuevo en unos minutos.",
+      "cargar": "No pudimos cargar tus movimientos. Inténtalo de nuevo.",
+      "premium": "Esta función es solo para usuarios Premium."
+    }
   }
 }

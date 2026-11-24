@@ -1,5 +1,106 @@
 {
   "inicio": {
-    "titulo": "Home"
+    "titulo": "Home",
+    "orientacion": {
+      "saludo": "Hi, {{nombre}}!",
+      "titulo": "Take control of your university finances",
+      "descripcion": "We know managing fixed and variable income while studying can be a challenge. InvertU helps you organize your budget in a simple, visual way designed for your academic life.",
+      "imagenAlt": "Books, coins and a growing plant",
+      "primerosPasos": "Your first steps:",
+      "paso": "Step {{numero}}",
+      "pendiente": "0% completed",
+      "completado": "100% completed",
+      "listo": "Done",
+      "pasos": {
+        "movimiento": {
+          "titulo": "Record your first transaction",
+          "descripcion": "Add your allowance, your scholarship stipend or your photocopy expenses to see your monthly indicators and charts.",
+          "boton": "Record income/expense"
+        },
+        "meta": {
+          "titulo": "Create your first savings goal",
+          "descripcion": "A new laptop, the semester or a trip? Set how much you need and track your progress with each contribution.",
+          "boton": "Create savings goal"
+        }
+      }
+    },
+    "subtitulo": "See the status of your income, expenses and savings for the selected month.",
+    "meses": {
+      "1": "January",
+      "2": "February",
+      "3": "March",
+      "4": "April",
+      "5": "May",
+      "6": "June",
+      "7": "July",
+      "8": "August",
+      "9": "September",
+      "10": "October",
+      "11": "November",
+      "12": "December"
+    },
+    "mesesCortos": {
+      "1": "Jan",
+      "2": "Feb",
+      "3": "Mar",
+      "4": "Apr",
+      "5": "May",
+      "6": "Jun",
+      "7": "Jul",
+      "8": "Aug",
+      "9": "Sep",
+      "10": "Oct",
+      "11": "Nov",
+      "12": "Dec"
+    },
+    "selectorMes": {
+      "etiqueta": "Choose month",
+      "anioAnterior": "Previous year",
+      "anioSiguiente": "Next year"
+    },
+    "vacio": {
+      "titulo": "No transactions found in {{mes}} {{anio}}",
+      "boton": "View current month"
+    },
+    "mesesEnFrase": {
+      "1": "January",
+      "2": "February",
+      "3": "March",
+      "4": "April",
+      "5": "May",
+      "6": "June",
+      "7": "July",
+      "8": "August",
+      "9": "September",
+      "10": "October",
+      "11": "November",
+      "12": "December"
+    },
+    "indicadores": {
+      "ingresos": "Income for the period",
+      "gastos": "Expenses for the period",
+      "fijos": "Fixed: {{pct}}%",
+      "variables": "Variable: {{pct}}%",
+      "tasa": "{{pct}}% of your income",
+      "aportes": "Goal contributions",
+      "aportesNota": "Contributions to your goals this month",
+      "disponible": "Available",
+      "disponibleNota": "Income minus expenses and goal contributions",
+      "disponibleNegativo": "Your expenses and contributions exceed your income this month",
+      "ahorroTotal": "Total savings",
+      "ahorroTotalNota": "Accumulated in your active and completed goals"
+    },
+    "graficos": {
+      "semanal": "Income vs expenses by week",
+      "semanalDescripcion": "Comparison of your income and expenses in each week of the selected month.",
+      "ingresos": "Income",
+      "gastos": "Expenses",
+      "semana": "Week {{numero}}",
+      "gastosCategoria": "Expenses by category",
+      "ingresosFuente": "Income by source",
+      "total": "Total",
+      "sinInformacion": "No information available"
+    },
+    "mesFuturo": "You can only view the current month or previous months"
   }
 }

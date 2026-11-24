@@ -1,16 +1,111 @@
 {
   "autenticacion": {
     "iniciarSesion": {
-      "titulo": "Inicia sesión"
+      "titulo": "¡Hola de nuevo!",
+      "subtitulo": "Ingresa tus credenciales para acceder a tu cuenta de estudiante.",
+      "correo": "Correo electrónico",
+      "correoPlaceholder": "correo@ejemplo.com",
+      "contrasena": "Contraseña",
+      "recuerdame": "Recordarme",
+      "olvidaste": "¿Olvidaste tu contraseña?",
+      "ingresar": "Iniciar sesión",
+      "sinCuenta": "¿No tienes cuenta?",
+      "registrate": "Regístrate",
+      "errores": {
+        "correoRequerido": "Este campo es obligatorio",
+        "correoInvalido": "Ingresa un correo válido",
+        "contrasenaRequerida": "Este campo es obligatorio",
+        "credenciales": "Correo o contraseña incorrectos",
+        "servidor": "No se pudo conectar con el servidor. Intenta de nuevo.",
+        "demasiadosIntentos": "Demasiados intentos fallidos. Intenta nuevamente en 15 minutos"
+      },
+      "cuentaCreada": "Tu cuenta fue creada. Inicia sesión para continuar"
     },
     "registro": {
-      "titulo": "Crea tu cuenta"
+      "titulo": "Crea tu cuenta",
+      "subtitulo": "Regístrate con tu correo para empezar a ordenar tus finanzas.",
+      "nombres": "Nombres",
+      "nombresPlaceholder": "Ej. María",
+      "apellidos": "Apellidos",
+      "apellidosPlaceholder": "Ej. Gonzales",
+      "confirmar": "Confirmar contraseña",
+      "verContrasena": "Mostrar u ocultar contraseña",
+      "crear": "Crear cuenta",
+      "yaTienes": "¿Ya tienes cuenta?",
+      "iniciaSesion": "Inicia sesión",
+      "requisitos": {
+        "minimo": "Mínimo 8 caracteres",
+        "mayuscula": "Una mayúscula",
+        "minuscula": "Una minúscula",
+        "numero": "Un número",
+        "especial": "Un carácter especial"
+      },
+      "errores": {
+        "noCoinciden": "Las contraseñas no coinciden",
+        "correoRegistrado": "Este correo ya está registrado.",
+        "datosInvalidos": "Revisa los datos ingresados.",
+        "demasiadosIntentos": "Demasiados intentos. Intenta nuevamente en unos minutos",
+        "obligatorio": "Este campo es obligatorio"
+      }
     },
     "recuperar": {
-      "titulo": "¿Olvidaste tu contraseña?"
+      "titulo": "¿Olvidaste tu contraseña?",
+      "subtitulo": "Ingresa tu correo y te enviaremos un enlace para restablecerla.",
+      "enviar": "Enviar enlace",
+      "teAcordaste": "¿Te acordaste?",
+      "volverLogin": "Volver al inicio de sesión",
+      "enviado": {
+        "titulo": "Enlace enviado",
+        "descripcion": "Si {{correo}} está registrado, recibirás un enlace para restablecer tu contraseña. El enlace vence en 30 minutos.",
+        "reenviar": "Reenviar enlace",
+        "reenviarEn": "Reenviar enlace (disponible en {{tiempo}})",
+        "noLlego": "¿No te llegó? Revisa tu carpeta de spam, usa",
+        "otroCorreo": "otro correo",
+        "o": "o",
+        "volverLogin": "vuelve al inicio de sesión"
+      },
+      "errores": {
+        "esperar": "Debes esperar 1 minuto para reenviar el enlace"
+      }
     },
     "restablecer": {
-      "titulo": "Crea tu nueva contraseña"
+      "titulo": "Crea tu nueva contraseña",
+      "subtitulo": "Elige una contraseña segura para tu cuenta.",
+      "validando": "Validando el enlace...",
+      "nueva": "Nueva contraseña",
+      "boton": "Restablecer contraseña",
+      "exito": {
+        "titulo": "¡Contraseña restablecida!",
+        "descripcion": "Ya puedes iniciar sesión con tu nueva contraseña.",
+        "boton": "Ir a iniciar sesión"
+      },
+      "invalido": {
+        "titulo": "Enlace expirado",
+        "descripcion": "El enlace expiró o no es válido",
+        "boton": "Solicitar nuevo enlace"
+      },
+      "errores": {
+        "noCumple": "La contraseña no cumple los requisitos o no coincide con la confirmación."
+      }
+    },
+    "panel": {
+      "titulo": "Decide hoy, vive tu mejor versión financiera",
+      "descripcion": "La plataforma de finanzas personales para universitarios que te ayuda a presupuestar, ahorrar e invertir mejor.",
+      "balanceTotal": "Balance total",
+      "esteMes": "Este mes",
+      "gastado": "Gastado",
+      "gastosMes": "Gastos del mes",
+      "fijo": "Fijo (renta, universidad)",
+      "variable": "Variable (salidas)",
+      "notaFijo": "35% • Alquiler, fotocopias",
+      "notaVariable": "65% • Salidas, comida, ocio",
+      "consejo": "¡Buen trabajo! Has ahorrado un 12% más que el mes pasado.",
+      "beneficios": {
+        "gastos": "Controla tus gastos",
+        "metas": "Alcanza tus metas",
+        "libertad": "Construye tu libertad"
+      },
+      "derechos": "© 2026 InvertU. Todos los derechos reservados."
     }
   }
 }

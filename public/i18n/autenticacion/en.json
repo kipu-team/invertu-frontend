@@ -1,16 +1,111 @@
 {
   "autenticacion": {
     "iniciarSesion": {
-      "titulo": "Log in"
+      "titulo": "Welcome back!",
+      "subtitulo": "Enter your credentials to access your student account.",
+      "correo": "Email",
+      "correoPlaceholder": "email@example.com",
+      "contrasena": "Password",
+      "recuerdame": "Remember me",
+      "olvidaste": "Forgot your password?",
+      "ingresar": "Log in",
+      "sinCuenta": "Don't have an account?",
+      "registrate": "Sign up",
+      "errores": {
+        "correoRequerido": "This field is required",
+        "correoInvalido": "Enter a valid email",
+        "contrasenaRequerida": "This field is required",
+        "credenciales": "Incorrect email or password",
+        "servidor": "Could not connect to the server. Try again.",
+        "demasiadosIntentos": "Too many failed attempts. Try again in 15 minutes"
+      },
+      "cuentaCreada": "Your account was created. Log in to continue"
     },
     "registro": {
-      "titulo": "Create your account"
+      "titulo": "Create your account",
+      "subtitulo": "Sign up with your email to start organizing your finances.",
+      "nombres": "First names",
+      "nombresPlaceholder": "E.g. María",
+      "apellidos": "Last names",
+      "apellidosPlaceholder": "E.g. Gonzales",
+      "confirmar": "Confirm password",
+      "verContrasena": "Show or hide password",
+      "crear": "Create account",
+      "yaTienes": "Already have an account?",
+      "iniciaSesion": "Log in",
+      "requisitos": {
+        "minimo": "At least 8 characters",
+        "mayuscula": "One uppercase letter",
+        "minuscula": "One lowercase letter",
+        "numero": "One number",
+        "especial": "One special character"
+      },
+      "errores": {
+        "noCoinciden": "Passwords do not match",
+        "correoRegistrado": "This email is already registered.",
+        "datosInvalidos": "Please check the data you entered.",
+        "demasiadosIntentos": "Too many attempts. Try again in a few minutes",
+        "obligatorio": "This field is required"
+      }
     },
     "recuperar": {
-      "titulo": "Forgot your password?"
+      "titulo": "Forgot your password?",
+      "subtitulo": "Enter your email and we will send you a link to reset it.",
+      "enviar": "Send link",
+      "teAcordaste": "Remembered it?",
+      "volverLogin": "Back to log in",
+      "enviado": {
+        "titulo": "Link sent",
+        "descripcion": "If {{correo}} is registered, you will receive a link to reset your password. The link expires in 30 minutes.",
+        "reenviar": "Resend link",
+        "reenviarEn": "Resend link (available in {{tiempo}})",
+        "noLlego": "Didn't get it? Check your spam folder, use",
+        "otroCorreo": "another email",
+        "o": "or",
+        "volverLogin": "go back to log in"
+      },
+      "errores": {
+        "esperar": "You must wait 1 minute to resend the link"
+      }
     },
     "restablecer": {
-      "titulo": "Create your new password"
+      "titulo": "Create your new password",
+      "subtitulo": "Choose a secure password for your account.",
+      "validando": "Validating the link...",
+      "nueva": "New password",
+      "boton": "Reset password",
+      "exito": {
+        "titulo": "Password reset!",
+        "descripcion": "You can now log in with your new password.",
+        "boton": "Go to log in"
+      },
+      "invalido": {
+        "titulo": "Link expired",
+        "descripcion": "The link has expired or is not valid",
+        "boton": "Request a new link"
+      },
+      "errores": {
+        "noCumple": "The password does not meet the requirements or does not match the confirmation."
+      }
+    },
+    "panel": {
+      "titulo": "Decide today, live your best financial self",
+      "descripcion": "The personal finance platform for university students that helps you budget, save and invest better.",
+      "balanceTotal": "Total balance",
+      "esteMes": "This month",
+      "gastado": "Spent",
+      "gastosMes": "Monthly expenses",
+      "fijo": "Fixed (rent, university)",
+      "variable": "Variable (outings)",
+      "notaFijo": "35% • Rent, photocopies",
+      "notaVariable": "65% • Outings, food, leisure",
+      "consejo": "Great job! You saved 12% more than last month.",
+      "beneficios": {
+        "gastos": "Control your expenses",
+        "metas": "Reach your goals",
+        "libertad": "Build your freedom"
+      },
+      "derechos": "© 2026 InvertU. All rights reserved."
     }
   }
 }

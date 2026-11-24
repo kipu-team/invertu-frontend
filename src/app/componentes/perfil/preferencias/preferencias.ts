@@ -5,25 +5,34 @@ import { PerfilService } from '../../../servicios/perfil-service';
 import { IdiomaService } from '../../../servicios/idioma-service';
 import { Idioma, Tema } from '../../../modelo/comun';
 
+import { MatButtonModule } from '@angular/material/button';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatSelectModule } from '@angular/material/select';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+
 interface Notificaciones {
   alertasGastos: boolean;
   recordatoriosMetas: boolean;
   actualizacionesSistema: boolean;
 }
+
 @Component({
   changeDetection: ChangeDetectionStrategy.Eager,
   selector: 'app-preferencias',
   standalone: true,
   imports: [
     MatIconModule,
-    TranslatePipe
+    TranslatePipe,
+    MatButtonModule,
+    MatFormFieldModule,
+    MatSelectModule,
+    MatSlideToggleModule
   ],
   styleUrl: './preferencias.css',
   templateUrl: './preferencias.html',
 })
-
 export class Preferencias implements OnInit {
-  private perfilService =inject(PerfilService);
+  private perfilService = inject(PerfilService);
   private idiomaService = inject(IdiomaService);
 
   tema = signal<Tema>('SISTEMA');
@@ -37,27 +46,22 @@ export class Preferencias implements OnInit {
 
   ngOnInit() {
     this.perfilService.obtener().subscribe({
-      next: (perfil) =>{
+      next: (perfil) => {
         this.tema.set(perfil.tema);
         this.idioma.set(perfil.idioma);
         this.aplicarTema(perfil.tema);
-
-        this.idiomaService.usar(
-          perfil.idioma === 'en_US' ? 'en' : 'es'
-        );
+        this.idiomaService.usar(perfil.idioma === 'en_US' ? 'en' : 'es');
       }
-    })
+    });
 
     const guardado = localStorage.getItem('notificaciones');
-
-    if(guardado){
-      try{
+    if (guardado) {
+      try {
         const datos = JSON.parse(guardado) as Notificaciones;
-
         this.notificaciones.set({
           alertasGastos: datos.alertasGastos ?? true,
           recordatoriosMetas: datos.recordatoriosMetas ?? true,
-          actualizacionesSistema: datos.actualizacionesSistema ??false
+          actualizacionesSistema: datos.actualizacionesSistema ?? false
         });
       } catch {
         localStorage.removeItem('notificaciones');
@@ -68,58 +72,28 @@ export class Preferencias implements OnInit {
   cambiarTema(tema: Tema): void {
     this.tema.set(tema);
     this.aplicarTema(tema);
-
     this.guardarPreferencias();
   }
 
   cambiarIdioma(idioma: Idioma): void {
     this.idioma.set(idioma);
-
-    this.idiomaService.usar(
-      idioma === 'en_US' ? 'en' : 'es'
-    );
-
+    this.idiomaService.usar(idioma === 'en_US' ? 'en' : 'es');
     this.guardarPreferencias();
   }
 
-  cambiarNotificacion(
-    campo: keyof Notificaciones,
-    valor: boolean
-  ): void {
+  cambiarNotificacion(campo: keyof Notificaciones, valor: boolean): void {
     const actual = this.notificaciones();
-
-    const nuevas = {
-      ...actual,
-      [campo]: valor
-    };
-
+    const nuevas = { ...actual, [campo]: valor };
     this.notificaciones.set(nuevas);
-
-    localStorage.setItem(
-      'notificaciones',
-      JSON.stringify(nuevas)
-    );
+    localStorage.setItem('notificaciones', JSON.stringify(nuevas));
   }
 
   restaurarConfiguracion(): void {
     this.tema.set('SISTEMA');
     this.idioma.set('es_419');
-
-    this.notificaciones.set({
-      alertasGastos: true,
-      recordatoriosMetas: true,
-      actualizacionesSistema: false
-    });
-
+    this.notificaciones.set({ alertasGastos: true, recordatoriosMetas: true, actualizacionesSistema: false });
     this.aplicarTema('SISTEMA');
-
     this.idiomaService.usar('es');
-
-    localStorage.setItem(
-      'notificaciones',
-      JSON.stringify(this.notificaciones())
-    );
-
     this.guardarPreferencias();
   }
 
@@ -130,26 +104,23 @@ export class Preferencias implements OnInit {
   }
 
   private guardarPreferencias(): void {
-    this.perfilService.actualizarPreferencias({
-      tema: this.tema(),
-      idioma: this.idioma()
-    }).subscribe({
-      error: () => {
-        console.error('No se pudieron guardar las preferencias.');
-      }
-    });
+    this.perfilService.actualizarPreferencias({ tema: this.tema(), idioma: this.idioma() }).subscribe();
   }
 
   private aplicarTema(tema: Tema): void {
-    const oscuro = tema === 'OSCURO' ||
-      (tema === 'SISTEMA' &&
-        window.matchMedia('(prefers-color-scheme: dark)').matches);
+    const oscuro = tema === 'OSCURO' || (tema === 'SISTEMA' && window.matchMedia('(prefers-color-scheme: dark)').matches);
+    const htmlElement = document.documentElement;
+    const bodyElement = document.body;
+    const overlayContainer = document.querySelector('.cdk-overlay-container');
 
-    const contenido = document.querySelector('.layout__contenido');
-
-    contenido?.setAttribute(
-      'data-theme',
-      oscuro ? 'dark' : 'light'
-    );
+    if (oscuro) {
+      htmlElement.classList.add('oscuro-theme');
+      bodyElement.classList.add('oscuro-theme');
+      overlayContainer?.classList.add('oscuro-theme');
+    } else {
+      htmlElement.classList.remove('oscuro-theme');
+      bodyElement.classList.remove('oscuro-theme');
+      overlayContainer?.classList.remove('oscuro-theme');
+    }
   }
 }

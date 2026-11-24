@@ -9,6 +9,7 @@ import { PerfilService } from '../../../servicios/perfil-service';
 import { SesionService } from '../../../servicios/sesion-service';
 import { PerfilEditar } from '../perfil-editar/perfil-editar';
 import { Preferencias } from '../preferencias/preferencias';
+import { CambiarContrasenaComponent } from '../cambiar-contrasena/cambiar-contrasena';
 
 @Component({
   selector: 'app-perfil',
@@ -20,7 +21,8 @@ import { Preferencias } from '../preferencias/preferencias';
     MatIconModule,
     TranslatePipe,
     PerfilEditar,
-    Preferencias
+    Preferencias,
+    CambiarContrasenaComponent,
   ],
   templateUrl: './perfil.html',
   changeDetection: ChangeDetectionStrategy.Eager,
@@ -33,8 +35,7 @@ export class Perfil implements OnInit {
   editando = signal(false);
 
   private route = inject(ActivatedRoute);
-  pestana = signal<'perfil' | 'configuracion'>('perfil');
-
+  pestana = signal<'perfil' | 'configuracion' | 'contrasena'>('perfil');
   perfil = signal<PerfilModelo | null>(null);
 
   iniciales = computed(() => {
@@ -55,23 +56,23 @@ export class Perfil implements OnInit {
   }
 
   ngOnInit(): void {
+    this.route.queryParamMap.subscribe((params) => {
+      const pestanaParam = params.get('pestana');
 
-    this.route.queryParamMap.subscribe(params => {
-      const pestana = params.get('pestana');
-
-      this.pestana.set(
-        pestana === 'configuracion' ? 'configuracion' : 'perfil'
-      );
-
-      // Al cambiar a configuración, salimos del modo edición del perfil.
-      if (pestana === 'configuracion') {
+      // se evalúa cada opción de la URL de forma ordenada
+      if (pestanaParam === 'configuracion') {
+        this.pestana.set('configuracion');
         this.editando.set(false);
+      } else if (pestanaParam === 'contrasena') {
+        this.pestana.set('contrasena');
+        this.editando.set(false);
+      } else {
+        this.pestana.set('perfil');
       }
     });
 
     this.perfilService.obtener().subscribe((data: PerfilModelo) => {
       this.perfil.set(data);
     });
-
   }
 }

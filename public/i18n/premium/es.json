@@ -1,7 +1,65 @@
 {
   "premium": {
     "pasar": {
-      "titulo": "Pásate a Premium"
+      "titulo": "Pásate a Premium",
+      "subtitulo": "Compara los planes y elige el que mejor se adapta a tu vida universitaria.",
+      "planActual": "Tu plan actual",
+      "porMes": "/ mes",
+      "free": {
+        "nombre": "Plan Free",
+        "descripcion": "Lo esencial para ordenar tus finanzas."
+      },
+      "premium": {
+        "nombre": "Plan Premium",
+        "descripcion": "Todas las herramientas de InvertU, sin límites."
+      },
+      "caracteristicas": {
+        "movimientos": "Registro manual de ingresos y gastos",
+        "dashboard": "Indicadores y gráficos del mes",
+        "suscripciones": "Registro de suscripciones",
+        "metas": "Metas de ahorro activas:",
+        "recordatorios": "Recordatorios de suscripciones:",
+        "fechaEstimada": "Fecha estimada para cumplir tus metas",
+        "calendario": "Calendario financiero",
+        "comprobante": "Registro con IA desde comprobante",
+        "categorias": "Categorías personalizadas",
+        "alertaSaldo": "Alerta de saldo para suscripciones",
+        "chatbot": "Chatbot financiero"
+      },
+      "limites": {
+        "hasta3": "hasta 3",
+        "sinLimite": "sin límite"
+      },
+      "notaPrueba": "Versión de prueba: el pago es simulado y no se te cobrará nada.",
+      "boton": "Pasar a Premium",
+      "exito": {
+        "titulo": "¡Ya eres Premium!",
+        "descripcion": "Ya puedes usar todas las funciones Premium de InvertU.",
+        "boton": "Ir al inicio"
+      },
+      "errores": {
+        "yaPremium": "Ya cuentas con el plan Premium",
+        "servidor": "No se pudo activar Premium. Intenta de nuevo."
+      }
+    },
+    "pago": {
+      "titulo": "Pago de Premium",
+      "aviso": "Pago simulado, no se realizará ningún cobro. Los datos de la tarjeta no se guardan ni se envían.",
+      "total": "Total a pagar",
+      "titular": "Nombre del titular",
+      "titularPlaceholder": "Como aparece en la tarjeta",
+      "numero": "Número de tarjeta",
+      "vencimiento": "Vencimiento",
+      "vencimientoPlaceholder": "MM/AA",
+      "cvv": "CVV",
+      "pagar": "Pagar S/ 9.90",
+      "errores": {
+        "titular": "Ingresa el nombre del titular",
+        "numero": "El número debe tener 16 dígitos",
+        "vencimiento": "Usa el formato MM/AA",
+        "vencida": "La tarjeta está vencida",
+        "cvv": "El CVV debe tener 3 dígitos"
+      }
     },
     "aviso": {
       "titulo": "Función exclusiva Premium",

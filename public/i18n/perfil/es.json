@@ -29,7 +29,8 @@
       "universidad": "Universidad",
       "sin_universidad": "No registrada",
       "estado_verificacion": "Estado de Verificación",
-      "verificado": "Estudiante Verificado"
+      "verificado": "Estudiante Verificado",
+      "selecciona_universidad": "Selecciona una universidad"
     },
     "botones": {
       "editar": "Editar perfil",
@@ -73,6 +74,39 @@
       "desc_recordatorios": "Avisos para aportar a tus objetivos de ahorro activos.",
       "actualizaciones": "Actualizaciones del sistema",
       "desc_actualizaciones": "Información sobre nuevas funcionalidades y mejoras en InvertU."
+    }
+  },
+  "calendario": {
+    "titulo": "Calendario Financiero",
+    "de": "de",
+    "filtrar_por": "Filtrar por:",
+    "deudas": "Deudas",
+    "suscripciones": "Suscripciones",
+    "metas": "Metas",
+    "metas_aportes": "Metas / Aportes",
+    "premium_modal": {
+      "titulo": "Pásate a Premium para activar el Calendario Financiero",
+      "descripcion": "Consulta todos los eventos programados como metas, aportes, suscripciones, desde un solo lugar.",
+      "b1": "Todos tus cobros de suscripciones y aportes a metas en un solo calendario",
+      "b2": "Toca un cobro para abrir el detalle de esa suscripción",
+      "b3": "Planifica tu mes y evita cobros sorpresa",
+      "suscribirse": "Pasar a Premium - S/ 9.90/mes →",
+      "volver": "Volver"
+    },
+    "protegido": "Contenido protegido para cuentas Premium.",
+    "meses": {
+      "0": "Enero",
+      "1": "Febrero",
+      "2": "Marzo",
+      "3": "Abril",
+      "4": "Mayo",
+      "5": "Junio",
+      "6": "Julio",
+      "7": "Agosto",
+      "8": "Septiembre",
+      "9": "Octubre",
+      "10": "Noviembre",
+      "11": "Diciembre"
     }
   }
 }

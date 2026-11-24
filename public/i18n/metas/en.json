@@ -8,8 +8,14 @@
     "ahorradoDe": "saved of",
     "de": "of",
     "otrasActivas": "Other active goals",
-    "consejoPrueba": "This month you had less variable income, so we suggest setting aside S/40 this week instead of S/60. Keep your goal on track for February.",
+    "consejoPrueba": "Saving a little every week helps you reach your goal on time.",
     "compartir": "Share",
+    "compartirMensaje": "🎉 I reached my goal \"{{ nombre }}\" of S/ {{ monto }} with InvertU!",
+    "compartirOpciones": {
+      "whatsapp": "Share on WhatsApp",
+      "copiar": "Copy text",
+      "copiado": "Text copied"
+    },
     "vacio": {
       "titulo": "You don't have an active goal yet",
       "descripcion": "Set something you want to achieve and we'll help you get there, adapting to your real income every week.",
@@ -34,12 +40,43 @@
       "11": "Nov",
       "12": "Dec"
     },
+    "editar": {
+      "titulo": "Edit goal",
+      "subtitulo": "Set up a smart savings plan adapted to your student budget.",
+      "guardar": "Save changes",
+      "exito": "Goal updated successfully",
+      "verDetalle": "View details"
+    },
+    "vencida": {
+      "etiqueta": "Overdue",
+      "aviso": "Your goal is overdue. You can extend the deadline to keep saving.",
+      "extender": "Extend date",
+      "actualizada": "Date updated. Keep saving!"
+    },
+    "extender": {
+      "titulo": "Extend deadline",
+      "subtitulo": "Choose a new date to reach your goal.",
+      "fecha": "New deadline",
+      "confirmar": "Confirm"
+    },
+    "cancelar": {
+      "titulo": "Cancel the goal {{nombre}}?",
+      "mensaje": "You won't be able to record contributions while it is cancelled.",
+      "volver": "Go back"
+    },
+    "eliminar": {
+      "titulo": "Delete the goal {{nombre}}?",
+      "mensaje": "This action cannot be undone.",
+      "confirmar": "Delete",
+      "boton": "Delete goal"
+    },
     "registrar": {
       "titulo": "Create new goal",
       "subtitulo": "Set up a smart savings plan adapted to your student budget.",
       "nombre": "Goal name",
       "nombrePlaceholder": "E.g. Laptop for university, End-of-term trip...",
       "obligatorio": "(Required field)",
+      "errorObligatorio": "This field is required",
       "descripcion": "Description (Optional)",
       "descripcionPlaceholder": "Briefly describe what this goal is for...",
       "monto": "Target amount",
@@ -58,11 +95,64 @@
       "exito": "Goal created successfully!",
       "verMisMetas": "View my goals",
       "limiteTitulo": "Free Plan Limit Reached",
-      "limiteMensaje": "You have reached the limit of your Free plan (maximum 2 active goals). Upgrade to Premium to create unlimited goals and organize your savings better.",
+      "limiteMensaje": "You have reached the limit of your Free plan (maximum {{limite}} active goals). Upgrade to Premium to create unlimited goals and organize your savings better.",
       "pasarPremium": "Upgrade to Premium"
     },
     "detalle": {
-      "titulo": "Goal details"
+      "reactivar": "Reactivate goal",
+      "limiteReactivar": "You have reached the active goals limit of your Free plan. Cancel or complete a goal to reactivate this one.",
+      "volver": "Back to my goals",
+      "titulo": "Goal details",
+      "editar": "Edit goal",
+      "aportar": "Contribute",
+      "cancelar": "Cancel goal",
+      "estado": {
+        "ACTIVA": "Active",
+        "CUMPLIDA": "Completed",
+        "CANCELADA": "Cancelled"
+      },
+      "campo": {
+        "estado": "Status",
+        "montoAcumulado": "Amount saved",
+        "montoObjetivo": "Target amount",
+        "fechaObjetivo": "Target date",
+        "frecuencia": "Frequency",
+        "descripcion": "Description"
+      },
+      "frecuenciaValor": {
+        "DIARIA": "Daily",
+        "SEMANAL": "Weekly",
+        "MENSUAL": "Monthly",
+        "SIN_FRECUENCIA": "No frequency"
+      },
+      "historial": "Contribution history",
+      "eliminarAporte": "Delete contribution",
+      "proyeccion": {
+        "titulo": "Projection",
+        "fechaEstimada": "Estimated completion date",
+        "soloPremium": "Projection is available on Premium",
+        "pasarPremium": "Upgrade to Premium"
+      }
+    },
+    "aporte": {
+      "titulo": "Contribute to {{nombre}}",
+      "subtitulo": "Fill in the contribution details to record the transaction.",
+      "monto": "Amount",
+      "fecha": "Date",
+      "descripcion": "Description (optional)",
+      "descripcionPlaceholder": "Weekly contribution",
+      "restante": "Remaining amount of the goal",
+      "registrar": "Register contribution",
+      "montoMinimo": "The amount must be greater than 0",
+      "montoMaximo": "The amount cannot exceed what is left for the goal",
+      "fechaFutura": "The contribution date can't be later than today",
+      "excedeTitulo": "Contribution above your available money",
+      "excede": "You are contributing more than your available money this month. Do you want to continue?",
+      "continuar": "Continue",
+      "eliminarTitulo": "Delete this contribution?",
+      "eliminarMensaje": "It will be removed from the history and the accumulated amount of your goal will be recalculated.",
+      "cumplida": "Congratulations! You reached your goal",
+      "aceptar": "Got it"
     }
   }
 }

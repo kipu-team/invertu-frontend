@@ -8,8 +8,14 @@
     "ahorradoDe": "ahorrado de",
     "de": "de",
     "otrasActivas": "Otras metas activas",
-    "consejoPrueba": "Este mes tuviste menos ingreso variable, te sugerimos destinar S/40 esta semana en vez de S/60. Mantienes la meta para febrero.",
+    "consejoPrueba": "Aportar un poco cada semana te ayuda a llegar a tu meta a tiempo.",
     "compartir": "Compartir",
+    "compartirMensaje": "🎉 ¡Cumplí mi meta \"{{ nombre }}\" de S/ {{ monto }} con InvertU!",
+    "compartirOpciones": {
+      "whatsapp": "Compartir por WhatsApp",
+      "copiar": "Copiar texto",
+      "copiado": "Texto copiado"
+    },
     "vacio": {
       "titulo": "Aún no tienes una meta activa",
       "descripcion": "Define algo que quieras lograr y te ayudamos a llegar ahí, ajustándonos a tu ingreso real cada semana.",
@@ -34,12 +40,43 @@
       "11": "Nov",
       "12": "Dic"
     },
+    "editar": {
+      "titulo": "Editar meta",
+      "subtitulo": "Configura un plan de ahorro inteligente adaptado a tu presupuesto estudiantil.",
+      "guardar": "Guardar cambios",
+      "exito": "Meta actualizada correctamente",
+      "verDetalle": "Ver detalle"
+    },
+    "vencida": {
+      "etiqueta": "Vencida",
+      "aviso": "Tu meta ha vencido. Puedes extender la fecha límite para seguir ahorrando.",
+      "extender": "Extender fecha",
+      "actualizada": "Fecha actualizada. ¡Sigue ahorrando!"
+    },
+    "extender": {
+      "titulo": "Extender fecha límite",
+      "subtitulo": "Elige una nueva fecha para alcanzar tu meta.",
+      "fecha": "Nueva fecha límite",
+      "confirmar": "Confirmar"
+    },
+    "cancelar": {
+      "titulo": "¿Cancelar la meta {{nombre}}?",
+      "mensaje": "Ya no podrás registrar aportes mientras esté cancelada.",
+      "volver": "Volver"
+    },
+    "eliminar": {
+      "titulo": "¿Eliminar la meta {{nombre}}?",
+      "mensaje": "Esta acción no se puede deshacer.",
+      "confirmar": "Eliminar",
+      "boton": "Eliminar meta"
+    },
     "registrar": {
       "titulo": "Crear nueva meta",
       "subtitulo": "Configura un plan de ahorro inteligente adaptado a tu presupuesto estudiantil.",
       "nombre": "Nombre de la meta",
       "nombrePlaceholder": "Ej. Laptop para la universidad, Viaje de fin de ciclo...",
       "obligatorio": "(Campo obligatorio)",
+      "errorObligatorio": "Este campo es obligatorio",
       "descripcion": "Descripción (Opcional)",
       "descripcionPlaceholder": "Describe brevemente para qué es esta meta...",
       "monto": "Monto objetivo",
@@ -58,11 +95,64 @@
       "exito": "¡Meta creada con éxito!",
       "verMisMetas": "Ver mis metas",
       "limiteTitulo": "Límite del Plan Free Alcanzado",
-      "limiteMensaje": "Has alcanzado el límite de tu plan Free (máximo 2 metas activas). Pasa a Premium para crear metas ilimitadas y organizar mejor tus ahorros.",
+      "limiteMensaje": "Has alcanzado el límite de tu plan Free (máximo {{limite}} metas activas). Pasa a Premium para crear metas ilimitadas y organizar mejor tus ahorros.",
       "pasarPremium": "Pasar a Premium"
     },
     "detalle": {
-      "titulo": "Detalle de la meta"
+      "reactivar": "Reactivar meta",
+      "limiteReactivar": "Alcanzaste el límite de metas activas de tu plan Free. Cancela o completa una meta para poder reactivar esta.",
+      "volver": "Volver a mis metas",
+      "titulo": "Detalle de meta",
+      "editar": "Editar meta",
+      "aportar": "Aportar",
+      "cancelar": "Cancelar meta",
+      "estado": {
+        "ACTIVA": "Activa",
+        "CUMPLIDA": "Completada",
+        "CANCELADA": "Cancelada"
+      },
+      "campo": {
+        "estado": "Estado",
+        "montoAcumulado": "Monto acumulado",
+        "montoObjetivo": "Monto objetivo",
+        "fechaObjetivo": "Fecha objetivo",
+        "frecuencia": "Frecuencia",
+        "descripcion": "Descripción"
+      },
+      "frecuenciaValor": {
+        "DIARIA": "Diaria",
+        "SEMANAL": "Semanal",
+        "MENSUAL": "Mensual",
+        "SIN_FRECUENCIA": "Sin frecuencia"
+      },
+      "historial": "Historial de aportes",
+      "eliminarAporte": "Eliminar aporte",
+      "proyeccion": {
+        "titulo": "Proyección",
+        "fechaEstimada": "Fecha estimada de cumplimiento",
+        "soloPremium": "La proyección está disponible en Premium",
+        "pasarPremium": "Pasar a Premium"
+      }
+    },
+    "aporte": {
+      "titulo": "Aportar a {{nombre}}",
+      "subtitulo": "Completa los datos del aporte para registrar el movimiento.",
+      "monto": "Monto",
+      "fecha": "Fecha",
+      "descripcion": "Descripción (opcional)",
+      "descripcionPlaceholder": "Aporte semanal",
+      "restante": "Monto restante de la meta",
+      "registrar": "Registrar aporte",
+      "montoMinimo": "El monto debe ser mayor a 0",
+      "montoMaximo": "El monto no puede ser mayor a lo que falta para la meta",
+      "fechaFutura": "La fecha del aporte no puede ser mayor a hoy",
+      "excedeTitulo": "Aporte mayor a tu disponible",
+      "excede": "Estás aportando más de tu dinero disponible este mes. ¿Deseas continuar?",
+      "continuar": "Continuar",
+      "eliminarTitulo": "¿Eliminar este aporte?",
+      "eliminarMensaje": "Se quitará del historial y se recalculará el monto acumulado de tu meta.",
+      "cumplida": "¡Felicidades! Cumpliste tu meta",
+      "aceptar": "Aceptar"
     }
   }
 }

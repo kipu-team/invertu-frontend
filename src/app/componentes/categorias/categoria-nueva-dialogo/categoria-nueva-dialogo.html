@@ -1,1 +1,27 @@
-<p>categoria-nueva-dialogo: en construcción (Matias)</p>
+<h2 mat-dialog-title class="nueva__titulo">
+  <mat-icon>sell</mat-icon>
+  {{ 'categorias.nueva.titulo' | translate }}
+</h2>
+
+<form [formGroup]="formulario" (ngSubmit)="crear()">
+  <mat-dialog-content>
+    <mat-form-field appearance="outline" class="nueva__campo">
+      <mat-label>{{ 'categorias.nueva.nombre' | translate }}</mat-label>
+      <input matInput formControlName="nombre" maxlength="80" cdkFocusInitial />
+      <mat-hint>{{ 'categorias.nueva.ayuda' | translate }}</mat-hint>
+      @if (nombre.hasError('required')) {
+        <mat-error>{{ 'categorias.nueva.errores.nombre' | translate }}</mat-error>
+      } @else if (nombre.hasError('duplicada')) {
+        <mat-error>{{ 'categorias.nueva.errores.duplicada' | translate }}</mat-error>
+      }
+    </mat-form-field>
+  </mat-dialog-content>
+
+  <mat-dialog-actions align="end">
+    <button mat-button type="button" mat-dialog-close>{{ 'categorias.nueva.cancelar' | translate }}</button>
+    <button mat-flat-button type="submit">
+      <mat-icon>add</mat-icon>
+      {{ 'categorias.nueva.crear' | translate }}
+    </button>
+  </mat-dialog-actions>
+</form>

@@ -1,0 +1,37 @@
+<div class="modal-premium-layout">
+
+  <header class="modal-premium-header">
+    <div class="estrella-circulo"><mat-icon>star</mat-icon></div>
+    <button mat-icon-button class="boton-cerrar-x" (click)="salirABase()"><mat-icon>close</mat-icon></button>
+  </header>
+
+  <mat-dialog-content class="modal-premium-body">
+    <h2 class="modal-premium-titulo-central">{{ 'calendario.premium_modal.titulo' | translate }}</h2>
+    <p class="modal-premium-sub">{{ 'calendario.premium_modal.descripcion' | translate }}</p>
+
+    <div class="modal-premium-beneficios">
+      <div class="beneficio-linea"><mat-icon>check_circle</mat-icon><span>{{ 'calendario.premium_modal.b1' | translate }}</span></div>
+      <div class="beneficio-linea"><mat-icon>check_circle</mat-icon><span>{{ 'calendario.premium_modal.b2' | translate }}</span></div>
+      <div class="beneficio-linea"><mat-icon>check_circle</mat-icon><span>{{ 'calendario.premium_modal.b3' | translate }}</span></div>
+    </div>
+
+    <!-- El pago se hace en Pasar a Premium (pago simulado con validaciones, T-144); aquí solo el resumen -->
+    <div class="modal-premium-precio">
+      <strong>S/ 9.90</strong>
+      <span>{{ 'premium.pasar.porMes' | translate }}</span>
+    </div>
+    <p class="modal-premium-nota">
+      <mat-icon>info</mat-icon>{{ 'premium.pasar.notaPrueba' | translate }}
+    </p>
+  </mat-dialog-content>
+
+  <mat-dialog-actions align="center" class="modal-premium-footer">
+    <button mat-flat-button class="boton-suscribir-institucional" (click)="irAPagar()">
+      {{ 'calendario.premium_modal.suscribirse' | translate }}
+    </button>
+    <button mat-button class="boton-volver-link" (click)="salirABase()">
+      {{ 'calendario.premium_modal.volver' | translate }}
+    </button>
+  </mat-dialog-actions>
+
+</div>

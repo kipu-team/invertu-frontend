@@ -1,5 +1,28 @@
 {
   "categorias": {
-    "titulo": "Categories"
+    "titulo": "Categories",
+    "etiqueta": "Categories",
+    "crear": "Create category",
+    "quitar": "Delete {{nombre}}",
+    "aviso": {
+      "crear": "Creating custom categories is a Premium feature.",
+      "eliminar": "Deleting custom categories is a Premium feature."
+    },
+    "eliminar": {
+      "titulo": "Delete this category?",
+      "mensaje": "It will no longer appear for new transactions. Transactions that already use it won't change.",
+      "confirmar": "Delete"
+    },
+    "nueva": {
+      "titulo": "New category",
+      "nombre": "Category name",
+      "ayuda": "Give it a clear, descriptive name to group your expenses.",
+      "cancelar": "Cancel",
+      "crear": "Create",
+      "errores": {
+        "nombre": "Enter a name",
+        "duplicada": "You already have a category with that name"
+      }
+    }
   }
 }

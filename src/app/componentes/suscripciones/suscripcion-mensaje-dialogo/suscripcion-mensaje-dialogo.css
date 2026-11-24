@@ -1,0 +1,68 @@
+.mensaje {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  padding: 32px 24px 24px;
+  text-align: center;
+  color: var(--texto);
+}
+
+.mensaje__cerrar {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+}
+
+/* Círculo verde con check (éxito) o rojo (error) */
+.mensaje__icono {
+  display: grid;
+  place-items: center;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: var(--verde-esmeralda);
+  color: #ffffff;
+}
+
+.mensaje__icono--error {
+  background: var(--gasto);
+}
+
+.mensaje__icono mat-icon {
+  width: 32px;
+  height: 32px;
+  font-size: 32px;
+}
+
+.mensaje h2 {
+  margin: 8px 0 0;
+  font-size: 1.3rem;
+}
+
+.mensaje p {
+  margin: 0 0 12px;
+  color: var(--texto-suave);
+}
+
+.boton-verde {
+  min-width: 160px;
+  --mat-button-filled-container-color: var(--verde-esmeralda);
+  --mat-button-filled-label-text-color: #ffffff;
+}
+
+/* Responsive: celulares */
+@media (max-width: 640px) {
+  .mensaje {
+    padding: 28px 16px 20px;
+  }
+
+  .mensaje h2 {
+    font-size: 1.15rem;
+  }
+
+  .boton-verde {
+    width: 100%;
+  }
+}

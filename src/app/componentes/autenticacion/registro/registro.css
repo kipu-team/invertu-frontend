@@ -1,0 +1,24 @@
+/* Solo lo propio del registro. Lo común está en ../autenticacion-comun.css */
+
+/* Espacio entre campos */
+.campo {
+  margin-bottom: 14px;
+}
+
+/* Nombres y apellidos lado a lado */
+.fila-doble {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+/* Ancho mínimo 0 para que el campo no se salga de la tarjeta */
+.fila-doble > div {
+  min-width: 0;
+}
+
+@media (max-width: 768px) {
+  .fila-doble {
+    grid-template-columns: 1fr;
+  }
+}
