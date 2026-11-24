@@ -105,7 +105,7 @@
     <mat-icon class="aviso-limite__icono">warning_amber</mat-icon>
     <div class="aviso-limite__texto">
       <strong>{{ 'metas.registrar.limiteTitulo' | translate }}</strong>
-      <p>{{ 'metas.registrar.limiteMensaje' | translate }}</p>
+      <p>{{ 'metas.registrar.limiteMensaje' | translate: { limite: limite } }}</p>
     </div>
     <a mat-flat-button class="aviso-limite__boton" routerLink="/pasar-premium">
       {{ 'metas.registrar.pasarPremium' | translate }}

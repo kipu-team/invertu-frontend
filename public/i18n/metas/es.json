@@ -95,11 +95,12 @@
       "exito": "¡Meta creada con éxito!",
       "verMisMetas": "Ver mis metas",
       "limiteTitulo": "Límite del Plan Free Alcanzado",
-      "limiteMensaje": "Has alcanzado el límite de tu plan Free (máximo 2 metas activas). Pasa a Premium para crear metas ilimitadas y organizar mejor tus ahorros.",
+      "limiteMensaje": "Has alcanzado el límite de tu plan Free (máximo {{limite}} metas activas). Pasa a Premium para crear metas ilimitadas y organizar mejor tus ahorros.",
       "pasarPremium": "Pasar a Premium"
     },
     "detalle": {
       "reactivar": "Reactivar meta",
+      "limiteReactivar": "Alcanzaste el límite de metas activas de tu plan Free. Cancela o completa una meta para poder reactivar esta.",
       "volver": "Volver a mis metas",
       "titulo": "Detalle de meta",
       "editar": "Editar meta",

@@ -322,3 +322,12 @@
     grid-template-columns: minmax(0, 1fr);
   }
 }
+
+.detalle__error {
+  color: #b3261e;
+  background: #fdecea;
+  border: 1px solid #f5c2be;
+  border-radius: 8px;
+  padding: 10px 14px;
+  font-size: 0.85rem;
+}

@@ -177,3 +177,10 @@ input.invalido {
   font-size: 0.75rem;
   font-weight: 700;
 }
+
+.acciones__registrar:disabled,
+.acciones__registrar[disabled] {
+  background-color: #d6d9d7 !important;
+  color: #7a8580 !important;
+  cursor: not-allowed;
+}

@@ -41,6 +41,7 @@ export class MetaRegistrar {
   limiteAlcanzado = false;
   intentoEnvio = false;
   idMeta: number | null = null;
+  limite: number | null = null;
 
   formulario = this.fb.group({
     nombre: ['', Validators.required],
@@ -67,6 +68,7 @@ export class MetaRegistrar {
       this.sesion.esPremium();
       this.metaService.consultarEstadoLimite().subscribe((estado) => {
         this.limiteAlcanzado = estado.limiteAlcanzado;
+        this.limite = estado.limite;
       });
     });
     this.route.params.subscribe((data) => {

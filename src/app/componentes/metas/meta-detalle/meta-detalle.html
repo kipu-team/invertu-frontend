@@ -73,6 +73,10 @@
       }
     </header>
 
+@if (errorLimite) {
+  <p class="detalle__error">{{ 'metas.detalle.limiteReactivar' | translate }}</p>
+}
+
     <article class="tarjeta detalle__progreso">
       <div class="detalle__fila">
         <div class="detalle__circulo">
