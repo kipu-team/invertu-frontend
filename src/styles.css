@@ -96,7 +96,7 @@ body {
 
 body {
   margin: 0;
-  font-family: 'Inter Variable', system-ui, sans-serif;
+  font-family: 'Nunito Variable', system-ui, sans-serif;
   background: var(--fondo);
   color: var(--texto);
 }
