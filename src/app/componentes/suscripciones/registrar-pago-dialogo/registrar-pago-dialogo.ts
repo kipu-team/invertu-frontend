@@ -9,6 +9,7 @@ import {
 } from '@angular/material/dialog';
 import { MatButton } from '@angular/material/button';
 import { MatIcon } from '@angular/material/icon';
+import { DatePipe } from '@angular/common';
 import { TranslatePipe, TranslateService } from '@ngx-translate/core';
 import { SuscripcionService } from '../../../servicios/suscripcion-service';
 import { MovimientoService } from '../../../servicios/movimiento-service';
@@ -32,6 +33,7 @@ import { MedioPago } from '../../../modelo/comun';
     MatButton,
     MatIcon,
     TranslatePipe,
+    DatePipe,
   ],
   templateUrl: './registrar-pago-dialogo.html',
   changeDetection: ChangeDetectionStrategy.Eager,
@@ -59,6 +61,9 @@ export class RegistrarPagoDialogo implements OnInit {
   nombreServicio = signal('');
   categorias = signal<Categoria[]>([]);
   guardando = signal(false);
+  // Aviso de pago repetido: fecha del último pago del ciclo actual y si ya se mostró el aviso
+  ultimoPago = signal<string | null>(null);
+  avisoDuplicado = signal(false);
 
   // Las mismas reglas que valida el backend para un movimiento (MovimientoRequestDTO)
   formulario = this.fb.group({
@@ -80,6 +85,8 @@ export class RegistrarPagoDialogo implements OnInit {
       // Precarga del detalle: monto y categoría del pago más reciente (o "Suscripciones")
       this.suscripcionService.obtenerDetalle(this.idSuscripcion).subscribe((s) => {
         this.nombreServicio.set(s.nombreServicio);
+        // Si el último cobro ya está pagado (no hay "Pago sin registrar") y hay pagos, otro pago sería del mismo ciclo
+        if (!s.pagoSinRegistrar && s.pagos.length > 0) this.ultimoPago.set(s.pagos[0].fecha);
         // Primer pago: el backend no tiene categoría "Suscripciones", así que se propone "Servicios"
         const porDefecto =
           lista.find((c) => c.nombre === 'Suscripciones' || c.nombre === 'Servicios')
@@ -100,6 +107,11 @@ export class RegistrarPagoDialogo implements OnInit {
   registrar(): void {
     if (this.formulario.invalid) {
       this.formulario.markAllAsTouched();
+      return;
+    }
+    // Antes de guardar un segundo pago del mismo ciclo se avisa; el segundo clic lo registra igual
+    if (this.ultimoPago() && !this.avisoDuplicado()) {
+      this.avisoDuplicado.set(true);
       return;
     }
     const v = this.formulario.getRawValue();

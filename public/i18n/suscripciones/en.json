@@ -140,7 +140,9 @@
         "fechaFutura": "The date cannot be in the future",
         "categoria": "Select a category"
       },
-      "aviso": "A charge for this subscription has passed and you haven't recorded it yet. Record it to keep your balance up to date."
+      "aviso": "A charge for this subscription has passed and you haven't recorded it yet. Record it to keep your balance up to date.",
+      "duplicado": "You already recorded a payment for {{nombre}} on {{fecha}}. Do you want to record another one?",
+      "registrarIgual": "Record anyway"
     }
   }
 }
