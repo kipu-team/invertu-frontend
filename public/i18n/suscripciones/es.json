@@ -140,7 +140,9 @@
         "fechaFutura": "La fecha no puede ser futura",
         "categoria": "Selecciona una categoría"
       },
-      "aviso": "Ya pasó un cobro de esta suscripción y aún no lo registras. Regístralo para que tu saldo esté al día."
+      "aviso": "Ya pasó un cobro de esta suscripción y aún no lo registras. Regístralo para que tu saldo esté al día.",
+      "duplicado": "Ya registraste un pago de {{nombre}} el {{fecha}}. ¿Quieres registrar otro?",
+      "registrarIgual": "Registrar de todos modos"
     }
   }
 }

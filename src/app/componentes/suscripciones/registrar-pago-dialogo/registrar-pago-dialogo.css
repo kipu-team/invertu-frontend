@@ -74,6 +74,27 @@
   --mat-button-filled-label-text-color: #ffffff;
 }
 
+/* Aviso de pago repetido en el mismo ciclo */
+.pago__duplicado {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  margin: 14px 0 0;
+  padding: 10px 12px;
+  border-radius: 8px;
+  background: var(--dorado-claro);
+  color: #8a6700;
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+.pago__duplicado mat-icon {
+  flex-shrink: 0;
+  width: 20px;
+  height: 20px;
+  font-size: 20px;
+}
+
 /* Responsive: en celular los botones van uno debajo del otro y a lo ancho */
 @media (max-width: 640px) {
   .acciones {
