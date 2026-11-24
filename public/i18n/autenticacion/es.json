@@ -2,7 +2,6 @@
   "autenticacion": {
     "iniciarSesion": {
       "titulo": "¡Hola de nuevo!",
-      "volverInicio": "Volver al inicio",
       "subtitulo": "Ingresa tus credenciales para acceder a tu cuenta de estudiante.",
       "correo": "Correo electrónico",
       "correoPlaceholder": "correo@ejemplo.com",

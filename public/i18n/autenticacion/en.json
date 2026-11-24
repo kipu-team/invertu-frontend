@@ -2,7 +2,6 @@
   "autenticacion": {
     "iniciarSesion": {
       "titulo": "Welcome back!",
-      "volverInicio": "Back to home",
       "subtitulo": "Enter your credentials to access your student account.",
       "correo": "Email",
       "correoPlaceholder": "email@example.com",

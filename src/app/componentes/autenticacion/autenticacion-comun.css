@@ -22,7 +22,7 @@
   box-sizing: border-box;
 }
 
-/* Logo y "Volver al inicio" */
+/* Logo */
 .encabezado {
   align-self: flex-start;
   display: flex;
@@ -35,22 +35,6 @@
   height: 68px;
   object-fit: contain;
   filter: drop-shadow(0 4px 4px rgba(0, 0, 0, 0.25));
-}
-
-.volver {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  font-size: 14px;
-  font-weight: 700;
-  color: var(--verde-esmeralda);
-  text-decoration: none;
-}
-
-.volver mat-icon {
-  font-size: 16px;
-  width: 16px;
-  height: 16px;
 }
 
 .tarjeta {
