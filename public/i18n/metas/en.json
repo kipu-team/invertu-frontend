@@ -95,11 +95,12 @@
       "exito": "Goal created successfully!",
       "verMisMetas": "View my goals",
       "limiteTitulo": "Free Plan Limit Reached",
-      "limiteMensaje": "You have reached the limit of your Free plan (maximum 2 active goals). Upgrade to Premium to create unlimited goals and organize your savings better.",
+      "limiteMensaje": "You have reached the limit of your Free plan (maximum {{limite}} active goals). Upgrade to Premium to create unlimited goals and organize your savings better.",
       "pasarPremium": "Upgrade to Premium"
     },
     "detalle": {
       "reactivar": "Reactivate goal",
+      "limiteReactivar": "You have reached the active goals limit of your Free plan. Cancel or complete a goal to reactivate this one.",
       "volver": "Back to my goals",
       "titulo": "Goal details",
       "editar": "Edit goal",

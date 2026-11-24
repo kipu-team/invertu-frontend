@@ -42,6 +42,7 @@ export class MetaDetalle implements OnInit {
   sesion = inject(SesionService);
   private dialog = inject(MatDialog);
   private traductor = inject(TranslateService);
+  errorLimite = false;
   id = 0;
   meta: MetaDetalleDatos | null = null;
   aportes: Aporte[] = [];
@@ -157,7 +158,13 @@ export class MetaDetalle implements OnInit {
   }
 
   reactivar() {
-    this.metaService.reactivar(this.id).subscribe(() => this.cargarMeta());
+    this.errorLimite = false;
+    this.metaService.reactivar(this.id).subscribe({
+      next: () => this.cargarMeta(),
+      error: (e) => {
+        if (e.status === 403) this.errorLimite = true;
+      },
+    });
   }
 
   eliminar() {
